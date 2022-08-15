@@ -68,7 +68,7 @@ class SplashScreenState extends State<SplashScreen> {
   }
 
   Future initPage() async {
-    await Future.delayed(const Duration(milliseconds: 20000));
+    await Future.delayed(const Duration(milliseconds: 2000));
     // if (activatedStatus == 'activated') {
     context.goNamed(HomeScreen.routeName);
     // } else {
