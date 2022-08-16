@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
+import 'package:fugi_movie_app_team2/src/detailscreen.dart';
+import 'package:go_router/go_router.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -13,7 +13,16 @@ class HomeScreen extends StatelessWidget {
         title: Text('Home Screen'),
       ),
       body: Center(
-        child: Text('Home Screen'),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text('Home Screen'),
+            ElevatedButton(
+                onPressed: () =>
+                    GoRouter.of(context).pushNamed(DetailScreen.routeName),
+                child: Text('Detail'))
+          ],
+        ),
       ),
     );
   }
