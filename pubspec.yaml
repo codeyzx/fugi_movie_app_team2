@@ -31,4 +31,15 @@ flutter:
   assets:
     - .env
     - assets/
+    - assets/icons/
     - assets/images/
+    - assets/fonts/
+  fonts:
+    - family: Poppins
+      fonts:
+        - asset: fonts/Poppins-Bold.ttf
+        - asset: fonts/Poppins-BoldItalic.ttf
+        - asset: fonts/Poppins-Italic.ttf
+        - asset: fonts/Poppins-Medium.ttf
+        - asset: fonts/Poppins-Reguler.ttf
+          style: italic

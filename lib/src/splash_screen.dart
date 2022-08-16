@@ -3,7 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 
 import 'common_config/palette.dart';
-import 'homescreen.dart';
+import 'home_screen.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({
@@ -30,15 +30,15 @@ class SplashScreenState extends State<SplashScreen> {
       left: false,
       right: false,
       child: Scaffold(
+        backgroundColor: Palette.team2color,
         body: SizedBox(
           height: MediaQuery.of(context).size.height,
           width: MediaQuery.of(context).size.width,
           child: Stack(
-            fit: StackFit.expand,
+            alignment: Alignment.center,
             children: [
               Image.asset(
-                "assets/images/splash_bg.png",
-                fit: BoxFit.cover,
+                "assets/icons/splash_icon.png",
                 alignment: Alignment.bottomCenter,
               ),
               Positioned(
@@ -51,10 +51,10 @@ class SplashScreenState extends State<SplashScreen> {
                     width: 50.sp,
                     height: 50.sp,
                     child: CircularProgressIndicator.adaptive(
-                      backgroundColor: Palette.movieDarkPrimary,
+                      backgroundColor: Palette.team2color,
                       strokeWidth: 7.5,
                       valueColor: AlwaysStoppedAnimation<Color>(
-                        Palette.moviePrimary.shade700,
+                        Palette.team2color.shade700,
                       ),
                     ),
                   ),
