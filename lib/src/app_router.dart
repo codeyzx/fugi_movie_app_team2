@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:fugi_movie_app_team2/src/detailscreen.dart';
 import 'package:go_router/go_router.dart';
 
-import 'homescreen.dart';
+import 'home_screen.dart';
 import 'splash_screen.dart';
 
 final goRouter =
