@@ -42,7 +42,6 @@ flutter:
   fonts:
     - family: Poppins
       fonts:
-        - asset: assets/fonts/Poppins-Bold.ttf
         - asset: assets/fonts/Poppins-BoldItalic.ttf
         - asset: assets/fonts/Poppins-Italic.ttf
         - asset: assets/fonts/Poppins-Medium.ttf

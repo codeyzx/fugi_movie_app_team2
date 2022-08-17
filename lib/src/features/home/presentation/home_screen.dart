@@ -53,9 +53,15 @@ class _HomeScreenState extends State<HomeScreen> {
                           ),
                           hintText: 'Search',
                           hintStyle: const TextStyle(color: AppTheme.thirdColor),
-                          labelText: '',
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(25),
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(25),
+                            borderSide: const BorderSide(
+                              color: AppTheme.textBlueColor,
+                              width: 2,
+                            ),
                           ),
                         ),
                       ),
@@ -66,12 +72,64 @@ class _HomeScreenState extends State<HomeScreen> {
                       scrollDirection: Axis.horizontal,
                       itemCount: 5,
                       itemBuilder: (context, index) {
-                        return ImageNumberWidget(number: (index + 1));
+                        return ImageNumberWidget(
+                          number: (index + 1),
+                        );
                       },
                     )),
-                const Expanded(
+                Expanded(
                   flex: 2,
-                  child: Text('Results'),
+                  child: DefaultTabController(
+                    initialIndex: 0,
+                    length: 4,
+                    child: SafeArea(
+                      child: Scaffold(
+                        appBar: AppBar(
+                          title: const Text('What do you want to watch?'),
+                          bottom: const TabBar(
+                            isScrollable: true,
+                            tabs: [
+                              Tab(text: 'Now Playing'),
+                              Tab(text: 'Upcoming'),
+                              Tab(text: 'Top Rated'),
+                              Tab(text: 'Popular'),
+                            ],
+                          ),
+                        ),
+                        body: TabBarView(
+                          children: [
+                            Center(
+                              child: GridView.builder(
+                                scrollDirection: Axis.vertical,
+                                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                                  crossAxisCount: 3,
+                                  mainAxisSpacing: 15,
+                                  crossAxisSpacing: 15,
+                                  mainAxisExtent: MediaQuery.of(context).size.width * 0.5,
+                                ),
+                                padding: const EdgeInsets.all(5),
+                                itemCount: 5,
+                                itemBuilder: (context, index) {
+                                  return Container(
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(10),
+                                      image: DecorationImage(
+                                        image: AssetImage('assets/images/movie${index + 1}.png'),
+                                        fit: BoxFit.contain,
+                                      ),
+                                    ),
+                                  );
+                                },
+                              ),
+                            ),
+                            Center(child: Text('Tab 2')),
+                            Center(child: Text('Tab 3')),
+                            Center(child: Text('Tab 4')),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
                 ),
               ],
             ),
