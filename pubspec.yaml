@@ -37,9 +37,9 @@ flutter:
   fonts:
     - family: Poppins
       fonts:
-        - asset: fonts/Poppins-Bold.ttf
-        - asset: fonts/Poppins-BoldItalic.ttf
-        - asset: fonts/Poppins-Italic.ttf
-        - asset: fonts/Poppins-Medium.ttf
-        - asset: fonts/Poppins-Reguler.ttf
+        - asset: assets/fonts/Poppins-Bold.ttf
+        - asset: assets/fonts/Poppins-BoldItalic.ttf
+        - asset: assets/fonts/Poppins-Italic.ttf
+        - asset: assets/fonts/Poppins-Medium.ttf
+        - asset: assets/fonts/Poppins-Regular.ttf
           style: italic
