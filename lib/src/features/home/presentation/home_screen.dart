@@ -22,7 +22,7 @@ class _HomeScreenState extends State<HomeScreen> {
     return SafeArea(
       top: false,
       child: KeyboardDismisser(
-        gestures: [
+        gestures: const [
           GestureType.onTap,
           GestureType.onVerticalDragDown,
           GestureType.onVerticalDragEnd,
@@ -87,7 +87,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     length: 4,
                     child: SafeArea(
                       child: Scaffold(
-                        appBar: TabBar(
+                        appBar: const TabBar(
                           isScrollable: true,
                           tabs: [
                             Tab(text: 'Now Playing'),
@@ -127,9 +127,9 @@ class _HomeScreenState extends State<HomeScreen> {
                                 },
                               ),
                             ),
-                            Center(child: Text('Tab 2')),
-                            Center(child: Text('Tab 3')),
-                            Center(child: Text('Tab 4')),
+                            const Center(child: Text('Tab 2')),
+                            const Center(child: Text('Tab 3')),
+                            const Center(child: Text('Tab 4')),
                           ],
                         ),
                       ),

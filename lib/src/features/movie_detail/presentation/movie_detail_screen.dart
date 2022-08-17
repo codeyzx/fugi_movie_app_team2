@@ -7,17 +7,15 @@ class MovieDetailScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final defaultPadding = EdgeInsets.symmetric(horizontal: 7);
+    final defaultPadding = const EdgeInsets.symmetric(horizontal: 7);
     return Scaffold(
       appBar: AppBar(
         title: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
+          children: const [
             SizedBox(),
             Text('Detail'),
-            Icon(
-              Icons.hub,
-            )
+            Icon(Icons.hub),
           ],
         ),
       ),
@@ -44,8 +42,8 @@ class MovieDetailScreen extends StatelessWidget {
                       top: 160,
                       right: 0,
                       child: Container(
-                        padding: EdgeInsets.all(10),
-                        margin: EdgeInsets.all(15),
+                        padding: const EdgeInsets.all(10),
+                        margin: const EdgeInsets.all(15),
                         width: 75,
                         decoration: BoxDecoration(
                           color: AppTheme.primaryColor,
@@ -55,13 +53,13 @@ class MovieDetailScreen extends StatelessWidget {
                         child: Center(
                           child: Row(
                             children: [
-                              Icon(
+                              const Icon(
                                 Icons.star_border,
                                 color: Colors.orange,
                               ),
-                              Text(
+                              const Text(
                                 '9.5',
-                                style: TextStyle(
+                                style: const TextStyle(
                                   color: Colors.orange,
                                 ),
                               ),
@@ -88,13 +86,13 @@ class MovieDetailScreen extends StatelessWidget {
                               'assets/images/movie-sub-hero.png',
                               fit: BoxFit.cover,
                             ),
-                            borderRadius: BorderRadius.all(Radius.circular(10)),
+                            borderRadius: const BorderRadius.all(const Radius.circular(10)),
                           ),
-                          SizedBox(width: 20),
-                          Flexible(
+                          const SizedBox(width: 20),
+                          const Flexible(
                             child: Text(
                               'Spiderman No Way Home',
-                              style: TextStyle(
+                              style: const TextStyle(
                                 fontSize: 28,
                               ),
                             ),
@@ -109,16 +107,16 @@ class MovieDetailScreen extends StatelessWidget {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Icon(Icons.calendar_month, color: AppTheme.fourthColor),
-                      Text('2022', style: const TextStyle(color: AppTheme.fourthColor, fontSize: 18)),
-                      Divider(
+                      const Icon(Icons.calendar_month, color: AppTheme.fourthColor),
+                      const Text('2022', style: TextStyle(color: AppTheme.fourthColor, fontSize: 18)),
+                      const Divider(
                         color: AppTheme.fourthColor,
                         thickness: 1,
                       ),
-                      Icon(Icons.watch_later, color: AppTheme.fourthColor),
-                      Text(' 180 Minuts', style: const TextStyle(color: AppTheme.fourthColor, fontSize: 18)),
-                      Icon(Icons.airplane_ticket, color: AppTheme.fourthColor),
-                      Text('Action', style: const TextStyle(color: AppTheme.fourthColor, fontSize: 18)),
+                      const Icon(Icons.watch_later, color: AppTheme.fourthColor),
+                      const Text(' 180 Minuts', style: TextStyle(color: AppTheme.fourthColor, fontSize: 18)),
+                      const Icon(Icons.airplane_ticket, color: AppTheme.fourthColor),
+                      const Text('Action', style: TextStyle(color: AppTheme.fourthColor, fontSize: 18)),
                     ],
                   ),
                 )
@@ -132,10 +130,10 @@ class MovieDetailScreen extends StatelessWidget {
               child: SafeArea(
                 top: false,
                 child: Scaffold(
-                  appBar: TabBar(
+                  appBar: const TabBar(
                     tabs: [
-                      Tab(child: Text('About Movie')),
-                      Tab(child: Text('Reviews')),
+                      Tab(child: const Text('About Movie')),
+                      const Tab(child: Text('Reviews')),
                       Tab(child: Text('Cast')),
                     ],
                   ),
@@ -143,9 +141,9 @@ class MovieDetailScreen extends StatelessWidget {
                     children: [
                       Container(
                           child: ListView.builder(
-                        padding: EdgeInsets.all(15),
+                        padding: const EdgeInsets.all(15),
                         itemBuilder: (context, index) {
-                          return Card(
+                          return const Card(
                             color: AppTheme.thirdColor,
                             child: ListTile(
                               leading: CircleAvatar(
@@ -155,8 +153,8 @@ class MovieDetailScreen extends StatelessWidget {
                           );
                         },
                       )),
-                      Container(child: Text('Reviews')),
-                      Container(child: Text('Cast')),
+                      Container(child: const Text('Reviews')),
+                      Container(child: const Text('Cast')),
                     ],
                   ),
                 ),

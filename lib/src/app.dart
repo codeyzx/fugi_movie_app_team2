@@ -29,7 +29,7 @@ class MyApp extends StatelessWidget {
                 fontWeight: FontWeight.w600,
               ),
             ),
-            iconTheme: IconThemeData(
+            iconTheme: const IconThemeData(
               color: Colors.white,
             ),
             scaffoldBackgroundColor: Palette.team2color,
