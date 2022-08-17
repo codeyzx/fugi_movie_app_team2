@@ -1,0 +1,10 @@
+{
+  "configurations": [
+    {
+      "name": "Jpops Mobile",
+      "request": "launch",
+      "type": "dart",
+      "flutterMode": "debug"
+    }
+  ]
+}

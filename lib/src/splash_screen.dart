@@ -3,7 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 
 import 'common_config/palette.dart';
-import 'home_screen.dart';
+import 'features/home/presentation/home_screen.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({
