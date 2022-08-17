@@ -60,6 +60,7 @@ class _WatchlistScreenState extends State<WatchlistScreen> {
                       ],
                     ),
                     Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text('Jurassic World'),
                         Row(
@@ -151,6 +152,7 @@ class _WatchlistScreenState extends State<WatchlistScreen> {
                       ],
                     ),
                     Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text('Spiderman'),
                         Row(
