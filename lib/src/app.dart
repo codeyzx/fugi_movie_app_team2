@@ -21,13 +21,16 @@ class MyApp extends StatelessWidget {
             fontFamily: 'Poppins',
             appBarTheme: AppBarTheme(
               elevation: 1,
-              centerTitle: false,
+              centerTitle: true,
               titleTextStyle: TextStyle(
                 fontFamily: 'Poppins',
                 color: Colors.white,
                 fontSize: ScreenUtil().setSp(18),
                 fontWeight: FontWeight.w600,
               ),
+            ),
+            iconTheme: IconThemeData(
+              color: Colors.white,
             ),
             scaffoldBackgroundColor: Palette.team2color,
             textTheme: TextTheme(

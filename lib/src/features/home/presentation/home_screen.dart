@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:fugi_movie_app_team2/src/features/home/presentation/widgets/image_number_widget.dart';
+import 'package:fugi_movie_app_team2/src/features/movie_detail/presentation/movie_detail_screen.dart';
+import 'package:go_router/go_router.dart';
 import 'package:keyboard_dismisser/keyboard_dismisser.dart';
 
 import '../../../common_config/app_theme.dart';
@@ -27,6 +29,7 @@ class _HomeScreenState extends State<HomeScreen> {
         ],
         child: Scaffold(
           appBar: AppBar(
+            centerTitle: false,
             title: const Text('What do you want to watch?'),
           ),
           body: Container(
@@ -84,17 +87,14 @@ class _HomeScreenState extends State<HomeScreen> {
                     length: 4,
                     child: SafeArea(
                       child: Scaffold(
-                        appBar: AppBar(
-                          title: const Text('What do you want to watch?'),
-                          bottom: const TabBar(
-                            isScrollable: true,
-                            tabs: [
-                              Tab(text: 'Now Playing'),
-                              Tab(text: 'Upcoming'),
-                              Tab(text: 'Top Rated'),
-                              Tab(text: 'Popular'),
-                            ],
-                          ),
+                        appBar: TabBar(
+                          isScrollable: true,
+                          tabs: [
+                            Tab(text: 'Now Playing'),
+                            Tab(text: 'Upcoming'),
+                            Tab(text: 'Top Rated'),
+                            Tab(text: 'Popular'),
+                          ],
                         ),
                         body: TabBarView(
                           children: [
@@ -110,12 +110,17 @@ class _HomeScreenState extends State<HomeScreen> {
                                 padding: const EdgeInsets.all(5),
                                 itemCount: 5,
                                 itemBuilder: (context, index) {
-                                  return Container(
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(10),
-                                      image: DecorationImage(
-                                        image: AssetImage('assets/images/movie${index + 1}.png'),
-                                        fit: BoxFit.contain,
+                                  return InkWell(
+                                    onTap: () => context.pushNamed(
+                                      MovieDetailScreen.routeName,
+                                    ),
+                                    child: Container(
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(10),
+                                        image: DecorationImage(
+                                          image: AssetImage('assets/images/movie${index + 1}.png'),
+                                          fit: BoxFit.contain,
+                                        ),
                                       ),
                                     ),
                                   );
