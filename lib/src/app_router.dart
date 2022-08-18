@@ -1,3 +1,4 @@
+import 'package:fugi_movie_app_team2/src/features/home/presentation/widgets/botnavbar_widget.dart';
 import 'package:fugi_movie_app_team2/src/features/movie_detail/presentation/movie_detail_screen.dart';
 import 'package:fugi_movie_app_team2/src/features/movie_detail/presentation/movie_watchlist.dart';
 import 'package:fugi_movie_app_team2/src/features/profile/presentation/profile_screen.dart';
@@ -18,6 +19,14 @@ final goRouter = GoRouter(
         child: const SplashScreen(),
       ),
     ),
+    GoRoute(
+        path: '/navbar-widget',
+        name: BotnavbarWidget.routeName,
+        pageBuilder: (context, state) => NoTransitionPage<void>(
+              key: state.pageKey,
+              child: const BotnavbarWidget(),
+            ),
+        routes: []),
     GoRoute(
         path: '/home-screen',
         name: HomeScreen.routeName,
