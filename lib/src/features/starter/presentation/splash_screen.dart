@@ -4,6 +4,7 @@ import 'package:fugi_movie_app_team2/src/features/home/presentation/widgets/botn
 import 'package:go_router/go_router.dart';
 
 import '../../../common_config/palette.dart';
+import '../../home/presentation/home_screen.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({

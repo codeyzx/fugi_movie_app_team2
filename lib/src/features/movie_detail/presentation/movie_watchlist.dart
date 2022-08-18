@@ -226,34 +226,34 @@ class _WatchlistScreenState extends State<WatchlistScreen> {
               ],
             ),
           ),
-          bottomNavigationBar: Container(
-            height: MediaQuery.of(context).size.height * 0.08,
-            padding: const EdgeInsets.only(top: 1),
-            decoration: const BoxDecoration(color: AppTheme.textBlueColor),
-            child: BottomNavigationBar(
-              iconSize: 32,
-              currentIndex: selectedIndex,
-              onTap: (index) {
-                setState(() {
-                  selectedIndex = index;
-                });
-              },
-              items: const [
-                BottomNavigationBarItem(
-                  icon: Icon(Icons.home),
-                  label: 'Home',
-                ),
-                BottomNavigationBarItem(
-                  icon: Icon(Icons.search),
-                  label: 'Search',
-                ),
-                BottomNavigationBarItem(
-                  icon: Icon(Icons.person),
-                  label: 'Profile',
-                ),
-              ],
-            ),
-          ),
+          // bottomNavigationBar: Container(
+          //   height: MediaQuery.of(context).size.height * 0.08,
+          //   padding: const EdgeInsets.only(top: 1),
+          //   decoration: const BoxDecoration(color: AppTheme.textBlueColor),
+          //   child: BottomNavigationBar(
+          //     iconSize: 32,
+          //     currentIndex: selectedIndex,
+          //     onTap: (index) {
+          //       setState(() {
+          //         selectedIndex = index;
+          //       });
+          //     },
+          //     items: const [
+          //       BottomNavigationBarItem(
+          //         icon: Icon(Icons.home),
+          //         label: 'Home',
+          //       ),
+          //       BottomNavigationBarItem(
+          //         icon: Icon(Icons.search),
+          //         label: 'Search',
+          //       ),
+          //       BottomNavigationBarItem(
+          //         icon: Icon(Icons.person),
+          //         label: 'Profile',
+          //       ),
+          //     ],
+          //   ),
+          // ),
         ),
       ),
     );
