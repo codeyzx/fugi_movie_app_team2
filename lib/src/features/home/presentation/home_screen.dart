@@ -55,8 +55,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             size: 32,
                           ),
                           hintText: 'Search',
-                          hintStyle:
-                              const TextStyle(color: AppTheme.thirdColor),
+                          hintStyle: const TextStyle(color: AppTheme.thirdColor),
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(25),
                           ),
@@ -102,13 +101,11 @@ class _HomeScreenState extends State<HomeScreen> {
                             Center(
                               child: GridView.builder(
                                 scrollDirection: Axis.vertical,
-                                gridDelegate:
-                                    SliverGridDelegateWithFixedCrossAxisCount(
+                                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                                   crossAxisCount: 3,
                                   mainAxisSpacing: 15,
                                   crossAxisSpacing: 15,
-                                  mainAxisExtent:
-                                      MediaQuery.of(context).size.width * 0.5,
+                                  mainAxisExtent: MediaQuery.of(context).size.width * 0.5,
                                 ),
                                 padding: const EdgeInsets.all(5),
                                 itemCount: 3,
@@ -122,8 +119,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                       decoration: BoxDecoration(
                                         borderRadius: BorderRadius.circular(10),
                                         image: DecorationImage(
-                                          image: AssetImage(
-                                              'assets/images/movie${index + 1}.png'),
+                                          image: AssetImage('assets/images/movie${index + 1}.png'),
                                           fit: BoxFit.contain,
                                         ),
                                       ),

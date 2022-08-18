@@ -1,10 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:fugi_movie_app_team2/src/features/home/presentation/widgets/image_number_widget.dart';
-import 'package:fugi_movie_app_team2/src/features/movie_detail/presentation/movie_detail_screen.dart';
-import 'package:go_router/go_router.dart';
 import 'package:keyboard_dismisser/keyboard_dismisser.dart';
 
-import '../../../common_config/app_theme.dart';
 
 class WatchlistScreen extends StatefulWidget {
   const WatchlistScreen({Key? key}) : super(key: key);
@@ -30,11 +26,11 @@ class _WatchlistScreenState extends State<WatchlistScreen> {
         child: Scaffold(
           appBar: AppBar(
             centerTitle: false,
-            title: Center(
-              child: const Text('Watch List'),
+            title: const Center(
+              child: Text('Watch List'),
             ),
             leading: IconButton(
-              icon: Icon(Icons.arrow_back),
+              icon: const Icon(Icons.arrow_back),
               onPressed: () => Navigator.pop(context),
             ),
           ),
@@ -51,7 +47,7 @@ class _WatchlistScreenState extends State<WatchlistScreen> {
                         Container(
                           width: 95,
                           height: 120,
-                          decoration: BoxDecoration(
+                          decoration: const BoxDecoration(
                             image: DecorationImage(
                               image: AssetImage('assets/images/movie1.png'),
                             ),
@@ -62,17 +58,17 @@ class _WatchlistScreenState extends State<WatchlistScreen> {
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text('Jurassic World'),
+                        const Text('Jurassic World'),
                         Row(
                           // crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            const Icon(
+                          children: const [
+                            Icon(
                               Icons.star_border,
                               color: Colors.orange,
                             ),
-                            const Text(
+                            Text(
                               '9.5',
-                              style: const TextStyle(
+                              style: TextStyle(
                                 color: Colors.orange,
                               ),
                               // textAlign: TextAlign.start,
@@ -81,14 +77,14 @@ class _WatchlistScreenState extends State<WatchlistScreen> {
                         ),
                         Row(
                           // crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            const Icon(
+                          children: const [
+                            Icon(
                               Icons.airplane_ticket,
                               color: Colors.grey,
                             ),
-                            const Text(
+                            Text(
                               'Action',
-                              style: const TextStyle(
+                              style: TextStyle(
                                 color: Colors.grey,
                               ),
                               // textAlign: TextAlign.start,
@@ -97,14 +93,14 @@ class _WatchlistScreenState extends State<WatchlistScreen> {
                         ),
                         Row(
                           // crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            const Icon(
+                          children: const [
+                            Icon(
                               Icons.calendar_month,
                               color: Colors.grey,
                             ),
-                            const Text(
+                            Text(
                               '2019',
-                              style: const TextStyle(
+                              style: TextStyle(
                                 color: Colors.grey,
                               ),
                               // textAlign: TextAlign.start,
@@ -113,14 +109,14 @@ class _WatchlistScreenState extends State<WatchlistScreen> {
                         ),
                         Row(
                           // crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            const Icon(
+                          children: const [
+                            Icon(
                               Icons.watch_later,
                               color: Colors.grey,
                             ),
-                            const Text(
+                            Text(
                               '139 minutes',
-                              style: const TextStyle(
+                              style: TextStyle(
                                 color: Colors.grey,
                               ),
                               // textAlign: TextAlign.start,
@@ -131,7 +127,7 @@ class _WatchlistScreenState extends State<WatchlistScreen> {
                     ),
                   ],
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 30,
                 ),
                 Row(
@@ -143,7 +139,7 @@ class _WatchlistScreenState extends State<WatchlistScreen> {
                         Container(
                           width: 95,
                           height: 120,
-                          decoration: BoxDecoration(
+                          decoration: const BoxDecoration(
                             image: DecorationImage(
                               image: AssetImage('assets/images/movie2.png'),
                             ),
@@ -154,17 +150,17 @@ class _WatchlistScreenState extends State<WatchlistScreen> {
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text('Spiderman'),
+                        const Text('Spiderman'),
                         Row(
                           // crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            const Icon(
+                          children: const [
+                            Icon(
                               Icons.star_border,
                               color: Colors.orange,
                             ),
-                            const Text(
+                            Text(
                               '8.5',
-                              style: const TextStyle(
+                              style: TextStyle(
                                 color: Colors.orange,
                               ),
                               // textAlign: TextAlign.start,
@@ -173,14 +169,14 @@ class _WatchlistScreenState extends State<WatchlistScreen> {
                         ),
                         Row(
                           // crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            const Icon(
+                          children: const [
+                            Icon(
                               Icons.airplane_ticket,
                               color: Colors.grey,
                             ),
-                            const Text(
+                            Text(
                               'Action',
-                              style: const TextStyle(
+                              style: TextStyle(
                                 color: Colors.grey,
                               ),
                               // textAlign: TextAlign.start,
@@ -189,14 +185,14 @@ class _WatchlistScreenState extends State<WatchlistScreen> {
                         ),
                         Row(
                           // crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            const Icon(
+                          children: const [
+                            Icon(
                               Icons.calendar_month,
                               color: Colors.grey,
                             ),
-                            const Text(
+                            Text(
                               '2021',
-                              style: const TextStyle(
+                              style: TextStyle(
                                 color: Colors.grey,
                               ),
                               // textAlign: TextAlign.start,
@@ -205,14 +201,14 @@ class _WatchlistScreenState extends State<WatchlistScreen> {
                         ),
                         Row(
                           // crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            const Icon(
+                          children: const [
+                            Icon(
                               Icons.watch_later,
                               color: Colors.grey,
                             ),
-                            const Text(
+                            Text(
                               '139 minutes',
-                              style: const TextStyle(
+                              style: TextStyle(
                                 color: Colors.grey,
                               ),
                               // textAlign: TextAlign.start,

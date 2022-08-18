@@ -7,7 +7,6 @@ class MovieDetailScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final defaultPadding = const EdgeInsets.symmetric(horizontal: 7);
     return Scaffold(
       appBar: AppBar(
         title: Row(
@@ -52,14 +51,14 @@ class MovieDetailScreen extends StatelessWidget {
                         ),
                         child: Center(
                           child: Row(
-                            children: [
-                              const Icon(
+                            children: const [
+                              Icon(
                                 Icons.star_border,
                                 color: Colors.orange,
                               ),
-                              const Text(
+                              Text(
                                 '9.5',
-                                style: const TextStyle(
+                                style: TextStyle(
                                   color: Colors.orange,
                                 ),
                               ),
@@ -82,17 +81,17 @@ class MovieDetailScreen extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.end,
                         children: [
                           ClipRRect(
+                            borderRadius: const BorderRadius.all(Radius.circular(10)),
                             child: Image.asset(
                               'assets/images/movie-sub-hero.png',
                               fit: BoxFit.cover,
                             ),
-                            borderRadius: const BorderRadius.all(const Radius.circular(10)),
                           ),
                           const SizedBox(width: 20),
                           const Flexible(
                             child: Text(
                               'Spiderman No Way Home',
-                              style: const TextStyle(
+                              style: TextStyle(
                                 fontSize: 28,
                               ),
                             ),
@@ -106,17 +105,17 @@ class MovieDetailScreen extends StatelessWidget {
                   width: MediaQuery.of(context).size.width * 0.8,
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      const Icon(Icons.calendar_month, color: AppTheme.fourthColor),
-                      const Text('2022', style: TextStyle(color: AppTheme.fourthColor, fontSize: 18)),
-                      const Divider(
+                    children: const [
+                      Icon(Icons.calendar_month, color: AppTheme.fourthColor),
+                      Text('2022', style: TextStyle(color: AppTheme.fourthColor, fontSize: 18)),
+                      Divider(
                         color: AppTheme.fourthColor,
                         thickness: 1,
                       ),
-                      const Icon(Icons.watch_later, color: AppTheme.fourthColor),
-                      const Text(' 180 Minuts', style: TextStyle(color: AppTheme.fourthColor, fontSize: 18)),
-                      const Icon(Icons.airplane_ticket, color: AppTheme.fourthColor),
-                      const Text('Action', style: TextStyle(color: AppTheme.fourthColor, fontSize: 18)),
+                      Icon(Icons.watch_later, color: AppTheme.fourthColor),
+                      Text(' 180 Minuts', style: TextStyle(color: AppTheme.fourthColor, fontSize: 18)),
+                      Icon(Icons.airplane_ticket, color: AppTheme.fourthColor),
+                      Text('Action', style: TextStyle(color: AppTheme.fourthColor, fontSize: 18)),
                     ],
                   ),
                 )
@@ -132,15 +131,14 @@ class MovieDetailScreen extends StatelessWidget {
                 child: Scaffold(
                   appBar: const TabBar(
                     tabs: [
-                      Tab(child: const Text('About Movie')),
-                      const Tab(child: Text('Reviews')),
+                      Tab(child: Text('About Movie')),
+                      Tab(child: Text('Reviews')),
                       Tab(child: Text('Cast')),
                     ],
                   ),
                   body: TabBarView(
                     children: [
-                      Container(
-                          child: ListView.builder(
+                      ListView.builder(
                         padding: const EdgeInsets.all(15),
                         itemBuilder: (context, index) {
                           return const Card(
@@ -152,9 +150,9 @@ class MovieDetailScreen extends StatelessWidget {
                             ),
                           );
                         },
-                      )),
-                      Container(child: const Text('Reviews')),
-                      Container(child: const Text('Cast')),
+                      ),
+                      const Text('Reviews'),
+                      const Text('Cast'),
                     ],
                   ),
                 ),
