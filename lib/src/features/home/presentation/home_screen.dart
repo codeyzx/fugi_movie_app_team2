@@ -55,7 +55,8 @@ class _HomeScreenState extends State<HomeScreen> {
                             size: 32,
                           ),
                           hintText: 'Search',
-                          hintStyle: const TextStyle(color: AppTheme.thirdColor),
+                          hintStyle:
+                              const TextStyle(color: AppTheme.thirdColor),
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(25),
                           ),
@@ -73,7 +74,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     flex: 2,
                     child: ListView.builder(
                       scrollDirection: Axis.horizontal,
-                      itemCount: 5,
+                      itemCount: 3,
                       itemBuilder: (context, index) {
                         return ImageNumberWidget(
                           number: (index + 1),
@@ -101,24 +102,28 @@ class _HomeScreenState extends State<HomeScreen> {
                             Center(
                               child: GridView.builder(
                                 scrollDirection: Axis.vertical,
-                                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                                gridDelegate:
+                                    SliverGridDelegateWithFixedCrossAxisCount(
                                   crossAxisCount: 3,
                                   mainAxisSpacing: 15,
                                   crossAxisSpacing: 15,
-                                  mainAxisExtent: MediaQuery.of(context).size.width * 0.5,
+                                  mainAxisExtent:
+                                      MediaQuery.of(context).size.width * 0.5,
                                 ),
                                 padding: const EdgeInsets.all(5),
-                                itemCount: 5,
+                                itemCount: 3,
                                 itemBuilder: (context, index) {
                                   return InkWell(
                                     onTap: () => context.pushNamed(
                                       MovieDetailScreen.routeName,
+                                      // ProfileScreen.routeName,
                                     ),
                                     child: Container(
                                       decoration: BoxDecoration(
                                         borderRadius: BorderRadius.circular(10),
                                         image: DecorationImage(
-                                          image: AssetImage('assets/images/movie${index + 1}.png'),
+                                          image: AssetImage(
+                                              'assets/images/movie${index + 1}.png'),
                                           fit: BoxFit.contain,
                                         ),
                                       ),
@@ -135,34 +140,6 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                     ),
                   ),
-                ),
-              ],
-            ),
-          ),
-          bottomNavigationBar: Container(
-            height: MediaQuery.of(context).size.height * 0.08,
-            padding: const EdgeInsets.only(top: 1),
-            decoration: const BoxDecoration(color: AppTheme.textBlueColor),
-            child: BottomNavigationBar(
-              iconSize: 32,
-              currentIndex: selectedIndex,
-              onTap: (index) {
-                setState(() {
-                  selectedIndex = index;
-                });
-              },
-              items: const [
-                BottomNavigationBarItem(
-                  icon: Icon(Icons.home),
-                  label: 'Home',
-                ),
-                BottomNavigationBarItem(
-                  icon: Icon(Icons.search),
-                  label: 'Search',
-                ),
-                BottomNavigationBarItem(
-                  icon: Icon(Icons.person),
-                  label: 'Profile',
                 ),
               ],
             ),

@@ -20,7 +20,7 @@ class ImageNumberWidget extends StatelessWidget {
           SizedBox(
             height: MediaQuery.of(context).size.height * 0.5,
             child: Image.asset(
-              'assets/images/movie1.png',
+              'assets/images/movie$number.png',
             ),
           ),
           Positioned(
