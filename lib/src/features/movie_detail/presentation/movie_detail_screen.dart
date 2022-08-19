@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:fugi_movie_app_team2/src/common_config/app_theme.dart';
+import 'package:fugi_movie_app_team2/src/features/movie_detail/presentation/widgets/about_movie.dart';
+import 'package:fugi_movie_app_team2/src/features/movie_detail/presentation/widgets/cast.dart';
+import 'package:fugi_movie_app_team2/src/features/movie_detail/presentation/widgets/movie_status.dart';
+import 'package:fugi_movie_app_team2/src/features/movie_detail/presentation/widgets/reviews.dart';
 
 class MovieDetailScreen extends StatelessWidget {
   const MovieDetailScreen({Key? key}) : super(key: key);
@@ -9,14 +13,8 @@ class MovieDetailScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: const [
-            SizedBox(),
-            Text('Detail'),
-            Icon(Icons.hub),
-          ],
-        ),
+        title: Text('Detail'),
+        actions: [IconButton(onPressed: () {}, icon: Icon(Icons.bookmark))],
       ),
       body: Column(
         children: [
@@ -41,16 +39,17 @@ class MovieDetailScreen extends StatelessWidget {
                       top: 160,
                       right: 0,
                       child: Container(
-                        padding: const EdgeInsets.all(10),
                         margin: const EdgeInsets.all(15),
-                        width: 75,
+                        width: 70,
+                        height: 35,
                         decoration: BoxDecoration(
                           color: AppTheme.primaryColor,
-                          borderRadius: BorderRadius.circular(50),
+                          borderRadius: BorderRadius.circular(10),
                           border: Border.all(color: Colors.orange),
                         ),
                         child: Center(
                           child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: const [
                               Icon(
                                 Icons.star_border,
@@ -59,6 +58,7 @@ class MovieDetailScreen extends StatelessWidget {
                               Text(
                                 '9.5',
                                 style: TextStyle(
+                                  fontSize: 20,
                                   color: Colors.orange,
                                 ),
                               ),
@@ -70,7 +70,7 @@ class MovieDetailScreen extends StatelessWidget {
                   ],
                 ),
                 Positioned(
-                  top: 215,
+                  top: 200,
                   left: 0,
                   right: 0,
                   child: SizedBox(
@@ -81,7 +81,8 @@ class MovieDetailScreen extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.end,
                         children: [
                           ClipRRect(
-                            borderRadius: const BorderRadius.all(Radius.circular(10)),
+                            borderRadius:
+                                const BorderRadius.all(Radius.circular(10)),
                             child: Image.asset(
                               'assets/images/movie-sub-hero.png',
                               fit: BoxFit.cover,
@@ -104,20 +105,16 @@ class MovieDetailScreen extends StatelessWidget {
                 SizedBox(
                   width: MediaQuery.of(context).size.width * 0.8,
                   child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: const [
-                      Icon(Icons.calendar_month, color: AppTheme.fourthColor),
-                      Text('2022', style: TextStyle(color: AppTheme.fourthColor, fontSize: 18)),
-                      Divider(
-                        color: AppTheme.fourthColor,
-                        thickness: 1,
-                      ),
-                      Icon(Icons.watch_later, color: AppTheme.fourthColor),
-                      Text(' 180 Minuts', style: TextStyle(color: AppTheme.fourthColor, fontSize: 18)),
-                      Icon(Icons.airplane_ticket, color: AppTheme.fourthColor),
-                      Text('Action', style: TextStyle(color: AppTheme.fourthColor, fontSize: 18)),
-                    ],
-                  ),
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        MovieStatus(icon: Icons.calendar_month, text: '2022'),
+                        MovieStatus(
+                            icon: Icons.watch_later_outlined,
+                            text: '148 Minutes'),
+                        MovieStatus(
+                            icon: Icons.airplane_ticket_rounded,
+                            text: 'Action'),
+                      ]),
                 )
               ],
             ),
@@ -138,21 +135,9 @@ class MovieDetailScreen extends StatelessWidget {
                   ),
                   body: TabBarView(
                     children: [
-                      ListView.builder(
-                        padding: const EdgeInsets.all(15),
-                        itemBuilder: (context, index) {
-                          return const Card(
-                            color: AppTheme.thirdColor,
-                            child: ListTile(
-                              leading: CircleAvatar(
-                                backgroundColor: AppTheme.secondaryColor,
-                              ),
-                            ),
-                          );
-                        },
-                      ),
-                      const Text('Reviews'),
-                      const Text('Cast'),
+                      AboutMovie(),
+                      Reviews(),
+                      Cast(),
                     ],
                   ),
                 ),
