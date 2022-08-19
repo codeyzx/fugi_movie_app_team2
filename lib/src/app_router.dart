@@ -48,7 +48,7 @@ final goRouter = GoRouter(
       name: MovieDetailScreen.routeName,
       pageBuilder: (context, state) => NoTransitionPage<void>(
         key: state.pageKey,
-        child: MovieDetailScreen(),
+        child: const MovieDetailScreen(),
       ),
     ),
     GoRoute(
