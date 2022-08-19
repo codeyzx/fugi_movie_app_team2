@@ -4,11 +4,17 @@ import 'package:fugi_movie_app_team2/src/features/movie_detail/presentation/widg
 import 'package:fugi_movie_app_team2/src/features/movie_detail/presentation/widgets/cast.dart';
 import 'package:fugi_movie_app_team2/src/features/movie_detail/presentation/widgets/movie_status.dart';
 import 'package:fugi_movie_app_team2/src/features/movie_detail/presentation/widgets/reviews.dart';
+import 'package:google_fonts/google_fonts.dart';
 
-class MovieDetailScreen extends StatelessWidget {
+class MovieDetailScreen extends StatefulWidget {
   const MovieDetailScreen({Key? key}) : super(key: key);
   static const routeName = 'movie-detail-screen';
 
+  @override
+  State<MovieDetailScreen> createState() => _MovieDetailScreenState();
+}
+
+class _MovieDetailScreenState extends State<MovieDetailScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -38,31 +44,54 @@ class MovieDetailScreen extends StatelessWidget {
                     Positioned(
                       top: 160,
                       right: 0,
-                      child: Container(
-                        margin: const EdgeInsets.all(15),
-                        width: 70,
-                        height: 35,
-                        decoration: BoxDecoration(
-                          color: AppTheme.primaryColor,
-                          borderRadius: BorderRadius.circular(10),
-                          border: Border.all(color: Colors.orange),
-                        ),
-                        child: Center(
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: const [
-                              Icon(
-                                Icons.star_border,
-                                color: Colors.orange,
-                              ),
-                              Text(
-                                '9.5',
-                                style: TextStyle(
-                                  fontSize: 20,
+                      child: GestureDetector(
+                        onTap: () {
+                          //Navigator.pop(context);
+                          showModalBottomSheet(
+                              context: context,
+                              backgroundColor: Colors.transparent,
+                              builder: ((BuildContext context) {
+                                return Wrap(
+                                  children: [
+                                    Container(
+                                      decoration: BoxDecoration(
+                                          color: Colors.white,
+                                          borderRadius: BorderRadius.only(
+                                              topLeft: Radius.circular(20),
+                                              topRight: Radius.circular(20))),
+                                      padding: EdgeInsets.all(20),
+                                      child: WidgetSLider(),
+                                    )
+                                  ],
+                                );
+                              }));
+                        },
+                        child: Container(
+                          margin: const EdgeInsets.all(15),
+                          width: 70,
+                          height: 35,
+                          decoration: BoxDecoration(
+                            color: AppTheme.primaryColor,
+                            borderRadius: BorderRadius.circular(10),
+                            border: Border.all(color: Colors.orange),
+                          ),
+                          child: Center(
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: const [
+                                Icon(
+                                  Icons.star_border,
                                   color: Colors.orange,
                                 ),
-                              ),
-                            ],
+                                Text(
+                                  '9.5',
+                                  style: TextStyle(
+                                    fontSize: 20,
+                                    color: Colors.orange,
+                                  ),
+                                ),
+                              ],
+                            ),
                           ),
                         ),
                       ),
@@ -146,6 +175,83 @@ class MovieDetailScreen extends StatelessWidget {
           ),
         ],
       ),
+    );
+  }
+}
+
+class WidgetSLider extends StatefulWidget {
+  const WidgetSLider({Key? key}) : super(key: key);
+
+  @override
+  State<WidgetSLider> createState() => _WidgetSLiderState();
+}
+
+class _WidgetSLiderState extends State<WidgetSLider> {
+  double SliderValue = 0.0;
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        Text("Rate this Movie",
+            style: GoogleFonts.montserrat().copyWith(
+                fontSize: 18,
+                fontWeight: FontWeight.w400,
+                color: AppTheme.thirdColor)),
+        SizedBox(height: 20),
+        Text('${double.parse(SliderValue.toStringAsFixed(1))}',
+            style: GoogleFonts.montserrat().copyWith(
+                fontSize: 32,
+                fontWeight: FontWeight.w400,
+                color: AppTheme.thirdColor)),
+        SizedBox(height: 10),
+        SliderTheme(
+          data: SliderThemeData(
+            activeTrackColor: Color(0XFFFF8700),
+            trackHeight: 10,
+            overlayColor: Colors.amber,
+            inactiveTrackColor: Colors.grey,
+            thumbColor: Colors.white,
+            thumbShape:
+                RoundSliderThumbShape(elevation: 10, enabledThumbRadius: 15),
+            overlayShape: RoundSliderOverlayShape(overlayRadius: 20),
+          ),
+          // thumbColor: Colors.green,
+          // thumbShape: RoundSliderThumbShape(enabledThumbRadius: 20)),
+          child: Slider(
+            value: SliderValue,
+            max: 10,
+            // divisions: 100,
+            label: '${SliderValue.round()}',
+            // thumbColor: Colors.white,
+            // activeColor: Colors.amber,
+            autofocus: true,
+            //inactiveColor: Colors.grey,
+            onChanged: (double value) {
+              setState(() {
+                SliderValue = value;
+              });
+            },
+          ),
+        ),
+        SizedBox(
+          height: 20,
+        ),
+        ClipRRect(
+          borderRadius: BorderRadius.circular(28),
+          child: Container(
+            width: 220,
+            height: 56,
+            color: Color(0XFF0296E5),
+            child: Center(
+              child: Text("OK",
+                  style: GoogleFonts.montserrat().copyWith(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w600,
+                      color: Colors.white)),
+            ),
+          ),
+        )
+      ],
     );
   }
 }
