@@ -1,23 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:fugi_movie_app_team2/src/common_config/app_theme.dart';
+import 'package:fugi_movie_app_team2/src/features/movie_detail/presentation/widgets/about_movie.dart';
+import 'package:fugi_movie_app_team2/src/features/movie_detail/presentation/widgets/cast.dart';
+import 'package:fugi_movie_app_team2/src/features/movie_detail/presentation/widgets/movie_status.dart';
+import 'package:fugi_movie_app_team2/src/features/movie_detail/presentation/widgets/reviews.dart';
+import 'package:google_fonts/google_fonts.dart';
 
-class MovieDetailScreen extends StatelessWidget {
+class MovieDetailScreen extends StatefulWidget {
   const MovieDetailScreen({Key? key}) : super(key: key);
   static const routeName = 'movie-detail-screen';
 
   @override
+  State<MovieDetailScreen> createState() => _MovieDetailScreenState();
+}
+
+class _MovieDetailScreenState extends State<MovieDetailScreen> {
+  @override
   Widget build(BuildContext context) {
-    final defaultPadding = const EdgeInsets.symmetric(horizontal: 7);
     return Scaffold(
       appBar: AppBar(
-        title: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: const [
-            SizedBox(),
-            Text('Detail'),
-            Icon(Icons.hub),
-          ],
-        ),
+        title: Text('Detail'),
+        actions: [IconButton(onPressed: () {}, icon: Icon(Icons.bookmark))],
       ),
       body: Column(
         children: [
@@ -41,29 +44,54 @@ class MovieDetailScreen extends StatelessWidget {
                     Positioned(
                       top: 160,
                       right: 0,
-                      child: Container(
-                        padding: const EdgeInsets.all(10),
-                        margin: const EdgeInsets.all(15),
-                        width: 75,
-                        decoration: BoxDecoration(
-                          color: AppTheme.primaryColor,
-                          borderRadius: BorderRadius.circular(50),
-                          border: Border.all(color: Colors.orange),
-                        ),
-                        child: Center(
-                          child: Row(
-                            children: [
-                              const Icon(
-                                Icons.star_border,
-                                color: Colors.orange,
-                              ),
-                              const Text(
-                                '9.5',
-                                style: const TextStyle(
+                      child: GestureDetector(
+                        onTap: () {
+                          //Navigator.pop(context);
+                          showModalBottomSheet(
+                              context: context,
+                              backgroundColor: Colors.transparent,
+                              builder: ((BuildContext context) {
+                                return Wrap(
+                                  children: [
+                                    Container(
+                                      decoration: BoxDecoration(
+                                          color: Colors.white,
+                                          borderRadius: BorderRadius.only(
+                                              topLeft: Radius.circular(20),
+                                              topRight: Radius.circular(20))),
+                                      padding: EdgeInsets.all(20),
+                                      child: WidgetSLider(),
+                                    )
+                                  ],
+                                );
+                              }));
+                        },
+                        child: Container(
+                          margin: const EdgeInsets.all(15),
+                          width: 70,
+                          height: 35,
+                          decoration: BoxDecoration(
+                            color: AppTheme.primaryColor,
+                            borderRadius: BorderRadius.circular(10),
+                            border: Border.all(color: Colors.orange),
+                          ),
+                          child: Center(
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: const [
+                                Icon(
+                                  Icons.star_border,
                                   color: Colors.orange,
                                 ),
-                              ),
-                            ],
+                                Text(
+                                  '9.5',
+                                  style: TextStyle(
+                                    fontSize: 20,
+                                    color: Colors.orange,
+                                  ),
+                                ),
+                              ],
+                            ),
                           ),
                         ),
                       ),
@@ -71,7 +99,7 @@ class MovieDetailScreen extends StatelessWidget {
                   ],
                 ),
                 Positioned(
-                  top: 215,
+                  top: 200,
                   left: 0,
                   right: 0,
                   child: SizedBox(
@@ -82,17 +110,18 @@ class MovieDetailScreen extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.end,
                         children: [
                           ClipRRect(
+                            borderRadius:
+                                const BorderRadius.all(Radius.circular(10)),
                             child: Image.asset(
                               'assets/images/movie-sub-hero.png',
                               fit: BoxFit.cover,
                             ),
-                            borderRadius: const BorderRadius.all(const Radius.circular(10)),
                           ),
                           const SizedBox(width: 20),
                           const Flexible(
                             child: Text(
                               'Spiderman No Way Home',
-                              style: const TextStyle(
+                              style: TextStyle(
                                 fontSize: 28,
                               ),
                             ),
@@ -105,20 +134,16 @@ class MovieDetailScreen extends StatelessWidget {
                 SizedBox(
                   width: MediaQuery.of(context).size.width * 0.8,
                   child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      const Icon(Icons.calendar_month, color: AppTheme.fourthColor),
-                      const Text('2022', style: TextStyle(color: AppTheme.fourthColor, fontSize: 18)),
-                      const Divider(
-                        color: AppTheme.fourthColor,
-                        thickness: 1,
-                      ),
-                      const Icon(Icons.watch_later, color: AppTheme.fourthColor),
-                      const Text(' 180 Minuts', style: TextStyle(color: AppTheme.fourthColor, fontSize: 18)),
-                      const Icon(Icons.airplane_ticket, color: AppTheme.fourthColor),
-                      const Text('Action', style: TextStyle(color: AppTheme.fourthColor, fontSize: 18)),
-                    ],
-                  ),
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        MovieStatus(icon: Icons.calendar_month, text: '2022'),
+                        MovieStatus(
+                            icon: Icons.watch_later_outlined,
+                            text: '148 Minutes'),
+                        MovieStatus(
+                            icon: Icons.airplane_ticket_rounded,
+                            text: 'Action'),
+                      ]),
                 )
               ],
             ),
@@ -132,29 +157,16 @@ class MovieDetailScreen extends StatelessWidget {
                 child: Scaffold(
                   appBar: const TabBar(
                     tabs: [
-                      Tab(child: const Text('About Movie')),
-                      const Tab(child: Text('Reviews')),
+                      Tab(child: Text('About Movie')),
+                      Tab(child: Text('Reviews')),
                       Tab(child: Text('Cast')),
                     ],
                   ),
                   body: TabBarView(
                     children: [
-                      Container(
-                          child: ListView.builder(
-                        padding: const EdgeInsets.all(15),
-                        itemBuilder: (context, index) {
-                          return const Card(
-                            color: AppTheme.thirdColor,
-                            child: ListTile(
-                              leading: CircleAvatar(
-                                backgroundColor: AppTheme.secondaryColor,
-                              ),
-                            ),
-                          );
-                        },
-                      )),
-                      Container(child: const Text('Reviews')),
-                      Container(child: const Text('Cast')),
+                      AboutMovie(),
+                      Reviews(),
+                      Cast(),
                     ],
                   ),
                 ),
@@ -163,6 +175,83 @@ class MovieDetailScreen extends StatelessWidget {
           ),
         ],
       ),
+    );
+  }
+}
+
+class WidgetSLider extends StatefulWidget {
+  const WidgetSLider({Key? key}) : super(key: key);
+
+  @override
+  State<WidgetSLider> createState() => _WidgetSLiderState();
+}
+
+class _WidgetSLiderState extends State<WidgetSLider> {
+  double SliderValue = 0.0;
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        Text("Rate this Movie",
+            style: GoogleFonts.montserrat().copyWith(
+                fontSize: 18,
+                fontWeight: FontWeight.w400,
+                color: AppTheme.thirdColor)),
+        SizedBox(height: 20),
+        Text('${double.parse(SliderValue.toStringAsFixed(1))}',
+            style: GoogleFonts.montserrat().copyWith(
+                fontSize: 32,
+                fontWeight: FontWeight.w400,
+                color: AppTheme.thirdColor)),
+        SizedBox(height: 10),
+        SliderTheme(
+          data: SliderThemeData(
+            activeTrackColor: Color(0XFFFF8700),
+            trackHeight: 10,
+            overlayColor: Colors.amber,
+            inactiveTrackColor: Colors.grey,
+            thumbColor: Colors.white,
+            thumbShape:
+                RoundSliderThumbShape(elevation: 10, enabledThumbRadius: 15),
+            overlayShape: RoundSliderOverlayShape(overlayRadius: 20),
+          ),
+          // thumbColor: Colors.green,
+          // thumbShape: RoundSliderThumbShape(enabledThumbRadius: 20)),
+          child: Slider(
+            value: SliderValue,
+            max: 10,
+            // divisions: 100,
+            label: '${SliderValue.round()}',
+            // thumbColor: Colors.white,
+            // activeColor: Colors.amber,
+            autofocus: true,
+            //inactiveColor: Colors.grey,
+            onChanged: (double value) {
+              setState(() {
+                SliderValue = value;
+              });
+            },
+          ),
+        ),
+        SizedBox(
+          height: 20,
+        ),
+        ClipRRect(
+          borderRadius: BorderRadius.circular(28),
+          child: Container(
+            width: 220,
+            height: 56,
+            color: Color(0XFF0296E5),
+            child: Center(
+              child: Text("OK",
+                  style: GoogleFonts.montserrat().copyWith(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w600,
+                      color: Colors.white)),
+            ),
+          ),
+        )
+      ],
     );
   }
 }

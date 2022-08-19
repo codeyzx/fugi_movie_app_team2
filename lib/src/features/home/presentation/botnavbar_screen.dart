@@ -4,15 +4,15 @@ import 'package:fugi_movie_app_team2/src/features/home/presentation/home_screen.
 import 'package:fugi_movie_app_team2/src/features/movie_detail/presentation/movie_watchlist.dart';
 import 'package:fugi_movie_app_team2/src/features/profile/presentation/profile_screen.dart';
 
-class BotnavbarWidget extends StatefulWidget {
-  const BotnavbarWidget({Key? key}) : super(key: key);
-  static const routeName = '/botnavbar-widget';
+class BotNavBarScreen extends StatefulWidget {
+  const BotNavBarScreen({Key? key}) : super(key: key);
+  static const routeName = '/botnavbar-screen';
 
   @override
-  State<BotnavbarWidget> createState() => _BotnavbarWidgetState();
+  State<BotNavBarScreen> createState() => BotNavBarScreenState();
 }
 
-class _BotnavbarWidgetState extends State<BotnavbarWidget> {
+class BotNavBarScreenState extends State<BotNavBarScreen> {
   int currentIndex = 0;
 
   final PageStorageBucket bucket = PageStorageBucket();

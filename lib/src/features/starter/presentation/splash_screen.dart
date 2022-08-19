@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:fugi_movie_app_team2/src/features/home/presentation/widgets/botnavbar_widget.dart';
+import 'package:fugi_movie_app_team2/src/features/home/presentation/botnavbar_screen.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../common_config/palette.dart';
-import '../../home/presentation/home_screen.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({
@@ -70,8 +69,9 @@ class SplashScreenState extends State<SplashScreen> {
 
   Future initPage() async {
     await Future.delayed(const Duration(milliseconds: 2000));
+    if (!mounted) return;
     // if (activatedStatus == 'activated') {
-    context.goNamed(BotnavbarWidget.routeName);
+    context.goNamed(BotNavBarScreen.routeName);
     // context.goNamed(HomeScreen.routeName);
     // context.goNamed(WatchlistScreen.routeName);
     // } else {
