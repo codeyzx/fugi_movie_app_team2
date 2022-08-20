@@ -1,30 +1,43 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:fugi_movie_app_team2/src/features/home/domain/trending.dart';
 
 import '../../../../common_config/app_theme.dart';
 
 class ImageNumberWidget extends StatelessWidget {
+  final Trending trending;
   final int number;
   const ImageNumberWidget({
     Key? key,
     required this.number,
+    required this.trending,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: MediaQuery.of(context).size.width * 0.4,
+      width: MediaQuery.of(context).size.width * 0.4.sp,
       height: MediaQuery.of(context).size.height,
       child: Stack(
-        alignment: Alignment.bottomLeft,
+        alignment: Alignment.topLeft,
         children: [
-          SizedBox(
-            height: MediaQuery.of(context).size.height * 0.5,
-            child: Image.asset(
-              'assets/images/movie$number.png',
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 18.0),
+            child: SizedBox(
+              height: MediaQuery.of(context).size.height * 0.21.sp,
+              child: ClipRRect(
+                borderRadius: BorderRadius.all(
+                  Radius.circular(15.0.sp),
+                ),
+                child: Image.network(
+                  'https://image.tmdb.org/t/p/w500/${trending.posterPath}',
+                ),
+              ),
             ),
           ),
           Positioned(
-            bottom: -20,
+            left: 0.0.sp,
+            bottom: -20.0.sp,
             child: Stack(
               children: [
                 Text(

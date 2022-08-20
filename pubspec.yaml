@@ -20,6 +20,7 @@ dependencies:
   go_router: ^4.2.7
   google_fonts: ^3.0.1
   keyboard_dismisser: ^3.0.0
+  logger: ^1.1.0
 
 dev_dependencies:
   build_runner: any
