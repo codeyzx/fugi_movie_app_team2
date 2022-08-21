@@ -1,3 +1,4 @@
+import 'package:fugi_movie_app_team2/src/features/home/domain/trending.dart';
 import 'package:fugi_movie_app_team2/src/features/home/presentation/botnavbar_screen.dart';
 import 'package:fugi_movie_app_team2/src/features/movie_detail/presentation/movie_detail_screen.dart';
 import 'package:fugi_movie_app_team2/src/features/movie_detail/presentation/movie_watchlist.dart';
@@ -44,13 +45,17 @@ final goRouter = GoRouter(
             ),
         routes: []),
     GoRoute(
-      path: '/movie-screen',
-      name: MovieDetailScreen.routeName,
-      pageBuilder: (context, state) => NoTransitionPage<void>(
-        key: state.pageKey,
-        child: const MovieDetailScreen(),
-      ),
-    ),
+        path: '/movie-screen',
+        name: MovieDetailScreen.routeName,
+        pageBuilder: (context, state) {
+          final movieId = state.extra as Trending;
+          return NoTransitionPage<void>(
+            key: state.pageKey,
+            child: MovieDetailScreen(
+              trending: movieId,
+            ),
+          );
+        }),
     GoRoute(
       path: '/watchlist-screen',
       name: WatchlistScreen.routeName,
