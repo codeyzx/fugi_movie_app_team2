@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fugi_movie_app_team2/src/common_config/app_theme.dart';
 import 'package:fugi_movie_app_team2/src/features/home/presentation/home_screen.dart';
-import 'package:fugi_movie_app_team2/src/features/movie_detail/presentation/movie_watchlist.dart';
 import 'package:fugi_movie_app_team2/src/features/profile/presentation/profile_screen.dart';
+import 'package:fugi_movie_app_team2/src/features/search/presentation/search_screen.dart';
 
 class BotNavBarScreen extends StatefulWidget {
   const BotNavBarScreen({Key? key}) : super(key: key);
@@ -47,7 +47,7 @@ class BotNavBarScreenState extends State<BotNavBarScreen> {
                     currentScreen = const HomeScreen();
                     break;
                   case 1:
-                    currentScreen = const WatchlistScreen();
+                    currentScreen = const SearchScreen();
                     break;
                   case 2:
                     currentScreen = const ProfileScreen();

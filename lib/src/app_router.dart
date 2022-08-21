@@ -2,6 +2,7 @@ import 'package:fugi_movie_app_team2/src/features/home/presentation/botnavbar_sc
 import 'package:fugi_movie_app_team2/src/features/movie_detail/presentation/movie_detail_screen.dart';
 import 'package:fugi_movie_app_team2/src/features/movie_detail/presentation/movie_watchlist.dart';
 import 'package:fugi_movie_app_team2/src/features/profile/presentation/profile_screen.dart';
+import 'package:fugi_movie_app_team2/src/features/search/presentation/search_screen.dart';
 import 'package:go_router/go_router.dart';
 
 import 'features/home/presentation/home_screen.dart';
@@ -33,6 +34,14 @@ final goRouter = GoRouter(
         pageBuilder: (context, state) => NoTransitionPage<void>(
               key: state.pageKey,
               child: const HomeScreen(),
+            ),
+        routes: []),
+    GoRoute(
+        path: '/search-screen',
+        name: SearchScreen.routeName,
+        pageBuilder: (context, state) => NoTransitionPage<void>(
+              key: state.pageKey,
+              child: const SearchScreen(),
             ),
         routes: []),
     GoRoute(
