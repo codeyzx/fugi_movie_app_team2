@@ -68,23 +68,21 @@ class _SearchScreenState extends State<SearchScreen> {
                       ),
                     ),
                   )),
-              isLoading
-                  ? const Center(
-                      child: CircularProgressIndicator.adaptive(),
-                    )
-                  : Expanded(
-                      child: ListView.builder(
-                      padding: EdgeInsets.symmetric(vertical: 15.0.sp),
-                      itemCount: trendings.length,
-                      itemBuilder: (context, index) {
-                        return MovieItemWidget(
-                          imagePath: trendings[index].posterPath,
-                          title: trendings[index].name,
-                          rating: trendings[index].voteAverage?.toStringAsFixed(1),
-                          date: trendings[index].firstAirDate?.toString().split('-').first,
-                        );
-                      },
-                    )),
+              Expanded(
+                  child: isLoading
+                      ? const Center(child: CircularProgressIndicator.adaptive())
+                      : ListView.builder(
+                          padding: EdgeInsets.symmetric(vertical: 15.0.sp),
+                          itemCount: trendings.length,
+                          itemBuilder: (context, index) {
+                            return MovieItemWidget(
+                              imagePath: trendings[index].posterPath,
+                              title: trendings[index].name,
+                              rating: trendings[index].voteAverage?.toStringAsFixed(1),
+                              date: trendings[index].firstAirDate?.toString().split('-').first,
+                            );
+                          },
+                        )),
             ],
           ),
         ));
