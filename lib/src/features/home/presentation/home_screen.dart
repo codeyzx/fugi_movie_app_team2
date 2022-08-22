@@ -86,17 +86,19 @@ class _HomeScreenState extends State<HomeScreen> {
                       )),
                   Expanded(
                       flex: 2,
-                      child: ListView.builder(
-                        padding: EdgeInsets.symmetric(vertical: 15.0.sp),
-                        scrollDirection: Axis.horizontal,
-                        itemCount: trendings.length,
-                        itemBuilder: (context, index) {
-                          return ImageNumberWidget(
-                            trending: trendings[index],
-                            number: (index + 1),
-                          );
-                        },
-                      )),
+                      child: isLoading
+                          ? const Center(child: CircularProgressIndicator.adaptive())
+                          : ListView.builder(
+                              padding: EdgeInsets.symmetric(vertical: 15.0.sp),
+                              scrollDirection: Axis.horizontal,
+                              itemCount: trendings.length,
+                              itemBuilder: (context, index) {
+                                return ImageNumberWidget(
+                                  trending: trendings[index],
+                                  number: (index + 1),
+                                );
+                              },
+                            )),
                   Expanded(
                     flex: 2,
                     child: DefaultTabController(
