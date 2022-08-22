@@ -22,7 +22,7 @@ final goRouter = GoRouter(
       ),
     ),
     GoRoute(
-        path: '/navbar-widget',
+        path: '/botnavbar-screen',
         name: BotNavBarScreen.routeName,
         pageBuilder: (context, state) => NoTransitionPage<void>(
               key: state.pageKey,
