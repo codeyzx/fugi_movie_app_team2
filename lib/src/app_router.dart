@@ -1,7 +1,9 @@
+import 'package:fugi_movie_app_team2/src/features/home/domain/trending.dart';
 import 'package:fugi_movie_app_team2/src/features/home/presentation/botnavbar_screen.dart';
 import 'package:fugi_movie_app_team2/src/features/movie_detail/presentation/movie_detail_screen.dart';
 import 'package:fugi_movie_app_team2/src/features/movie_detail/presentation/movie_watchlist.dart';
 import 'package:fugi_movie_app_team2/src/features/profile/presentation/profile_screen.dart';
+import 'package:fugi_movie_app_team2/src/features/search/presentation/search_screen.dart';
 import 'package:go_router/go_router.dart';
 
 import 'features/home/presentation/home_screen.dart';
@@ -20,7 +22,7 @@ final goRouter = GoRouter(
       ),
     ),
     GoRoute(
-        path: '/navbar-widget',
+        path: '/botnavbar-screen',
         name: BotNavBarScreen.routeName,
         pageBuilder: (context, state) => NoTransitionPage<void>(
               key: state.pageKey,
@@ -36,6 +38,14 @@ final goRouter = GoRouter(
             ),
         routes: []),
     GoRoute(
+        path: '/search-screen',
+        name: SearchScreen.routeName,
+        pageBuilder: (context, state) => NoTransitionPage<void>(
+              key: state.pageKey,
+              child: const SearchScreen(),
+            ),
+        routes: []),
+    GoRoute(
         path: '/profile-screen',
         name: ProfileScreen.routeName,
         pageBuilder: (context, state) => NoTransitionPage<void>(
@@ -44,13 +54,17 @@ final goRouter = GoRouter(
             ),
         routes: []),
     GoRoute(
-      path: '/movie-screen',
-      name: MovieDetailScreen.routeName,
-      pageBuilder: (context, state) => NoTransitionPage<void>(
-        key: state.pageKey,
-        child: const MovieDetailScreen(),
-      ),
-    ),
+        path: '/movie-screen',
+        name: MovieDetailScreen.routeName,
+        pageBuilder: (context, state) {
+          final movieId = state.extra as Trending;
+          return NoTransitionPage<void>(
+            key: state.pageKey,
+            child: MovieDetailScreen(
+              trending: movieId,
+            ),
+          );
+        }),
     GoRoute(
       path: '/watchlist-screen',
       name: WatchlistScreen.routeName,

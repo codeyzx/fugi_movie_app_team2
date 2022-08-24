@@ -1,94 +1,60 @@
 import 'package:flutter/material.dart';
-import 'package:keyboard_dismisser/keyboard_dismisser.dart';
 
-class WatchlistScreen extends StatefulWidget {
-  const WatchlistScreen({Key? key}) : super(key: key);
-  static const routeName = '/watchlist-screen';
-
-  @override
-  State<WatchlistScreen> createState() => _WatchlistScreenState();
-}
-
-class _WatchlistScreenState extends State<WatchlistScreen> {
-  var selectedIndex = 0;
-
-  @override
-  Widget build(BuildContext context) {
-    return SafeArea(
-      top: false,
-      child: KeyboardDismisser(
-        gestures: const [
-          GestureType.onTap,
-          GestureType.onVerticalDragDown,
-          GestureType.onVerticalDragEnd,
-        ],
-        child: Scaffold(
-          appBar: AppBar(
-            title: Text('Watch List'),
-            leading: IconButton(
-              icon: const Icon(Icons.arrow_back),
-              onPressed: () => Navigator.pop(context),
-            ),
-          ),
-          body: ListView(
-            padding: const EdgeInsets.only(top: 50.0, left: 30, right: 30),
-            children: [
-              WatchListItem(),
-              WatchListItem(),
-              WatchListItem(),
-              WatchListItem(),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-class WatchListItem extends StatelessWidget {
-  const WatchListItem({
+class MovieItemWidget extends StatelessWidget {
+  final String? imagePath;
+  final String? title;
+  final String? rating;
+  final String? date;
+  const MovieItemWidget({
     Key? key,
+    this.imagePath,
+    this.title,
+    this.rating,
+    this.date,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.only(bottom: 20),
+      margin: const EdgeInsets.only(bottom: 20),
       child: Row(
         children: [
           Container(
             width: 95,
             height: 120,
-            decoration: const BoxDecoration(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(10),
               image: DecorationImage(
-                image: AssetImage('assets/images/movie1.png'),
-              ),
+                  image: Image.network(
+                    'https://image.tmdb.org/t/p/w780/$imagePath',
+                  ).image,
+                  fit: BoxFit.cover),
             ),
           ),
-          SizedBox(
+          const SizedBox(
             width: 10,
           ),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text('Jurassic World'),
-              SizedBox(
+              Text(title ?? ''),
+              const SizedBox(
                 height: 10,
               ),
               Row(
                 // crossAxisAlignment: CrossAxisAlignment.start,
-                children: const [
-                  Icon(
+                children: [
+                  const Icon(
                     Icons.star_border,
                     color: Colors.orange,
                     size: 20,
                   ),
-                  SizedBox(
+                  const SizedBox(
                     width: 5,
                   ),
                   Text(
-                    '9.5',
-                    style: TextStyle(
+                    rating ?? '',
+                    style: const TextStyle(
                       color: Colors.orange,
                     ),
                     // textAlign: TextAlign.start,
@@ -117,18 +83,18 @@ class WatchListItem extends StatelessWidget {
               ),
               Row(
                 // crossAxisAlignment: CrossAxisAlignment.start,
-                children: const [
-                  Icon(
+                children: [
+                  const Icon(
                     Icons.calendar_month,
                     color: Colors.grey,
                     size: 20,
                   ),
-                  SizedBox(
+                  const SizedBox(
                     width: 5,
                   ),
                   Text(
-                    '2019',
-                    style: TextStyle(
+                    date ?? '',
+                    style: const TextStyle(
                       color: Colors.grey,
                     ),
                     // textAlign: TextAlign.start,
