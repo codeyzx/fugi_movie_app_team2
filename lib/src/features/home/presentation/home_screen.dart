@@ -146,7 +146,7 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 }
-=======
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fugi_movie_app_team2/src/features/home/domain/popular.dart';
