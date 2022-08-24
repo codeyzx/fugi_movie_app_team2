@@ -260,7 +260,7 @@ class _HomeScreenState extends State<HomeScreen> {
     );
 
     List<dynamic> listTrending = resp.data['results'];
-    List<dynamic> listPopular = resp.data['results_popular'];
+    List<dynamic> listPopular = respPopular.data['results'];
     List<Popular> myPopular =
         listPopular.map((e) => Popular.fromJson(e)).toList();
     List<Trending> myTrendings =
