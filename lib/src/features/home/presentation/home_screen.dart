@@ -6,6 +6,7 @@ import 'package:fugi_movie_app_team2/src/features/home/domain/upcoming.dart';
 import 'package:fugi_movie_app_team2/src/features/home/presentation/widgets/image_number_widget.dart';
 import 'package:fugi_movie_app_team2/src/features/movie_detail/presentation/movie_detail_screen_popular.dart';
 import 'package:fugi_movie_app_team2/src/features/movie_detail/presentation/movie_detail_screen.dart';
+import 'package:fugi_movie_app_team2/src/features/movie_detail/presentation/movie_detail_screen_toprated.dart';
 import 'package:go_router/go_router.dart';
 import 'package:keyboard_dismisser/keyboard_dismisser.dart';
 
@@ -183,7 +184,55 @@ class _HomeScreenState extends State<HomeScreen> {
                                       );
                                     },
                                   ),
-                                const Center(child: Text('Tab 2')),
+                                GridView.builder(
+                                  //top rated
+                                  scrollDirection: Axis.vertical,
+                                  gridDelegate:
+                                      const SliverGridDelegateWithFixedCrossAxisCount(
+                                    crossAxisCount: 3,
+                                    childAspectRatio: .6,
+                                    mainAxisSpacing: 10,
+                                    crossAxisSpacing: 10,
+                                  ),
+                                  padding: EdgeInsets.all(8.0.sp),
+                                  itemCount: upcomings.length,
+                                  itemBuilder: (context, index) {
+                                    return InkWell(
+                                      onTap: () {
+                                        context.pushNamed(
+                                            movieDetailScreenPopular.routeName,
+                                            extra: upcomings[index]);
+                                      },
+                                      child: Stack(
+                                        alignment: Alignment.bottomRight,
+                                        children: [
+                                          Container(
+                                            height: MediaQuery.of(context)
+                                                .size
+                                                .height,
+                                            width: MediaQuery.of(context)
+                                                .size
+                                                .width,
+                                            decoration: BoxDecoration(
+                                              borderRadius:
+                                                  BorderRadius.circular(10),
+                                              image: DecorationImage(
+                                                image: Image.network(
+                                                  'https://image.tmdb.org/t/p/w780/${upcomings[index].posterPath}',
+                                                ).image,
+                                                fit: BoxFit.cover,
+                                              ),
+                                            ),
+                                          ),
+                                          Text('${upcomings[index].id}',
+                                              style: TextStyle(
+                                                  color: Colors.white,
+                                                  fontSize: 20.0.sp)),
+                                        ],
+                                      ),
+                                    );
+                                  },
+                                ),
                                 GridView.builder(
                                   //top rated
                                   scrollDirection: Axis.vertical,
@@ -200,7 +249,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                     return InkWell(
                                       onTap: () {
                                         context.pushNamed(
-                                            movieDetailScreenPopular.routeName,
+                                            movieDetailScreenTopRated.routeName,
                                             extra: toprateds[index]);
                                       },
                                       child: Stack(
@@ -317,16 +366,16 @@ class _HomeScreenState extends State<HomeScreen> {
       requestType: RequestType.get,
       queryParameters: {},
     );
-    // var respUpcoming = await DioClient().apiCall(
-    //   url: '/movie/upcoming',
-    //   requestType: RequestType.get,
-    //   queryParameters: {},
-    // );
+    var respUpcoming = await DioClient().apiCall(
+      url: '/movie/upcoming',
+      requestType: RequestType.get,
+      queryParameters: {},
+    );
 
     List<dynamic> listTrending = resp.data['results'];
     List<dynamic> listPopular = respPopular.data['results'];
     List<dynamic> listTopRated = respTopRated.data['results'];
-    // List<dynamic> listUpcoming = respUpcoming.data['results'];
+    List<dynamic> listUpcoming = respUpcoming.data['results'];
 
     List<Popular> myPopular =
         listPopular.map((e) => Popular.fromJson(e)).toList();
@@ -334,14 +383,14 @@ class _HomeScreenState extends State<HomeScreen> {
         listTrending.map((e) => Trending.fromJson(e)).toList();
     List<TopRated> myTopRated =
         listTopRated.map((e) => TopRated.fromJson(e)).toList();
-    // List<Upcoming> myUpcoming =
-    //     listUpcoming.map((e) => Upcoming.fromJson(e)).toList();
+    List<Upcoming> myUpcoming =
+        listUpcoming.map((e) => Upcoming.fromJson(e)).toList();
 
     setState(() {
       trendings = myTrendings;
       populars = myPopular;
       toprateds = myTopRated;
-      // upcomings = myUpcoming;
+      upcomings = myUpcoming;
       isLoading = false;
     });
   }
