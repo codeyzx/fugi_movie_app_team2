@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fugi_movie_app_team2/src/features/home/domain/popular.dart';
 import 'package:fugi_movie_app_team2/src/features/home/presentation/widgets/image_number_widget.dart';
+import 'package:fugi_movie_app_team2/src/features/movie_detail/presentation/movie_detail_screen_popular.dart';
 import 'package:fugi_movie_app_team2/src/features/movie_detail/presentation/movie_detail_screen.dart';
 import 'package:go_router/go_router.dart';
 import 'package:keyboard_dismisser/keyboard_dismisser.dart';
@@ -195,7 +196,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                     return InkWell(
                                       onTap: () {
                                         context.pushNamed(
-                                            MovieDetailScreen.routeName,
+                                            movieDetailScreenPopular.routeName,
                                             extra: populars[index]);
                                       },
                                       child: Stack(

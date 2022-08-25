@@ -1,6 +1,8 @@
 import 'package:fugi_movie_app_team2/src/features/home/domain/trending.dart';
+import 'package:fugi_movie_app_team2/src/features/home/domain/popular.dart';
 import 'package:fugi_movie_app_team2/src/features/home/presentation/botnavbar_screen.dart';
 import 'package:fugi_movie_app_team2/src/features/movie_detail/presentation/movie_detail_screen.dart';
+import 'package:fugi_movie_app_team2/src/features/movie_detail/presentation/movie_detail_screen_popular.dart';
 import 'package:fugi_movie_app_team2/src/features/movie_detail/presentation/movie_watchlist.dart';
 import 'package:fugi_movie_app_team2/src/features/profile/presentation/profile_screen.dart';
 import 'package:fugi_movie_app_team2/src/features/search/presentation/search_screen.dart';
@@ -62,6 +64,18 @@ final goRouter = GoRouter(
             key: state.pageKey,
             child: MovieDetailScreen(
               trending: movieId,
+            ),
+          );
+        }),
+    GoRoute(
+        path: '/movie-screen-popular',
+        name: movieDetailScreenPopular.routeName,
+        pageBuilder: (context, state) {
+          final movieId = state.extra as Popular;
+          return NoTransitionPage<void>(
+            key: state.pageKey,
+            child: movieDetailScreenPopular(
+              popular: movieId,
             ),
           );
         }),

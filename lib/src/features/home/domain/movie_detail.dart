@@ -21,7 +21,8 @@ abstract class MovieDetail with _$MovieDetail {
     @JsonKey(name: 'overview') String? overview,
     @JsonKey(name: 'popularity') double? popularity,
     @JsonKey(name: 'poster_path') String? posterPath,
-    @JsonKey(name: 'production_companies') List<ProductionCompany>? productionCompanies,
+    @JsonKey(name: 'production_companies')
+        List<ProductionCompany>? productionCompanies,
     @JsonKey(name: 'production_countries') List<dynamic>? productionCountries,
     @JsonKey(name: 'release_date') DateTime? releaseDate,
     @JsonKey(name: 'revenue') int? revenue,
@@ -35,7 +36,8 @@ abstract class MovieDetail with _$MovieDetail {
     @JsonKey(name: 'vote_count') int? voteCount,
   }) = _MovieDetail;
 
-  factory MovieDetail.fromJson(Map<String, dynamic> json) => _$MovieDetailFromJson(json);
+  factory MovieDetail.fromJson(Map<String, dynamic> json) =>
+      _$MovieDetailFromJson(json);
 }
 
 @freezed
@@ -57,5 +59,8 @@ abstract class ProductionCompany with _$ProductionCompany {
     @JsonKey(name: 'origin_country') String? originCountry,
   }) = _ProductionCompany;
 
-  factory ProductionCompany.fromJson(Map<String, dynamic> json) => _$ProductionCompanyFromJson(json);
+  factory ProductionCompany.fromJson(Map<String, dynamic> json) =>
+      _$ProductionCompanyFromJson(json);
 }
+
+//
