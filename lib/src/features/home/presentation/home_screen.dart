@@ -7,6 +7,7 @@ import 'package:fugi_movie_app_team2/src/features/home/presentation/widgets/imag
 import 'package:fugi_movie_app_team2/src/features/movie_detail/presentation/movie_detail_screen_popular.dart';
 import 'package:fugi_movie_app_team2/src/features/movie_detail/presentation/movie_detail_screen.dart';
 import 'package:fugi_movie_app_team2/src/features/movie_detail/presentation/movie_detail_screen_toprated.dart';
+import 'package:fugi_movie_app_team2/src/features/movie_detail/presentation/movie_detail_screen_upcoming.dart';
 import 'package:go_router/go_router.dart';
 import 'package:keyboard_dismisser/keyboard_dismisser.dart';
 
@@ -185,7 +186,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                     },
                                   ),
                                 GridView.builder(
-                                  //top rated
+                                  //upcoming
                                   scrollDirection: Axis.vertical,
                                   gridDelegate:
                                       const SliverGridDelegateWithFixedCrossAxisCount(
@@ -200,7 +201,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                     return InkWell(
                                       onTap: () {
                                         context.pushNamed(
-                                            movieDetailScreenPopular.routeName,
+                                            movieDetailScreenUpcoming.routeName,
                                             extra: upcomings[index]);
                                       },
                                       child: Stack(

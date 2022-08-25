@@ -1,10 +1,12 @@
 import 'package:fugi_movie_app_team2/src/features/home/domain/top_rated.dart';
 import 'package:fugi_movie_app_team2/src/features/home/domain/trending.dart';
 import 'package:fugi_movie_app_team2/src/features/home/domain/popular.dart';
+import 'package:fugi_movie_app_team2/src/features/home/domain/upcoming.dart';
 import 'package:fugi_movie_app_team2/src/features/home/presentation/botnavbar_screen.dart';
 import 'package:fugi_movie_app_team2/src/features/movie_detail/presentation/movie_detail_screen.dart';
 import 'package:fugi_movie_app_team2/src/features/movie_detail/presentation/movie_detail_screen_popular.dart';
 import 'package:fugi_movie_app_team2/src/features/movie_detail/presentation/movie_detail_screen_toprated.dart';
+import 'package:fugi_movie_app_team2/src/features/movie_detail/presentation/movie_detail_screen_upcoming.dart';
 import 'package:fugi_movie_app_team2/src/features/movie_detail/presentation/movie_watchlist.dart';
 import 'package:fugi_movie_app_team2/src/features/profile/presentation/profile_screen.dart';
 import 'package:fugi_movie_app_team2/src/features/search/presentation/search_screen.dart';
@@ -90,6 +92,18 @@ final goRouter = GoRouter(
             key: state.pageKey,
             child: movieDetailScreenTopRated(
               topRated: movieId,
+            ),
+          );
+        }),
+    GoRoute(
+        path: '/movie-screen-upcoming',
+        name: movieDetailScreenUpcoming.routeName,
+        pageBuilder: (context, state) {
+          final movieId = state.extra as Upcoming;
+          return NoTransitionPage<void>(
+            key: state.pageKey,
+            child: movieDetailScreenUpcoming(
+              upcoming: movieId,
             ),
           );
         }),
