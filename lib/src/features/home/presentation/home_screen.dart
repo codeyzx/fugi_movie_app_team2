@@ -180,8 +180,57 @@ class _HomeScreenState extends State<HomeScreen> {
                                     },
                                   ),
                                 const Center(child: Text('Tab 2')),
-                                const Center(child: Text('Tab 3')),
                                 GridView.builder(
+                                  //top rated
+                                  scrollDirection: Axis.vertical,
+                                  gridDelegate:
+                                      const SliverGridDelegateWithFixedCrossAxisCount(
+                                    crossAxisCount: 3,
+                                    childAspectRatio: .6,
+                                    mainAxisSpacing: 10,
+                                    crossAxisSpacing: 10,
+                                  ),
+                                  padding: EdgeInsets.all(8.0.sp),
+                                  itemCount: populars.length,
+                                  itemBuilder: (context, index) {
+                                    return InkWell(
+                                      onTap: () {
+                                        context.pushNamed(
+                                            movieDetailScreenPopular.routeName,
+                                            extra: populars[index]);
+                                      },
+                                      child: Stack(
+                                        alignment: Alignment.bottomRight,
+                                        children: [
+                                          Container(
+                                            height: MediaQuery.of(context)
+                                                .size
+                                                .height,
+                                            width: MediaQuery.of(context)
+                                                .size
+                                                .width,
+                                            decoration: BoxDecoration(
+                                              borderRadius:
+                                                  BorderRadius.circular(10),
+                                              image: DecorationImage(
+                                                image: Image.network(
+                                                  'https://image.tmdb.org/t/p/w780/${populars[index].posterPath}',
+                                                ).image,
+                                                fit: BoxFit.cover,
+                                              ),
+                                            ),
+                                          ),
+                                          Text('${populars[index].id}',
+                                              style: TextStyle(
+                                                  color: Colors.white,
+                                                  fontSize: 20.0.sp)),
+                                        ],
+                                      ),
+                                    );
+                                  },
+                                ),
+                                GridView.builder(
+                                  //popular
                                   scrollDirection: Axis.vertical,
                                   gridDelegate:
                                       const SliverGridDelegateWithFixedCrossAxisCount(
