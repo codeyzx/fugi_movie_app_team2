@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fugi_movie_app_team2/src/features/home/domain/popular.dart';
+import 'package:fugi_movie_app_team2/src/features/home/domain/top_rated.dart';
+import 'package:fugi_movie_app_team2/src/features/home/domain/upcoming.dart';
 import 'package:fugi_movie_app_team2/src/features/home/presentation/widgets/image_number_widget.dart';
 import 'package:fugi_movie_app_team2/src/features/movie_detail/presentation/movie_detail_screen_popular.dart';
 import 'package:fugi_movie_app_team2/src/features/movie_detail/presentation/movie_detail_screen.dart';
@@ -24,6 +26,8 @@ class _HomeScreenState extends State<HomeScreen> {
   bool isLoading = false;
   List<Trending> trendings = [];
   List<Popular> populars = [];
+  List<TopRated> toprateds = [];
+  List<Upcoming> upcomings = [];
 
   @override
   void initState() {
@@ -191,13 +195,13 @@ class _HomeScreenState extends State<HomeScreen> {
                                     crossAxisSpacing: 10,
                                   ),
                                   padding: EdgeInsets.all(8.0.sp),
-                                  itemCount: populars.length,
+                                  itemCount: toprateds.length,
                                   itemBuilder: (context, index) {
                                     return InkWell(
                                       onTap: () {
                                         context.pushNamed(
                                             movieDetailScreenPopular.routeName,
-                                            extra: populars[index]);
+                                            extra: toprateds[index]);
                                       },
                                       child: Stack(
                                         alignment: Alignment.bottomRight,
@@ -214,13 +218,13 @@ class _HomeScreenState extends State<HomeScreen> {
                                                   BorderRadius.circular(10),
                                               image: DecorationImage(
                                                 image: Image.network(
-                                                  'https://image.tmdb.org/t/p/w780/${populars[index].posterPath}',
+                                                  'https://image.tmdb.org/t/p/w780/${toprateds[index].posterPath}',
                                                 ).image,
                                                 fit: BoxFit.cover,
                                               ),
                                             ),
                                           ),
-                                          Text('${populars[index].id}',
+                                          Text('${toprateds[index].id}',
                                               style: TextStyle(
                                                   color: Colors.white,
                                                   fontSize: 20.0.sp)),
@@ -308,16 +312,36 @@ class _HomeScreenState extends State<HomeScreen> {
       requestType: RequestType.get,
       queryParameters: {},
     );
+    var respTopRated = await DioClient().apiCall(
+      url: '/movie/top_rated',
+      requestType: RequestType.get,
+      queryParameters: {},
+    );
+    // var respUpcoming = await DioClient().apiCall(
+    //   url: '/movie/upcoming',
+    //   requestType: RequestType.get,
+    //   queryParameters: {},
+    // );
 
     List<dynamic> listTrending = resp.data['results'];
     List<dynamic> listPopular = respPopular.data['results'];
+    List<dynamic> listTopRated = respTopRated.data['results'];
+    // List<dynamic> listUpcoming = respUpcoming.data['results'];
+
     List<Popular> myPopular =
         listPopular.map((e) => Popular.fromJson(e)).toList();
     List<Trending> myTrendings =
         listTrending.map((e) => Trending.fromJson(e)).toList();
+    List<TopRated> myTopRated =
+        listTopRated.map((e) => TopRated.fromJson(e)).toList();
+    // List<Upcoming> myUpcoming =
+    //     listUpcoming.map((e) => Upcoming.fromJson(e)).toList();
+
     setState(() {
       trendings = myTrendings;
       populars = myPopular;
+      toprateds = myTopRated;
+      // upcomings = myUpcoming;
       isLoading = false;
     });
   }
