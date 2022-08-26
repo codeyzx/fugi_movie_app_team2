@@ -2,8 +2,9 @@
 //
 //     final topRated = topRatedFromMap(jsonString);
 
+// ignore_for_file: invalid_annotation_target
+
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'dart:convert';
 
 part 'top_rated.freezed.dart';
 part 'top_rated.g.dart';
@@ -27,6 +28,5 @@ abstract class TopRated with _$TopRated {
     @JsonKey(name: 'vote_count') int? voteCount,
   }) = _TopRated;
 
-  factory TopRated.fromJson(Map<String, dynamic> json) =>
-      _$TopRatedFromJson(json);
+  factory TopRated.fromJson(Map<String, dynamic> json) => _$TopRatedFromJson(json);
 }

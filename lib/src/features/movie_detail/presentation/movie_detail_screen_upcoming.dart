@@ -12,20 +12,17 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:logger/logger.dart';
 
-class movieDetailScreenUpcoming extends StatefulWidget {
+class MovieDetailScreenUpcoming extends StatefulWidget {
+  final String? idMovie;
   final Upcoming upcoming;
-  const movieDetailScreenUpcoming({
-    Key? key,
-    required this.upcoming,
-  }) : super(key: key);
+  const MovieDetailScreenUpcoming({Key? key, required this.upcoming, this.idMovie}) : super(key: key);
   static const routeName = 'movie-detail-screen-upcoming';
 
   @override
-  State<movieDetailScreenUpcoming> createState() =>
-      _movieDetailScreenUpcomingState();
+  State<MovieDetailScreenUpcoming> createState() => _MovieDetailScreenUpcomingState();
 }
 
-class _movieDetailScreenUpcomingState extends State<movieDetailScreenUpcoming> {
+class _MovieDetailScreenUpcomingState extends State<MovieDetailScreenUpcoming> {
   MovieDetail detailMovie = const MovieDetail();
   bool isLoading = false;
 
@@ -40,9 +37,7 @@ class _movieDetailScreenUpcomingState extends State<movieDetailScreenUpcoming> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Detail'),
-        actions: [
-          IconButton(onPressed: () {}, icon: const Icon(Icons.bookmark))
-        ],
+        actions: [IconButton(onPressed: () {}, icon: const Icon(Icons.bookmark))],
       ),
       body: isLoading
           ? const Center(
@@ -64,7 +59,7 @@ class _movieDetailScreenUpcomingState extends State<movieDetailScreenUpcoming> {
                               bottom: MediaQuery.of(context).size.height * .175,
                             ),
                             decoration: BoxDecoration(
-                              borderRadius: BorderRadius.only(
+                              borderRadius: const BorderRadius.only(
                                 bottomLeft: Radius.circular(25),
                                 bottomRight: Radius.circular(25),
                               ),
@@ -92,13 +87,8 @@ class _movieDetailScreenUpcomingState extends State<movieDetailScreenUpcoming> {
                                           Container(
                                             decoration: const BoxDecoration(
                                                 color: Colors.white,
-                                                borderRadius: const BorderRadius
-                                                        .only(
-                                                    topLeft:
-                                                        const Radius.circular(
-                                                            20),
-                                                    topRight:
-                                                        Radius.circular(20))),
+                                                borderRadius: const BorderRadius.only(
+                                                    topLeft: const Radius.circular(20), topRight: Radius.circular(20))),
                                             padding: const EdgeInsets.all(20),
                                             child: const WidgetSLider(),
                                           )
@@ -117,8 +107,7 @@ class _movieDetailScreenUpcomingState extends State<movieDetailScreenUpcoming> {
                                 ),
                                 child: Center(
                                   child: Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceEvenly,
+                                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                                     children: [
                                       Icon(
                                         Icons.star_border,
@@ -152,8 +141,7 @@ class _movieDetailScreenUpcomingState extends State<movieDetailScreenUpcoming> {
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
                                 ClipRRect(
-                                  borderRadius: const BorderRadius.all(
-                                      Radius.circular(10)),
+                                  borderRadius: const BorderRadius.all(Radius.circular(10)),
                                   child: Image.network(
                                     'https://image.tmdb.org/t/p/w500/${detailMovie.posterPath}',
                                     fit: BoxFit.cover,
@@ -176,20 +164,14 @@ class _movieDetailScreenUpcomingState extends State<movieDetailScreenUpcoming> {
                       ),
                       SizedBox(
                         width: MediaQuery.of(context).size.width * 0.8,
-                        child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              MovieStatus(
-                                  icon: Icons.calendar_month,
-                                  text:
-                                      '${DateFormat('dd MMM yyyy').format(DateTime.parse(detailMovie.releaseDate.toString()))}'),
-                              MovieStatus(
-                                  icon: Icons.watch_later_outlined,
-                                  text: '${detailMovie.runtime} min'),
-                              MovieStatus(
-                                  icon: Icons.airplane_ticket_rounded,
-                                  text: '${detailMovie.genres?[0].name}'),
-                            ]),
+                        child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+                          MovieStatus(
+                              icon: Icons.calendar_month,
+                              text:
+                                  '${DateFormat('dd MMM yyyy').format(DateTime.parse(detailMovie.releaseDate.toString()))}'),
+                          MovieStatus(icon: Icons.watch_later_outlined, text: '${detailMovie.runtime} min'),
+                          MovieStatus(icon: Icons.airplane_ticket_rounded, text: '${detailMovie.genres?[0].name}'),
+                        ]),
                       )
                     ],
                   ),
@@ -201,11 +183,11 @@ class _movieDetailScreenUpcomingState extends State<movieDetailScreenUpcoming> {
                     child: SafeArea(
                       top: false,
                       child: Scaffold(
-                        appBar: TabBar(
+                        appBar: const TabBar(
                           tabs: [
-                            Tab(child: Text('Reviews')),
-                            Tab(child: Text('About Movie')),
-                            Tab(child: Text('Prod. Companies')),
+                            Tab(child: const Text('Reviews')),
+                            Tab(child: const Text('About Movie')),
+                            Tab(child: const Text('Prod. Companies')),
                           ],
                         ),
                         body: TabBarView(
@@ -260,16 +242,10 @@ class _WidgetSLiderState extends State<WidgetSLider> {
     return Column(
       children: [
         Text("Rate this Movie",
-            style: GoogleFonts.montserrat().copyWith(
-                fontSize: 18,
-                fontWeight: FontWeight.w400,
-                color: AppTheme.thirdColor)),
+            style: GoogleFonts.montserrat().copyWith(fontSize: 18, fontWeight: FontWeight.w400, color: AppTheme.thirdColor)),
         const SizedBox(height: 20),
         Text('${double.parse(SliderValue.toStringAsFixed(1))}',
-            style: GoogleFonts.montserrat().copyWith(
-                fontSize: 32,
-                fontWeight: FontWeight.w400,
-                color: AppTheme.thirdColor)),
+            style: GoogleFonts.montserrat().copyWith(fontSize: 32, fontWeight: FontWeight.w400, color: AppTheme.thirdColor)),
         const SizedBox(height: 10),
         SliderTheme(
           data: const SliderThemeData(
@@ -278,8 +254,7 @@ class _WidgetSLiderState extends State<WidgetSLider> {
             overlayColor: Colors.amber,
             inactiveTrackColor: Colors.grey,
             thumbColor: Colors.white,
-            thumbShape:
-                RoundSliderThumbShape(elevation: 10, enabledThumbRadius: 15),
+            thumbShape: RoundSliderThumbShape(elevation: 10, enabledThumbRadius: 15),
             overlayShape: const RoundSliderOverlayShape(overlayRadius: 20),
           ),
           // thumbColor: Colors.green,
@@ -311,10 +286,7 @@ class _WidgetSLiderState extends State<WidgetSLider> {
             color: const Color(0XFF0296E5),
             child: Center(
               child: Text("OK",
-                  style: GoogleFonts.montserrat().copyWith(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w600,
-                      color: Colors.white)),
+                  style: GoogleFonts.montserrat().copyWith(fontSize: 16, fontWeight: FontWeight.w600, color: Colors.white)),
             ),
           ),
         )

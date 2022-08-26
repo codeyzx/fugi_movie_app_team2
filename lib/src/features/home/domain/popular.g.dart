@@ -1,5 +1,7 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
+// ignore_for_file: non_constant_identifier_names
+
 part of 'popular.dart';
 
 // **************************************************************************
@@ -9,25 +11,21 @@ part of 'popular.dart';
 _$_Popular _$$_PopularFromJson(Map<String, dynamic> json) => _$_Popular(
       adult: json['adult'] as bool?,
       backdropPath: json['backdrop_path'] as String?,
-      genreIds:
-          (json['genre_ids'] as List<dynamic>?)?.map((e) => e as int).toList(),
+      genreIds: (json['genre_ids'] as List<dynamic>?)?.map((e) => e as int).toList(),
       id: json['id'] as int?,
       originalLanguage: json['orignal_language'] as String?,
       originalTitle: json['original_title'] as String?,
       overview: json['overview'] as String?,
       popularity: (json['popularity'] as num?)?.toDouble(),
       posterPath: json['poster_path'] as String?,
-      releaseDate: json['release_date'] == null
-          ? null
-          : DateTime.parse(json['release_date'] as String),
+      releaseDate: json['release_date'] == null ? null : DateTime.parse(json['release_date'] as String),
       title: json['title'] as String?,
       video: json['video'] as bool?,
       voteAverage: (json['vote_avarage'] as num?)?.toDouble(),
       voteCount: json['vote_count'] as int?,
     );
 
-Map<String, dynamic> _$$_PopularToJson(_$_Popular instance) =>
-    <String, dynamic>{
+Map<String, dynamic> _$$_PopularToJson(_$_Popular instance) => <String, dynamic>{
       'adult': instance.adult,
       'backdrop_path': instance.backdropPath,
       'genre_ids': instance.genreIds,

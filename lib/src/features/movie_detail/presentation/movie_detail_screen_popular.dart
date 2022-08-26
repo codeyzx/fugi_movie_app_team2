@@ -21,8 +21,7 @@ class movieDetailScreenPopular extends StatefulWidget {
   static const routeName = 'movie-detail-screen-popular';
 
   @override
-  State<movieDetailScreenPopular> createState() =>
-      _movieDetailScreenPopularState();
+  State<movieDetailScreenPopular> createState() => _movieDetailScreenPopularState();
 }
 
 class _movieDetailScreenPopularState extends State<movieDetailScreenPopular> {
@@ -40,9 +39,7 @@ class _movieDetailScreenPopularState extends State<movieDetailScreenPopular> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Detail'),
-        actions: [
-          IconButton(onPressed: () {}, icon: const Icon(Icons.bookmark))
-        ],
+        actions: [IconButton(onPressed: () {}, icon: const Icon(Icons.bookmark))],
       ),
       body: isLoading
           ? const Center(
@@ -92,13 +89,8 @@ class _movieDetailScreenPopularState extends State<movieDetailScreenPopular> {
                                           Container(
                                             decoration: const BoxDecoration(
                                                 color: Colors.white,
-                                                borderRadius: const BorderRadius
-                                                        .only(
-                                                    topLeft:
-                                                        const Radius.circular(
-                                                            20),
-                                                    topRight:
-                                                        Radius.circular(20))),
+                                                borderRadius: const BorderRadius.only(
+                                                    topLeft: const Radius.circular(20), topRight: Radius.circular(20))),
                                             padding: const EdgeInsets.all(20),
                                             child: const WidgetSLider(),
                                           )
@@ -117,8 +109,7 @@ class _movieDetailScreenPopularState extends State<movieDetailScreenPopular> {
                                 ),
                                 child: Center(
                                   child: Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceEvenly,
+                                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                                     children: [
                                       Icon(
                                         Icons.star_border,
@@ -152,8 +143,7 @@ class _movieDetailScreenPopularState extends State<movieDetailScreenPopular> {
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
                                 ClipRRect(
-                                  borderRadius: const BorderRadius.all(
-                                      Radius.circular(10)),
+                                  borderRadius: const BorderRadius.all(Radius.circular(10)),
                                   child: Image.network(
                                     'https://image.tmdb.org/t/p/w500/${detailMovie.posterPath}',
                                     fit: BoxFit.cover,
@@ -176,20 +166,14 @@ class _movieDetailScreenPopularState extends State<movieDetailScreenPopular> {
                       ),
                       SizedBox(
                         width: MediaQuery.of(context).size.width * 0.8,
-                        child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              MovieStatus(
-                                  icon: Icons.calendar_month,
-                                  text:
-                                      '${DateFormat('dd MMM yyyy').format(DateTime.parse(detailMovie.releaseDate.toString()))}'),
-                              MovieStatus(
-                                  icon: Icons.watch_later_outlined,
-                                  text: '${detailMovie.runtime} min'),
-                              MovieStatus(
-                                  icon: Icons.airplane_ticket_rounded,
-                                  text: '${detailMovie.genres?[0].name}'),
-                            ]),
+                        child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+                          MovieStatus(
+                              icon: Icons.calendar_month,
+                              text:
+                                  '${DateFormat('dd MMM yyyy').format(DateTime.parse(detailMovie.releaseDate.toString()))}'),
+                          MovieStatus(icon: Icons.watch_later_outlined, text: '${detailMovie.runtime} min'),
+                          MovieStatus(icon: Icons.airplane_ticket_rounded, text: '${detailMovie.genres?[0].name}'),
+                        ]),
                       )
                     ],
                   ),
@@ -260,16 +244,10 @@ class _WidgetSLiderState extends State<WidgetSLider> {
     return Column(
       children: [
         Text("Rate this Movie",
-            style: GoogleFonts.montserrat().copyWith(
-                fontSize: 18,
-                fontWeight: FontWeight.w400,
-                color: AppTheme.thirdColor)),
+            style: GoogleFonts.montserrat().copyWith(fontSize: 18, fontWeight: FontWeight.w400, color: AppTheme.thirdColor)),
         const SizedBox(height: 20),
         Text('${double.parse(SliderValue.toStringAsFixed(1))}',
-            style: GoogleFonts.montserrat().copyWith(
-                fontSize: 32,
-                fontWeight: FontWeight.w400,
-                color: AppTheme.thirdColor)),
+            style: GoogleFonts.montserrat().copyWith(fontSize: 32, fontWeight: FontWeight.w400, color: AppTheme.thirdColor)),
         const SizedBox(height: 10),
         SliderTheme(
           data: const SliderThemeData(
@@ -278,8 +256,7 @@ class _WidgetSLiderState extends State<WidgetSLider> {
             overlayColor: Colors.amber,
             inactiveTrackColor: Colors.grey,
             thumbColor: Colors.white,
-            thumbShape:
-                RoundSliderThumbShape(elevation: 10, enabledThumbRadius: 15),
+            thumbShape: RoundSliderThumbShape(elevation: 10, enabledThumbRadius: 15),
             overlayShape: const RoundSliderOverlayShape(overlayRadius: 20),
           ),
           // thumbColor: Colors.green,
@@ -311,10 +288,7 @@ class _WidgetSLiderState extends State<WidgetSLider> {
             color: const Color(0XFF0296E5),
             child: Center(
               child: Text("OK",
-                  style: GoogleFonts.montserrat().copyWith(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w600,
-                      color: Colors.white)),
+                  style: GoogleFonts.montserrat().copyWith(fontSize: 16, fontWeight: FontWeight.w600, color: Colors.white)),
             ),
           ),
         )

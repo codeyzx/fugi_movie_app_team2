@@ -2,8 +2,9 @@
 //
 //     final Upcoming = UpcomingFromMap(jsonString);
 
+// ignore_for_file: invalid_annotation_target
+
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'dart:convert';
 
 part 'upcoming.freezed.dart';
 part 'upcoming.g.dart';
@@ -37,6 +38,5 @@ abstract class Upcoming with _$Upcoming {
     @JsonKey(name: 'vote_count') int? voteCount,
   }) = _Upcoming;
 
-  factory Upcoming.fromJson(Map<String, dynamic> json) =>
-      _$UpcomingFromJson(json);
+  factory Upcoming.fromJson(Map<String, dynamic> json) => _$UpcomingFromJson(json);
 }

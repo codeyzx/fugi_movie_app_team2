@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../common_config/palette.dart';
 
@@ -9,18 +10,20 @@ class MovieStatus extends StatelessWidget {
   MovieStatus({required this.icon, required this.text});
   @override
   Widget build(BuildContext context) {
-    return Row(
+    return Column(
       children: [
         Icon(
           icon ?? Icons.abc,
           color: Palette.team2color[200],
+          size: 22.0.sp,
         ),
-        SizedBox(
-          width: 5,
-        ),
+        SizedBox(width: 10.0.sp),
         Text(
           text ?? 'asdsa',
-          style: TextStyle(color: Palette.team2color[200]),
+          style: TextStyle(
+            color: Palette.team2color[200],
+            fontSize: 12.0.sp,
+          ),
         ),
       ],
     );

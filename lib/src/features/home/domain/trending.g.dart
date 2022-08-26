@@ -1,5 +1,7 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
+// ignore_for_file: non_constant_identifier_names
+
 part of 'trending.dart';
 
 // **************************************************************************
@@ -17,21 +19,15 @@ _$_Trending _$$_TrendingFromJson(Map<String, dynamic> json) => _$_Trending(
       overview: json['overview'] as String?,
       posterPath: json['poster_path'] as String?,
       mediaType: json['media_type'] as String?,
-      genreIds:
-          (json['genre_ids'] as List<dynamic>?)?.map((e) => e as int).toList(),
+      genreIds: (json['genre_ids'] as List<dynamic>?)?.map((e) => e as int).toList(),
       popularity: (json['popularity'] as num?)?.toDouble(),
-      firstAirDate: json['first_air_date'] == null
-          ? null
-          : DateTime.parse(json['first_air_date'] as String),
+      firstAirDate: json['first_air_date'] == null ? null : DateTime.parse(json['first_air_date'] as String),
       voteAverage: (json['vote_average'] as num?)?.toDouble(),
       voteCount: json['vote_count'] as int?,
-      originCountry: (json['origin_country'] as List<dynamic>?)
-          ?.map((e) => e as String)
-          .toList(),
+      originCountry: (json['origin_country'] as List<dynamic>?)?.map((e) => e as String).toList(),
     );
 
-Map<String, dynamic> _$$_TrendingToJson(_$_Trending instance) =>
-    <String, dynamic>{
+Map<String, dynamic> _$$_TrendingToJson(_$_Trending instance) => <String, dynamic>{
       'adult': instance.adult,
       'backdrop_path': instance.backdropPath,
       'id': instance.id,

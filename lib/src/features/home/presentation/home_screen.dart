@@ -4,15 +4,16 @@ import 'package:fugi_movie_app_team2/src/features/home/domain/popular.dart';
 import 'package:fugi_movie_app_team2/src/features/home/domain/top_rated.dart';
 import 'package:fugi_movie_app_team2/src/features/home/domain/upcoming.dart';
 import 'package:fugi_movie_app_team2/src/features/home/presentation/widgets/image_number_widget.dart';
-import 'package:fugi_movie_app_team2/src/features/movie_detail/presentation/movie_detail_screen_popular.dart';
 import 'package:fugi_movie_app_team2/src/features/movie_detail/presentation/movie_detail_screen.dart';
+import 'package:fugi_movie_app_team2/src/features/movie_detail/presentation/movie_detail_screen_popular.dart';
 import 'package:fugi_movie_app_team2/src/features/movie_detail/presentation/movie_detail_screen_toprated.dart';
-import 'package:fugi_movie_app_team2/src/features/movie_detail/presentation/movie_detail_screen_upcoming.dart';
 import 'package:go_router/go_router.dart';
 import 'package:keyboard_dismisser/keyboard_dismisser.dart';
+import 'package:palette_generator/palette_generator.dart';
 
 import '../../../common_config/app_theme.dart';
 import '../../../core/client/dio_client.dart';
+import '../domain/movie_detail.dart';
 import '../domain/trending.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -24,6 +25,8 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  List<PaletteColor> _colors = [];
+  int _currentIndex = 0;
   var selectedIndex = 0;
   bool isLoading = false;
   List<Trending> trendings = [];
@@ -79,8 +82,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               size: 32,
                             ),
                             hintText: 'Search',
-                            hintStyle:
-                                const TextStyle(color: AppTheme.thirdColor),
+                            hintStyle: const TextStyle(color: AppTheme.thirdColor),
                             border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(25),
                             ),
@@ -95,21 +97,21 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),
                       )),
                   Expanded(
-                      flex: 2,
-                      child: isLoading
-                          ? const Center(
-                              child: CircularProgressIndicator.adaptive())
-                          : ListView.builder(
-                              padding: EdgeInsets.symmetric(vertical: 15.0.sp),
-                              scrollDirection: Axis.horizontal,
-                              itemCount: trendings.length,
-                              itemBuilder: (context, index) {
-                                return ImageNumberWidget(
-                                  trending: trendings[index],
-                                  number: (index + 1),
-                                );
-                              },
-                            )),
+                    flex: 2,
+                    child: isLoading
+                        ? const Center(child: CircularProgressIndicator.adaptive())
+                        : ListView.builder(
+                            padding: EdgeInsets.symmetric(vertical: 10.5.sp),
+                            scrollDirection: Axis.horizontal,
+                            itemCount: trendings.length,
+                            itemBuilder: (context, index) {
+                              return ImageNumberWidget(
+                                trending: trendings[index],
+                                number: (index + 1),
+                              );
+                            },
+                          ),
+                  ),
                   Expanded(
                     flex: 2,
                     child: DefaultTabController(
@@ -139,47 +141,47 @@ class _HomeScreenState extends State<HomeScreen> {
                                 else
                                   GridView.builder(
                                     scrollDirection: Axis.vertical,
-                                    gridDelegate:
-                                        const SliverGridDelegateWithFixedCrossAxisCount(
+                                    gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                                       crossAxisCount: 3,
-                                      childAspectRatio: .6,
-                                      mainAxisSpacing: 10,
-                                      crossAxisSpacing: 10,
+                                      childAspectRatio: .7,
+                                      mainAxisSpacing: 15,
+                                      crossAxisSpacing: 15,
                                     ),
                                     padding: EdgeInsets.all(8.0.sp),
                                     itemCount: trendings.length,
                                     itemBuilder: (context, index) {
                                       return InkWell(
                                         onTap: () {
-                                          context.pushNamed(
-                                              MovieDetailScreen.routeName,
-                                              extra: trendings[index]);
+                                          context.pushNamed(MovieDetailScreen.routeName, extra: {
+                                            "id": trendings[index].id,
+                                            "object": trendings[index],
+                                          });
                                         },
                                         child: Stack(
                                           alignment: Alignment.bottomRight,
                                           children: [
                                             Container(
-                                              height: MediaQuery.of(context)
-                                                  .size
-                                                  .height,
-                                              width: MediaQuery.of(context)
-                                                  .size
-                                                  .width,
+                                              height: MediaQuery.of(context).size.height,
+                                              width: MediaQuery.of(context).size.width,
                                               decoration: BoxDecoration(
-                                                borderRadius:
-                                                    BorderRadius.circular(10),
+                                                borderRadius: BorderRadius.circular(10.0.sp),
                                                 image: DecorationImage(
                                                   image: Image.network(
                                                     'https://image.tmdb.org/t/p/w780/${trendings[index].posterPath}',
                                                   ).image,
                                                   fit: BoxFit.cover,
                                                 ),
+                                                boxShadow: [
+                                                  BoxShadow(
+                                                    color: Colors.white.withOpacity(.2),
+                                                    blurRadius: 10,
+                                                    offset: const Offset(0, 10),
+                                                  ),
+                                                ],
                                               ),
                                             ),
-                                            Text('${trendings[index].id}',
-                                                style: TextStyle(
-                                                    color: Colors.white,
-                                                    fontSize: 20.0.sp)),
+                                            // Text('${trendings[index].id}',
+                                            //     style: TextStyle(color: Colors.white, fontSize: 20.0.sp)),
                                           ],
                                         ),
                                       );
@@ -188,8 +190,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 GridView.builder(
                                   //upcoming
                                   scrollDirection: Axis.vertical,
-                                  gridDelegate:
-                                      const SliverGridDelegateWithFixedCrossAxisCount(
+                                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                                     crossAxisCount: 3,
                                     childAspectRatio: .6,
                                     mainAxisSpacing: 10,
@@ -200,23 +201,20 @@ class _HomeScreenState extends State<HomeScreen> {
                                   itemBuilder: (context, index) {
                                     return InkWell(
                                       onTap: () {
-                                        context.pushNamed(
-                                            movieDetailScreenUpcoming.routeName,
-                                            extra: upcomings[index]);
+                                        // context.pushNamed(MovieDetailScreenUpcoming.routeName, extra: upcomings[index]);
+                                        context.pushNamed(MovieDetailScreen.routeName, extra: {
+                                          "id": upcomings[index].id,
+                                          'object': upcomings[index],
+                                        });
                                       },
                                       child: Stack(
                                         alignment: Alignment.bottomRight,
                                         children: [
                                           Container(
-                                            height: MediaQuery.of(context)
-                                                .size
-                                                .height,
-                                            width: MediaQuery.of(context)
-                                                .size
-                                                .width,
+                                            height: MediaQuery.of(context).size.height,
+                                            width: MediaQuery.of(context).size.width,
                                             decoration: BoxDecoration(
-                                              borderRadius:
-                                                  BorderRadius.circular(10),
+                                              borderRadius: BorderRadius.circular(10),
                                               image: DecorationImage(
                                                 image: Image.network(
                                                   'https://image.tmdb.org/t/p/w780/${upcomings[index].posterPath}',
@@ -226,9 +224,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                             ),
                                           ),
                                           Text('${upcomings[index].id}',
-                                              style: TextStyle(
-                                                  color: Colors.white,
-                                                  fontSize: 20.0.sp)),
+                                              style: TextStyle(color: Colors.white, fontSize: 20.0.sp)),
                                         ],
                                       ),
                                     );
@@ -237,8 +233,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 GridView.builder(
                                   //top rated
                                   scrollDirection: Axis.vertical,
-                                  gridDelegate:
-                                      const SliverGridDelegateWithFixedCrossAxisCount(
+                                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                                     crossAxisCount: 3,
                                     childAspectRatio: .6,
                                     mainAxisSpacing: 10,
@@ -249,23 +244,16 @@ class _HomeScreenState extends State<HomeScreen> {
                                   itemBuilder: (context, index) {
                                     return InkWell(
                                       onTap: () {
-                                        context.pushNamed(
-                                            movieDetailScreenTopRated.routeName,
-                                            extra: toprateds[index]);
+                                        context.pushNamed(movieDetailScreenTopRated.routeName, extra: toprateds[index]);
                                       },
                                       child: Stack(
                                         alignment: Alignment.bottomRight,
                                         children: [
                                           Container(
-                                            height: MediaQuery.of(context)
-                                                .size
-                                                .height,
-                                            width: MediaQuery.of(context)
-                                                .size
-                                                .width,
+                                            height: MediaQuery.of(context).size.height,
+                                            width: MediaQuery.of(context).size.width,
                                             decoration: BoxDecoration(
-                                              borderRadius:
-                                                  BorderRadius.circular(10),
+                                              borderRadius: BorderRadius.circular(10),
                                               image: DecorationImage(
                                                 image: Image.network(
                                                   'https://image.tmdb.org/t/p/w780/${toprateds[index].posterPath}',
@@ -275,9 +263,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                             ),
                                           ),
                                           Text('${toprateds[index].id}',
-                                              style: TextStyle(
-                                                  color: Colors.white,
-                                                  fontSize: 20.0.sp)),
+                                              style: TextStyle(color: Colors.white, fontSize: 20.0.sp)),
                                         ],
                                       ),
                                     );
@@ -286,8 +272,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 GridView.builder(
                                   //popular
                                   scrollDirection: Axis.vertical,
-                                  gridDelegate:
-                                      const SliverGridDelegateWithFixedCrossAxisCount(
+                                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                                     crossAxisCount: 3,
                                     childAspectRatio: .6,
                                     mainAxisSpacing: 10,
@@ -298,23 +283,16 @@ class _HomeScreenState extends State<HomeScreen> {
                                   itemBuilder: (context, index) {
                                     return InkWell(
                                       onTap: () {
-                                        context.pushNamed(
-                                            movieDetailScreenPopular.routeName,
-                                            extra: populars[index]);
+                                        context.pushNamed(movieDetailScreenPopular.routeName, extra: populars[index]);
                                       },
                                       child: Stack(
                                         alignment: Alignment.bottomRight,
                                         children: [
                                           Container(
-                                            height: MediaQuery.of(context)
-                                                .size
-                                                .height,
-                                            width: MediaQuery.of(context)
-                                                .size
-                                                .width,
+                                            height: MediaQuery.of(context).size.height,
+                                            width: MediaQuery.of(context).size.width,
                                             decoration: BoxDecoration(
-                                              borderRadius:
-                                                  BorderRadius.circular(10),
+                                              borderRadius: BorderRadius.circular(10.0.sp),
                                               image: DecorationImage(
                                                 image: Image.network(
                                                   'https://image.tmdb.org/t/p/w780/${populars[index].posterPath}',
@@ -324,9 +302,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                             ),
                                           ),
                                           Text('${populars[index].id}',
-                                              style: TextStyle(
-                                                  color: Colors.white,
-                                                  fontSize: 20.0.sp)),
+                                              style: TextStyle(color: Colors.white, fontSize: 20.0.sp)),
                                         ],
                                       ),
                                     );
@@ -378,14 +354,10 @@ class _HomeScreenState extends State<HomeScreen> {
     List<dynamic> listTopRated = respTopRated.data['results'];
     List<dynamic> listUpcoming = respUpcoming.data['results'];
 
-    List<Popular> myPopular =
-        listPopular.map((e) => Popular.fromJson(e)).toList();
-    List<Trending> myTrendings =
-        listTrending.map((e) => Trending.fromJson(e)).toList();
-    List<TopRated> myTopRated =
-        listTopRated.map((e) => TopRated.fromJson(e)).toList();
-    List<Upcoming> myUpcoming =
-        listUpcoming.map((e) => Upcoming.fromJson(e)).toList();
+    List<Popular> myPopular = listPopular.map((e) => Popular.fromJson(e)).toList();
+    List<Trending> myTrendings = listTrending.map((e) => Trending.fromJson(e)).toList();
+    List<TopRated> myTopRated = listTopRated.map((e) => TopRated.fromJson(e)).toList();
+    List<Upcoming> myUpcoming = listUpcoming.map((e) => Upcoming.fromJson(e)).toList();
 
     setState(() {
       trendings = myTrendings;
@@ -394,5 +366,16 @@ class _HomeScreenState extends State<HomeScreen> {
       upcomings = myUpcoming;
       isLoading = false;
     });
+  }
+
+  void _updatePalettes(MovieDetail movieDetailResponse) async {
+    var x = movieDetailResponse.posterPath;
+    final generator = await PaletteGenerator.fromImageProvider(
+      NetworkImage(
+        'https://image.tmdb.org/t/p/w500/${x}',
+      ),
+    );
+    _colors.add(generator.lightVibrantColor ?? generator.lightMutedColor ?? PaletteColor(Colors.teal, 2));
+    setState(() {});
   }
 }

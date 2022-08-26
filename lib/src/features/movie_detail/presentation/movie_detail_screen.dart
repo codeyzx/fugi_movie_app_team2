@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fugi_movie_app_team2/src/common_config/app_theme.dart';
@@ -11,12 +13,15 @@ import 'package:fugi_movie_app_team2/src/features/movie_detail/presentation/widg
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:logger/logger.dart';
+import 'package:palette_generator/palette_generator.dart';
 
 class MovieDetailScreen extends StatefulWidget {
-  final Trending trending;
+  final Map<String, dynamic>? idAndObject;
+  final Trending? trending;
   const MovieDetailScreen({
     Key? key,
-    required this.trending,
+    this.trending,
+    this.idAndObject,
   }) : super(key: key);
   static const routeName = 'movie-detail-screen';
 
@@ -27,11 +32,24 @@ class MovieDetailScreen extends StatefulWidget {
 class _MovieDetailScreenState extends State<MovieDetailScreen> {
   MovieDetail detailMovie = const MovieDetail();
   bool isLoading = false;
+  List<PaletteColor> _colors = [];
+  int _currentIndex = 0;
 
   @override
   void initState() {
     super.initState();
     fetchData();
+  }
+
+  void _updatePalettes(MovieDetail movieDetailResponse) async {
+    var x = movieDetailResponse.posterPath;
+    final generator = await PaletteGenerator.fromImageProvider(
+      NetworkImage(
+        'https://image.tmdb.org/t/p/w500/${x}',
+      ),
+    );
+    _colors.add(generator.lightVibrantColor ?? generator.lightMutedColor ?? PaletteColor(Colors.teal, 2));
+    setState(() {});
   }
 
   @override
@@ -48,23 +66,33 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
           : Column(
               children: [
                 Expanded(
-                  flex: 0,
+                  flex: 2,
                   child: Stack(
                     alignment: Alignment.bottomCenter,
                     children: [
                       Stack(
                         children: [
                           Container(
-                            height: MediaQuery.of(context).size.height * 0.335,
+                            height: MediaQuery.of(context).size.height * 0.235.sp,
                             width: MediaQuery.of(context).size.width,
                             margin: EdgeInsets.only(
-                              bottom: MediaQuery.of(context).size.height * .175,
+                              bottom: MediaQuery.of(context).size.height * .1.sp,
                             ),
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.only(
-                                bottomLeft: Radius.circular(25),
-                                bottomRight: Radius.circular(25),
+                                bottomLeft: Radius.circular(15.0.sp),
+                                bottomRight: Radius.circular(15.0.sp),
                               ),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: _colors.isNotEmpty
+                                      ? _colors[_currentIndex].color.withOpacity(.5)
+                                      : Colors.black.withOpacity(0.5),
+                                  spreadRadius: 5.0.sp,
+                                  blurRadius: 10.0.sp,
+                                  offset: const Offset(0, 2), // changes position of shadow
+                                ),
+                              ],
                               color: AppTheme.secondaryColor,
                               image: DecorationImage(
                                 image: NetworkImage(
@@ -74,9 +102,10 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
                               ),
                             ),
                           ),
-                          Text('${widget.trending.id}'),
+                          // Text('${widget.trending.id}'),
+                          Text('${widget.idAndObject!['id']}'),
                           Positioned(
-                            top: 160,
+                            bottom: 100.0.sp,
                             right: 0,
                             child: GestureDetector(
                               onTap: () {
@@ -87,11 +116,14 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
                                       return Wrap(
                                         children: [
                                           Container(
-                                            decoration: const BoxDecoration(
-                                                color: Colors.white,
-                                                borderRadius: const BorderRadius.only(
-                                                    topLeft: const Radius.circular(20), topRight: Radius.circular(20))),
-                                            padding: const EdgeInsets.all(20),
+                                            decoration: BoxDecoration(
+                                              color: Colors.white,
+                                              borderRadius: BorderRadius.only(
+                                                topLeft: Radius.circular(20.0.sp),
+                                                topRight: Radius.circular(20.0.sp),
+                                              ),
+                                            ),
+                                            padding: EdgeInsets.all(20.0.sp),
                                             child: const WidgetSLider(),
                                           )
                                         ],
@@ -99,12 +131,12 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
                                     }));
                               },
                               child: Container(
-                                margin: const EdgeInsets.all(15),
-                                width: 70,
-                                height: 35,
+                                margin: EdgeInsets.symmetric(vertical: 35.0.sp, horizontal: 20.0.sp),
+                                width: 70.0.sp,
+                                height: 35.0.sp,
                                 decoration: BoxDecoration(
                                   color: AppTheme.primaryColor,
-                                  borderRadius: BorderRadius.circular(10),
+                                  borderRadius: BorderRadius.circular(10.0.sp),
                                   border: Border.all(color: Colors.orange),
                                 ),
                                 child: Center(
@@ -116,13 +148,11 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
                                         color: Colors.orange,
                                         size: 14.0.sp,
                                       ),
-                                      Text(
-                                        '${detailMovie.voteAverage}',
-                                        style: TextStyle(
-                                          fontSize: 14.0.sp,
-                                          color: Colors.orange,
-                                        ),
-                                      ),
+                                      Text('${detailMovie.voteAverage}',
+                                          style: TextStyle(
+                                            fontSize: 14.0.sp,
+                                            color: Colors.orange,
+                                          )),
                                     ],
                                   ),
                                 ),
@@ -132,31 +162,54 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
                         ],
                       ),
                       Positioned(
-                        top: 210,
-                        left: 0,
-                        right: 0,
+                        top: MediaQuery.of(context).size.height * 0.200.sp,
+                        left: 0.sp,
+                        right: 0.sp,
                         child: SizedBox(
                           width: double.infinity,
                           child: Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 25),
+                            padding: EdgeInsets.symmetric(
+                              horizontal: 25.0.sp,
+                              // vertical: 5.0.sp,
+                            ),
                             child: Row(
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
-                                ClipRRect(
-                                  borderRadius: const BorderRadius.all(Radius.circular(10)),
-                                  child: Image.network(
-                                    'https://image.tmdb.org/t/p/w500/${detailMovie.posterPath}',
-                                    fit: BoxFit.cover,
-                                    width: 90,
+                                Container(
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(10.0.sp),
+                                    boxShadow: [
+                                      BoxShadow(
+                                        color:
+                                            _colors.isNotEmpty ? _colors[_currentIndex].color.withOpacity(.5) : Colors.white,
+                                        blurRadius: 10.0.sp,
+                                        spreadRadius: 5.0.sp,
+                                      ),
+                                    ],
+                                  ),
+                                  child: ClipRRect(
+                                    borderRadius: BorderRadius.all(Radius.circular(10.0.sp)),
+                                    child: Image.network(
+                                      'https://image.tmdb.org/t/p/w500/${detailMovie.posterPath}',
+                                      fit: BoxFit.cover,
+                                      width: 90.sp,
+                                    ),
                                   ),
                                 ),
                                 const SizedBox(width: 25),
                                 Flexible(
-                                  child: Text(
-                                    '(${detailMovie.title})',
-                                    style: TextStyle(
-                                      fontSize: 22.0.sp,
-                                    ),
+                                  child: Column(
+                                    children: [
+                                      SizedBox(height: Platform.isIOS ? 30.0.sp : 60.sp),
+                                      Text(
+                                        '${detailMovie.title}',
+                                        style: TextStyle(
+                                          fontSize: 22.0.sp,
+                                          overflow: TextOverflow.ellipsis,
+                                        ),
+                                        maxLines: 2,
+                                      ),
+                                    ],
                                   ),
                                 )
                               ],
@@ -164,41 +217,46 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
                           ),
                         ),
                       ),
-                      SizedBox(
-                        width: MediaQuery.of(context).size.width * 0.8,
-                        child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-                          MovieStatus(
-                              icon: Icons.calendar_month,
-                              text:
-                                  '${DateFormat('dd MMM yyyy').format(DateTime.parse(detailMovie.releaseDate.toString()))}'),
-                          MovieStatus(icon: Icons.watch_later_outlined, text: '${detailMovie.runtime} min'),
-                          MovieStatus(icon: Icons.airplane_ticket_rounded, text: '${detailMovie.genres?[0].name}'),
-                        ]),
-                      )
                     ],
                   ),
                 ),
                 Expanded(
-                  flex: 1,
+                    flex: 0,
+                    child: Padding(
+                      padding: EdgeInsets.only(top: 10.0.sp),
+                      child: SizedBox(
+                        width: MediaQuery.of(context).size.width * 0.6.sp,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            MovieStatus(
+                                icon: Icons.calendar_month,
+                                text:
+                                    '${DateFormat('dd MMM yyyy').format(DateTime.parse(detailMovie.releaseDate.toString()))}'),
+                            MovieStatus(icon: Icons.watch_later_outlined, text: '${detailMovie.runtime} min'),
+                            MovieStatus(icon: Icons.airplane_ticket_rounded, text: '${detailMovie.genres?[0].name}'),
+                          ],
+                        ),
+                      ),
+                    )),
+                Expanded(
+                  flex: 2,
                   child: DefaultTabController(
                     length: 3,
-                    child: SafeArea(
-                      top: false,
-                      child: Scaffold(
-                        appBar: TabBar(
-                          tabs: [
-                            Tab(child: Text('Reviews')),
-                            Tab(child: Text('About Movie')),
-                            Tab(child: Text('Prod. Companies')),
-                          ],
-                        ),
-                        body: TabBarView(
-                          children: [
-                            AboutMovie(content: detailMovie.overview ?? '-'),
-                            Reviews(content: detailMovie.overview ?? '-'),
-                            Cast(content: detailMovie.productionCompanies!),
-                          ],
-                        ),
+                    child: Scaffold(
+                      appBar: TabBar(
+                        tabs: [
+                          Tab(child: Text('Reviews')),
+                          Tab(child: Text('About Movie')),
+                          Tab(child: Text('Production')),
+                        ],
+                      ),
+                      body: TabBarView(
+                        children: [
+                          AboutMovie(content: detailMovie.overview ?? '-'),
+                          Reviews(content: detailMovie.overview ?? '-'),
+                          Cast(content: detailMovie.productionCompanies!),
+                        ],
                       ),
                     ),
                   ),
@@ -214,7 +272,8 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
         isLoading = true;
       });
       var resp = await DioClient().apiCall(
-        url: '/movie/${widget.trending.id}',
+        // url: '/movie/${widget.trending.id}',
+        url: '/movie/${widget.idAndObject!['id']}',
         requestType: RequestType.get,
         queryParameters: {},
       );
@@ -224,6 +283,7 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
         detailMovie = movieDetailResponse;
         isLoading = false;
       });
+      _updatePalettes(movieDetailResponse);
     } catch (e) {
       Logger().e(e);
     }
@@ -257,7 +317,7 @@ class _WidgetSLiderState extends State<WidgetSLider> {
             inactiveTrackColor: Colors.grey,
             thumbColor: Colors.white,
             thumbShape: RoundSliderThumbShape(elevation: 10, enabledThumbRadius: 15),
-            overlayShape: const RoundSliderOverlayShape(overlayRadius: 20),
+            overlayShape: RoundSliderOverlayShape(overlayRadius: 20),
           ),
           // thumbColor: Colors.green,
           // thumbShape: RoundSliderThumbShape(enabledThumbRadius: 20)),

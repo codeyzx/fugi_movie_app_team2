@@ -2,8 +2,9 @@
 //
 //     final popular = popularFromJson(jsonString);
 
+// ignore_for_file: invalid_annotation_target
+
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'dart:convert';
 
 part 'popular.freezed.dart';
 part 'popular.g.dart';
@@ -27,6 +28,5 @@ abstract class Popular with _$Popular {
     @JsonKey(name: 'vote_count') int? voteCount,
   }) = _Popular;
 
-  factory Popular.fromJson(Map<String, dynamic> json) =>
-      _$PopularFromJson(json);
+  factory Popular.fromJson(Map<String, dynamic> json) => _$PopularFromJson(json);
 }
