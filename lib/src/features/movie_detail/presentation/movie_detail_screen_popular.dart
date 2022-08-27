@@ -61,7 +61,7 @@ class _movieDetailScreenPopularState extends State<movieDetailScreenPopular> {
                               bottom: MediaQuery.of(context).size.height * .175,
                             ),
                             decoration: BoxDecoration(
-                              borderRadius: BorderRadius.only(
+                              borderRadius: const BorderRadius.only(
                                 bottomLeft: Radius.circular(25),
                                 bottomRight: Radius.circular(25),
                               ),
@@ -89,8 +89,8 @@ class _movieDetailScreenPopularState extends State<movieDetailScreenPopular> {
                                           Container(
                                             decoration: const BoxDecoration(
                                                 color: Colors.white,
-                                                borderRadius: const BorderRadius.only(
-                                                    topLeft: const Radius.circular(20), topRight: Radius.circular(20))),
+                                                borderRadius: BorderRadius.only(
+                                                    topLeft: Radius.circular(20), topRight: Radius.circular(20))),
                                             padding: const EdgeInsets.all(20),
                                             child: const WidgetSLider(),
                                           )
@@ -170,7 +170,7 @@ class _movieDetailScreenPopularState extends State<movieDetailScreenPopular> {
                           MovieStatus(
                               icon: Icons.calendar_month,
                               text:
-                                  '${DateFormat('dd MMM yyyy').format(DateTime.parse(detailMovie.releaseDate.toString()))}'),
+                                  DateFormat('dd MMM yyyy').format(DateTime.parse(detailMovie.releaseDate.toString()))),
                           MovieStatus(icon: Icons.watch_later_outlined, text: '${detailMovie.runtime} min'),
                           MovieStatus(icon: Icons.airplane_ticket_rounded, text: '${detailMovie.genres?[0].name}'),
                         ]),
@@ -185,7 +185,7 @@ class _movieDetailScreenPopularState extends State<movieDetailScreenPopular> {
                     child: SafeArea(
                       top: false,
                       child: Scaffold(
-                        appBar: TabBar(
+                        appBar: const TabBar(
                           tabs: [
                             Tab(child: Text('Reviews')),
                             Tab(child: Text('About Movie')),
@@ -257,7 +257,7 @@ class _WidgetSLiderState extends State<WidgetSLider> {
             inactiveTrackColor: Colors.grey,
             thumbColor: Colors.white,
             thumbShape: RoundSliderThumbShape(elevation: 10, enabledThumbRadius: 15),
-            overlayShape: const RoundSliderOverlayShape(overlayRadius: 20),
+            overlayShape: RoundSliderOverlayShape(overlayRadius: 20),
           ),
           // thumbColor: Colors.green,
           // thumbShape: RoundSliderThumbShape(enabledThumbRadius: 20)),

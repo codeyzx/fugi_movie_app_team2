@@ -21,8 +21,8 @@ class ImageNumberWidget extends StatefulWidget {
 }
 
 class _ImageNumberWidgetState extends State<ImageNumberWidget> {
-  List<PaletteColor> _colors = [];
-  int _currentIndex = 0;
+  final List<PaletteColor> _colors = [];
+  final int _currentIndex = 0;
 
   @override
   void initState() {

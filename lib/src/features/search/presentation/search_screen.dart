@@ -1,91 +1,92 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:fugi_movie_app_team2/src/features/home/domain/trending.dart';
-import 'package:fugi_movie_app_team2/src/features/search/widgets/movie_item_widget.dart';
+import 'package:fugi_movie_app_team2/src/features/home/presentation/home_screen.dart';
+import 'package:fugi_movie_app_team2/src/features/search/presentation/search_controller.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../../../common_config/app_theme.dart';
 import '../../../core/client/dio_client.dart';
+import '../../home/domain/trending.dart';
+import 'widgets/movie_item_widget.dart';
 
-class SearchScreen extends StatefulWidget {
+class SearchScreen extends StatefulHookConsumerWidget {
   const SearchScreen({Key? key}) : super(key: key);
   static const routeName = 'search-screen';
 
   @override
-  State<SearchScreen> createState() => _SearchScreenState();
+  _SearchScreenState createState() => _SearchScreenState();
 }
 
-class _SearchScreenState extends State<SearchScreen> {
+class _SearchScreenState extends ConsumerState<SearchScreen> {
   bool isLoading = false;
   List<Trending> trendings = [];
 
   @override
   void initState() {
     super.initState();
-    fetchData();
+    // fetchData();
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: AppBar(
-          title: const Text('Search'),
-          actions: [IconButton(onPressed: () {}, icon: const Icon(Icons.info_outline))],
-        ),
-        body: Container(
-          padding: const EdgeInsets.all(16),
-          child: Column(
-            children: [
-              Expanded(
-                  flex: 0,
-                  child: Container(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(25),
-                      color: AppTheme.secondaryColor,
-                    ),
-                    child: TextField(
-                      style: const TextStyle(
-                        color: AppTheme.textBlueColor,
-                      ),
-                      decoration: InputDecoration(
-                        contentPadding: const EdgeInsets.all(20),
-                        suffixIcon: const Icon(
-                          Icons.search,
-                          color: AppTheme.thirdColor,
-                          size: 32,
-                        ),
-                        hintText: 'Search',
-                        hintStyle: const TextStyle(color: AppTheme.thirdColor),
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(25),
-                        ),
-                        focusedBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(25),
-                          borderSide: const BorderSide(
-                            color: AppTheme.textBlueColor,
-                            width: 2,
-                          ),
-                        ),
-                      ),
-                    ),
-                  )),
-              Expanded(
-                  child: isLoading
-                      ? const Center(child: CircularProgressIndicator.adaptive())
-                      : ListView.builder(
-                          padding: EdgeInsets.symmetric(vertical: 15.0.sp),
-                          itemCount: trendings.length,
-                          itemBuilder: (context, index) {
-                            return MovieItemWidget(
-                              imagePath: trendings[index].posterPath,
-                              title: trendings[index].name,
-                              rating: trendings[index].voteAverage?.toStringAsFixed(1),
-                              date: trendings[index].firstAirDate?.toString().split('-').first,
-                            );
-                          },
-                        )),
+    final searchResultState = ref.watch(searchControllerProvider);
+    final keywordSearchState = ref.watch(keywordsProvider);
+
+    return SafeArea(
+      top: false,
+      child: Scaffold(
+          appBar: AppBar(
+            title: Text('Search Results'),
+            actions: [
+              IconButton(onPressed: () {}, icon: const Icon(Icons.info_outline)),
             ],
           ),
-        ));
+          body: searchResultState.when(
+            data: (datas) {
+              return Column(
+                children: [
+                  Expanded(
+                      flex: 0,
+                      child: Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 18.0.sp),
+                        child: Row(
+                          children: [
+                            Text('Finded ${datas?.length} results for keyword'),
+                            SizedBox(width: 5.0.sp),
+                            Text(
+                              '"$keywordSearchState"',
+                              style: TextStyle(
+                                fontWeight: FontWeight.normal,
+                                fontStyle: FontStyle.italic,
+                              ),
+                            ),
+                          ],
+                        ),
+                      )),
+                  Expanded(
+                    child: ListView.builder(
+                      padding: EdgeInsets.symmetric(vertical: 15.0.sp, horizontal: 15.0.sp),
+                      itemCount: datas?.length,
+                      itemBuilder: (context, index) {
+                        var dataku = datas![index];
+                        return MovieItemWidget(
+                          imagePath: dataku['poster_path'],
+                          title: dataku['title'],
+                          rating: dataku['vote_average'].toString(),
+                          date: dataku['release_date'],
+                          movie: dataku,
+                        );
+                      },
+                    ),
+                  ),
+                ],
+              );
+            },
+            error: (e, st) => const Text('Error'),
+            loading: () => const Center(
+              child: CircularProgressIndicator(),
+            ),
+          )),
+    );
   }
 
   Future<void> fetchData() async {

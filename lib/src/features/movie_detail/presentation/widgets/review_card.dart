@@ -13,7 +13,7 @@ class ReviewCard extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Column(
-            children: [
+            children: const [
               CircleAvatar(
                 backgroundImage: NetworkImage('https://i.pravatar.cc/300'),
               ),
@@ -26,13 +26,13 @@ class ReviewCard extends StatelessWidget {
               )
             ],
           ),
-          SizedBox(
+          const SizedBox(
             width: 30,
           ),
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
+              children: const [
                 Text(
                   'Your Name',
                   style: TextStyle(fontWeight: FontWeight.bold),

@@ -24,7 +24,7 @@ class _WatchlistScreenState extends State<WatchlistScreen> {
         ],
         child: Scaffold(
           appBar: AppBar(
-            title: Text('Watch List'),
+            title: const Text('Watch List'),
             leading: IconButton(
               icon: const Icon(Icons.arrow_back),
               onPressed: () => Navigator.pop(context),
@@ -32,7 +32,7 @@ class _WatchlistScreenState extends State<WatchlistScreen> {
           ),
           body: ListView(
             padding: const EdgeInsets.only(top: 50.0, left: 30, right: 30),
-            children: [
+            children: const [
               WatchListItem(),
               WatchListItem(),
               WatchListItem(),
@@ -53,7 +53,7 @@ class WatchListItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.only(bottom: 20),
+      margin: const EdgeInsets.only(bottom: 20),
       child: Row(
         children: [
           Container(
@@ -65,14 +65,14 @@ class WatchListItem extends StatelessWidget {
               ),
             ),
           ),
-          SizedBox(
+          const SizedBox(
             width: 10,
           ),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const Text('Jurassic World'),
-              SizedBox(
+              const SizedBox(
                 height: 10,
               ),
               Row(

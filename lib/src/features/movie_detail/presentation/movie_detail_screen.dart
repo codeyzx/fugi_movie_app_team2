@@ -32,8 +32,8 @@ class MovieDetailScreen extends StatefulWidget {
 class _MovieDetailScreenState extends State<MovieDetailScreen> {
   MovieDetail detailMovie = const MovieDetail();
   bool isLoading = false;
-  List<PaletteColor> _colors = [];
-  int _currentIndex = 0;
+  final List<PaletteColor> _colors = [];
+  final int _currentIndex = 0;
 
   @override
   void initState() {
@@ -45,7 +45,7 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
     var x = movieDetailResponse.posterPath;
     final generator = await PaletteGenerator.fromImageProvider(
       NetworkImage(
-        'https://image.tmdb.org/t/p/w500/${x}',
+        'https://image.tmdb.org/t/p/w500/$x',
       ),
     );
     _colors.add(generator.lightVibrantColor ?? generator.lightMutedColor ?? PaletteColor(Colors.teal, 2));
@@ -73,7 +73,7 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
                       Stack(
                         children: [
                           Container(
-                            height: MediaQuery.of(context).size.height * 0.235.sp,
+                            // height: MediaQuery.of(context).size.height * 0.235.sp,
                             width: MediaQuery.of(context).size.width,
                             margin: EdgeInsets.only(
                               bottom: MediaQuery.of(context).size.height * .1.sp,
@@ -86,10 +86,10 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
                               boxShadow: [
                                 BoxShadow(
                                   color: _colors.isNotEmpty
-                                      ? _colors[_currentIndex].color.withOpacity(.5)
+                                      ? _colors[_currentIndex].color.withOpacity(.3)
                                       : Colors.black.withOpacity(0.5),
-                                  spreadRadius: 5.0.sp,
-                                  blurRadius: 10.0.sp,
+                                  spreadRadius: 2.5.sp,
+                                  blurRadius: 5.0.sp,
                                   offset: const Offset(0, 2), // changes position of shadow
                                 ),
                               ],
@@ -103,7 +103,17 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
                             ),
                           ),
                           // Text('${widget.trending.id}'),
-                          Text('${widget.idAndObject!['id']}'),
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Text(
+                              'Movie ID: ${widget.idAndObject!['id']}',
+                              style: TextStyle(
+                                fontSize: 10.0.sp,
+                                fontWeight: FontWeight.normal,
+                                color: Colors.grey,
+                              ),
+                            ),
+                          ),
                           Positioned(
                             bottom: 100.0.sp,
                             right: 0,
@@ -131,7 +141,7 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
                                     }));
                               },
                               child: Container(
-                                margin: EdgeInsets.symmetric(vertical: 35.0.sp, horizontal: 20.0.sp),
+                                margin: EdgeInsets.symmetric(vertical: 15.0.sp, horizontal: 15.0.sp),
                                 width: 70.0.sp,
                                 height: 35.0.sp,
                                 decoration: BoxDecoration(
@@ -143,11 +153,7 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
                                   child: Row(
                                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                                     children: [
-                                      Icon(
-                                        Icons.star_border,
-                                        color: Colors.orange,
-                                        size: 14.0.sp,
-                                      ),
+                                      const Icon(Icons.star_border, color: Colors.orange),
                                       Text('${detailMovie.voteAverage}',
                                           style: TextStyle(
                                             fontSize: 14.0.sp,
@@ -231,8 +237,7 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
                           children: [
                             MovieStatus(
                                 icon: Icons.calendar_month,
-                                text:
-                                    '${DateFormat('dd MMM yyyy').format(DateTime.parse(detailMovie.releaseDate.toString()))}'),
+                                text: DateFormat('dd MMM yyyy').format(DateTime.parse(detailMovie.releaseDate.toString()))),
                             MovieStatus(icon: Icons.watch_later_outlined, text: '${detailMovie.runtime} min'),
                             MovieStatus(icon: Icons.airplane_ticket_rounded, text: '${detailMovie.genres?[0].name}'),
                           ],
@@ -244,7 +249,7 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
                   child: DefaultTabController(
                     length: 3,
                     child: Scaffold(
-                      appBar: TabBar(
+                      appBar: const TabBar(
                         tabs: [
                           Tab(child: Text('Reviews')),
                           Tab(child: Text('About Movie')),
@@ -253,7 +258,10 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
                       ),
                       body: TabBarView(
                         children: [
-                          AboutMovie(content: detailMovie.overview ?? '-'),
+                          AboutMovie(
+                            movieTitle: detailMovie.title,
+                            content: detailMovie.overview ?? '-',
+                          ),
                           Reviews(content: detailMovie.overview ?? '-'),
                           Cast(content: detailMovie.productionCompanies!),
                         ],

@@ -87,8 +87,8 @@ class _MovieDetailScreenUpcomingState extends State<MovieDetailScreenUpcoming> {
                                           Container(
                                             decoration: const BoxDecoration(
                                                 color: Colors.white,
-                                                borderRadius: const BorderRadius.only(
-                                                    topLeft: const Radius.circular(20), topRight: Radius.circular(20))),
+                                                borderRadius: BorderRadius.only(
+                                                    topLeft: Radius.circular(20), topRight: Radius.circular(20))),
                                             padding: const EdgeInsets.all(20),
                                             child: const WidgetSLider(),
                                           )
@@ -168,7 +168,7 @@ class _MovieDetailScreenUpcomingState extends State<MovieDetailScreenUpcoming> {
                           MovieStatus(
                               icon: Icons.calendar_month,
                               text:
-                                  '${DateFormat('dd MMM yyyy').format(DateTime.parse(detailMovie.releaseDate.toString()))}'),
+                                  DateFormat('dd MMM yyyy').format(DateTime.parse(detailMovie.releaseDate.toString()))),
                           MovieStatus(icon: Icons.watch_later_outlined, text: '${detailMovie.runtime} min'),
                           MovieStatus(icon: Icons.airplane_ticket_rounded, text: '${detailMovie.genres?[0].name}'),
                         ]),
@@ -185,9 +185,9 @@ class _MovieDetailScreenUpcomingState extends State<MovieDetailScreenUpcoming> {
                       child: Scaffold(
                         appBar: const TabBar(
                           tabs: [
-                            Tab(child: const Text('Reviews')),
-                            Tab(child: const Text('About Movie')),
-                            Tab(child: const Text('Prod. Companies')),
+                            Tab(child: Text('Reviews')),
+                            Tab(child: Text('About Movie')),
+                            Tab(child: Text('Prod. Companies')),
                           ],
                         ),
                         body: TabBarView(
@@ -255,7 +255,7 @@ class _WidgetSLiderState extends State<WidgetSLider> {
             inactiveTrackColor: Colors.grey,
             thumbColor: Colors.white,
             thumbShape: RoundSliderThumbShape(elevation: 10, enabledThumbRadius: 15),
-            overlayShape: const RoundSliderOverlayShape(overlayRadius: 20),
+            overlayShape: RoundSliderOverlayShape(overlayRadius: 20),
           ),
           // thumbColor: Colors.green,
           // thumbShape: RoundSliderThumbShape(enabledThumbRadius: 20)),

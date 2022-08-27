@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fugi_movie_app_team2/src/features/home/domain/popular.dart';
 import 'package:fugi_movie_app_team2/src/features/home/domain/top_rated.dart';
@@ -7,7 +8,10 @@ import 'package:fugi_movie_app_team2/src/features/home/presentation/widgets/imag
 import 'package:fugi_movie_app_team2/src/features/movie_detail/presentation/movie_detail_screen.dart';
 import 'package:fugi_movie_app_team2/src/features/movie_detail/presentation/movie_detail_screen_popular.dart';
 import 'package:fugi_movie_app_team2/src/features/movie_detail/presentation/movie_detail_screen_toprated.dart';
+import 'package:fugi_movie_app_team2/src/features/search/presentation/search_controller.dart';
+import 'package:fugi_movie_app_team2/src/features/search/presentation/search_screen.dart';
 import 'package:go_router/go_router.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:keyboard_dismisser/keyboard_dismisser.dart';
 import 'package:palette_generator/palette_generator.dart';
 
@@ -16,23 +20,26 @@ import '../../../core/client/dio_client.dart';
 import '../domain/movie_detail.dart';
 import '../domain/trending.dart';
 
-class HomeScreen extends StatefulWidget {
+final keywordsProvider = StateProvider<String?>((ref) => '');
+
+class HomeScreen extends StatefulHookConsumerWidget {
   const HomeScreen({Key? key}) : super(key: key);
   static const routeName = 'home-screen';
 
   @override
-  State<HomeScreen> createState() => _HomeScreenState();
+  _HomeScreenState createState() => _HomeScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
-  List<PaletteColor> _colors = [];
-  int _currentIndex = 0;
+class _HomeScreenState extends ConsumerState<HomeScreen> {
+  final List<PaletteColor> _colors = [];
+  final int _currentIndex = 0;
   var selectedIndex = 0;
   bool isLoading = false;
   List<Trending> trendings = [];
   List<Popular> populars = [];
   List<TopRated> toprateds = [];
   List<Upcoming> upcomings = [];
+  bool isLoadingSearch = false;
 
   @override
   void initState() {
@@ -42,6 +49,27 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    var _searchController = useTextEditingController();
+
+    ref.listen<AsyncValue<List<Map<String, dynamic>>?>>(
+      searchControllerProvider,
+      (prev, state) {
+        if (!state.isRefreshing && !state.hasError) {
+          Future.delayed(const Duration(milliseconds: 1000), () {
+            context.pushNamed(SearchScreen.routeName);
+            setState(() {
+              isLoadingSearch = false;
+            });
+          });
+        }
+        if (state.isRefreshing) {
+          setState(() {
+            isLoadingSearch = true;
+          });
+        }
+      },
+    );
+
     return RefreshIndicator(
       onRefresh: () async {
         await fetchData();
@@ -64,38 +92,65 @@ class _HomeScreenState extends State<HomeScreen> {
               child: Column(
                 children: [
                   Expanded(
-                      flex: 0,
-                      child: Container(
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(25),
-                          color: AppTheme.secondaryColor,
-                        ),
-                        child: TextField(
-                          style: const TextStyle(
-                            color: AppTheme.textBlueColor,
+                    flex: 0,
+                    child: Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(50.0.sp),
+                        color: AppTheme.secondaryColor,
+                      ),
+                      child: TextField(
+                        onChanged: (value) {
+                          ref.read(keywordsProvider.state).state = value;
+                          setState(() {});
+                        },
+                        onSubmitted: (value) {
+                          ref.read(searchControllerProvider.notifier).search(_searchController.text.toLowerCase());
+                        },
+                        controller: _searchController,
+                        style: const TextStyle(color: AppTheme.textBlueColor),
+                        decoration: InputDecoration(
+                          contentPadding: EdgeInsets.all(20.0.sp),
+                          suffixIcon: InkWell(
+                            onTap: () => {
+                              ref.read(searchControllerProvider.notifier).search(
+                                    _searchController.text.toLowerCase(),
+                                  ),
+                            },
+                            child: isLoadingSearch
+                                ? const CircularProgressIndicator()
+                                : _searchController.text.isNotEmpty
+                                    ? IconButton(
+                                        onPressed: () {
+                                          _searchController.clear();
+                                          setState(() {});
+                                        },
+                                        icon: Icon(
+                                          Icons.close,
+                                          color: AppTheme.textBlueColor,
+                                        ),
+                                      )
+                                    : Icon(
+                                        Icons.search,
+                                        color: AppTheme.thirdColor,
+                                        size: 32.0.sp,
+                                      ),
                           ),
-                          decoration: InputDecoration(
-                            contentPadding: const EdgeInsets.all(20),
-                            suffixIcon: const Icon(
-                              Icons.search,
-                              color: AppTheme.thirdColor,
-                              size: 32,
-                            ),
-                            hintText: 'Search',
-                            hintStyle: const TextStyle(color: AppTheme.thirdColor),
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(25),
-                            ),
-                            focusedBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(25),
-                              borderSide: const BorderSide(
-                                color: AppTheme.textBlueColor,
-                                width: 2,
-                              ),
+                          hintText: 'Search',
+                          hintStyle: const TextStyle(color: AppTheme.thirdColor),
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(50.0.sp),
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(50.0.sp),
+                            borderSide: const BorderSide(
+                              color: AppTheme.textBlueColor,
+                              width: 2,
                             ),
                           ),
                         ),
-                      )),
+                      ),
+                    ),
+                  ),
                   Expanded(
                     flex: 2,
                     child: isLoading
@@ -372,7 +427,7 @@ class _HomeScreenState extends State<HomeScreen> {
     var x = movieDetailResponse.posterPath;
     final generator = await PaletteGenerator.fromImageProvider(
       NetworkImage(
-        'https://image.tmdb.org/t/p/w500/${x}',
+        'https://image.tmdb.org/t/p/w500/$x',
       ),
     );
     _colors.add(generator.lightVibrantColor ?? generator.lightMutedColor ?? PaletteColor(Colors.teal, 2));
