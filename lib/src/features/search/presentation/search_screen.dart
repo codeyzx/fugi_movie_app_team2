@@ -35,7 +35,7 @@ class _SearchScreenState extends ConsumerState<SearchScreen> {
       top: false,
       child: Scaffold(
           appBar: AppBar(
-            title: Text('Search Results'),
+            title: const Text('Search Results'),
             actions: [
               IconButton(onPressed: () {}, icon: const Icon(Icons.info_outline)),
             ],
@@ -54,7 +54,7 @@ class _SearchScreenState extends ConsumerState<SearchScreen> {
                             SizedBox(width: 5.0.sp),
                             Text(
                               '"$keywordSearchState"',
-                              style: TextStyle(
+                              style: const TextStyle(
                                 fontWeight: FontWeight.normal,
                                 fontStyle: FontStyle.italic,
                               ),

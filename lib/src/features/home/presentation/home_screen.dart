@@ -49,7 +49,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    var _searchController = useTextEditingController();
+    var searchController = useTextEditingController();
 
     ref.listen<AsyncValue<List<Map<String, dynamic>>?>>(
       searchControllerProvider,
@@ -104,27 +104,27 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                           setState(() {});
                         },
                         onSubmitted: (value) {
-                          ref.read(searchControllerProvider.notifier).search(_searchController.text.toLowerCase());
+                          ref.read(searchControllerProvider.notifier).search(searchController.text.toLowerCase());
                         },
-                        controller: _searchController,
+                        controller: searchController,
                         style: const TextStyle(color: AppTheme.textBlueColor),
                         decoration: InputDecoration(
                           contentPadding: EdgeInsets.all(20.0.sp),
                           suffixIcon: InkWell(
                             onTap: () => {
                               ref.read(searchControllerProvider.notifier).search(
-                                    _searchController.text.toLowerCase(),
+                                    searchController.text.toLowerCase(),
                                   ),
                             },
                             child: isLoadingSearch
                                 ? const CircularProgressIndicator()
-                                : _searchController.text.isNotEmpty
+                                : searchController.text.isNotEmpty
                                     ? IconButton(
                                         onPressed: () {
-                                          _searchController.clear();
+                                          searchController.clear();
                                           setState(() {});
                                         },
-                                        icon: Icon(
+                                        icon: const Icon(
                                           Icons.close,
                                           color: AppTheme.textBlueColor,
                                         ),

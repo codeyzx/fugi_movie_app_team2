@@ -66,7 +66,7 @@ class _ImageNumberWidgetState extends State<ImageNumberWidget> {
         ),
         Positioned(
           left: -2.5.sp,
-          top: Platform.isIOS ? 110.0.sp : 90.0.sp,
+          top: Platform.isIOS ? 105.0.sp : 90.0.sp,
           child: Stack(
             children: [
               FittedBox(
