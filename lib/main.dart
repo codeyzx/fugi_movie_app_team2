@@ -13,7 +13,7 @@ void main() async {
   );
 }
 //bima pus tgl 28
+
 //bima push 28(2)
 //bima push 28(33)
 //bima push 28(44)
-//asdasfdasf
