@@ -1,240 +1,303 @@
-import 'package:flutter/material.dart';
-import 'package:fugi_movie_app_team2/src/common_config/app_theme.dart';
-import 'package:google_fonts/google_fonts.dart';
+import 'dart:io';
 
-class MovieDetailScreen extends StatelessWidget {
-  MovieDetailScreen({Key? key}) : super(key: key);
+import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:fugi_movie_app_team2/src/common_config/app_theme.dart';
+import 'package:fugi_movie_app_team2/src/core/client/dio_client.dart';
+import 'package:fugi_movie_app_team2/src/features/home/domain/movie_detail.dart';
+import 'package:fugi_movie_app_team2/src/features/home/domain/trending.dart';
+import 'package:fugi_movie_app_team2/src/features/movie_detail/presentation/widgets/about_movie.dart';
+import 'package:fugi_movie_app_team2/src/features/movie_detail/presentation/widgets/cast.dart';
+import 'package:fugi_movie_app_team2/src/features/movie_detail/presentation/widgets/movie_status.dart';
+import 'package:fugi_movie_app_team2/src/features/movie_detail/presentation/widgets/reviews.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:intl/intl.dart';
+import 'package:logger/logger.dart';
+import 'package:palette_generator/palette_generator.dart';
+
+class MovieDetailScreen extends StatefulWidget {
+  final Map<String, dynamic>? idAndObject;
+  final Trending? trending;
+  const MovieDetailScreen({
+    Key? key,
+    this.trending,
+    this.idAndObject,
+  }) : super(key: key);
   static const routeName = 'movie-detail-screen';
-  double SliderValue = 0.0;
+
+  @override
+  State<MovieDetailScreen> createState() => _MovieDetailScreenState();
+}
+
+class _MovieDetailScreenState extends State<MovieDetailScreen> {
+  MovieDetail detailMovie = const MovieDetail();
+  bool isLoading = false;
+  final List<PaletteColor> _colors = [];
+  final int _currentIndex = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    fetchData();
+  }
+
+  void _updatePalettes(MovieDetail movieDetailResponse) async {
+    var x = movieDetailResponse.posterPath;
+    final generator = await PaletteGenerator.fromImageProvider(
+      NetworkImage(
+        'https://image.tmdb.org/t/p/w500/$x',
+      ),
+    );
+    _colors.add(generator.lightVibrantColor ?? generator.lightMutedColor ?? PaletteColor(Colors.teal, 2));
+    setState(() {});
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: const [
-            SizedBox(),
-            Text('Detail'),
-            Icon(Icons.hub),
-          ],
-        ),
+        title: const Text('Detail'),
+        actions: [
+          IconButton(onPressed: () {}, icon: const Icon(Icons.bookmark)),
+        ],
       ),
-      body: Column(
-        children: [
-          Expanded(
-            flex: 0,
-            child: Stack(
-              alignment: Alignment.bottomCenter,
+      body: isLoading
+          ? const Center(
+              child: CircularProgressIndicator.adaptive(),
+            )
+          : Column(
               children: [
-                Stack(
-                  children: [
-                    Container(
-                      width: MediaQuery.of(context).size.width,
-                      margin: EdgeInsets.only(
-                        bottom: MediaQuery.of(context).size.height * .175,
-                      ),
-                      child: Image.asset(
-                        'assets/images/movie-hero.png',
-                        fit: BoxFit.contain,
-                      ),
-                    ),
-                    Positioned(
-                      top: 160,
-                      right: 0,
-                      child: GestureDetector(
-                        onTap: () {
-                          //Navigator.pop(context);
-                          showModalBottomSheet(
-                              context: context,
-                              backgroundColor: Colors.transparent,
-                              builder: ((BuildContext context) {
-                                return Wrap(
-                                  children: [
-                                    Container(
-                                      decoration: BoxDecoration(
-                                          color: Colors.white,
-                                          borderRadius: BorderRadius.only(
-                                              topLeft: Radius.circular(20),
-                                              topRight: Radius.circular(20))),
-                                      padding: EdgeInsets.all(20),
-                                      child: WidgetSLider(),
-                                    )
-                                  ],
-                                );
-                              }));
-                        },
-                        // child: Container(
-                        //   padding: const EdgeInsets.all(10),
-                        //   margin: const EdgeInsets.all(15),
-                        //   width: 75,
-                        //   decoration: BoxDecoration(
-                        //     color: AppTheme.primaryColor,
-                        //     borderRadius: BorderRadius.circular(50),
-                        //     border: Border.all(color: Colors.orange),
-                        //   ),
-                        //   child: Center(
-                        //     child: Row(
-                        //       children: [
-                        //         const Icon(
-                        //           Icons.star_border,
-                        child: Container(
-                          padding: const EdgeInsets.all(10),
-                          margin: const EdgeInsets.all(15),
-                          width: 75,
-                          decoration: BoxDecoration(
-                            color: AppTheme.primaryColor,
-                            borderRadius: BorderRadius.circular(50),
-                            border: Border.all(color: Colors.orange),
+                Expanded(
+                  flex: 2,
+                  child: Stack(
+                    alignment: Alignment.bottomCenter,
+                    children: [
+                      Stack(
+                        children: [
+                          Container(
+                            width: MediaQuery.of(context).size.width,
+                            margin: EdgeInsets.only(
+                              bottom: MediaQuery.of(context).size.height * .09.sp,
+                            ),
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.only(
+                                bottomLeft: Radius.circular(15.0.sp),
+                                bottomRight: Radius.circular(15.0.sp),
+                              ),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: _colors.isNotEmpty
+                                      ? _colors[_currentIndex].color.withOpacity(.3)
+                                      : Colors.black.withOpacity(0.5),
+                                  spreadRadius: 2.5.sp,
+                                  blurRadius: 5.0.sp,
+                                  offset: const Offset(0, 2), // changes position of shadow
+                                ),
+                              ],
+                              color: AppTheme.secondaryColor,
+                              image: DecorationImage(
+                                image: NetworkImage(
+                                  'https://image.tmdb.org/t/p/original/${detailMovie.backdropPath}',
+                                ),
+                                fit: BoxFit.cover,
+                              ),
+                            ),
                           ),
-                          child: Center(
+                          // Text('${widget.trending.id}'),
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Text(
+                              'Movie ID: ${widget.idAndObject!['id']}',
+                              style: TextStyle(
+                                fontSize: 10.0.sp,
+                                fontWeight: FontWeight.normal,
+                                color: Colors.grey,
+                              ),
+                            ),
+                          ),
+                          Positioned(
+                            bottom: 100.0.sp,
+                            right: 0,
+                            child: GestureDetector(
+                              onTap: () {
+                                showModalBottomSheet(
+                                    context: context,
+                                    backgroundColor: Colors.transparent,
+                                    builder: ((BuildContext context) {
+                                      return Wrap(
+                                        children: [
+                                          Container(
+                                            decoration: BoxDecoration(
+                                              color: Colors.white,
+                                              borderRadius: BorderRadius.only(
+                                                topLeft: Radius.circular(20.0.sp),
+                                                topRight: Radius.circular(20.0.sp),
+                                              ),
+                                            ),
+                                            padding: EdgeInsets.all(20.0.sp),
+                                            child: const WidgetSLider(),
+                                          )
+                                        ],
+                                      );
+                                    }));
+                              },
+                              child: Container(
+                                margin: EdgeInsets.symmetric(vertical: 15.0.sp, horizontal: 15.0.sp),
+                                width: 70.0.sp,
+                                height: 35.0.sp,
+                                decoration: BoxDecoration(
+                                  color: AppTheme.primaryColor,
+                                  borderRadius: BorderRadius.circular(10.0.sp),
+                                  border: Border.all(color: Colors.orange),
+                                ),
+                                child: Center(
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                    children: [
+                                      const Icon(Icons.star_border, color: Colors.orange),
+                                      Text('${detailMovie.voteAverage}',
+                                          style: TextStyle(
+                                            fontSize: 14.0.sp,
+                                            color: Colors.orange,
+                                          )),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                      Positioned(
+                        left: 0.0.sp,
+                        right: 0.0.sp,
+                        child: SizedBox(
+                          width: double.infinity,
+                          child: Padding(
+                            padding: EdgeInsets.symmetric(
+                              horizontal: 25.0.sp,
+                              // vertical: 5.0.sp,
+                            ),
                             child: Row(
-                              children: const [
-                                Icon(
-                                  Icons.star_border,
-                                  color: Colors.orange,
-                                ),
-                                Text(
-                                  '9.5',
-                                  style: TextStyle(
-                                    color: Colors.orange,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Container(
+                                  width: 75.0.sp,
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(10.0.sp),
+                                    boxShadow: [
+                                      BoxShadow(
+                                        color:
+                                            _colors.isNotEmpty ? _colors[_currentIndex].color.withOpacity(.5) : Colors.white,
+                                        blurRadius: 10.0.sp,
+                                        spreadRadius: 5.0.sp,
+                                      ),
+                                    ],
+                                  ),
+                                  child: ClipRRect(
+                                    borderRadius: BorderRadius.all(Radius.circular(10.0.sp)),
+                                    child: Image.network(
+                                      'https://image.tmdb.org/t/p/w500/${detailMovie.posterPath}',
+                                      fit: BoxFit.cover,
+                                      width: 90.sp,
+                                    ),
                                   ),
                                 ),
-                                Text(
-                                  '9.5',
-                                  style: TextStyle(
-                                    color: Colors.orange,
+                                const SizedBox(width: 25),
+                                Flexible(
+                                  child: Column(
+                                    children: [
+                                      SizedBox(height: Platform.isIOS ? 30.0.sp : 50.0.sp),
+                                      Text(
+                                        '${detailMovie.title}',
+                                        style: TextStyle(
+                                          fontSize: 22.0.sp,
+                                          overflow: TextOverflow.ellipsis,
+                                        ),
+                                        maxLines: 2,
+                                      ),
+                                    ],
                                   ),
-                                ),
+                                )
                               ],
                             ),
                           ),
                         ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
-                Positioned(
-                  top: 215,
-                  left: 0,
-                  right: 0,
-                  child: SizedBox(
-                    width: double.infinity,
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 25),
+                Expanded(
+                  flex: 0,
+                  child: Padding(
+                    padding: EdgeInsets.only(top: 10.0.sp),
+                    child: SizedBox(
+                      width: MediaQuery.of(context).size.width * 0.6.sp,
                       child: Row(
-                        crossAxisAlignment: CrossAxisAlignment.end,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          ClipRRect(
-                            borderRadius:
-                                const BorderRadius.all(Radius.circular(10)),
-                            child: Image.asset(
-                              'assets/images/movie-sub-hero.png',
-                              fit: BoxFit.cover,
-                            ),
-                          ),
-                          const SizedBox(width: 20),
-                          const Flexible(
-                            child: Text(
-                              'Spiderman No Way Home',
-                              style: TextStyle(
-                                fontSize: 28,
-                              ),
-                            ),
-                          )
+                          MovieStatus(
+                              icon: FontAwesomeIcons.calendarWeek,
+                              text: DateFormat('dd MMM yyyy').format(DateTime.parse(detailMovie.releaseDate.toString()))),
+                          MovieStatus(icon: FontAwesomeIcons.clock, text: '${detailMovie.runtime} min'),
+                          MovieStatus(icon: FontAwesomeIcons.ticket, text: '${detailMovie.genres?[0].name}'),
                         ],
                       ),
                     ),
                   ),
                 ),
-                SizedBox(
-                  width: MediaQuery.of(context).size.width * 0.8,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-
-                    // ignore: prefer_const_literals_to_create_immutables
-                    children: [
-                      const Icon(Icons.calendar_month,
-                          color: AppTheme.fourthColor),
-                      const Text('2022',
-                          style: TextStyle(
-                              color: AppTheme.fourthColor, fontSize: 18)),
-                      const Divider(
-                        color: AppTheme.fourthColor,
-                        thickness: 1,
+                Expanded(
+                  flex: 2,
+                  child: DefaultTabController(
+                    length: 3,
+                    child: Scaffold(
+                      appBar: const TabBar(
+                        tabs: [
+                          Tab(child: Text('Reviews')),
+                          Tab(child: Text('About Movie')),
+                          Tab(child: Text('Production')),
+                        ],
                       ),
-                      const Icon(Icons.watch_later,
-                          color: AppTheme.fourthColor),
-                      const Text(' 180 Minuts',
-                          style: TextStyle(
-                              color: AppTheme.fourthColor, fontSize: 18)),
-                      const Icon(Icons.airplane_ticket,
-                          color: AppTheme.fourthColor),
-                      const Text('Action',
-                          style: TextStyle(
-                              color: AppTheme.fourthColor, fontSize: 18)),
-                      Icon(Icons.calendar_month, color: AppTheme.fourthColor),
-                      Text('2022',
-                          style: TextStyle(
-                              color: AppTheme.fourthColor, fontSize: 18)),
-                      Divider(
-                        color: AppTheme.fourthColor,
-                        thickness: 1,
+                      body: TabBarView(
+                        children: [
+                          AboutMovie(
+                            movieTitle: detailMovie.title,
+                            content: detailMovie.overview ?? '-',
+                          ),
+                          Reviews(content: detailMovie.overview ?? '-'),
+                          Cast(content: detailMovie.productionCompanies!),
+                        ],
                       ),
-                      Icon(Icons.watch_later, color: AppTheme.fourthColor),
-                      Text(' 180 Minuts',
-                          style: TextStyle(
-                              color: AppTheme.fourthColor, fontSize: 18)),
-                      Icon(Icons.airplane_ticket, color: AppTheme.fourthColor),
-                      Text('Action',
-                          style: TextStyle(
-                              color: AppTheme.fourthColor, fontSize: 18)),
-                    ],
-                  ),
-                )
-              ],
-            ),
-          ),
-          Expanded(
-            flex: 1,
-            child: DefaultTabController(
-              length: 3,
-              child: SafeArea(
-                top: false,
-                child: Scaffold(
-                  appBar: const TabBar(
-                    tabs: [
-                      Tab(child: Text('About Movie')),
-                      Tab(child: Text('Reviews')),
-                      Tab(child: Text('Cast')),
-                    ],
-                  ),
-                  body: TabBarView(
-                    children: [
-                      ListView.builder(
-                        padding: const EdgeInsets.all(15),
-                        itemBuilder: (context, index) {
-                          return const Card(
-                            color: AppTheme.thirdColor,
-                            child: ListTile(
-                              leading: CircleAvatar(
-                                backgroundColor: AppTheme.secondaryColor,
-                              ),
-                            ),
-                          );
-                        },
-                      ),
-                      const Text('Reviews'),
-                      const Text('Cast'),
-                    ],
+                    ),
                   ),
                 ),
-              ),
+              ],
             ),
-          ),
-        ],
-      ),
     );
+  }
+
+  void fetchData() async {
+    try {
+      setState(() {
+        isLoading = true;
+      });
+      var resp = await DioClient().apiCall(
+        // url: '/movie/${widget.trending.id}',
+        url: '/movie/${widget.idAndObject!['id']}',
+        requestType: RequestType.get,
+        queryParameters: {},
+      );
+      var respBody = resp.data;
+      MovieDetail movieDetailResponse = MovieDetail.fromJson(respBody);
+      setState(() {
+        detailMovie = movieDetailResponse;
+        isLoading = false;
+      });
+      _updatePalettes(movieDetailResponse);
+    } catch (e) {
+      Logger().e(e);
+    }
   }
 }
 
@@ -252,26 +315,19 @@ class _WidgetSLiderState extends State<WidgetSLider> {
     return Column(
       children: [
         Text("Rate this Movie",
-            style: GoogleFonts.montserrat().copyWith(
-                fontSize: 18,
-                fontWeight: FontWeight.w400,
-                color: AppTheme.thirdColor)),
-        SizedBox(height: 20),
+            style: GoogleFonts.montserrat().copyWith(fontSize: 18, fontWeight: FontWeight.w400, color: AppTheme.thirdColor)),
+        const SizedBox(height: 20),
         Text('${double.parse(SliderValue.toStringAsFixed(1))}',
-            style: GoogleFonts.montserrat().copyWith(
-                fontSize: 32,
-                fontWeight: FontWeight.w400,
-                color: AppTheme.thirdColor)),
-        SizedBox(height: 10),
+            style: GoogleFonts.montserrat().copyWith(fontSize: 32, fontWeight: FontWeight.w400, color: AppTheme.thirdColor)),
+        const SizedBox(height: 10),
         SliderTheme(
-          data: SliderThemeData(
+          data: const SliderThemeData(
             activeTrackColor: Color(0XFFFF8700),
             trackHeight: 10,
             overlayColor: Colors.amber,
             inactiveTrackColor: Colors.grey,
             thumbColor: Colors.white,
-            thumbShape:
-                RoundSliderThumbShape(elevation: 10, enabledThumbRadius: 15),
+            thumbShape: RoundSliderThumbShape(elevation: 10, enabledThumbRadius: 15),
             overlayShape: RoundSliderOverlayShape(overlayRadius: 20),
           ),
           // thumbColor: Colors.green,
@@ -292,7 +348,7 @@ class _WidgetSLiderState extends State<WidgetSLider> {
             },
           ),
         ),
-        SizedBox(
+        const SizedBox(
           height: 20,
         ),
         ClipRRect(
@@ -300,13 +356,10 @@ class _WidgetSLiderState extends State<WidgetSLider> {
           child: Container(
             width: 220,
             height: 56,
-            color: Color(0XFF0296E5),
+            color: const Color(0XFF0296E5),
             child: Center(
               child: Text("OK",
-                  style: GoogleFonts.montserrat().copyWith(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w600,
-                      color: Colors.white)),
+                  style: GoogleFonts.montserrat().copyWith(fontSize: 16, fontWeight: FontWeight.w600, color: Colors.white)),
             ),
           ),
         )
