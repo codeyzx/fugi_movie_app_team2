@@ -35,7 +35,8 @@ class DioClient {
       case RequestType.get:
         {
           Options options = Options(headers: header);
-          result = await _dio.get(url, queryParameters: queryParameters, options: options);
+          result = await _dio.get(url,
+              queryParameters: queryParameters, options: options);
           break;
         }
       case RequestType.post:
@@ -47,7 +48,8 @@ class DioClient {
       case RequestType.delete:
         {
           Options options = Options(headers: header);
-          result = await _dio.delete(url, data: queryParameters, options: options);
+          result =
+              await _dio.delete(url, data: queryParameters, options: options);
           break;
         }
       case RequestType.put:
