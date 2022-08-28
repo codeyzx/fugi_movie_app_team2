@@ -7,16 +7,18 @@ import 'package:fugi_movie_app_team2/src/common_config/app_theme.dart';
 import 'package:fugi_movie_app_team2/src/core/client/dio_client.dart';
 import 'package:fugi_movie_app_team2/src/features/home/domain/movie_detail.dart';
 import 'package:fugi_movie_app_team2/src/features/home/domain/trending.dart';
+import 'package:fugi_movie_app_team2/src/features/movie_detail/presentation/movie_watchlist_controller.dart';
 import 'package:fugi_movie_app_team2/src/features/movie_detail/presentation/widgets/about_movie.dart';
 import 'package:fugi_movie_app_team2/src/features/movie_detail/presentation/widgets/cast.dart';
 import 'package:fugi_movie_app_team2/src/features/movie_detail/presentation/widgets/movie_status.dart';
 import 'package:fugi_movie_app_team2/src/features/movie_detail/presentation/widgets/reviews.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:intl/intl.dart';
 import 'package:logger/logger.dart';
 import 'package:palette_generator/palette_generator.dart';
 
-class MovieDetailScreen extends StatefulWidget {
+class MovieDetailScreen extends StatefulHookConsumerWidget {
   final Map<String, dynamic>? idAndObject;
   final Trending? trending;
   const MovieDetailScreen({
@@ -27,10 +29,10 @@ class MovieDetailScreen extends StatefulWidget {
   static const routeName = 'movie-detail-screen';
 
   @override
-  State<MovieDetailScreen> createState() => _MovieDetailScreenState();
+  _MovieDetailScreenState createState() => _MovieDetailScreenState();
 }
 
-class _MovieDetailScreenState extends State<MovieDetailScreen> {
+class _MovieDetailScreenState extends ConsumerState<MovieDetailScreen> {
   MovieDetail detailMovie = const MovieDetail();
   bool isLoading = false;
   final List<PaletteColor> _colors = [];
@@ -75,7 +77,13 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
       appBar: AppBar(
         title: const Text('Detail'),
         actions: [
-          IconButton(onPressed: () {}, icon: const Icon(Icons.bookmark)),
+          IconButton(
+            onPressed: () {
+              ref.read(watchlistControllerProvider.notifier).addToWatchlist(detailMovie);
+              setState(() {});
+            },
+            icon: getStatusWitch(detailMovie),
+          ),
         ],
       ),
       body: isLoading
@@ -114,7 +122,7 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
                               color: AppTheme.secondaryColor,
                               image: DecorationImage(
                                 image: NetworkImage(
-                                  'https://image.tmdb.org/t/p/original/${detailMovie.backdropPath}',
+                                  'https://image.tmdb.org/t/p/w780/${detailMovie.backdropPath}',
                                 ),
                                 fit: BoxFit.cover,
                               ),
@@ -315,6 +323,21 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
     } catch (e) {
       Logger().e(e);
     }
+  }
+
+  Widget getStatusWitch(MovieDetail detailMovie) {
+    var status = ref.read(watchlistControllerProvider.notifier).isWishlist(detailMovie);
+    return status
+        ? Icon(
+            Icons.bookmark_added,
+            color: Colors.orange,
+            size: 24.0.sp,
+          )
+        : Icon(
+            Icons.bookmark_border,
+            color: Colors.orange,
+            size: 24.0.sp,
+          );
   }
 }
 

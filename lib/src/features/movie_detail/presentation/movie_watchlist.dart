@@ -1,19 +1,30 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:fugi_movie_app_team2/src/features/movie_detail/presentation/movie_watchlist_controller.dart';
+import 'package:go_router/go_router.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:intl/intl.dart';
 import 'package:keyboard_dismisser/keyboard_dismisser.dart';
 
-class WatchlistScreen extends StatefulWidget {
+import '../../search/presentation/widgets/movie_item_widget.dart';
+import 'movie_detail_screen.dart';
+
+class WatchlistScreen extends StatefulHookConsumerWidget {
   const WatchlistScreen({Key? key}) : super(key: key);
-  static const routeName = '/watchlist-screen';
+  static const routeName = 'watchlist-screen';
 
   @override
-  State<WatchlistScreen> createState() => _WatchlistScreenState();
+  _WatchlistScreenState createState() => _WatchlistScreenState();
 }
 
-class _WatchlistScreenState extends State<WatchlistScreen> {
+class _WatchlistScreenState extends ConsumerState<WatchlistScreen> {
   var selectedIndex = 0;
 
   @override
   Widget build(BuildContext context) {
+    final watchlistState = ref.watch(watchlistControllerProvider);
+
     return SafeArea(
       top: false,
       child: KeyboardDismisser(
@@ -30,15 +41,42 @@ class _WatchlistScreenState extends State<WatchlistScreen> {
               onPressed: () => Navigator.pop(context),
             ),
           ),
-          body: ListView(
-            padding: const EdgeInsets.only(top: 50.0, left: 30, right: 30),
-            children: const [
-              WatchListItem(),
-              WatchListItem(),
-              WatchListItem(),
-              WatchListItem(),
-            ],
-          ),
+          body: watchlistState != null
+              ? ListView.builder(
+                  itemCount: watchlistState.length,
+                  itemBuilder: (context, index) {
+                    final watchlist = watchlistState[index];
+                    return Stack(
+                      alignment: Alignment.topRight,
+                      children: [
+                        MovieItemWidget(
+                          imagePath: watchlist.posterPath,
+                          title: watchlist.title,
+                          rating: watchlist.voteAverage.toString(),
+                          date: DateFormat('dd MMM yyyy').format(DateTime.parse(watchlist.releaseDate.toString())),
+                        ),
+                        IconButton(
+                          color: Colors.red.shade800,
+                          onPressed: () {
+                            ref.read(watchlistControllerProvider.notifier).removeFromWatchlist(watchlist);
+                            setState(() {});
+                          },
+                          icon: Icon(FontAwesomeIcons.circleXmark),
+                        )
+                      ],
+                    );
+                  },
+                  padding: EdgeInsets.only(top: 20.0.sp, left: 20.0.sp),
+                  // children: const [
+                  //   WatchListItem(),
+                  //   WatchListItem(),
+                  //   WatchListItem(),
+                  //   WatchListItem(),
+                  // ],
+                )
+              : const Center(
+                  child: CircularProgressIndicator(),
+                ),
         ),
       ),
     );
