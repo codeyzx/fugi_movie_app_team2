@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:fugi_movie_app_team2/src/common_config/app_theme.dart';
 import 'package:fugi_movie_app_team2/src/core/client/dio_client.dart';
 import 'package:fugi_movie_app_team2/src/features/home/domain/movie_detail.dart';
@@ -57,7 +58,9 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Detail'),
-        actions: [IconButton(onPressed: () {}, icon: const Icon(Icons.bookmark))],
+        actions: [
+          IconButton(onPressed: () {}, icon: const Icon(Icons.bookmark)),
+        ],
       ),
       body: isLoading
           ? const Center(
@@ -73,10 +76,9 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
                       Stack(
                         children: [
                           Container(
-                            // height: MediaQuery.of(context).size.height * 0.235.sp,
                             width: MediaQuery.of(context).size.width,
                             margin: EdgeInsets.only(
-                              bottom: MediaQuery.of(context).size.height * .1.sp,
+                              bottom: MediaQuery.of(context).size.height * .09.sp,
                             ),
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.only(
@@ -96,7 +98,7 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
                               color: AppTheme.secondaryColor,
                               image: DecorationImage(
                                 image: NetworkImage(
-                                  'https://image.tmdb.org/t/p/w500/${detailMovie.backdropPath}',
+                                  'https://image.tmdb.org/t/p/original/${detailMovie.backdropPath}',
                                 ),
                                 fit: BoxFit.cover,
                               ),
@@ -168,9 +170,8 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
                         ],
                       ),
                       Positioned(
-                        top: MediaQuery.of(context).size.height * 0.200.sp,
-                        left: 0.sp,
-                        right: 0.sp,
+                        left: 0.0.sp,
+                        right: 0.0.sp,
                         child: SizedBox(
                           width: double.infinity,
                           child: Padding(
@@ -182,6 +183,7 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
                                 Container(
+                                  width: 75.0.sp,
                                   decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(10.0.sp),
                                     boxShadow: [
@@ -206,7 +208,7 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
                                 Flexible(
                                   child: Column(
                                     children: [
-                                      SizedBox(height: Platform.isIOS ? 30.0.sp : 60.sp),
+                                      SizedBox(height: Platform.isIOS ? 30.0.sp : 50.0.sp),
                                       Text(
                                         '${detailMovie.title}',
                                         style: TextStyle(
@@ -227,23 +229,24 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
                   ),
                 ),
                 Expanded(
-                    flex: 0,
-                    child: Padding(
-                      padding: EdgeInsets.only(top: 10.0.sp),
-                      child: SizedBox(
-                        width: MediaQuery.of(context).size.width * 0.6.sp,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            MovieStatus(
-                                icon: Icons.calendar_month,
-                                text: DateFormat('dd MMM yyyy').format(DateTime.parse(detailMovie.releaseDate.toString()))),
-                            MovieStatus(icon: Icons.watch_later_outlined, text: '${detailMovie.runtime} min'),
-                            MovieStatus(icon: Icons.airplane_ticket_rounded, text: '${detailMovie.genres?[0].name}'),
-                          ],
-                        ),
+                  flex: 0,
+                  child: Padding(
+                    padding: EdgeInsets.only(top: 10.0.sp),
+                    child: SizedBox(
+                      width: MediaQuery.of(context).size.width * 0.6.sp,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          MovieStatus(
+                              icon: FontAwesomeIcons.calendarWeek,
+                              text: DateFormat('dd MMM yyyy').format(DateTime.parse(detailMovie.releaseDate.toString()))),
+                          MovieStatus(icon: FontAwesomeIcons.clock, text: '${detailMovie.runtime} min'),
+                          MovieStatus(icon: FontAwesomeIcons.ticket, text: '${detailMovie.genres?[0].name}'),
+                        ],
                       ),
-                    )),
+                    ),
+                  ),
+                ),
                 Expanded(
                   flex: 2,
                   child: DefaultTabController(

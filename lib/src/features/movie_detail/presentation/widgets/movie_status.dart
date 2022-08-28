@@ -15,14 +15,14 @@ class MovieStatus extends StatelessWidget {
         Icon(
           icon ?? Icons.abc,
           color: Palette.team2color[200],
-          size: 22.0.sp,
+          size: 16.0.sp,
         ),
-        SizedBox(width: 10.0.sp),
+        SizedBox(height: 5.0.sp),
         Text(
           text ?? 'asdsa',
           style: TextStyle(
             color: Palette.team2color[200],
-            fontSize: 12.0.sp,
+            fontSize: 10.0.sp,
           ),
         ),
       ],

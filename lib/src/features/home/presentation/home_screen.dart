@@ -109,7 +109,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                         controller: searchController,
                         style: const TextStyle(color: AppTheme.textBlueColor),
                         decoration: InputDecoration(
-                          contentPadding: EdgeInsets.all(20.0.sp),
+                          contentPadding: EdgeInsets.all(15.0.sp),
                           suffixIcon: InkWell(
                             onTap: () => {
                               ref.read(searchControllerProvider.notifier).search(
@@ -132,7 +132,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                                     : Icon(
                                         Icons.search,
                                         color: AppTheme.thirdColor,
-                                        size: 32.0.sp,
+                                        size: 28.0.sp,
                                       ),
                           ),
                           hintText: 'Search',
