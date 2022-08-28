@@ -55,6 +55,22 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
 
   @override
   Widget build(BuildContext context) {
+    TabBar myTabBar = TabBar(
+      indicator: const BoxDecoration(
+        color: AppTheme.secondaryColor,
+      ),
+      tabs: const [
+        Tab(child: Text('Reviews')),
+        Tab(child: Text('About Movie')),
+        Tab(child: Text('Production')),
+      ],
+      indicatorColor: AppTheme.textColor,
+      unselectedLabelColor: Colors.white,
+      labelColor: Colors.white,
+      labelStyle: TextStyle(fontSize: 10.0.sp),
+      unselectedLabelStyle: TextStyle(fontSize: 11.0.sp),
+    );
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('Detail'),
@@ -252,13 +268,14 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
                   child: DefaultTabController(
                     length: 3,
                     child: Scaffold(
-                      appBar: const TabBar(
-                        tabs: [
-                          Tab(child: Text('Reviews')),
-                          Tab(child: Text('About Movie')),
-                          Tab(child: Text('Production')),
-                        ],
-                      ),
+                      appBar: myTabBar,
+                      // appBar: const TabBar(
+                      //   tabs: [
+                      //     Tab(child: Text('Reviews')),
+                      //     Tab(child: Text('About Movie')),
+                      //     Tab(child: Text('Production')),
+                      //   ],
+                      // ),
                       body: TabBarView(
                         children: [
                           AboutMovie(

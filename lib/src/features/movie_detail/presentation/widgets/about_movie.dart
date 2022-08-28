@@ -12,21 +12,21 @@ class AboutMovie extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-        margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+    return SingleChildScrollView(
+      child: Padding(
+        padding: EdgeInsets.symmetric(horizontal: 20.0.sp, vertical: 10.0.sp),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
               movieTitle ?? '',
-              style: TextStyle(
-                fontSize: 18.0.sp,
-                fontWeight: FontWeight.bold,
-              ),
+              style: TextStyle(fontSize: 18.0.sp, fontWeight: FontWeight.bold),
             ),
             SizedBox(height: 10.0.sp),
             Text(content),
           ],
-        ));
+        ),
+      ),
+    );
   }
 }

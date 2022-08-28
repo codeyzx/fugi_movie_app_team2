@@ -104,7 +104,9 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                           setState(() {});
                         },
                         onSubmitted: (value) {
-                          ref.read(searchControllerProvider.notifier).search(searchController.text.toLowerCase());
+                          ref.read(searchControllerProvider.notifier).search(
+                                searchController.text.toLowerCase(),
+                              );
                         },
                         controller: searchController,
                         style: const TextStyle(color: AppTheme.textBlueColor),
@@ -156,7 +158,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                     child: isLoading
                         ? const Center(child: CircularProgressIndicator.adaptive())
                         : ListView.builder(
-                            padding: EdgeInsets.symmetric(vertical: 10.5.sp),
+                            padding: EdgeInsets.symmetric(vertical: 16.5.sp),
                             scrollDirection: Axis.horizontal,
                             itemCount: trendings.length,
                             itemBuilder: (context, index) {

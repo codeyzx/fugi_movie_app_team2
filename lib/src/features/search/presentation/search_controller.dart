@@ -30,8 +30,7 @@ class SearchMovieController extends StateNotifier<AsyncValue<List<Map<String, dy
   }
 }
 
-final searchControllerProvider =
-    StateNotifierProvider.autoDispose<SearchMovieController, AsyncValue<List<Map<String, dynamic>>?>>(
+final searchControllerProvider = StateNotifierProvider<SearchMovieController, AsyncValue<List<Map<String, dynamic>>?>>(
   (ref) {
     return SearchMovieController();
   },
