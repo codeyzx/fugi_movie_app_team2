@@ -44,10 +44,22 @@ class MyApp extends StatelessWidget {
             ),
             scaffoldBackgroundColor: Palette.team2color,
             textTheme: TextTheme(
-              headline6: TextStyle(fontSize: ScreenUtil().setSp(18), fontWeight: FontWeight.w600, color: Colors.red),
-              bodyText1: TextStyle(fontSize: ScreenUtil().setSp(14), fontWeight: FontWeight.w600, color: Colors.yellow),
-              bodyText2: TextStyle(fontSize: ScreenUtil().setSp(14), fontWeight: FontWeight.w600, color: AppTheme.textColor),
-              button: TextStyle(fontSize: ScreenUtil().setSp(14), fontWeight: FontWeight.w600, color: Colors.blue),
+              headline6: TextStyle(
+                  fontSize: ScreenUtil().setSp(18),
+                  fontWeight: FontWeight.w600,
+                  color: Colors.red),
+              bodyText1: TextStyle(
+                  fontSize: ScreenUtil().setSp(14),
+                  fontWeight: FontWeight.w600,
+                  color: Colors.yellow),
+              bodyText2: TextStyle(
+                  fontSize: ScreenUtil().setSp(14),
+                  fontWeight: FontWeight.w600,
+                  color: AppTheme.textColor),
+              button: TextStyle(
+                  fontSize: ScreenUtil().setSp(14),
+                  fontWeight: FontWeight.w600,
+                  color: Colors.blue),
             ),
             bottomNavigationBarTheme: const BottomNavigationBarThemeData(
               elevation: 1,
@@ -66,3 +78,5 @@ class MyApp extends StatelessWidget {
     );
   }
 }
+
+//bima push 28(55)
