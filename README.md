@@ -7,16 +7,16 @@ FUGI (Flutter User Group Indonesia 🇮🇩)has challenge to create mini project
 ### Team Members:
 
 1.  Yahya (Team Leader)
-    ![enter image description here](https://res.cloudinary.com/flutter-user-group-indonesia/image/upload/v1661744289/thumbnail_avatar_yahya_16ad6d8033.png)
 2.  Faqih (Team Co-Leader)
-    ![enter image description here](https://res.cloudinary.com/flutter-user-group-indonesia/image/upload/v1661744289/thumbnail_avatar_faqih_db2e57ce41.png)
 3.  Rasyid (Team Member)
-    ![enter image description here](https://res.cloudinary.com/flutter-user-group-indonesia/image/upload/v1661744290/thumbnail_avatar_rasyid_aa43f97f75.png)
 4.  Bima (Team Member)
 5.  Aswin (Team Member)
 
-- Mentor: **Hendra Kurniawan**
-  ![enter image description here](https://res.cloudinary.com/flutter-user-group-indonesia/image/upload/v1661658941/thumbnail_anonymus_ec9258a6cd.png)
+Mentor
+
+> Kurniawan Hendra
+
+![enter image description here](https://res.cloudinary.com/flutter-user-group-indonesia/image/upload/v1661658941/thumbnail_anonymus_ec9258a6cd.png)
 
 ## Project Description
 
