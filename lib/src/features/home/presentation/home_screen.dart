@@ -301,7 +301,11 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                                   itemBuilder: (context, index) {
                                     return InkWell(
                                       onTap: () {
-                                        context.pushNamed(movieDetailScreenTopRated.routeName, extra: toprateds[index]);
+                                        // context.pushNamed(movieDetailScreenTopRated.routeName, extra: toprateds[index]);
+                                        context.pushNamed(MovieDetailScreen.routeName, extra: {
+                                          "id": toprateds[index].id,
+                                          'object': toprateds[index],
+                                        });
                                       },
                                       child: Stack(
                                         alignment: Alignment.bottomRight,
@@ -340,7 +344,11 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                                   itemBuilder: (context, index) {
                                     return InkWell(
                                       onTap: () {
-                                        context.pushNamed(movieDetailScreenPopular.routeName, extra: populars[index]);
+                                        // context.pushNamed(movieDetailScreenPopular.routeName, extra: populars[index]);
+                                        context.pushNamed(MovieDetailScreen.routeName, extra: {
+                                          "id": populars[index].id,
+                                          'object': populars[index],
+                                        });
                                       },
                                       child: Stack(
                                         alignment: Alignment.bottomRight,
@@ -436,6 +444,5 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     setState(() {});
   }
 }
-
 
 // test bima merge

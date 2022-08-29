@@ -52,16 +52,34 @@ Template movie apps we are used: https://www.figma.com/file/SDUDaD3iIAKgXuccRUbp
 2.  `cd` to `fugi_movie_app_team2` and type command `code .` to open project in Vs Code
 3.  Make sure the environment is same with as description (flutter version)
 4.  Run `flutter pub get`
-5.  Run "Run Without Debugging" on VS Code ![enter image description here](https://res.cloudinary.com/flutter-user-group-indonesia/image/upload/v1661745394/thumbnail_run_without_debuggin_b2eae2ae86.png)
+5.  Run "Run Without Debugging" on VS Code
+    > Run Without Debugging
+    > ![enter image description here](https://res.cloudinary.com/flutter-user-group-indonesia/image/upload/v1661745394/thumbnail_run_without_debuggin_b2eae2ae86.png)
 
 ## Screen Shots
 
 1.  Splash Screen
 2.  Home Screen
+
+![enter image description here](https://res.cloudinary.com/flutter-user-group-indonesia/image/upload/v1661750019/small_home_screen_30797a8680.png)
+
 3.  Detail Movie Screen
+
+![enter image description here](https://res.cloudinary.com/flutter-user-group-indonesia/image/upload/v1661750018/small_detail_screen_65db22f2c4.png)
+
 4.  Search Results Screen
+
+![enter image description here](https://res.cloudinary.com/flutter-user-group-indonesia/image/upload/v1661750017/small_search_results_screen_561507f639.png)
+
 5.  Profile Screen
-6.  Wish List
+
+![enter image description here](https://res.cloudinary.com/flutter-user-group-indonesia/image/upload/v1661750014/small_profile_screen_58951d172e.png)
+
+6. Wish List
+
+![enter image description here](https://res.cloudinary.com/flutter-user-group-indonesia/image/upload/v1661750016/small_wish_list_screen_13fd10114b.png)
+
+7. asdf
 
 ## Demo Project
 
