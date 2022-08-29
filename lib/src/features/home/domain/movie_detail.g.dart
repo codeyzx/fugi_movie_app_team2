@@ -1,19 +1,20 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-// ignore_for_file: non_constant_identifier_names
-
 part of 'movie_detail.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_MovieDetail _$$_MovieDetailFromJson(Map<String, dynamic> json) => _$_MovieDetail(
+_$_MovieDetail _$$_MovieDetailFromJson(Map<String, dynamic> json) =>
+    _$_MovieDetail(
       adult: json['adult'] as bool?,
       backdropPath: json['backdrop_path'],
       belongsToCollection: json['belongs_to_collection'],
       budget: json['budget'] as int?,
-      genres: (json['genres'] as List<dynamic>?)?.map((e) => Genre.fromJson(e as Map<String, dynamic>)).toList(),
+      genres: (json['genres'] as List<dynamic>?)
+          ?.map((e) => Genre.fromJson(e as Map<String, dynamic>))
+          .toList(),
       homepage: json['homepage'] as String?,
       id: json['id'] as int?,
       imdbId: json['imdb_id'],
@@ -26,7 +27,7 @@ _$_MovieDetail _$$_MovieDetailFromJson(Map<String, dynamic> json) => _$_MovieDet
           ?.map((e) => ProductionCompany.fromJson(e as Map<String, dynamic>))
           .toList(),
       productionCountries: json['production_countries'] as List<dynamic>?,
-      releaseDate: json['release_date'] == null ? null : DateTime.parse(json['release_date'] as String),
+      releaseDate: json['release_date'],
       revenue: json['revenue'] as int?,
       runtime: json['runtime'] as int?,
       spokenLanguages: json['spoken_languages'] as List<dynamic>?,
@@ -38,7 +39,8 @@ _$_MovieDetail _$$_MovieDetailFromJson(Map<String, dynamic> json) => _$_MovieDet
       voteCount: json['vote_count'] as int?,
     );
 
-Map<String, dynamic> _$$_MovieDetailToJson(_$_MovieDetail instance) => <String, dynamic>{
+Map<String, dynamic> _$$_MovieDetailToJson(_$_MovieDetail instance) =>
+    <String, dynamic>{
       'adult': instance.adult,
       'backdrop_path': instance.backdropPath,
       'belongs_to_collection': instance.belongsToCollection,
@@ -54,7 +56,7 @@ Map<String, dynamic> _$$_MovieDetailToJson(_$_MovieDetail instance) => <String, 
       'poster_path': instance.posterPath,
       'production_companies': instance.productionCompanies,
       'production_countries': instance.productionCountries,
-      'release_date': instance.releaseDate?.toIso8601String(),
+      'release_date': instance.releaseDate,
       'revenue': instance.revenue,
       'runtime': instance.runtime,
       'spoken_languages': instance.spokenLanguages,
@@ -76,14 +78,17 @@ Map<String, dynamic> _$$_GenreToJson(_$_Genre instance) => <String, dynamic>{
       'name': instance.name,
     };
 
-_$_ProductionCompany _$$_ProductionCompanyFromJson(Map<String, dynamic> json) => _$_ProductionCompany(
+_$_ProductionCompany _$$_ProductionCompanyFromJson(Map<String, dynamic> json) =>
+    _$_ProductionCompany(
       id: json['idd'] as int?,
       logoPath: json['logo_path'],
       name: json['name'] as String?,
       originCountry: json['origin_country'] as String?,
     );
 
-Map<String, dynamic> _$$_ProductionCompanyToJson(_$_ProductionCompany instance) => <String, dynamic>{
+Map<String, dynamic> _$$_ProductionCompanyToJson(
+        _$_ProductionCompany instance) =>
+    <String, dynamic>{
       'idd': instance.id,
       'logo_path': instance.logoPath,
       'name': instance.name,

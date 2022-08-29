@@ -5,6 +5,7 @@ import 'package:fugi_movie_app_team2/src/common_config/app_theme.dart';
 import 'package:fugi_movie_app_team2/src/features/home/presentation/home_screen.dart';
 import 'package:fugi_movie_app_team2/src/features/movie_detail/presentation/movie_watchlist_controller.dart';
 import 'package:fugi_movie_app_team2/src/features/profile/presentation/profile_screen.dart';
+import 'package:fugi_movie_app_team2/src/features/search/presentation/search_page.dart';
 import 'package:fugi_movie_app_team2/src/features/search/presentation/search_screen.dart';
 
 import '../../movie_detail/presentation/movie_watchlist.dart';
@@ -54,7 +55,7 @@ class BotNavBarScreenState extends State<BotNavBarScreen> {
                     currentScreen = const HomeScreen();
                     break;
                   case 1:
-                    currentScreen = const SearchScreen();
+                    currentScreen = const SearchPage();
                     break;
                   case 2:
                     currentScreen = const WatchlistScreen();

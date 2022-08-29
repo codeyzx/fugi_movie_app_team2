@@ -1,14 +1,13 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-// ignore_for_file: non_constant_identifier_names
-
 part of 'latest_movie.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_LatestMovie _$$_LatestMovieFromJson(Map<String, dynamic> json) => _$_LatestMovie(
+_$_LatestMovie _$$_LatestMovieFromJson(Map<String, dynamic> json) =>
+    _$_LatestMovie(
       adult: json['adult'] as bool?,
       backdropPath: json['backdrop_path'],
       belongsToCollection: json['belongs_to_collection'],
@@ -36,7 +35,8 @@ _$_LatestMovie _$$_LatestMovieFromJson(Map<String, dynamic> json) => _$_LatestMo
       voteCount: json['vote_count'] as int?,
     );
 
-Map<String, dynamic> _$$_LatestMovieToJson(_$_LatestMovie instance) => <String, dynamic>{
+Map<String, dynamic> _$$_LatestMovieToJson(_$_LatestMovie instance) =>
+    <String, dynamic>{
       'adult': instance.adult,
       'backdrop_path': instance.backdropPath,
       'belongs_to_collection': instance.belongsToCollection,

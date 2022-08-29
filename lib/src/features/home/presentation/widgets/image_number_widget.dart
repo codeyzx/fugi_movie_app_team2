@@ -70,7 +70,7 @@ class _ImageNumberWidgetState extends State<ImageNumberWidget> {
             ),
           ),
           Positioned(
-            top: Platform.isIOS ? 125.0.sp : 87.5.sp,
+            top: Platform.isIOS ? 115.0.sp : 87.5.sp,
             left: -2.5.sp,
             child: Stack(
               children: [

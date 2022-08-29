@@ -52,7 +52,7 @@ mixin _$MovieDetail {
   @JsonKey(name: 'production_countries')
   List<dynamic>? get productionCountries => throw _privateConstructorUsedError;
   @JsonKey(name: 'release_date')
-  DateTime? get releaseDate => throw _privateConstructorUsedError;
+  dynamic get releaseDate => throw _privateConstructorUsedError;
   @JsonKey(name: 'revenue')
   int? get revenue => throw _privateConstructorUsedError;
   @JsonKey(name: 'runtime')
@@ -115,7 +115,7 @@ abstract class $MovieDetailCopyWith<$Res> {
       @JsonKey(name: 'production_countries')
           List<dynamic>? productionCountries,
       @JsonKey(name: 'release_date')
-          DateTime? releaseDate,
+          dynamic releaseDate,
       @JsonKey(name: 'revenue')
           int? revenue,
       @JsonKey(name: 'runtime')
@@ -236,7 +236,7 @@ class _$MovieDetailCopyWithImpl<$Res> implements $MovieDetailCopyWith<$Res> {
       releaseDate: releaseDate == freezed
           ? _value.releaseDate
           : releaseDate // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
+              as dynamic,
       revenue: revenue == freezed
           ? _value.revenue
           : revenue // ignore: cast_nullable_to_non_nullable
@@ -316,7 +316,7 @@ abstract class _$$_MovieDetailCopyWith<$Res>
       @JsonKey(name: 'production_countries')
           List<dynamic>? productionCountries,
       @JsonKey(name: 'release_date')
-          DateTime? releaseDate,
+          dynamic releaseDate,
       @JsonKey(name: 'revenue')
           int? revenue,
       @JsonKey(name: 'runtime')
@@ -439,7 +439,7 @@ class __$$_MovieDetailCopyWithImpl<$Res> extends _$MovieDetailCopyWithImpl<$Res>
       releaseDate: releaseDate == freezed
           ? _value.releaseDate
           : releaseDate // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
+              as dynamic,
       revenue: revenue == freezed
           ? _value.revenue
           : revenue // ignore: cast_nullable_to_non_nullable
@@ -610,7 +610,7 @@ class _$_MovieDetail implements _MovieDetail {
 
   @override
   @JsonKey(name: 'release_date')
-  final DateTime? releaseDate;
+  final dynamic releaseDate;
   @override
   @JsonKey(name: 'revenue')
   final int? revenue;
@@ -771,7 +771,7 @@ abstract class _MovieDetail implements MovieDetail {
       @JsonKey(name: 'production_countries')
           final List<dynamic>? productionCountries,
       @JsonKey(name: 'release_date')
-          final DateTime? releaseDate,
+          final dynamic releaseDate,
       @JsonKey(name: 'revenue')
           final int? revenue,
       @JsonKey(name: 'runtime')
@@ -841,7 +841,7 @@ abstract class _MovieDetail implements MovieDetail {
   List<dynamic>? get productionCountries;
   @override
   @JsonKey(name: 'release_date')
-  DateTime? get releaseDate;
+  dynamic get releaseDate;
   @override
   @JsonKey(name: 'revenue')
   int? get revenue;

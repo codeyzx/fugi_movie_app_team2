@@ -40,9 +40,11 @@ class MovieItemWidget extends StatelessWidget {
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(5.5.sp),
                 image: DecorationImage(
-                    image: Image.network(
-                      'https://image.tmdb.org/t/p/w780/$imagePath',
-                    ).image,
+                    image: imagePath != null
+                        ? Image.network(
+                            'https://image.tmdb.org/t/p/w780/$imagePath',
+                          ).image
+                        : Image.asset('assets/icons/no-image.png').image,
                     fit: BoxFit.cover),
               ),
             ),

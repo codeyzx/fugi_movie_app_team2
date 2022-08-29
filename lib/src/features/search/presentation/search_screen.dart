@@ -34,58 +34,59 @@ class _SearchScreenState extends ConsumerState<SearchScreen> {
     return SafeArea(
       top: false,
       child: Scaffold(
-          appBar: AppBar(
-            title: const Text('Search Results'),
-            actions: [
-              IconButton(onPressed: () {}, icon: const Icon(Icons.info_outline)),
-            ],
-          ),
-          body: searchResultState.when(
-            data: (datas) {
-              return Column(
-                children: [
-                  Expanded(
-                      flex: 0,
-                      child: Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 18.0.sp),
-                        child: Row(
-                          children: [
-                            Text('Finded ${datas?.length} results for keyword'),
-                            SizedBox(width: 5.0.sp),
-                            Text(
-                              '"$keywordSearchState"',
-                              style: const TextStyle(
-                                fontWeight: FontWeight.normal,
-                                fontStyle: FontStyle.italic,
-                              ),
+        appBar: AppBar(
+          title: const Text('Search Results'),
+          actions: [
+            IconButton(onPressed: () {}, icon: const Icon(Icons.info_outline)),
+          ],
+        ),
+        body: searchResultState.when(
+          data: (datas) {
+            return Column(
+              children: [
+                Expanded(
+                    flex: 0,
+                    child: Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 18.0.sp),
+                      child: Row(
+                        children: [
+                          Text('Finded ${datas?.length} results for keyword'),
+                          SizedBox(width: 5.0.sp),
+                          Text(
+                            '"$keywordSearchState"',
+                            style: const TextStyle(
+                              fontWeight: FontWeight.normal,
+                              fontStyle: FontStyle.italic,
                             ),
-                          ],
-                        ),
-                      )),
-                  Expanded(
-                    child: ListView.builder(
-                      padding: EdgeInsets.symmetric(vertical: 15.0.sp, horizontal: 15.0.sp),
-                      itemCount: datas?.length,
-                      itemBuilder: (context, index) {
-                        var dataku = datas![index];
-                        return MovieItemWidget(
-                          imagePath: dataku['poster_path'],
-                          title: dataku['title'],
-                          rating: dataku['vote_average'].toString(),
-                          date: dataku['release_date'],
-                          movie: dataku,
-                        );
-                      },
-                    ),
+                          ),
+                        ],
+                      ),
+                    )),
+                Expanded(
+                  child: ListView.builder(
+                    padding: EdgeInsets.symmetric(vertical: 15.0.sp, horizontal: 15.0.sp),
+                    itemCount: datas?.length,
+                    itemBuilder: (context, index) {
+                      var dataku = datas![index];
+                      return MovieItemWidget(
+                        imagePath: dataku['poster_path'],
+                        title: dataku['title'],
+                        rating: dataku['vote_average'].toString(),
+                        date: dataku['release_date'],
+                        movie: dataku,
+                      );
+                    },
                   ),
-                ],
-              );
-            },
-            error: (e, st) => const Text('Error'),
-            loading: () => const Center(
-              child: CircularProgressIndicator(),
-            ),
-          )),
+                ),
+              ],
+            );
+          },
+          error: (e, st) => const Text('Error'),
+          loading: () => const Center(
+            child: CircularProgressIndicator(),
+          ),
+        ),
+      ),
     );
   }
 

@@ -278,8 +278,8 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                                               ),
                                             ),
                                           ),
-                                          Text('${upcomings[index].id}',
-                                              style: TextStyle(color: Colors.white, fontSize: 20.0.sp)),
+                                          // Text('${upcomings[index].id}',
+                                          //     style: TextStyle(color: Colors.white, fontSize: 20.0.sp)),
                                         ],
                                       ),
                                     );
@@ -321,8 +321,8 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                                               ),
                                             ),
                                           ),
-                                          Text('${toprateds[index].id}',
-                                              style: TextStyle(color: Colors.white, fontSize: 20.0.sp)),
+                                          // Text('${toprateds[index].id}',
+                                          //     style: TextStyle(color: Colors.white, fontSize: 20.0.sp)),
                                         ],
                                       ),
                                     );
@@ -364,8 +364,8 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                                               ),
                                             ),
                                           ),
-                                          Text('${populars[index].id}',
-                                              style: TextStyle(color: Colors.white, fontSize: 20.0.sp)),
+                                          // Text('${populars[index].id}',
+                                          //     style: TextStyle(color: Colors.white, fontSize: 20.0.sp)),
                                         ],
                                       ),
                                     );

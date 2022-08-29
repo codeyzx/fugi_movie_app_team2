@@ -4,9 +4,9 @@ import 'package:logger/logger.dart';
 import '../../../core/client/dio_client.dart';
 
 class SearchMovieController extends StateNotifier<AsyncValue<List<Map<String, dynamic>>?>> {
-  SearchMovieController() : super(const AsyncValue.loading());
+  SearchMovieController() : super(const AsyncValue.data(null));
 
-  Future<void> search(String query) async {
+  Future<void> search(String? query) async {
     state = const AsyncValue.loading();
     try {
       var resp = await DioClient().apiCall(
@@ -30,7 +30,8 @@ class SearchMovieController extends StateNotifier<AsyncValue<List<Map<String, dy
   }
 }
 
-final searchControllerProvider = StateNotifierProvider<SearchMovieController, AsyncValue<List<Map<String, dynamic>>?>>(
+final searchControllerProvider =
+    StateNotifierProvider.autoDispose<SearchMovieController, AsyncValue<List<Map<String, dynamic>>?>>(
   (ref) {
     return SearchMovieController();
   },

@@ -172,7 +172,11 @@ class _movieDetailScreenTopRatedState extends State<movieDetailScreenTopRated> {
                               icon: FontAwesomeIcons.calendarWeek,
                               text: DateFormat('dd MMM yyyy').format(DateTime.parse(detailMovie.releaseDate.toString()))),
                           MovieStatus(icon: FontAwesomeIcons.clock, text: '${detailMovie.runtime} min'),
-                          MovieStatus(icon: FontAwesomeIcons.ticket, text: '${detailMovie.genres?[0].name}'),
+                          MovieStatus(
+                              icon: FontAwesomeIcons.ticket,
+                              text: detailMovie.genres!.isNotEmpty ? '${detailMovie.genres?[0].name}' : '-'),
+                          // MovieStatus(
+                          //     icon: FontAwesomeIcons.ticket, text: '${detailMovie.genres ?? detailMovie.genres?[0].name}'),
                         ]),
                       )
                     ],

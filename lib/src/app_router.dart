@@ -12,6 +12,7 @@ import 'package:fugi_movie_app_team2/src/features/search/presentation/search_scr
 import 'package:go_router/go_router.dart';
 
 import 'features/home/presentation/home_screen.dart';
+import 'features/search/presentation/search_page.dart';
 import 'features/starter/presentation/splash_screen.dart';
 
 final goRouter = GoRouter(
@@ -116,5 +117,13 @@ final goRouter = GoRouter(
         child: const WatchlistScreen(),
       ),
     ),
+    GoRoute(
+      path: '/search-page',
+      name: SearchPage.routeName,
+      pageBuilder: (context, state) => NoTransitionPage<void>(
+        key: state.pageKey,
+        child: const SearchPage(),
+      ),
+    )
   ],
 );
