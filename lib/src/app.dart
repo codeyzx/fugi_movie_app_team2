@@ -16,12 +16,12 @@ class MyApp extends StatelessWidget {
         return MaterialApp.router(
           title: 'Movie Apps 2nd Team',
           theme: ThemeData(
+            canvasColor: Palette.team2color,
             // tabBarTheme: TabBarTheme(
             //   labelColor: AppTheme.thirdColor,
             //   unselectedLabelColor: Colors.red,
             //   indicatorSize: TabBarIndicatorSize.label,
             // ),
-
             progressIndicatorTheme: const ProgressIndicatorThemeData(
               circularTrackColor: AppTheme.thirdColor,
               color: Colors.orange,
