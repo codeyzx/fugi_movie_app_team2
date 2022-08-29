@@ -4,17 +4,19 @@ FUGI (Flutter User Group Indonesia 🇮🇩)has challenge to create mini project
 
 ## Team Name: The 2nd Team's Squad
 
-<p>Team Members:</p>
-<ol>
-<li>Yahya (Team Leader)</li>
-<li>Faqih (Team Co-Leader)</li>
-<li>Rasyid (Team Member)</li>
-<li>Bima (Team Member) </li>
-<li>Aswin (Team Member)</li>
-</ol>
+### Team Members:
 
-Mentor: **Hendra Kurniawan**
-![alt text](https://res.cloudinary.com/flutter-user-group-indonesia/image/upload/v1661658939/anonymus_ec9258a6cd.png)
+1.  Yahya (Team Leader)
+    ![enter image description here](https://res.cloudinary.com/flutter-user-group-indonesia/image/upload/v1661744289/thumbnail_avatar_yahya_16ad6d8033.png)
+2.  Faqih (Team Co-Leader)
+    ![enter image description here](https://res.cloudinary.com/flutter-user-group-indonesia/image/upload/v1661744289/thumbnail_avatar_faqih_db2e57ce41.png)
+3.  Rasyid (Team Member)
+    ![enter image description here](https://res.cloudinary.com/flutter-user-group-indonesia/image/upload/v1661744290/thumbnail_avatar_rasyid_aa43f97f75.png)
+4.  Bima (Team Member)
+5.  Aswin (Team Member)
+
+- Mentor: **Hendra Kurniawan**
+  ![enter image description here](https://res.cloudinary.com/flutter-user-group-indonesia/image/upload/v1661658941/thumbnail_anonymus_ec9258a6cd.png)
 
 ## Project Description
 
@@ -46,15 +48,24 @@ Template movie apps we are used: https://www.figma.com/file/SDUDaD3iIAKgXuccRUbp
 
 ## How to Run
 
-1.  clone the project from: https://github.com/codeyzx/fugi_movie_app_team2
-2.  open VS Code
-3.  make sure the environment is same with as description (flutter version)
-4.  run `flutter pub get`
-5.  fun
+1.  Clone the project from: `https://github.com/codeyzx/fugi_movie_app_team2`
+2.  `cd` to `fugi_movie_app_team2` and type command `code .` to open project in Vs Code
+3.  Make sure the environment is same with as description (flutter version)
+4.  Run `flutter pub get`
+5.  Run "Run Without Debugging" on VS Code ![enter image description here](https://res.cloudinary.com/flutter-user-group-indonesia/image/upload/v1661745394/thumbnail_run_without_debuggin_b2eae2ae86.png)
+
+## Screen Shots
+
+1.  Splash Screen
+2.  Home Screen
+3.  Detail Movie Screen
+4.  Search Results Screen
+5.  Profile Screen
+6.  Wish List
+
+## Demo Project
 
 ## Term and Conditions from Officials
-
-No Flow
 
 <ol>
 <li>Koordinator membuat 1 repo github fugi_movie_app_team{nomor}</li>
