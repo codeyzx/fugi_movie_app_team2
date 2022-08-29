@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:fugi_movie_app_team2/src/common_config/app_theme.dart';
 import 'package:fugi_movie_app_team2/src/core/client/dio_client.dart';
 import 'package:fugi_movie_app_team2/src/features/home/domain/movie_detail.dart';
@@ -166,11 +167,10 @@ class _MovieDetailScreenUpcomingState extends State<MovieDetailScreenUpcoming> {
                         width: MediaQuery.of(context).size.width * 0.8,
                         child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
                           MovieStatus(
-                              icon: Icons.calendar_month,
-                              text:
-                                  DateFormat('dd MMM yyyy').format(DateTime.parse(detailMovie.releaseDate.toString()))),
-                          MovieStatus(icon: Icons.watch_later_outlined, text: '${detailMovie.runtime} min'),
-                          MovieStatus(icon: Icons.airplane_ticket_rounded, text: '${detailMovie.genres?[0].name}'),
+                              icon: FontAwesomeIcons.calendarWeek,
+                              text: DateFormat('dd MMM yyyy').format(DateTime.parse(detailMovie.releaseDate.toString()))),
+                          MovieStatus(icon: FontAwesomeIcons.clock, text: '${detailMovie.runtime} min'),
+                          MovieStatus(icon: FontAwesomeIcons.ticket, text: '${detailMovie.genres?[0].name}'),
                         ]),
                       )
                     ],

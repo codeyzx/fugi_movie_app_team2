@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../movie_detail/presentation/movie_detail_screen.dart';
@@ -69,21 +70,9 @@ class MovieItemWidget extends StatelessWidget {
                   Row(
                     // crossAxisAlignment: CrossAxisAlignment.start,
                     children: const [
-                      Icon(
-                        Icons.airplane_ticket,
-                        color: Colors.grey,
-                        size: 20,
-                      ),
-                      SizedBox(
-                        width: 5,
-                      ),
-                      Text(
-                        'Action',
-                        style: TextStyle(
-                          color: Colors.grey,
-                        ),
-                        // textAlign: TextAlign.start,
-                      ),
+                      Icon(FontAwesomeIcons.ticket, color: Colors.grey, size: 20),
+                      SizedBox(width: 5),
+                      Text('Action', style: TextStyle(color: Colors.grey)),
                     ],
                   ),
                   Row(

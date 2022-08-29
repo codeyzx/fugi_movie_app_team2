@@ -35,13 +35,13 @@ class _WatchlistScreenState extends ConsumerState<WatchlistScreen> {
         ],
         child: Scaffold(
           appBar: AppBar(
-            title: const Text('Watch List'),
+            title: const Text('Watch list'),
             leading: IconButton(
               icon: const Icon(Icons.arrow_back),
               onPressed: () => Navigator.pop(context),
             ),
           ),
-          body: watchlistState != null
+          body: watchlistState!.isNotEmpty
               ? ListView.builder(
                   itemCount: watchlistState.length,
                   itemBuilder: (context, index) {
@@ -74,8 +74,21 @@ class _WatchlistScreenState extends ConsumerState<WatchlistScreen> {
                   //   WatchListItem(),
                   // ],
                 )
-              : const Center(
-                  child: CircularProgressIndicator(),
+              : Center(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Image.asset('assets/icons/watch-icon.png'),
+                      Text(
+                        'There is no movie yet!',
+                        style: TextStyle(fontSize: 20.0.sp, fontWeight: FontWeight.bold),
+                      ),
+                      Text(
+                        'Find your movie by Type title, categories, years, etc ',
+                        style: TextStyle(fontSize: 10.0.sp),
+                      ),
+                    ],
+                  ),
                 ),
         ),
       ),
@@ -136,21 +149,9 @@ class WatchListItem extends StatelessWidget {
               Row(
                 // crossAxisAlignment: CrossAxisAlignment.start,
                 children: const [
-                  Icon(
-                    Icons.airplane_ticket,
-                    color: Colors.grey,
-                    size: 20,
-                  ),
-                  SizedBox(
-                    width: 5,
-                  ),
-                  Text(
-                    'Action',
-                    style: TextStyle(
-                      color: Colors.grey,
-                    ),
-                    // textAlign: TextAlign.start,
-                  ),
+                  Icon(FontAwesomeIcons.ticket, color: Colors.grey, size: 20),
+                  SizedBox(width: 5),
+                  Text('Action', style: TextStyle(color: Colors.grey)),
                 ],
               ),
               Row(
