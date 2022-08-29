@@ -43,7 +43,9 @@ Mentor
 </ol>
 </p>
 
-Template movie apps we are used: https://www.figma.com/file/SDUDaD3iIAKgXuccRUbp4u/FUGI-Movie-Apps-Team-2?node-id=1%3A3
+Template Movies Apps we are used from: https://www.figma.com/community/file/1124835379376527920
+
+Creator: https://github.com/santosfrancisco
 ![enter image description here](https://res.cloudinary.com/flutter-user-group-indonesia/image/upload/v1661660709/template_movie_apps_6bb7833a77.png?updated_at=2022-08-28T04:25:19.240Z)
 
 ## How to Run
