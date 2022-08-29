@@ -3,22 +3,22 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:fugi_movie_app_team2/src/common_config/app_theme.dart';
 import 'package:fugi_movie_app_team2/src/features/home/presentation/home_screen.dart';
-import 'package:fugi_movie_app_team2/src/features/movie_detail/presentation/movie_watchlist_controller.dart';
 import 'package:fugi_movie_app_team2/src/features/profile/presentation/profile_screen.dart';
 import 'package:fugi_movie_app_team2/src/features/search/presentation/search_page.dart';
-import 'package:fugi_movie_app_team2/src/features/search/presentation/search_screen.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../movie_detail/presentation/movie_watchlist.dart';
+import '../../movie_detail/presentation/movie_watchlist_controller.dart';
 
-class BotNavBarScreen extends StatefulWidget {
+class BotNavBarScreen extends StatefulHookConsumerWidget {
   const BotNavBarScreen({Key? key}) : super(key: key);
   static const routeName = '/botnavbar-screen';
 
   @override
-  State<BotNavBarScreen> createState() => BotNavBarScreenState();
+  BotNavBarScreenState createState() => BotNavBarScreenState();
 }
 
-class BotNavBarScreenState extends State<BotNavBarScreen> {
+class BotNavBarScreenState extends ConsumerState<BotNavBarScreen> {
   int currentIndex = 0;
 
   final PageStorageBucket bucket = PageStorageBucket();
@@ -31,6 +31,8 @@ class BotNavBarScreenState extends State<BotNavBarScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final watchlistState = ref.watch(watchlistControllerProvider);
+
     return SafeArea(
       top: false,
       child: Scaffold(
@@ -67,14 +69,14 @@ class BotNavBarScreenState extends State<BotNavBarScreen> {
                 }
               });
             },
-            items: const [
-              BottomNavigationBarItem(
+            items: [
+              const BottomNavigationBarItem(
                   icon: Padding(
                     padding: EdgeInsets.only(top: 8.0),
                     child: Icon(FontAwesomeIcons.houseChimney),
                   ),
                   label: 'Home'),
-              BottomNavigationBarItem(
+              const BottomNavigationBarItem(
                   icon: Padding(
                     padding: EdgeInsets.only(top: 8.0),
                     child: Icon(FontAwesomeIcons.magnifyingGlass),
@@ -83,15 +85,30 @@ class BotNavBarScreenState extends State<BotNavBarScreen> {
               BottomNavigationBarItem(
                   icon: Padding(
                     padding: EdgeInsets.only(top: 8.0),
-                    child: Icon(FontAwesomeIcons.bookmark),
+                    child: Stack(
+                      alignment: Alignment.topRight,
+                      children: [
+                        const Icon(FontAwesomeIcons.bookmark),
+                        if (watchlistState != null && watchlistState.isNotEmpty)
+                          CircleAvatar(
+                            radius: 5.5.sp,
+                            backgroundColor: Colors.red,
+                            child: Text(
+                              '',
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 10.0.sp,
+                              ),
+                            ),
+                          ),
+                      ],
+                    ),
                   ),
                   label: 'Watch List'),
-              BottomNavigationBarItem(
-                  icon: Padding(
-                    padding: EdgeInsets.only(top: 8.0),
-                    child: Icon(FontAwesomeIcons.user),
-                  ),
-                  label: 'Profile'),
+              const BottomNavigationBarItem(
+                icon: Padding(padding: EdgeInsets.only(top: 8.0), child: Icon(FontAwesomeIcons.user)),
+                label: 'Profile',
+              ),
             ],
           ),
         ),

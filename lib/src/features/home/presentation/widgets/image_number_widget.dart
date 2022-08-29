@@ -9,9 +9,10 @@ import 'package:palette_generator/palette_generator.dart';
 import '../../../../common_config/app_theme.dart';
 import '../../../movie_detail/presentation/movie_detail_screen.dart';
 
-class ImageNumberWidget extends StatefulWidget {
-  final Trending trending;
+class ImageNumberWidget<T> extends StatefulWidget {
+  // final Trending trending;
   final int number;
+  final T trending;
   const ImageNumberWidget({
     Key? key,
     required this.number,

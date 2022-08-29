@@ -2,13 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:fugi_movie_app_team2/src/features/movie_detail/presentation/movie_watchlist_controller.dart';
-import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:intl/intl.dart';
 import 'package:keyboard_dismisser/keyboard_dismisser.dart';
 
 import '../../search/presentation/widgets/movie_item_widget.dart';
-import 'movie_detail_screen.dart';
 
 class WatchlistScreen extends StatefulHookConsumerWidget {
   const WatchlistScreen({Key? key}) : super(key: key);
@@ -36,10 +34,6 @@ class _WatchlistScreenState extends ConsumerState<WatchlistScreen> {
         child: Scaffold(
           appBar: AppBar(
             title: const Text('Watch list'),
-            leading: IconButton(
-              icon: const Icon(Icons.arrow_back),
-              onPressed: () => Navigator.pop(context),
-            ),
           ),
           body: watchlistState!.isNotEmpty
               ? ListView.builder(
@@ -55,18 +49,22 @@ class _WatchlistScreenState extends ConsumerState<WatchlistScreen> {
                           rating: watchlist.voteAverage.toString(),
                           date: DateFormat('dd MMM yyyy').format(DateTime.parse(watchlist.releaseDate.toString())),
                         ),
-                        IconButton(
-                          color: Colors.red.shade800,
-                          onPressed: () {
-                            ref.read(watchlistControllerProvider.notifier).removeFromWatchlist(watchlist);
-                            setState(() {});
-                          },
-                          icon: Icon(FontAwesomeIcons.circleXmark),
+                        Positioned(
+                          right: -10.0.sp,
+                          top: -10.0.sp,
+                          child: IconButton(
+                            color: Colors.red.shade800,
+                            onPressed: () {
+                              ref.read(watchlistControllerProvider.notifier).removeFromWatchlist(watchlist);
+                              setState(() {});
+                            },
+                            icon: Icon(FontAwesomeIcons.circleXmark),
+                          ),
                         )
                       ],
                     );
                   },
-                  padding: EdgeInsets.only(top: 20.0.sp, left: 20.0.sp),
+                  padding: EdgeInsets.only(top: 20.0.sp, left: 20.0.sp, right: 20.0.sp),
                   // children: const [
                   //   WatchListItem(),
                   //   WatchListItem(),

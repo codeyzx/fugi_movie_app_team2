@@ -97,26 +97,16 @@ class MovieItemWidget extends StatelessWidget {
                       ),
                     ],
                   ),
-                  Row(
-                    // crossAxisAlignment: CrossAxisAlignment.start,
-                    children: const [
-                      Icon(
-                        Icons.watch_later,
-                        color: Colors.grey,
-                        size: 20,
-                      ),
-                      SizedBox(
-                        width: 5,
-                      ),
-                      Text(
-                        '139 minutes',
-                        style: TextStyle(
-                          color: Colors.grey,
-                        ),
-                        // textAlign: TextAlign.start,
-                      ),
-                    ],
-                  ),
+                  // Row(
+                  //   children: [
+                  //     Icon(Icons.watch_later, color: Colors.grey, size: 20.0.sp),
+                  //     SizedBox(width: 5.0.sp),
+                  //     Text('139 minutes',
+                  //         style: TextStyle(
+                  //           color: Colors.grey,
+                  //         )),
+                  //   ],
+                  // ),
                 ],
               ),
             ),

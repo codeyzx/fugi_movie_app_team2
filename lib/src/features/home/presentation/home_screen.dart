@@ -158,10 +158,10 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                         : ListView.builder(
                             padding: EdgeInsets.symmetric(vertical: 16.5.sp),
                             scrollDirection: Axis.horizontal,
-                            itemCount: trendings.length,
+                            itemCount: populars.length,
                             itemBuilder: (context, index) {
-                              return ImageNumberWidget(
-                                trending: trendings[index],
+                              return ImageNumberWidget<Popular>(
+                                trending: populars[index],
                                 number: (index + 1),
                               );
                             },

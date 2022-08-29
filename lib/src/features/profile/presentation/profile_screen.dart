@@ -3,13 +3,18 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:fugi_movie_app_team2/src/common_config/app_theme.dart';
 import 'package:fugi_movie_app_team2/src/features/movie_detail/presentation/movie_watchlist.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-class ProfileScreen extends StatelessWidget {
+import '../../movie_detail/presentation/movie_watchlist_controller.dart';
+
+class ProfileScreen extends HookConsumerWidget {
   const ProfileScreen({Key? key}) : super(key: key);
   static const routeName = 'profile-screen';
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final watchlistState = ref.watch(watchlistControllerProvider);
+
     return SafeArea(
       top: false,
       child: Scaffold(
@@ -30,22 +35,22 @@ class ProfileScreen extends StatelessWidget {
                       ClipRRect(
                         borderRadius: BorderRadius.circular(8.r),
                         child: Image.network(
-                          'https://firebasestorage.googleapis.com/v0/b/marcha-branch.appspot.com/o/profile%2F2022-08-02T17%3A04%3A23.545242image_picker3159266432624257485.png?alt=media&token=15e27c34-4cc0-45f6-8271-693047c562f7',
+                          'https://res.cloudinary.com/flutter-user-group-indonesia/image/upload/v1661744287/avatar_yahya_16ad6d8033.png',
                           width: 54.w,
                           height: 54.h,
                           fit: BoxFit.fill,
                         ),
                       ),
                       SizedBox(
-                        width: 12.w,
+                        width: 12.0.w,
                       ),
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           SizedBox(
-                            width: 250.w,
+                            width: 250.0.w,
                             child: Text(
-                              'Johannes Milke',
+                              'Yahya',
                               style: TextStyle(
                                 fontSize: 16.sp,
                                 fontWeight: FontWeight.w500,
@@ -55,7 +60,7 @@ class ProfileScreen extends StatelessWidget {
                           SizedBox(
                             width: 250.w,
                             child: Text(
-                              '@johnmilk',
+                              '@fugi_movie',
                               style: TextStyle(
                                 color: AppTheme.textBlueColor,
                                 fontSize: 14.sp,
@@ -83,7 +88,7 @@ class ProfileScreen extends StatelessWidget {
                   Row(
                     children: [
                       Text(
-                        "16 ",
+                        "${watchlistState?.length} ",
                         style: TextStyle(
                           fontSize: 14.sp,
                           fontWeight: FontWeight.w500,
