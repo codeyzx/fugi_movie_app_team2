@@ -51,10 +51,7 @@ class SearchPage extends HookConsumerWidget {
       top: false,
       child: Scaffold(
         appBar: AppBar(
-          title: const Text('Search Results'),
-          actions: [
-            IconButton(onPressed: () {}, icon: const Icon(Icons.info_outline)),
-          ],
+          title: const Text('Search'),
         ),
         body: Padding(
           padding: EdgeInsets.symmetric(horizontal: 10.0.sp),
