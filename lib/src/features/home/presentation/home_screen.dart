@@ -48,7 +48,8 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     ref.listen<AsyncValue<List<Map<String, dynamic>>?>>(
       searchControllerProvider,
       (prev, state) {
-        if (!state.isRefreshing && !state.hasError) {
+        // if (!state.isRefreshing && !state.hasError) {
+        if (!state.isRefreshing) {
           Future.delayed(const Duration(milliseconds: 1000), () {
             context.pushNamed(SearchScreen.routeName);
             setState(() {

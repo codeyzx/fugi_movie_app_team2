@@ -135,19 +135,22 @@ class SearchPage extends HookConsumerWidget {
                               child: Row(
                                 children: [
                                   Flexible(
-                                    child: Wrap(
-                                      direction: Axis.horizontal,
-                                      children: [
-                                        Text('Finded ${datas?.length} results for keyword'),
-                                        SizedBox(width: 5.0.sp),
-                                        Text(
-                                          '"$keywordSearchState"',
-                                          style: const TextStyle(
-                                            fontWeight: FontWeight.normal,
-                                            fontStyle: FontStyle.italic,
+                                    child: Visibility(
+                                      visible: datas?.length != null ? true : false,
+                                      child: Wrap(
+                                        direction: Axis.horizontal,
+                                        children: [
+                                          Text('Finded ${datas?.length} results for keyword'),
+                                          SizedBox(width: 5.0.sp),
+                                          Text(
+                                            '"$keywordSearchState"',
+                                            style: const TextStyle(
+                                              fontWeight: FontWeight.normal,
+                                              fontStyle: FontStyle.italic,
+                                            ),
                                           ),
-                                        ),
-                                      ],
+                                        ],
+                                      ),
                                     ),
                                   )
                                 ],
@@ -155,20 +158,42 @@ class SearchPage extends HookConsumerWidget {
                             )),
                         Expanded(
                           child: datas != null
-                              ? ListView.builder(
-                                  padding: EdgeInsets.symmetric(vertical: 15.0.sp, horizontal: 15.0.sp),
-                                  itemCount: datas.length,
-                                  itemBuilder: (context, index) {
-                                    var dataku = datas[index];
-                                    return MovieItemWidget(
-                                      imagePath: dataku['poster_path'],
-                                      title: dataku['title'],
-                                      rating: dataku['vote_average'].toString(),
-                                      date: dataku['release_date'],
-                                      movie: dataku,
-                                    );
-                                  },
-                                )
+                              ? datas.isNotEmpty
+                                  ? ListView.builder(
+                                      padding: EdgeInsets.symmetric(vertical: 15.0.sp, horizontal: 15.0.sp),
+                                      itemCount: datas.length,
+                                      itemBuilder: (context, index) {
+                                        var dataku = datas[index];
+                                        return MovieItemWidget(
+                                          imagePath: dataku['poster_path'],
+                                          title: dataku['title'],
+                                          rating: dataku['vote_average'].toString(),
+                                          date: dataku['release_date'],
+                                          movie: dataku,
+                                        );
+                                      },
+                                    )
+                                  : Container(
+                                      padding: EdgeInsets.symmetric(horizontal: 18.0.sp),
+                                      child: Column(
+                                        mainAxisAlignment: MainAxisAlignment.center,
+                                        children: [
+                                          Image.asset('assets/icons/search-icon.png'),
+                                          SizedBox(
+                                            width: 200.0.sp,
+                                            child: Text(
+                                              'we are sorry, we can not find the movie 😞',
+                                              textAlign: TextAlign.center,
+                                              style: TextStyle(fontSize: 16.0.sp, fontWeight: FontWeight.bold),
+                                            ),
+                                          ),
+                                          Text(
+                                            'Find your movie by Type title, categories, years, etc',
+                                            style: TextStyle(fontSize: 10.0.sp),
+                                          ),
+                                        ],
+                                      ),
+                                    )
                               : Container(
                                   padding: EdgeInsets.symmetric(horizontal: 18.0.sp),
                                   child: Column(
@@ -178,14 +203,10 @@ class SearchPage extends HookConsumerWidget {
                                       SizedBox(
                                         width: 200.0.sp,
                                         child: Text(
-                                          'we are sorry, we can not find the movie 😞',
+                                          'Find your movie now 😆️ !',
                                           textAlign: TextAlign.center,
                                           style: TextStyle(fontSize: 16.0.sp, fontWeight: FontWeight.bold),
                                         ),
-                                      ),
-                                      Text(
-                                        'Find your movie by Type title, categories, years, etc',
-                                        style: TextStyle(fontSize: 10.0.sp),
                                       ),
                                     ],
                                   ),
@@ -194,7 +215,23 @@ class SearchPage extends HookConsumerWidget {
                       ],
                     );
                   },
-                  error: (e, st) => const Text('Error'),
+                  error: (e, st) => Container(
+                    padding: EdgeInsets.symmetric(horizontal: 18.0.sp),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Image.asset('assets/icons/search-icon.png'),
+                        SizedBox(
+                          width: 200.0.sp,
+                          child: Text(
+                            'Find your movie now 😆️ !',
+                            textAlign: TextAlign.center,
+                            style: TextStyle(fontSize: 16.0.sp, fontWeight: FontWeight.bold),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
                   loading: () => const Center(
                     child: CircularProgressIndicator(),
                   ),
