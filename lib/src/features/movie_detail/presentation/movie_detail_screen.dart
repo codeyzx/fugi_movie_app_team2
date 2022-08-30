@@ -15,6 +15,7 @@ import 'package:fugi_movie_app_team2/src/features/movie_detail/presentation/widg
 import 'package:fugi_movie_app_team2/src/features/movie_detail/presentation/widgets/cast.dart';
 import 'package:fugi_movie_app_team2/src/features/movie_detail/presentation/widgets/movie_status.dart';
 import 'package:fugi_movie_app_team2/src/features/movie_detail/presentation/widgets/reviews.dart';
+import 'package:fugi_movie_app_team2/src/features/search/presentation/search_screen.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -27,10 +28,12 @@ import '../../home/presentation/botnavbar_screen.dart';
 class MovieDetailScreen extends StatefulHookConsumerWidget {
   final Map<String, dynamic>? idAndObject;
   final Trending? trending;
+  final String? paramRouteName;
   const MovieDetailScreen({
     Key? key,
     this.trending,
     this.idAndObject,
+    this.paramRouteName,
   }) : super(key: key);
   static const routeName = 'movie-detail-screen';
 
@@ -96,7 +99,11 @@ class _MovieDetailScreenState extends ConsumerState<MovieDetailScreen> {
         leading: IconButton(
           icon: const Icon(FontAwesomeIcons.house),
           onPressed: () {
-            context.goNamed(BotNavBarScreen.routeName);
+            if (widget.idAndObject!['type'] == 'search') {
+              context.goNamed(SearchScreen.routeName);
+            } else {
+              context.goNamed(BotNavBarScreen.routeName);
+            }
           },
         ),
         actions: [

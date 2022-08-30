@@ -27,6 +27,7 @@ class MovieItemWidget extends StatelessWidget {
         context.pushNamed(MovieDetailScreen.routeName, extra: {
           "id": movie?['id'],
           "object": null,
+          "type": "search",
         });
       },
       child: Container(
