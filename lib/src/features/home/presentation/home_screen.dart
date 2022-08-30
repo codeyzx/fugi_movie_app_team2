@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fugi_movie_app_team2/src/features/home/domain/popular.dart';
 import 'package:fugi_movie_app_team2/src/features/home/domain/top_rated.dart';
 import 'package:fugi_movie_app_team2/src/features/home/domain/upcoming.dart';
+import 'package:fugi_movie_app_team2/src/features/home/presentation/home_controller.dart';
 import 'package:fugi_movie_app_team2/src/features/home/presentation/widgets/image_number_widget.dart';
 import 'package:fugi_movie_app_team2/src/features/movie_detail/presentation/movie_detail_screen.dart';
 import 'package:fugi_movie_app_team2/src/features/search/presentation/search_controller.dart';
@@ -411,10 +412,24 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     List<dynamic> listTopRated = respTopRated.data['results'];
     List<dynamic> listUpcoming = respUpcoming.data['results'];
 
-    List<Popular> myPopular = listPopular.map((e) => Popular.fromJson(e)).toList();
-    List<Trending> myTrendings = listTrending.map((e) => Trending.fromJson(e)).toList();
-    List<TopRated> myTopRated = listTopRated.map((e) => TopRated.fromJson(e)).toList();
-    List<Upcoming> myUpcoming = listUpcoming.map((e) => Upcoming.fromJson(e)).toList();
+    List<Popular> myPopular = listPopular.map((e) {
+      ref.read(homeController.notifier).add('popular', e['id']);
+      return Popular.fromJson(e);
+    }).toList();
+    List<Trending> myTrendings = listTrending.map(
+      (e) {
+        ref.read(homeController.notifier).add('trending', e['id']);
+        return Trending.fromJson(e);
+      },
+    ).toList();
+    List<TopRated> myTopRated = listTopRated.map((e) {
+      ref.read(homeController.notifier).add('toprated', e['id']);
+      return TopRated.fromJson(e);
+    }).toList();
+    List<Upcoming> myUpcoming = listUpcoming.map((e) {
+      ref.read(homeController.notifier).add('upcoming', e['id']);
+      return Upcoming.fromJson(e);
+    }).toList();
 
     if (mounted) {
       setState(() {

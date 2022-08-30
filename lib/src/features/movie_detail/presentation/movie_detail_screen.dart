@@ -8,11 +8,13 @@ import 'package:fugi_movie_app_team2/src/common_config/app_theme.dart';
 import 'package:fugi_movie_app_team2/src/core/client/dio_client.dart';
 import 'package:fugi_movie_app_team2/src/features/home/domain/movie_detail.dart';
 import 'package:fugi_movie_app_team2/src/features/home/domain/trending.dart';
+import 'package:fugi_movie_app_team2/src/features/home/presentation/home_controller.dart';
 import 'package:fugi_movie_app_team2/src/features/movie_detail/presentation/movie_watchlist_controller.dart';
 import 'package:fugi_movie_app_team2/src/features/movie_detail/presentation/widgets/about_movie.dart';
 import 'package:fugi_movie_app_team2/src/features/movie_detail/presentation/widgets/cast.dart';
 import 'package:fugi_movie_app_team2/src/features/movie_detail/presentation/widgets/movie_status.dart';
 import 'package:fugi_movie_app_team2/src/features/movie_detail/presentation/widgets/reviews.dart';
+import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:intl/intl.dart';
@@ -39,6 +41,7 @@ class _MovieDetailScreenState extends ConsumerState<MovieDetailScreen> {
   bool isError = false;
   final List<PaletteColor> _colors = [];
   final int _currentIndex = 0;
+  dynamic nextMovieId = 0;
 
   @override
   void initState() {
@@ -62,6 +65,8 @@ class _MovieDetailScreenState extends ConsumerState<MovieDetailScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final movieIdsState = ref.read(homeController);
+
     TabBar myTabBar = TabBar(
       indicator: BoxDecoration(
         borderRadius: BorderRadius.circular(2.5.sp),
@@ -90,6 +95,15 @@ class _MovieDetailScreenState extends ConsumerState<MovieDetailScreen> {
             },
             icon: getStatusWitch(detailMovie),
           ),
+          IconButton(
+            onPressed: () {
+              context.pushNamed(
+                MovieDetailScreen.routeName,
+                extra: {"id": nextMovieId, "object": ''},
+              );
+            },
+            icon: const Icon(FontAwesomeIcons.chevronRight),
+          )
         ],
       ),
       body: isLoading
@@ -144,13 +158,18 @@ class _MovieDetailScreenState extends ConsumerState<MovieDetailScreen> {
                               // Text('${widget.trending.id}'),
                               Padding(
                                 padding: const EdgeInsets.all(8.0),
-                                child: Text(
-                                  'Movie ID: ${widget.idAndObject!['id']}',
-                                  style: TextStyle(
-                                    fontSize: 10.0.sp,
-                                    fontWeight: FontWeight.normal,
-                                    color: Colors.grey,
-                                  ),
+                                child: Column(
+                                  children: [
+                                    Text(
+                                      'Movie ID: ${widget.idAndObject!['id']}',
+                                      style: TextStyle(
+                                        fontSize: 10.0.sp,
+                                        fontWeight: FontWeight.normal,
+                                        color: Colors.grey,
+                                      ),
+                                    ),
+                                    // Flexible(child: Text('${movieIdsState.toString()}')),
+                                  ],
                                 ),
                               ),
                               Positioned(
@@ -333,8 +352,21 @@ class _MovieDetailScreenState extends ConsumerState<MovieDetailScreen> {
   }
 
   void fetchData() async {
-    Logger().e(widget.idAndObject);
+    // Logger().e(widget.idAndObject);
+
     try {
+      final listOfIds = ref.read(homeController);
+      var myData = [...listOfIds];
+      var findIndex = myData.indexWhere(
+        (element) => element!['value'] == widget.idAndObject!['id'],
+      );
+      if (findIndex != -1) {
+        var nextIndex = myData[findIndex + 1];
+        Logger().e('Next Index: $nextIndex');
+        setState(() {
+          nextMovieId = nextIndex?['value'];
+        });
+      }
       setState(() {
         isLoading = true;
       });
