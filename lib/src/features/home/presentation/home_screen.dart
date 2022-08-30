@@ -15,7 +15,6 @@ import 'package:palette_generator/palette_generator.dart';
 
 import '../../../common_config/app_theme.dart';
 import '../../../core/client/dio_client.dart';
-import '../domain/movie_detail.dart';
 import '../domain/trending.dart';
 
 final keywordsProvider = StateProvider<String?>((ref) => '');
@@ -388,9 +387,6 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
   }
 
   Future<void> fetchData() async {
-    setState(() {
-      isLoading = true;
-    });
     var resp = await DioClient().apiCall(
       url: '/trending/all/day',
       requestType: RequestType.get,
@@ -422,25 +418,15 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     List<TopRated> myTopRated = listTopRated.map((e) => TopRated.fromJson(e)).toList();
     List<Upcoming> myUpcoming = listUpcoming.map((e) => Upcoming.fromJson(e)).toList();
 
-    setState(() {
-      trendings = myTrendings;
-      populars = myPopular;
-      toprateds = myTopRated;
-      upcomings = myUpcoming;
-      isLoading = false;
-    });
-  }
-
-  void _updatePalettes(MovieDetail movieDetailResponse) async {
-    var x = movieDetailResponse.posterPath;
-    final generator = await PaletteGenerator.fromImageProvider(
-      NetworkImage(
-        'https://image.tmdb.org/t/p/w500/$x',
-      ),
-    );
-    _colors.add(generator.lightVibrantColor ?? generator.lightMutedColor ?? PaletteColor(Colors.teal, 2));
-    setState(() {});
+    if (mounted) {
+      setState(() {
+        isLoading = true;
+        trendings = myTrendings;
+        populars = myPopular;
+        toprateds = myTopRated;
+        upcomings = myUpcoming;
+        isLoading = false;
+      });
+    }
   }
 }
-
-// test bima merge

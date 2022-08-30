@@ -2,7 +2,6 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:fugi_movie_app_team2/src/features/home/domain/trending.dart';
 import 'package:go_router/go_router.dart';
 import 'package:palette_generator/palette_generator.dart';
 
@@ -108,6 +107,9 @@ class _ImageNumberWidgetState extends State<ImageNumberWidget> {
       ),
     );
     _colors.add(generator.lightVibrantColor ?? generator.lightMutedColor ?? PaletteColor(Colors.teal, 2));
-    setState(() {});
+
+    if (mounted) {
+      setState(() {});
+    }
   }
 }
