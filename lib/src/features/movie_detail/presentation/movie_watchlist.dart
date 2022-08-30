@@ -45,6 +45,7 @@ class _WatchlistScreenState extends ConsumerState<WatchlistScreen> {
                       children: [
                         MovieItemWidget(
                           imagePath: watchlist.posterPath,
+                          movie: {"id": watchlist.id},
                           title: watchlist.title,
                           rating: watchlist.voteAverage.toString(),
                           date: DateFormat('dd MMM yyyy').format(DateTime.parse(watchlist.releaseDate.toString())),
