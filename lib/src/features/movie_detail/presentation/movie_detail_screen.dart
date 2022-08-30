@@ -22,6 +22,8 @@ import 'package:intl/intl.dart';
 import 'package:logger/logger.dart';
 import 'package:palette_generator/palette_generator.dart';
 
+import '../../home/presentation/botnavbar_screen.dart';
+
 class MovieDetailScreen extends StatefulHookConsumerWidget {
   final Map<String, dynamic>? idAndObject;
   final Trending? trending;
@@ -43,6 +45,9 @@ class _MovieDetailScreenState extends ConsumerState<MovieDetailScreen> {
   final List<PaletteColor> _colors = [];
   final int _currentIndex = 0;
   dynamic nextMovieId = 0;
+  dynamic prevMovieId = 0;
+  var swaipCardController = const SwiperControl();
+  final _swaiperController = SwiperController();
 
   @override
   void initState() {
@@ -88,6 +93,12 @@ class _MovieDetailScreenState extends ConsumerState<MovieDetailScreen> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Detail'),
+        leading: IconButton(
+          icon: const Icon(FontAwesomeIcons.house),
+          onPressed: () {
+            context.goNamed(BotNavBarScreen.routeName);
+          },
+        ),
         actions: [
           IconButton(
             onPressed: () {
@@ -96,15 +107,6 @@ class _MovieDetailScreenState extends ConsumerState<MovieDetailScreen> {
             },
             icon: getStatusWitch(detailMovie),
           ),
-          IconButton(
-            onPressed: () {
-              context.pushNamed(
-                MovieDetailScreen.routeName,
-                extra: {"id": nextMovieId, "object": ''},
-              );
-            },
-            icon: const Icon(FontAwesomeIcons.chevronRight),
-          )
         ],
       ),
       body: isLoading
@@ -119,9 +121,22 @@ class _MovieDetailScreenState extends ConsumerState<MovieDetailScreen> {
                   ),
                 )
               : Swiper(
-                  itemCount: 3,
+                  itemCount: getCountIndex(),
                   pagination: const SwiperPagination(),
-                  control: const SwiperControl(),
+                  loop: false,
+                  onIndexChanged: (value) {
+                    Logger().i('onIndexChanged: $value');
+                    context.pushNamed(
+                      MovieDetailScreen.routeName,
+                      extra: {
+                        "id": nextMovieId,
+                        "object": '',
+                        "type": widget.idAndObject!['type'],
+                      },
+                    );
+                  },
+                  // control: const SwiperControl(),
+
                   scale: 0.9,
                   itemBuilder: (context, index) => Column(
                     children: [
@@ -175,6 +190,7 @@ class _MovieDetailScreenState extends ConsumerState<MovieDetailScreen> {
                                         ),
                                       ),
                                       // Flexible(child: Text('${movieIdsState.toString()}')),
+                                      // Flexible(child: Text('${getCountIndex()}')),
                                     ],
                                   ),
                                 ),
@@ -365,11 +381,13 @@ class _MovieDetailScreenState extends ConsumerState<MovieDetailScreen> {
       final listOfIds = ref.read(homeController);
       var myData = [...listOfIds];
       var findIndex = myData.indexWhere(
-        (element) => element!['value'] == widget.idAndObject!['id'],
+        (element) {
+          return element!['value'] == widget.idAndObject!['id'] && element['category'] == widget.idAndObject!['type'];
+        },
       );
       if (findIndex != -1) {
         var nextIndex = myData[findIndex + 1];
-        Logger().e('Next Index: $nextIndex');
+
         setState(() {
           nextMovieId = nextIndex?['value'];
         });
@@ -417,6 +435,16 @@ class _MovieDetailScreenState extends ConsumerState<MovieDetailScreen> {
             color: Colors.orange,
             size: 24.0.sp,
           );
+  }
+
+  int getCountIndex() {
+    var listOfIds = ref.watch(homeController);
+    var listOfIdsLength = listOfIds
+        .where(
+          (element) => element!['category'] == widget.idAndObject!['type'],
+        )
+        .toList();
+    return listOfIdsLength.length;
   }
 }
 

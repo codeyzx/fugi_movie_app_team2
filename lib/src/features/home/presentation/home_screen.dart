@@ -161,6 +161,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                               return ImageNumberWidget<Popular>(
                                 trending: populars[index],
                                 number: (index + 1),
+                                type: 'popular',
                               );
                             },
                           ),
@@ -208,6 +209,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                                           context.pushNamed(MovieDetailScreen.routeName, extra: {
                                             "id": trendings[index].id,
                                             "object": trendings[index],
+                                            'type': 'trending',
                                           });
                                         },
                                         child: Stack(
@@ -258,6 +260,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                                         context.pushNamed(MovieDetailScreen.routeName, extra: {
                                           "id": upcomings[index].id,
                                           'object': upcomings[index],
+                                          'type': 'upcoming',
                                         });
                                       },
                                       child: Stack(
@@ -301,6 +304,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                                         context.pushNamed(MovieDetailScreen.routeName, extra: {
                                           "id": toprateds[index].id,
                                           'object': toprateds[index],
+                                          'type': 'toprated',
                                         });
                                       },
                                       child: Stack(
@@ -344,6 +348,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                                         context.pushNamed(MovieDetailScreen.routeName, extra: {
                                           "id": populars[index].id,
                                           'object': populars[index],
+                                          'type': 'popular',
                                         });
                                       },
                                       child: Stack(

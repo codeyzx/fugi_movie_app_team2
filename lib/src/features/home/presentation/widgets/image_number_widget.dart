@@ -12,10 +12,12 @@ class ImageNumberWidget<T> extends StatefulWidget {
   // final Trending trending;
   final int number;
   final T trending;
+  final String? type;
   const ImageNumberWidget({
     Key? key,
     required this.number,
     required this.trending,
+    this.type,
   }) : super(key: key);
 
   @override
@@ -38,10 +40,14 @@ class _ImageNumberWidgetState extends State<ImageNumberWidget> {
 
     return InkWell(
       onTap: () {
-        context.pushNamed(MovieDetailScreen.routeName, extra: {
-          "id": widget.trending.id,
-          "object": widget.trending,
-        });
+        context.pushNamed(
+          MovieDetailScreen.routeName,
+          extra: {
+            "id": widget.trending.id,
+            "object": widget.trending,
+            "type": widget.type,
+          },
+        );
       },
       child: Stack(
         alignment: Alignment.topLeft,
