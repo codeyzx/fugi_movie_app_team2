@@ -13,7 +13,7 @@ class SearchScreen extends StatefulHookConsumerWidget {
   static const routeName = 'search-screen';
 
   @override
-  _SearchScreenState createState() => _SearchScreenState();
+  ConsumerState<SearchScreen> createState() => _SearchScreenState();
 }
 
 class _SearchScreenState extends ConsumerState<SearchScreen> {

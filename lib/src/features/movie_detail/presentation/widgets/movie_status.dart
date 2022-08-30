@@ -4,10 +4,10 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../common_config/palette.dart';
 
 class MovieStatus extends StatelessWidget {
-  IconData? icon;
-  String? text;
+  final IconData? icon;
+  final String? text;
 
-  MovieStatus({required this.icon, required this.text});
+  const MovieStatus({Key? key, required this.icon, required this.text}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Column(

@@ -30,7 +30,7 @@ class MovieDetailScreen extends StatefulHookConsumerWidget {
   static const routeName = 'movie-detail-screen';
 
   @override
-  _MovieDetailScreenState createState() => _MovieDetailScreenState();
+  ConsumerState<MovieDetailScreen> createState() => _MovieDetailScreenState();
 }
 
 class _MovieDetailScreenState extends ConsumerState<MovieDetailScreen> {
@@ -389,7 +389,7 @@ class WidgetSLider extends StatefulWidget {
 }
 
 class _WidgetSLiderState extends State<WidgetSLider> {
-  double SliderValue = 0.0;
+  double sliderValue = 0.0;
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -397,7 +397,7 @@ class _WidgetSLiderState extends State<WidgetSLider> {
         Text("Rate this Movie",
             style: GoogleFonts.montserrat().copyWith(fontSize: 18, fontWeight: FontWeight.w400, color: AppTheme.thirdColor)),
         const SizedBox(height: 20),
-        Text('${double.parse(SliderValue.toStringAsFixed(1))}',
+        Text('${double.parse(sliderValue.toStringAsFixed(1))}',
             style: GoogleFonts.montserrat().copyWith(fontSize: 32, fontWeight: FontWeight.w400, color: AppTheme.thirdColor)),
         const SizedBox(height: 10),
         SliderTheme(
@@ -413,17 +413,17 @@ class _WidgetSLiderState extends State<WidgetSLider> {
           // thumbColor: Colors.green,
           // thumbShape: RoundSliderThumbShape(enabledThumbRadius: 20)),
           child: Slider(
-            value: SliderValue,
+            value: sliderValue,
             max: 10,
             // divisions: 100,
-            label: '${SliderValue.round()}',
+            label: '${sliderValue.round()}',
             // thumbColor: Colors.white,
             // activeColor: Colors.amber,
             autofocus: true,
             //inactiveColor: Colors.grey,
             onChanged: (double value) {
               setState(() {
-                SliderValue = value;
+                sliderValue = value;
               });
             },
           ),

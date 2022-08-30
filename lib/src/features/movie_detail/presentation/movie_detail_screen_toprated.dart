@@ -13,19 +13,19 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:logger/logger.dart';
 
-class movieDetailScreenTopRated extends StatefulWidget {
+class MovieDetailScreenTopRated extends StatefulWidget {
   final TopRated topRated;
-  const movieDetailScreenTopRated({
+  const MovieDetailScreenTopRated({
     Key? key,
     required this.topRated,
   }) : super(key: key);
   static const routeName = 'movie-detail-screen-toprated';
 
   @override
-  State<movieDetailScreenTopRated> createState() => _movieDetailScreenTopRatedState();
+  State<MovieDetailScreenTopRated> createState() => _MovieDetailScreenTopRatedState();
 }
 
-class _movieDetailScreenTopRatedState extends State<movieDetailScreenTopRated> {
+class _MovieDetailScreenTopRatedState extends State<MovieDetailScreenTopRated> {
   MovieDetail detailMovie = const MovieDetail();
   bool isLoading = false;
 
@@ -242,7 +242,7 @@ class WidgetSLider extends StatefulWidget {
 }
 
 class _WidgetSLiderState extends State<WidgetSLider> {
-  double SliderValue = 0.0;
+  double sliderValue = 0.0;
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -250,7 +250,7 @@ class _WidgetSLiderState extends State<WidgetSLider> {
         Text("Rate this Movie",
             style: GoogleFonts.montserrat().copyWith(fontSize: 18, fontWeight: FontWeight.w400, color: AppTheme.thirdColor)),
         const SizedBox(height: 20),
-        Text('${double.parse(SliderValue.toStringAsFixed(1))}',
+        Text('${double.parse(sliderValue.toStringAsFixed(1))}',
             style: GoogleFonts.montserrat().copyWith(fontSize: 32, fontWeight: FontWeight.w400, color: AppTheme.thirdColor)),
         const SizedBox(height: 10),
         SliderTheme(
@@ -266,17 +266,17 @@ class _WidgetSLiderState extends State<WidgetSLider> {
           // thumbColor: Colors.green,
           // thumbShape: RoundSliderThumbShape(enabledThumbRadius: 20)),
           child: Slider(
-            value: SliderValue,
+            value: sliderValue,
             max: 10,
             // divisions: 100,
-            label: '${SliderValue.round()}',
+            label: '${sliderValue.round()}',
             // thumbColor: Colors.white,
             // activeColor: Colors.amber,
             autofocus: true,
             //inactiveColor: Colors.grey,
             onChanged: (double value) {
               setState(() {
-                SliderValue = value;
+                sliderValue = value;
               });
             },
           ),

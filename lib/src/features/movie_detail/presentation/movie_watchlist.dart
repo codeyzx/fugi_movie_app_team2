@@ -13,7 +13,7 @@ class WatchlistScreen extends StatefulHookConsumerWidget {
   static const routeName = 'watchlist-screen';
 
   @override
-  _WatchlistScreenState createState() => _WatchlistScreenState();
+  ConsumerState<WatchlistScreen> createState() => _WatchlistScreenState();
 }
 
 class _WatchlistScreenState extends ConsumerState<WatchlistScreen> {
@@ -58,7 +58,7 @@ class _WatchlistScreenState extends ConsumerState<WatchlistScreen> {
                               ref.read(watchlistControllerProvider.notifier).removeFromWatchlist(watchlist);
                               setState(() {});
                             },
-                            icon: Icon(FontAwesomeIcons.circleXmark),
+                            icon: const Icon(FontAwesomeIcons.circleXmark),
                           ),
                         )
                       ],

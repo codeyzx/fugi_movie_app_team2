@@ -75,24 +75,24 @@ final goRouter = GoRouter(
         }),
     GoRoute(
         path: '/movie-screen-popular',
-        name: movieDetailScreenPopular.routeName,
+        name: MovieDetailScreenPopular.routeName,
         pageBuilder: (context, state) {
           final movieId = state.extra as Popular;
           return NoTransitionPage<void>(
             key: state.pageKey,
-            child: movieDetailScreenPopular(
+            child: MovieDetailScreenPopular(
               popular: movieId,
             ),
           );
         }),
     GoRoute(
         path: '/movie-screen-toprated',
-        name: movieDetailScreenTopRated.routeName,
+        name: MovieDetailScreenTopRated.routeName,
         pageBuilder: (context, state) {
           final movieId = state.extra as TopRated;
           return NoTransitionPage<void>(
             key: state.pageKey,
-            child: movieDetailScreenTopRated(
+            child: MovieDetailScreenTopRated(
               topRated: movieId,
             ),
           );

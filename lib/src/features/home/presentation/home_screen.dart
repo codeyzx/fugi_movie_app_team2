@@ -11,7 +11,6 @@ import 'package:fugi_movie_app_team2/src/features/search/presentation/search_scr
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:keyboard_dismisser/keyboard_dismisser.dart';
-import 'package:palette_generator/palette_generator.dart';
 
 import '../../../common_config/app_theme.dart';
 import '../../../core/client/dio_client.dart';
@@ -24,12 +23,10 @@ class HomeScreen extends StatefulHookConsumerWidget {
   static const routeName = 'home-screen';
 
   @override
-  _HomeScreenState createState() => _HomeScreenState();
+  ConsumerState<HomeScreen> createState() => _HomeScreenState();
 }
 
 class _HomeScreenState extends ConsumerState<HomeScreen> {
-  final List<PaletteColor> _colors = [];
-  final int _currentIndex = 0;
   var selectedIndex = 0;
   bool isLoading = false;
   List<Trending> trendings = [];
@@ -298,7 +295,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                                   itemBuilder: (context, index) {
                                     return InkWell(
                                       onTap: () {
-                                        // context.pushNamed(movieDetailScreenTopRated.routeName, extra: toprateds[index]);
+                                        // context.pushNamed(MovieDetailScreenTopRated.routeName, extra: toprateds[index]);
                                         context.pushNamed(MovieDetailScreen.routeName, extra: {
                                           "id": toprateds[index].id,
                                           'object': toprateds[index],
@@ -341,7 +338,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                                   itemBuilder: (context, index) {
                                     return InkWell(
                                       onTap: () {
-                                        // context.pushNamed(movieDetailScreenPopular.routeName, extra: populars[index]);
+                                        // context.pushNamed(MovieDetailScreenPopular.routeName, extra: populars[index]);
                                         context.pushNamed(MovieDetailScreen.routeName, extra: {
                                           "id": populars[index].id,
                                           'object': populars[index],

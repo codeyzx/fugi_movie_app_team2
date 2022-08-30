@@ -8,44 +8,42 @@ class ReviewCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Column(
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Column(
+          children: const [
+            CircleAvatar(
+              backgroundImage: NetworkImage('https://i.pravatar.cc/300'),
+            ),
+            SizedBox(
+              height: 10,
+            ),
+            Text(
+              '6.3',
+              style: TextStyle(color: AppTheme.textBlueColor),
+            )
+          ],
+        ),
+        const SizedBox(
+          width: 30,
+        ),
+        Expanded(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: const [
-              CircleAvatar(
-                backgroundImage: NetworkImage('https://i.pravatar.cc/300'),
-              ),
-              SizedBox(
-                height: 10,
+              Text(
+                'Your Name',
+                style: TextStyle(fontWeight: FontWeight.bold),
               ),
               Text(
-                '6.3',
-                style: TextStyle(color: AppTheme.textBlueColor),
+                'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s,',
+                style: TextStyle(fontSize: 14),
               )
             ],
           ),
-          const SizedBox(
-            width: 30,
-          ),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: const [
-                Text(
-                  'Your Name',
-                  style: TextStyle(fontWeight: FontWeight.bold),
-                ),
-                Text(
-                  'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s,',
-                  style: TextStyle(fontSize: 14),
-                )
-              ],
-            ),
-          )
-        ],
-      ),
+        )
+      ],
     );
   }
 }

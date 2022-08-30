@@ -84,7 +84,7 @@ class BotNavBarScreenState extends ConsumerState<BotNavBarScreen> {
                   label: 'Search'),
               BottomNavigationBarItem(
                   icon: Padding(
-                    padding: EdgeInsets.only(top: 8.0),
+                    padding: const EdgeInsets.only(top: 8.0),
                     child: Stack(
                       alignment: Alignment.topRight,
                       children: [
