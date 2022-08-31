@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:card_swiper/card_swiper.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
@@ -15,7 +16,6 @@ import 'package:fugi_movie_app_team2/src/features/movie_detail/presentation/widg
 import 'package:fugi_movie_app_team2/src/features/movie_detail/presentation/widgets/cast.dart';
 import 'package:fugi_movie_app_team2/src/features/movie_detail/presentation/widgets/movie_status.dart';
 import 'package:fugi_movie_app_team2/src/features/movie_detail/presentation/widgets/reviews.dart';
-import 'package:fugi_movie_app_team2/src/features/search/presentation/search_screen.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -24,6 +24,8 @@ import 'package:logger/logger.dart';
 import 'package:palette_generator/palette_generator.dart';
 
 import '../../home/presentation/botnavbar_screen.dart';
+import '../../search/presentation/search_page.dart';
+import '../../search/presentation/widgets/movie_item_widget.dart';
 
 class MovieDetailScreen extends StatefulHookConsumerWidget {
   final Map<String, dynamic>? idAndObject;
@@ -51,6 +53,7 @@ class _MovieDetailScreenState extends ConsumerState<MovieDetailScreen> {
   dynamic prevMovieId = 0;
   var swaipCardController = const SwiperControl();
   final _swaiperController = SwiperController();
+  int _findIndex = 0;
 
   @override
   void initState() {
@@ -74,7 +77,9 @@ class _MovieDetailScreenState extends ConsumerState<MovieDetailScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final movieIdsState = ref.read(homeController);
+    final movieIdsState = ref.read(homeController).where(
+          (element) => element!['category'] == widget.idAndObject!['type'],
+        );
 
     TabBar myTabBar = TabBar(
       indicator: BoxDecoration(
@@ -95,21 +100,25 @@ class _MovieDetailScreenState extends ConsumerState<MovieDetailScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Detail'),
+        title: Text('Detail ${widget.idAndObject!['type']}'),
+        // leading: IconButton(
+        //   icon: const Icon(FontAwesomeIcons.house),
+        //   onPressed: () {
+        //     doRedirect();
+        //   },
+        // ),
         leading: IconButton(
-          icon: const Icon(FontAwesomeIcons.house),
+          icon: const Icon(FontAwesomeIcons.chevronLeft),
           onPressed: () {
-            if (widget.idAndObject!['type'] == 'search') {
-              context.goNamed(SearchScreen.routeName);
-            } else {
-              context.goNamed(BotNavBarScreen.routeName);
-            }
+            context.goNamed(ref.watch(movieDetailAccessFromProvider));
+            // doRedirect();
           },
         ),
         actions: [
           IconButton(
             onPressed: () {
               ref.read(watchlistControllerProvider.notifier).addToWatchlist(detailMovie);
+              ref.read(homeController.notifier).add('watchlist', detailMovie.id);
               setState(() {});
             },
             icon: getStatusWitch(detailMovie),
@@ -120,32 +129,62 @@ class _MovieDetailScreenState extends ConsumerState<MovieDetailScreen> {
           ? const Center(
               child: CircularProgressIndicator.adaptive(),
             )
-          : isError
-              ? Center(
-                  child: SizedBox(
-                    width: 200.0.w,
-                    child: const Text('Sorry, The resource you requested could not be found.'),
-                  ),
-                )
-              : Swiper(
-                  itemCount: getCountIndex(),
-                  pagination: const SwiperPagination(),
-                  loop: false,
-                  onIndexChanged: (value) {
-                    Logger().i('onIndexChanged: $value');
-                    context.pushNamed(
-                      MovieDetailScreen.routeName,
-                      extra: {
-                        "id": nextMovieId,
-                        "object": '',
-                        "type": widget.idAndObject!['type'],
-                      },
-                    );
-                  },
-                  // control: const SwiperControl(),
-
-                  scale: 0.9,
-                  itemBuilder: (context, index) => Column(
+          : Swiper(
+              itemCount: getCountIndex(),
+              loop: true,
+              autoplay: false,
+              onIndexChanged: (value) {
+                // Logger().v('__findIndex: $_findIndex');
+                Logger().v('__value_swipe_index: $value');
+                // Logger().v('__value_swipe_length: ${movieIdsState.length}');
+                // Logger().v('prevMovieId: $prevMovieId');
+                if (value == 1) {
+                  context.pushNamed(
+                    MovieDetailScreen.routeName,
+                    extra: {
+                      "id": nextMovieId,
+                      "object": '',
+                      "type": widget.idAndObject!['type'],
+                    },
+                  );
+                } else {
+                  context.pushNamed(
+                    MovieDetailScreen.routeName,
+                    extra: {
+                      "id": prevMovieId,
+                      "object": '',
+                      "type": widget.idAndObject!['type'],
+                    },
+                  );
+                }
+              },
+              // control: const SwiperControl(),
+              scale: .9,
+              curve: Curves.easeInOut,
+              itemBuilder: (context, index) {
+                if (isError) {
+                  return Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      SizedBox(
+                        width: 200.0.w,
+                        child: Text(
+                          'Sorry 🙏, The resource you requested could not be found. Movie with ID ${widget.idAndObject?['id']} not found',
+                          textAlign: TextAlign.center,
+                        ),
+                      ),
+                      ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          primary: AppTheme.textBlueColor,
+                        ),
+                        onPressed: () {},
+                        child: const Text('Swipe to Home'),
+                      ),
+                    ],
+                  );
+                } else {
+                  return Column(
                     children: [
                       Expanded(
                         flex: 2,
@@ -169,17 +208,27 @@ class _MovieDetailScreenState extends ConsumerState<MovieDetailScreen> {
                                         color: _colors.isNotEmpty
                                             ? _colors[_currentIndex].color.withOpacity(.3)
                                             : Colors.black.withOpacity(0.5),
-                                        spreadRadius: 2.5.sp,
+                                        spreadRadius: 5.5.sp,
                                         blurRadius: 5.0.sp,
                                         offset: const Offset(0, 2), // changes position of shadow
                                       ),
                                     ],
                                     color: AppTheme.secondaryColor,
-                                    image: DecorationImage(
-                                      image: detailMovie.backdropPath != null
-                                          ? NetworkImage('https://image.tmdb.org/t/p/w780/${detailMovie.backdropPath}')
-                                          : Image.asset('assets/icons/no-image.png').image,
-                                      fit: BoxFit.cover,
+                                    // image: DecorationImage(
+                                    //   image: detailMovie.backdropPath != null
+                                    //       ? NetworkImage('https://image.tmdb.org/t/p/w780/${detailMovie.backdropPath}')
+                                    //       : Image.asset('assets/icons/no-image.png').image,
+                                    //   fit: BoxFit.cover,
+                                    // ),
+                                  ),
+                                  child: Center(
+                                    child: CachedNetworkImage(
+                                      imageUrl: "https://image.tmdb.org/t/p/w780/${detailMovie.backdropPath}",
+                                      height: MediaQuery.of(context).size.height * .5.sp,
+                                      fit: BoxFit.fitHeight,
+                                      progressIndicatorBuilder: (context, url, downloadProgress) =>
+                                          Center(child: CircularProgressIndicator(value: downloadProgress.progress)),
+                                      errorWidget: (context, url, error) => const Icon(Icons.error),
                                     ),
                                   ),
                                 ),
@@ -376,30 +425,48 @@ class _MovieDetailScreenState extends ConsumerState<MovieDetailScreen> {
                         ),
                       ),
                     ],
-                  ),
-                ),
+                  );
+                }
+              }),
     );
   }
 
   void fetchData() async {
-    // Logger().e(widget.idAndObject);
-
     try {
-      final listOfIds = ref.read(homeController);
+      //Block pengecekan Movie Id selanjutnya, untuk kebutuhan Swipe
+      final listOfIds = ref.read(homeController).where((element) => element!['category'] == widget.idAndObject!['type']);
       var myData = [...listOfIds];
+
       var findIndex = myData.indexWhere(
         (element) {
           return element!['value'] == widget.idAndObject!['id'] && element['category'] == widget.idAndObject!['type'];
         },
       );
-      if (findIndex != -1) {
-        var nextIndex = myData[findIndex + 1];
+      Map? nextMovieIndex = {};
+      Map? prevMovieIndex = {};
+      if (findIndex != -1 && myData.length > (findIndex + 1)) {
+        //jika index yg ditemukan ada (tidak -1) dan jika jumlah data masih lebih dari index yang ditemukan, maka ambil data berikutnya.
+        nextMovieIndex = myData[findIndex + 1];
+        if (findIndex != 0) {
+          Logger().i('prevMovieIndex true: $findIndex');
+          prevMovieIndex = myData[findIndex - 1];
+        } else {
+          Logger().i('prevMovieIndex false: $findIndex');
+          prevMovieIndex = myData[findIndex];
+        }
+        Logger().i('true ${nextMovieIndex}, ${prevMovieIndex}');
+      } else {
+        //jika tidak ada data berikutnya, maka ambil data pertama ke-0.
+        nextMovieIndex = myData[findIndex];
+        prevMovieIndex = myData[findIndex - 1];
 
-        setState(() {
-          nextMovieId = nextIndex?['value'];
-        });
+        Logger().i('false ${nextMovieIndex}, ${prevMovieIndex}');
       }
+      //Block pengecekan Movie Id selanjutnya, untuk kebutuhan Swipe
       setState(() {
+        _findIndex = findIndex;
+        nextMovieId = nextMovieIndex?['value'];
+        prevMovieId = prevMovieIndex?['value'];
         isLoading = true;
       });
       var resp = await DioClient().apiCall(
@@ -416,14 +483,18 @@ class _MovieDetailScreenState extends ConsumerState<MovieDetailScreen> {
       });
       _updatePalettes(movieDetailResponse);
     } on DioError catch (e) {
-      Logger().e(e.response?.data);
+      // Logger().e(e.response?.data);
       setState(() {
         isError = true;
         isLoading = false;
       });
+      if (e.response?.statusCode == 404) {
+        doRedirect();
+      }
     } catch (e) {
-      Logger().e(e);
+      // Logger().e(e);
       setState(() {
+        isError = true;
         isLoading = false;
       });
     }
@@ -452,6 +523,15 @@ class _MovieDetailScreenState extends ConsumerState<MovieDetailScreen> {
         )
         .toList();
     return listOfIdsLength.length;
+  }
+
+  void doRedirect() {
+    if (widget.idAndObject!['type'] == 'search') {
+      // context.goNamed(SearchScreen.routeName);
+      context.pushNamed(SearchPage.routeName);
+    } else {
+      context.goNamed(BotNavBarScreen.routeName);
+    }
   }
 }
 

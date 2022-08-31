@@ -1,22 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:fugi_movie_app_team2/src/features/home/presentation/botnavbar_screen.dart';
+import 'package:fugi_movie_app_team2/src/features/search/presentation/widgets/movie_item_widget.dart';
 import 'package:go_router/go_router.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../movie_detail/presentation/movie_detail_screen.dart';
 
-final movieDetailAccessFromProvider = StateProvider<String>((ref) {
-  return '';
-});
-
-class MovieItemWidget extends StatelessWidget {
+class MovieWatchItemWidget extends ConsumerWidget {
   final String? imagePath;
   final String? title;
   final String? rating;
   final String? date;
   final Map<String, dynamic>? movie;
-  const MovieItemWidget({
+  const MovieWatchItemWidget({
     Key? key,
     this.imagePath,
     this.title,
@@ -26,14 +24,19 @@ class MovieItemWidget extends StatelessWidget {
   }) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return InkWell(
       onTap: () {
-        context.pushNamed(MovieDetailScreen.routeName, extra: {
-          "id": movie?['id'],
-          "object": null,
-          "type": "search",
-        });
+        ref.read(movieDetailAccessFromProvider.state).state = BotNavBarScreen.routeName;
+        ref.read(currentIndexProvider.state).state = 2;
+        context.pushNamed(
+          MovieDetailScreen.routeName,
+          extra: {
+            "id": movie?['id'],
+            "object": null,
+            "type": "watchlist",
+          },
+        );
       },
       child: Container(
         margin: EdgeInsets.only(bottom: 20.0.sp),

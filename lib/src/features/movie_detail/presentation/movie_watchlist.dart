@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:fugi_movie_app_team2/src/features/movie_detail/presentation/movie_watchlist_controller.dart';
+import 'package:fugi_movie_app_team2/src/features/search/presentation/widgets/movie_watch_item_widget.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:intl/intl.dart';
 import 'package:keyboard_dismisser/keyboard_dismisser.dart';
 
-import '../../search/presentation/widgets/movie_item_widget.dart';
 
 class WatchlistScreen extends StatefulHookConsumerWidget {
   const WatchlistScreen({Key? key}) : super(key: key);
@@ -43,7 +43,7 @@ class _WatchlistScreenState extends ConsumerState<WatchlistScreen> {
                     return Stack(
                       alignment: Alignment.topRight,
                       children: [
-                        MovieItemWidget(
+                        MovieWatchItemWidget(
                           imagePath: watchlist.posterPath,
                           movie: {"id": watchlist.id},
                           title: watchlist.title,

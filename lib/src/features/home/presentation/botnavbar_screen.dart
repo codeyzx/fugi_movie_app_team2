@@ -10,6 +10,9 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../movie_detail/presentation/movie_watchlist.dart';
 import '../../movie_detail/presentation/movie_watchlist_controller.dart';
 
+final currentScreenProvider = StateProvider<Widget>((ref) => const HomeScreen());
+final currentIndexProvider = StateProvider<int>((ref) => 0);
+
 class BotNavBarScreen extends StatefulHookConsumerWidget {
   const BotNavBarScreen({Key? key}) : super(key: key);
   static const routeName = '/botnavbar-screen';
@@ -19,10 +22,9 @@ class BotNavBarScreen extends StatefulHookConsumerWidget {
 }
 
 class BotNavBarScreenState extends ConsumerState<BotNavBarScreen> {
-  int currentIndex = 0;
-
   final PageStorageBucket bucket = PageStorageBucket();
-  Widget currentScreen = const HomeScreen();
+  // int currentIndex = 0;
+  // Widget currentScreen = const HomeScreen();
 
   @override
   void initState() {
@@ -31,10 +33,13 @@ class BotNavBarScreenState extends ConsumerState<BotNavBarScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final currentScreen = ref.watch(currentScreenProvider);
+    final currentIndex = ref.watch(currentIndexProvider);
     final watchlistState = ref.watch(watchlistControllerProvider);
 
     return SafeArea(
       top: false,
+      bottom: false,
       child: Scaffold(
         body: PageStorage(
           bucket: bucket,
@@ -51,19 +56,24 @@ class BotNavBarScreenState extends ConsumerState<BotNavBarScreen> {
             currentIndex: currentIndex,
             onTap: (index) {
               setState(() {
-                currentIndex = index;
-                switch (currentIndex) {
+                // currentIndex = index;
+                ref.read(currentIndexProvider.state).state = index;
+                switch (index) {
                   case 0:
-                    currentScreen = const HomeScreen();
+                    // currentScreen = const HomeScreen();
+                    ref.read(currentScreenProvider.state).state = const HomeScreen();
                     break;
                   case 1:
-                    currentScreen = const SearchPage();
+                    // currentScreen = const SearchPage();
+                    ref.read(currentScreenProvider.state).state = const SearchPage();
                     break;
                   case 2:
-                    currentScreen = const WatchlistScreen();
+                    // currentScreen = const WatchlistScreen();
+                    ref.read(currentScreenProvider.state).state = const WatchlistScreen();
                     break;
                   case 3:
-                    currentScreen = const ProfileScreen();
+                    // currentScreen = const ProfileScreen();
+                    ref.read(currentScreenProvider.state).state = const ProfileScreen();
                     break;
                   default:
                 }

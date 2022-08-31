@@ -2,13 +2,16 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:fugi_movie_app_team2/src/features/home/presentation/botnavbar_screen.dart';
 import 'package:go_router/go_router.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:palette_generator/palette_generator.dart';
 
 import '../../../../common_config/app_theme.dart';
 import '../../../movie_detail/presentation/movie_detail_screen.dart';
+import '../../../search/presentation/widgets/movie_item_widget.dart';
 
-class ImageNumberWidget<T> extends StatefulWidget {
+class ImageNumberWidget<T> extends StatefulHookConsumerWidget {
   // final Trending trending;
   final int number;
   final T trending;
@@ -21,10 +24,10 @@ class ImageNumberWidget<T> extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  State<ImageNumberWidget> createState() => _ImageNumberWidgetState();
+  _ImageNumberWidgetState createState() => _ImageNumberWidgetState();
 }
 
-class _ImageNumberWidgetState extends State<ImageNumberWidget> {
+class _ImageNumberWidgetState extends ConsumerState<ImageNumberWidget> {
   final List<PaletteColor> _colors = [];
   final int _currentIndex = 0;
 
@@ -48,6 +51,7 @@ class _ImageNumberWidgetState extends State<ImageNumberWidget> {
             "type": widget.type,
           },
         );
+        ref.read(movieDetailAccessFromProvider.state).state = BotNavBarScreen.routeName;
       },
       child: Stack(
         alignment: Alignment.topLeft,

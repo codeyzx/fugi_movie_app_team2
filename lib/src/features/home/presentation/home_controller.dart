@@ -13,8 +13,6 @@ class HomeController extends StateNotifier<List<Map<String, dynamic>?>> {
         'category': category,
         'value': value,
       });
-    } else {
-      myState.removeAt(findIndex);
     }
     state = myState;
   }

@@ -8,14 +8,16 @@ import 'package:fugi_movie_app_team2/src/features/home/presentation/home_control
 import 'package:fugi_movie_app_team2/src/features/home/presentation/widgets/image_number_widget.dart';
 import 'package:fugi_movie_app_team2/src/features/movie_detail/presentation/movie_detail_screen.dart';
 import 'package:fugi_movie_app_team2/src/features/search/presentation/search_controller.dart';
-import 'package:fugi_movie_app_team2/src/features/search/presentation/search_screen.dart';
+import 'package:fugi_movie_app_team2/src/features/search/presentation/search_page.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:keyboard_dismisser/keyboard_dismisser.dart';
 
 import '../../../common_config/app_theme.dart';
 import '../../../core/client/dio_client.dart';
+import '../../search/presentation/widgets/movie_item_widget.dart';
 import '../domain/trending.dart';
+import 'botnavbar_screen.dart';
 
 final keywordsProvider = StateProvider<String?>((ref) => '');
 
@@ -52,7 +54,8 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
         // if (!state.isRefreshing && !state.hasError) {
         if (!state.isRefreshing) {
           Future.delayed(const Duration(milliseconds: 1000), () {
-            context.pushNamed(SearchScreen.routeName);
+            // context.pushNamed(SearchScreen.routeName);
+            context.pushNamed(SearchPage.routeName);
             setState(() {
               isLoadingSearch = false;
             });
@@ -95,6 +98,10 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                         color: AppTheme.secondaryColor,
                       ),
                       child: TextField(
+                        onTap: () {
+                          ref.read(currentScreenProvider.state).state = const SearchPage();
+                          ref.read(currentIndexProvider.state).state = 1;
+                        },
                         onChanged: (value) {
                           ref.read(keywordsProvider.state).state = value;
                           setState(() {});
@@ -211,6 +218,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                                             "object": trendings[index],
                                             'type': 'trending',
                                           });
+                                          ref.read(movieDetailAccessFromProvider.state).state = BotNavBarScreen.routeName;
                                         },
                                         child: Stack(
                                           alignment: Alignment.bottomRight,
@@ -262,6 +270,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                                           'object': upcomings[index],
                                           'type': 'upcoming',
                                         });
+                                        ref.read(movieDetailAccessFromProvider.state).state = BotNavBarScreen.routeName;
                                       },
                                       child: Stack(
                                         alignment: Alignment.bottomRight,
@@ -306,6 +315,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                                           'object': toprateds[index],
                                           'type': 'toprated',
                                         });
+                                        ref.read(movieDetailAccessFromProvider.state).state = BotNavBarScreen.routeName;
                                       },
                                       child: Stack(
                                         alignment: Alignment.bottomRight,
@@ -350,6 +360,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                                           'object': populars[index],
                                           'type': 'popular',
                                         });
+                                        ref.read(movieDetailAccessFromProvider.state).state = BotNavBarScreen.routeName;
                                       },
                                       child: Stack(
                                         alignment: Alignment.bottomRight,
