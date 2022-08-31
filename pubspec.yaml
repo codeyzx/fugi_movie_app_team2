@@ -30,6 +30,7 @@ dependencies:
   keyboard_dismisser: ^3.0.0
   logger: ^1.1.0
   palette_generator: ^0.3.3+2
+  url_launcher: ^6.1.5
 
 dev_dependencies:
   build_runner: any

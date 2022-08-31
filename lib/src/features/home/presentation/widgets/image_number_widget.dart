@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fugi_movie_app_team2/src/features/home/presentation/botnavbar_screen.dart';
@@ -73,8 +74,16 @@ class _ImageNumberWidgetState extends ConsumerState<ImageNumberWidget> {
                 borderRadius: BorderRadius.all(
                   Radius.circular(10.0.sp),
                 ),
-                child: Image.network(
-                  'https://image.tmdb.org/t/p/w500/${widget.trending.posterPath}',
+                // child: Image.network(
+                //   'https://image.tmdb.org/t/p/w500/${widget.trending.posterPath}',
+                // ),
+                child: CachedNetworkImage(
+                  imageUrl: "https://image.tmdb.org/t/p/w300/${widget.trending.posterPath}",
+                  height: MediaQuery.of(context).size.height * .4.sp,
+                  fit: BoxFit.cover,
+                  progressIndicatorBuilder: (context, url, downloadProgress) =>
+                      Center(child: CircularProgressIndicator(value: downloadProgress.progress)),
+                  errorWidget: (context, url, error) => const Icon(Icons.error),
                 ),
               ),
             ),

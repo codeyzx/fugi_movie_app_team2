@@ -137,7 +137,7 @@ class _MovieDetailScreenState extends ConsumerState<MovieDetailScreen> {
                   autoplay: false,
                   onIndexChanged: (value) {
                     // Logger().v('__findIndex: $_findIndex');
-                    Logger().v('__value_swipe_index: $value');
+                    // Logger().v('__value_swipe_index: $value');
                     // Logger().v('__value_swipe_length: ${movieIdsState.length}');
                     // Logger().v('prevMovieId: $prevMovieId');
                     if (value == 1) {
@@ -178,7 +178,7 @@ class _MovieDetailScreenState extends ConsumerState<MovieDetailScreen> {
                           ),
                           ElevatedButton(
                             style: ElevatedButton.styleFrom(
-                              backgroundColor: AppTheme.textBlueColor,
+                              primary: AppTheme.textBlueColor,
                             ),
                             onPressed: () {},
                             child: const Text('Swipe to Home'),

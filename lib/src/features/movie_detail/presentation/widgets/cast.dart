@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fugi_movie_app_team2/src/features/home/domain/movie_detail.dart';
@@ -27,11 +28,19 @@ class Cast extends StatelessWidget {
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(5.0.sp),
                     color: Colors.grey[200],
-                    image: DecorationImage(
-                      image: NetworkImage(
-                          production.logoPath != null ? 'https://image.tmdb.org/t/p/w500${production.logoPath}' : ''),
-                      // fit: BoxFit.fitHeight,
-                    ),
+                    // image: DecorationImage(
+                    //   image: NetworkImage(
+                    //       production.logoPath != null ? 'https://image.tmdb.org/t/p/w500${production.logoPath}' : ''),
+                    //   // fit: BoxFit.fitHeight,
+                    // ),
+                  ),
+                  child: CachedNetworkImage(
+                    imageUrl: "https://image.tmdb.org/t/p/w500${production.logoPath}",
+                    height: MediaQuery.of(context).size.height * .5.sp,
+                    fit: BoxFit.fitHeight,
+                    progressIndicatorBuilder: (context, url, downloadProgress) =>
+                        Center(child: CircularProgressIndicator(value: downloadProgress.progress)),
+                    errorWidget: (context, url, error) => const Icon(Icons.error),
                   ),
                 ),
                 SizedBox(width: 10.0.sp),
