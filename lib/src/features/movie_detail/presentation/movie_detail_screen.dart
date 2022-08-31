@@ -292,7 +292,7 @@ class _MovieDetailScreenState extends ConsumerState<MovieDetailScreen> {
                                               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                                               children: [
                                                 const Icon(Icons.star_border, color: Colors.orange),
-                                                Text('${detailMovie.voteAverage}',
+                                                Text('${detailMovie.voteAverage?.toStringAsFixed(1)}',
                                                     style: TextStyle(
                                                       fontSize: 14.0.sp,
                                                       color: Colors.orange,
@@ -530,7 +530,7 @@ class _MovieDetailScreenState extends ConsumerState<MovieDetailScreen> {
                                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                                         children: [
                                           const Icon(Icons.star_border, color: Colors.orange),
-                                          Text('${detailMovie.voteAverage}',
+                                          Text('${detailMovie.voteAverage?.toStringAsFixed(1)}',
                                               style: TextStyle(
                                                 fontSize: 14.0.sp,
                                                 color: Colors.orange,

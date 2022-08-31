@@ -7,7 +7,6 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:intl/intl.dart';
 import 'package:keyboard_dismisser/keyboard_dismisser.dart';
 
-
 class WatchlistScreen extends StatefulHookConsumerWidget {
   const WatchlistScreen({Key? key}) : super(key: key);
   static const routeName = 'watchlist-screen';
@@ -47,7 +46,7 @@ class _WatchlistScreenState extends ConsumerState<WatchlistScreen> {
                           imagePath: watchlist.posterPath,
                           movie: {"id": watchlist.id},
                           title: watchlist.title,
-                          rating: watchlist.voteAverage.toString(),
+                          rating: watchlist.voteAverage?.toStringAsFixed(1),
                           date: DateFormat('dd MMM yyyy').format(DateTime.parse(watchlist.releaseDate.toString())),
                         ),
                         Positioned(
