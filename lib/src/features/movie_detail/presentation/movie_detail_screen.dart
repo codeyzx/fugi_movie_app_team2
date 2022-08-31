@@ -14,6 +14,7 @@ import 'package:fugi_movie_app_team2/src/features/home/presentation/home_control
 import 'package:fugi_movie_app_team2/src/features/movie_detail/presentation/movie_watchlist_controller.dart';
 import 'package:fugi_movie_app_team2/src/features/movie_detail/presentation/widgets/about_movie.dart';
 import 'package:fugi_movie_app_team2/src/features/movie_detail/presentation/widgets/cast.dart';
+import 'package:fugi_movie_app_team2/src/features/movie_detail/presentation/widgets/cast_card.dart';
 import 'package:fugi_movie_app_team2/src/features/movie_detail/presentation/widgets/movie_status.dart';
 import 'package:fugi_movie_app_team2/src/features/movie_detail/presentation/widgets/reviews.dart';
 import 'package:go_router/go_router.dart';
@@ -48,17 +49,16 @@ class _MovieDetailScreenState extends ConsumerState<MovieDetailScreen> {
   bool isLoading = false;
   bool isError = false;
   final List<PaletteColor> _colors = [];
+  List responseListCast = [];
   final int _currentIndex = 0;
   dynamic nextMovieId = 0;
   dynamic prevMovieId = 0;
   var swaipCardController = const SwiperControl();
-  final _swaiperController = SwiperController();
-  int _findIndex = 0;
-
   @override
   void initState() {
     super.initState();
     fetchData();
+    fetchDataCast();
   }
 
   void _updatePalettes(MovieDetail movieDetailResponse) async {
@@ -90,6 +90,7 @@ class _MovieDetailScreenState extends ConsumerState<MovieDetailScreen> {
         Tab(child: Text('Reviews')),
         Tab(child: Text('About Movie')),
         Tab(child: Text('Production')),
+        Tab(child: Text('Cast')),
       ],
       indicatorColor: AppTheme.textColor,
       unselectedLabelColor: Colors.white,
@@ -176,7 +177,7 @@ class _MovieDetailScreenState extends ConsumerState<MovieDetailScreen> {
                       ),
                       ElevatedButton(
                         style: ElevatedButton.styleFrom(
-                          primary: AppTheme.textBlueColor,
+                          backgroundColor: AppTheme.textBlueColor,
                         ),
                         onPressed: () {},
                         child: const Text('Swipe to Home'),
@@ -401,16 +402,9 @@ class _MovieDetailScreenState extends ConsumerState<MovieDetailScreen> {
                       Expanded(
                         flex: 2,
                         child: DefaultTabController(
-                          length: 3,
+                          length: 4,
                           child: Scaffold(
                             appBar: myTabBar,
-                            // appBar: const TabBar(
-                            //   tabs: [
-                            //     Tab(child: Text('Reviews')),
-                            //     Tab(child: Text('About Movie')),
-                            //     Tab(child: Text('Production')),
-                            //   ],
-                            // ),
                             body: TabBarView(
                               children: [
                                 AboutMovie(
@@ -419,6 +413,7 @@ class _MovieDetailScreenState extends ConsumerState<MovieDetailScreen> {
                                 ),
                                 Reviews(content: detailMovie.overview ?? '-'),
                                 Cast(content: detailMovie.productionCompanies!),
+                                CastCard(listData: responseListCast),
                               ],
                             ),
                           ),
@@ -429,6 +424,42 @@ class _MovieDetailScreenState extends ConsumerState<MovieDetailScreen> {
                 }
               }),
     );
+  }
+
+  void fetchDataCast() async {
+    try {
+      setState(() {
+        isLoading = true;
+      });
+
+      var resp = await DioClient().apiCall(
+        url: '/movie/${widget.idAndObject!['id']}/credits',
+        requestType: RequestType.get,
+        queryParameters: {},
+      );
+
+      var respBody = resp.data;
+
+      setState(() {
+        responseListCast = respBody['cast'];
+        isLoading = false;
+      });
+    } on DioError catch (e) {
+      // Logger().e(e.response?.data);
+      setState(() {
+        isError = true;
+        isLoading = false;
+      });
+      if (e.response?.statusCode == 404) {
+        doRedirect();
+      }
+    } catch (e) {
+      // Logger().e(e);
+      setState(() {
+        isError = true;
+        isLoading = false;
+      });
+    }
   }
 
   void fetchData() async {
@@ -454,17 +485,16 @@ class _MovieDetailScreenState extends ConsumerState<MovieDetailScreen> {
           Logger().i('prevMovieIndex false: $findIndex');
           prevMovieIndex = myData[findIndex];
         }
-        Logger().i('true ${nextMovieIndex}, ${prevMovieIndex}');
+        Logger().i('true $nextMovieIndex, $prevMovieIndex');
       } else {
         //jika tidak ada data berikutnya, maka ambil data pertama ke-0.
         nextMovieIndex = myData[findIndex];
         prevMovieIndex = myData[findIndex - 1];
 
-        Logger().i('false ${nextMovieIndex}, ${prevMovieIndex}');
+        Logger().i('false $nextMovieIndex, $prevMovieIndex');
       }
       //Block pengecekan Movie Id selanjutnya, untuk kebutuhan Swipe
       setState(() {
-        _findIndex = findIndex;
         nextMovieId = nextMovieIndex?['value'];
         prevMovieId = prevMovieIndex?['value'];
         isLoading = true;
