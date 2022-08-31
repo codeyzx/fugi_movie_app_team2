@@ -14,7 +14,7 @@ class MyApp extends StatelessWidget {
       designSize: const Size(360, 760),
       builder: (context, child) {
         return MaterialApp.router(
-          title: 'Movie Apps 2nd Team',
+          title: 'MyTinderMovie',
           theme: ThemeData(
             canvasColor: Palette.team2color,
             // tabBarTheme: TabBarTheme(
