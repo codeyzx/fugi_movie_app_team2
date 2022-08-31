@@ -177,7 +177,7 @@ class _MovieDetailScreenState extends ConsumerState<MovieDetailScreen> {
                       ),
                       ElevatedButton(
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: AppTheme.textBlueColor,
+                          primary: AppTheme.textBlueColor,
                         ),
                         onPressed: () {},
                         child: const Text('Swipe to Home'),
