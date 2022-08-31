@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -48,13 +49,24 @@ class MovieWatchItemWidget extends ConsumerWidget {
               height: 120.0.sp,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(5.5.sp),
-                image: DecorationImage(
-                    image: imagePath != null
-                        ? Image.network(
-                            'https://image.tmdb.org/t/p/w780/$imagePath',
-                          ).image
-                        : Image.asset('assets/icons/no-image.png').image,
-                    fit: BoxFit.cover),
+                // image: DecorationImage(
+                //     image: imagePath != null
+                //         ? Image.network(
+                //             'https://image.tmdb.org/t/p/w780/$imagePath',
+                //           ).image
+                //         : Image.asset('assets/icons/no-image.png').image,
+                //     fit: BoxFit.cover),
+              ),
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(5.0.sp),
+                child: CachedNetworkImage(
+                  fit: BoxFit.cover,
+                  imageUrl: "https://image.tmdb.org/t/p/w300/$imagePath",
+                  height: MediaQuery.of(context).size.height * .4.sp,
+                  progressIndicatorBuilder: (context, url, downloadProgress) =>
+                      Center(child: CircularProgressIndicator(value: downloadProgress.progress)),
+                  errorWidget: (context, url, error) => const Icon(Icons.error),
+                ),
               ),
             ),
             SizedBox(width: 10.0.sp),
