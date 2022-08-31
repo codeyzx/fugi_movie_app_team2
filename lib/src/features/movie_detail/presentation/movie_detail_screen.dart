@@ -130,299 +130,536 @@ class _MovieDetailScreenState extends ConsumerState<MovieDetailScreen> {
           ? const Center(
               child: CircularProgressIndicator.adaptive(),
             )
-          : Swiper(
-              itemCount: getCountIndex(),
-              loop: true,
-              autoplay: false,
-              onIndexChanged: (value) {
-                // Logger().v('__findIndex: $_findIndex');
-                Logger().v('__value_swipe_index: $value');
-                // Logger().v('__value_swipe_length: ${movieIdsState.length}');
-                // Logger().v('prevMovieId: $prevMovieId');
-                if (value == 1) {
-                  context.pushNamed(
-                    MovieDetailScreen.routeName,
-                    extra: {
-                      "id": nextMovieId,
-                      "object": '',
-                      "type": widget.idAndObject!['type'],
-                    },
-                  );
-                } else {
-                  context.pushNamed(
-                    MovieDetailScreen.routeName,
-                    extra: {
-                      "id": prevMovieId,
-                      "object": '',
-                      "type": widget.idAndObject!['type'],
-                    },
-                  );
-                }
-              },
-              // control: const SwiperControl(),
-              scale: .9,
-              curve: Curves.easeInOut,
-              itemBuilder: (context, index) {
-                if (isError) {
-                  return Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      SizedBox(
-                        width: 200.0.w,
-                        child: Text(
-                          'Sorry 🙏, The resource you requested could not be found. Movie with ID ${widget.idAndObject?['id']} not found',
-                          textAlign: TextAlign.center,
-                        ),
-                      ),
-                      ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          primary: AppTheme.textBlueColor,
-                        ),
-                        onPressed: () {},
-                        child: const Text('Swipe to Home'),
-                      ),
-                    ],
-                  );
-                } else {
-                  return Column(
-                    children: [
-                      Expanded(
-                        flex: 2,
-                        child: Stack(
-                          alignment: Alignment.bottomCenter,
-                          children: [
-                            Stack(
+          : widget.idAndObject!['type'] != 'watchlist'
+              ? Swiper(
+                  itemCount: getCountIndex(),
+                  loop: true,
+                  autoplay: false,
+                  onIndexChanged: (value) {
+                    // Logger().v('__findIndex: $_findIndex');
+                    Logger().v('__value_swipe_index: $value');
+                    // Logger().v('__value_swipe_length: ${movieIdsState.length}');
+                    // Logger().v('prevMovieId: $prevMovieId');
+                    if (value == 1) {
+                      context.pushNamed(
+                        MovieDetailScreen.routeName,
+                        extra: {
+                          "id": nextMovieId,
+                          "object": '',
+                          "type": widget.idAndObject!['type'],
+                        },
+                      );
+                    } else {
+                      context.pushNamed(
+                        MovieDetailScreen.routeName,
+                        extra: {
+                          "id": prevMovieId,
+                          "object": '',
+                          "type": widget.idAndObject!['type'],
+                        },
+                      );
+                    }
+                  },
+                  // control: const SwiperControl(),
+                  scale: .9,
+                  curve: Curves.easeInOut,
+                  itemBuilder: (context, index) {
+                    if (isError) {
+                      return Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          SizedBox(
+                            width: 200.0.w,
+                            child: Text(
+                              'Sorry 🙏, The resource you requested could not be found. Movie with ID ${widget.idAndObject?['id']} not found',
+                              textAlign: TextAlign.center,
+                            ),
+                          ),
+                          ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: AppTheme.textBlueColor,
+                            ),
+                            onPressed: () {},
+                            child: const Text('Swipe to Home'),
+                          ),
+                        ],
+                      );
+                    } else {
+                      return Column(
+                        children: [
+                          Expanded(
+                            flex: 2,
+                            child: Stack(
+                              alignment: Alignment.bottomCenter,
                               children: [
-                                Container(
-                                  width: MediaQuery.of(context).size.width,
-                                  margin: EdgeInsets.only(
-                                    bottom: MediaQuery.of(context).size.height * .09.sp,
-                                  ),
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.only(
-                                      bottomLeft: Radius.circular(15.0.sp),
-                                      bottomRight: Radius.circular(15.0.sp),
-                                    ),
-                                    boxShadow: [
-                                      BoxShadow(
-                                        color: _colors.isNotEmpty
-                                            ? _colors[_currentIndex].color.withOpacity(.3)
-                                            : Colors.black.withOpacity(0.5),
-                                        spreadRadius: 5.5.sp,
-                                        blurRadius: 5.0.sp,
-                                        offset: const Offset(0, 2), // changes position of shadow
+                                Stack(
+                                  children: [
+                                    Container(
+                                      width: MediaQuery.of(context).size.width,
+                                      margin: EdgeInsets.only(
+                                        bottom: MediaQuery.of(context).size.height * .09.sp,
                                       ),
-                                    ],
-                                    color: AppTheme.secondaryColor,
-                                    // image: DecorationImage(
-                                    //   image: detailMovie.backdropPath != null
-                                    //       ? NetworkImage('https://image.tmdb.org/t/p/w780/${detailMovie.backdropPath}')
-                                    //       : Image.asset('assets/icons/no-image.png').image,
-                                    //   fit: BoxFit.cover,
-                                    // ),
-                                  ),
-                                  child: Center(
-                                    child: CachedNetworkImage(
-                                      imageUrl: "https://image.tmdb.org/t/p/w780/${detailMovie.backdropPath}",
-                                      height: MediaQuery.of(context).size.height * .5.sp,
-                                      fit: BoxFit.fitHeight,
-                                      progressIndicatorBuilder: (context, url, downloadProgress) =>
-                                          Center(child: CircularProgressIndicator(value: downloadProgress.progress)),
-                                      errorWidget: (context, url, error) => const Icon(Icons.error),
-                                    ),
-                                  ),
-                                ),
-                                // Text('${widget.trending.id}'),
-                                Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: Column(
-                                    children: [
-                                      Text(
-                                        'Movie ID: ${widget.idAndObject!['id']}',
-                                        style: TextStyle(
-                                          fontSize: 10.0.sp,
-                                          fontWeight: FontWeight.normal,
-                                          color: Colors.grey,
-                                        ),
-                                      ),
-                                      // Flexible(child: Text('${movieIdsState.toString()}')),
-                                      // Flexible(child: Text('${getCountIndex()}')),
-                                    ],
-                                  ),
-                                ),
-                                Positioned(
-                                  bottom: 100.0.sp,
-                                  right: 0,
-                                  child: GestureDetector(
-                                    onTap: () {
-                                      showModalBottomSheet(
-                                          context: context,
-                                          backgroundColor: Colors.transparent,
-                                          builder: ((BuildContext context) {
-                                            return Wrap(
-                                              children: [
-                                                Container(
-                                                  decoration: BoxDecoration(
-                                                    color: Colors.white,
-                                                    borderRadius: BorderRadius.only(
-                                                      topLeft: Radius.circular(20.0.sp),
-                                                      topRight: Radius.circular(20.0.sp),
-                                                    ),
-                                                  ),
-                                                  padding: EdgeInsets.all(20.0.sp),
-                                                  child: const WidgetSLider(),
-                                                )
-                                              ],
-                                            );
-                                          }));
-                                    },
-                                    child: Container(
-                                      margin: EdgeInsets.symmetric(vertical: 15.0.sp, horizontal: 15.0.sp),
-                                      width: 70.0.sp,
-                                      height: 35.0.sp,
                                       decoration: BoxDecoration(
-                                        color: AppTheme.primaryColor,
-                                        borderRadius: BorderRadius.circular(10.0.sp),
-                                        border: Border.all(color: Colors.orange),
+                                        borderRadius: BorderRadius.only(
+                                          bottomLeft: Radius.circular(15.0.sp),
+                                          bottomRight: Radius.circular(15.0.sp),
+                                        ),
+                                        boxShadow: [
+                                          BoxShadow(
+                                            color: _colors.isNotEmpty
+                                                ? _colors[_currentIndex].color.withOpacity(.3)
+                                                : Colors.black.withOpacity(0.5),
+                                            spreadRadius: 5.5.sp,
+                                            blurRadius: 5.0.sp,
+                                            offset: const Offset(0, 2), // changes position of shadow
+                                          ),
+                                        ],
+                                        color: AppTheme.secondaryColor,
+                                        // image: DecorationImage(
+                                        //   image: detailMovie.backdropPath != null
+                                        //       ? NetworkImage('https://image.tmdb.org/t/p/w780/${detailMovie.backdropPath}')
+                                        //       : Image.asset('assets/icons/no-image.png').image,
+                                        //   fit: BoxFit.cover,
+                                        // ),
                                       ),
                                       child: Center(
-                                        child: Row(
-                                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                          children: [
-                                            const Icon(Icons.star_border, color: Colors.orange),
-                                            Text('${detailMovie.voteAverage}',
-                                                style: TextStyle(
-                                                  fontSize: 14.0.sp,
-                                                  color: Colors.orange,
-                                                )),
-                                          ],
+                                        child: CachedNetworkImage(
+                                          imageUrl: "https://image.tmdb.org/t/p/w780/${detailMovie.backdropPath}",
+                                          height: MediaQuery.of(context).size.height * .5.sp,
+                                          fit: BoxFit.fitHeight,
+                                          progressIndicatorBuilder: (context, url, downloadProgress) =>
+                                              Center(child: CircularProgressIndicator(value: downloadProgress.progress)),
+                                          errorWidget: (context, url, error) => const Icon(Icons.error),
                                         ),
+                                      ),
+                                    ),
+                                    // Text('${widget.trending.id}'),
+                                    Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: Column(
+                                        children: [
+                                          Text(
+                                            'Movie ID: ${widget.idAndObject!['id']}',
+                                            style: TextStyle(
+                                              fontSize: 10.0.sp,
+                                              fontWeight: FontWeight.normal,
+                                              color: Colors.grey,
+                                            ),
+                                          ),
+                                          // Flexible(child: Text('${movieIdsState.toString()}')),
+                                          // Flexible(child: Text('${getCountIndex()}')),
+                                        ],
+                                      ),
+                                    ),
+                                    Positioned(
+                                      bottom: 100.0.sp,
+                                      right: 0,
+                                      child: GestureDetector(
+                                        onTap: () {
+                                          showModalBottomSheet(
+                                              context: context,
+                                              backgroundColor: Colors.transparent,
+                                              builder: ((BuildContext context) {
+                                                return Wrap(
+                                                  children: [
+                                                    Container(
+                                                      decoration: BoxDecoration(
+                                                        color: Colors.white,
+                                                        borderRadius: BorderRadius.only(
+                                                          topLeft: Radius.circular(20.0.sp),
+                                                          topRight: Radius.circular(20.0.sp),
+                                                        ),
+                                                      ),
+                                                      padding: EdgeInsets.all(20.0.sp),
+                                                      child: const WidgetSLider(),
+                                                    )
+                                                  ],
+                                                );
+                                              }));
+                                        },
+                                        child: Container(
+                                          margin: EdgeInsets.symmetric(vertical: 15.0.sp, horizontal: 15.0.sp),
+                                          width: 70.0.sp,
+                                          height: 35.0.sp,
+                                          decoration: BoxDecoration(
+                                            color: AppTheme.primaryColor,
+                                            borderRadius: BorderRadius.circular(10.0.sp),
+                                            border: Border.all(color: Colors.orange),
+                                          ),
+                                          child: Center(
+                                            child: Row(
+                                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                              children: [
+                                                const Icon(Icons.star_border, color: Colors.orange),
+                                                Text('${detailMovie.voteAverage}',
+                                                    style: TextStyle(
+                                                      fontSize: 14.0.sp,
+                                                      color: Colors.orange,
+                                                    )),
+                                              ],
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                Positioned(
+                                  left: 0.0.sp,
+                                  right: 0.0.sp,
+                                  child: SizedBox(
+                                    width: double.infinity,
+                                    child: Padding(
+                                      padding: EdgeInsets.symmetric(
+                                        horizontal: 25.0.sp,
+                                        // vertical: 5.0.sp,
+                                      ),
+                                      child: Row(
+                                        crossAxisAlignment: CrossAxisAlignment.center,
+                                        children: [
+                                          Container(
+                                            width: 75.0.sp,
+                                            decoration: BoxDecoration(
+                                              borderRadius: BorderRadius.circular(10.0.sp),
+                                              boxShadow: [
+                                                BoxShadow(
+                                                  color: _colors.isNotEmpty
+                                                      ? _colors[_currentIndex].color.withOpacity(.5)
+                                                      : Colors.white,
+                                                  blurRadius: 10.0.sp,
+                                                  spreadRadius: 5.0.sp,
+                                                ),
+                                              ],
+                                            ),
+                                            child: ClipRRect(
+                                              borderRadius: BorderRadius.all(Radius.circular(10.0.sp)),
+                                              child: detailMovie.posterPath != null
+                                                  ? Image.network(
+                                                      'https://image.tmdb.org/t/p/w500/${detailMovie.posterPath}',
+                                                      fit: BoxFit.cover,
+                                                      width: 90.sp,
+                                                    )
+                                                  : Image.asset(
+                                                      'assets/icons/no-image.png',
+                                                      fit: BoxFit.cover,
+                                                    ),
+                                            ),
+                                          ),
+                                          const SizedBox(width: 25),
+                                          Flexible(
+                                            child: Column(
+                                              children: [
+                                                SizedBox(height: Platform.isIOS ? 30.0.sp : 50.0.sp),
+                                                Text(
+                                                  '${detailMovie.title}',
+                                                  style: TextStyle(
+                                                    fontSize: 22.0.sp,
+                                                    overflow: TextOverflow.ellipsis,
+                                                  ),
+                                                  maxLines: 2,
+                                                ),
+                                              ],
+                                            ),
+                                          )
+                                        ],
                                       ),
                                     ),
                                   ),
                                 ),
                               ],
                             ),
-                            Positioned(
-                              left: 0.0.sp,
-                              right: 0.0.sp,
+                          ),
+                          Expanded(
+                            flex: 0,
+                            child: Padding(
+                              padding: EdgeInsets.only(top: 10.0.sp),
                               child: SizedBox(
-                                width: double.infinity,
-                                child: Padding(
-                                  padding: EdgeInsets.symmetric(
-                                    horizontal: 25.0.sp,
-                                    // vertical: 5.0.sp,
-                                  ),
-                                  child: Row(
-                                    crossAxisAlignment: CrossAxisAlignment.center,
-                                    children: [
-                                      Container(
-                                        width: 75.0.sp,
-                                        decoration: BoxDecoration(
-                                          borderRadius: BorderRadius.circular(10.0.sp),
-                                          boxShadow: [
-                                            BoxShadow(
-                                              color: _colors.isNotEmpty
-                                                  ? _colors[_currentIndex].color.withOpacity(.5)
-                                                  : Colors.white,
-                                              blurRadius: 10.0.sp,
-                                              spreadRadius: 5.0.sp,
-                                            ),
-                                          ],
-                                        ),
-                                        child: ClipRRect(
-                                          borderRadius: BorderRadius.all(Radius.circular(10.0.sp)),
-                                          child: detailMovie.posterPath != null
-                                              ? Image.network(
-                                                  'https://image.tmdb.org/t/p/w500/${detailMovie.posterPath}',
-                                                  fit: BoxFit.cover,
-                                                  width: 90.sp,
-                                                )
-                                              : Image.asset(
-                                                  'assets/icons/no-image.png',
-                                                  fit: BoxFit.cover,
-                                                ),
-                                        ),
-                                      ),
-                                      const SizedBox(width: 25),
-                                      Flexible(
-                                        child: Column(
-                                          children: [
-                                            SizedBox(height: Platform.isIOS ? 30.0.sp : 50.0.sp),
-                                            Text(
-                                              '${detailMovie.title}',
-                                              style: TextStyle(
-                                                fontSize: 22.0.sp,
-                                                overflow: TextOverflow.ellipsis,
-                                              ),
-                                              maxLines: 2,
-                                            ),
-                                          ],
-                                        ),
-                                      )
-                                    ],
-                                  ),
+                                width: MediaQuery.of(context).size.width * 0.6.sp,
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    MovieStatus(
+                                      icon: FontAwesomeIcons.calendarWeek,
+                                      text: detailMovie.releaseDate != ''
+                                          ? DateFormat('dd MMM yyyy')
+                                              .format(DateTime.parse(detailMovie.releaseDate.toString()))
+                                              .toString()
+                                          : '-',
+                                    ),
+                                    MovieStatus(icon: FontAwesomeIcons.clock, text: '${detailMovie.runtime} min'),
+                                    MovieStatus(
+                                        icon: FontAwesomeIcons.ticket,
+                                        text: detailMovie.genres!.isNotEmpty ? '${detailMovie.genres?[0].name}' : '-'),
+                                    // MovieStatus(
+                                    //     icon: FontAwesomeIcons.ticket,
+                                    //     text: detailMovie.genres!.isNotEmpty ? '${detailMovie.genres?[0].name}' : '-'),
+                                  ],
                                 ),
                               ),
                             ),
-                          ],
-                        ),
-                      ),
-                      Expanded(
-                        flex: 0,
-                        child: Padding(
-                          padding: EdgeInsets.only(top: 10.0.sp),
-                          child: SizedBox(
-                            width: MediaQuery.of(context).size.width * 0.6.sp,
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                MovieStatus(
-                                  icon: FontAwesomeIcons.calendarWeek,
-                                  text: detailMovie.releaseDate != ''
-                                      ? DateFormat('dd MMM yyyy')
-                                          .format(DateTime.parse(detailMovie.releaseDate.toString()))
-                                          .toString()
-                                      : '-',
+                          ),
+                          SizedBox(height: 10.0.sp),
+                          Expanded(
+                            flex: 2,
+                            child: DefaultTabController(
+                              length: 4,
+                              child: Scaffold(
+                                appBar: myTabBar,
+                                body: TabBarView(
+                                  children: [
+                                    AboutMovie(
+                                      movieTitle: detailMovie.title,
+                                      content: detailMovie.overview ?? '-',
+                                    ),
+                                    Reviews(content: detailMovie.overview ?? '-'),
+                                    Cast(content: detailMovie.productionCompanies!),
+                                    CastCard(listData: responseListCast),
+                                  ],
                                 ),
-                                MovieStatus(icon: FontAwesomeIcons.clock, text: '${detailMovie.runtime} min'),
-                                MovieStatus(
-                                    icon: FontAwesomeIcons.ticket,
-                                    text: detailMovie.genres!.isNotEmpty ? '${detailMovie.genres?[0].name}' : '-'),
-                                // MovieStatus(
-                                //     icon: FontAwesomeIcons.ticket,
-                                //     text: detailMovie.genres!.isNotEmpty ? '${detailMovie.genres?[0].name}' : '-'),
-                              ],
+                              ),
                             ),
+                          ),
+                        ],
+                      );
+                    }
+                  })
+              : Column(
+                  children: [
+                    Expanded(
+                      flex: 2,
+                      child: Stack(
+                        alignment: Alignment.bottomCenter,
+                        children: [
+                          Stack(
+                            children: [
+                              Container(
+                                width: MediaQuery.of(context).size.width,
+                                margin: EdgeInsets.only(
+                                  bottom: MediaQuery.of(context).size.height * .09.sp,
+                                ),
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.only(
+                                    bottomLeft: Radius.circular(15.0.sp),
+                                    bottomRight: Radius.circular(15.0.sp),
+                                  ),
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: _colors.isNotEmpty
+                                          ? _colors[_currentIndex].color.withOpacity(.3)
+                                          : Colors.black.withOpacity(0.5),
+                                      spreadRadius: 5.5.sp,
+                                      blurRadius: 5.0.sp,
+                                      offset: const Offset(0, 2), // changes position of shadow
+                                    ),
+                                  ],
+                                  color: AppTheme.secondaryColor,
+                                  // image: DecorationImage(
+                                  //   image: detailMovie.backdropPath != null
+                                  //       ? NetworkImage('https://image.tmdb.org/t/p/w780/${detailMovie.backdropPath}')
+                                  //       : Image.asset('assets/icons/no-image.png').image,
+                                  //   fit: BoxFit.cover,
+                                  // ),
+                                ),
+                                child: Center(
+                                  child: CachedNetworkImage(
+                                    imageUrl: "https://image.tmdb.org/t/p/w780/${detailMovie.backdropPath}",
+                                    height: MediaQuery.of(context).size.height * .5.sp,
+                                    fit: BoxFit.fitHeight,
+                                    progressIndicatorBuilder: (context, url, downloadProgress) =>
+                                        Center(child: CircularProgressIndicator(value: downloadProgress.progress)),
+                                    errorWidget: (context, url, error) => const Icon(Icons.error),
+                                  ),
+                                ),
+                              ),
+                              // Text('${widget.trending.id}'),
+                              Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Column(
+                                  children: [
+                                    Text(
+                                      'Movie ID: ${widget.idAndObject!['id']}',
+                                      style: TextStyle(
+                                        fontSize: 10.0.sp,
+                                        fontWeight: FontWeight.normal,
+                                        color: Colors.grey,
+                                      ),
+                                    ),
+                                    // Flexible(child: Text('${movieIdsState.toString()}')),
+                                    // Flexible(child: Text('${getCountIndex()}')),
+                                  ],
+                                ),
+                              ),
+                              Positioned(
+                                bottom: 100.0.sp,
+                                right: 0,
+                                child: GestureDetector(
+                                  onTap: () {
+                                    showModalBottomSheet(
+                                        context: context,
+                                        backgroundColor: Colors.transparent,
+                                        builder: ((BuildContext context) {
+                                          return Wrap(
+                                            children: [
+                                              Container(
+                                                decoration: BoxDecoration(
+                                                  color: Colors.white,
+                                                  borderRadius: BorderRadius.only(
+                                                    topLeft: Radius.circular(20.0.sp),
+                                                    topRight: Radius.circular(20.0.sp),
+                                                  ),
+                                                ),
+                                                padding: EdgeInsets.all(20.0.sp),
+                                                child: const WidgetSLider(),
+                                              )
+                                            ],
+                                          );
+                                        }));
+                                  },
+                                  child: Container(
+                                    margin: EdgeInsets.symmetric(vertical: 15.0.sp, horizontal: 15.0.sp),
+                                    width: 70.0.sp,
+                                    height: 35.0.sp,
+                                    decoration: BoxDecoration(
+                                      color: AppTheme.primaryColor,
+                                      borderRadius: BorderRadius.circular(10.0.sp),
+                                      border: Border.all(color: Colors.orange),
+                                    ),
+                                    child: Center(
+                                      child: Row(
+                                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                        children: [
+                                          const Icon(Icons.star_border, color: Colors.orange),
+                                          Text('${detailMovie.voteAverage}',
+                                              style: TextStyle(
+                                                fontSize: 14.0.sp,
+                                                color: Colors.orange,
+                                              )),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                          Positioned(
+                            left: 0.0.sp,
+                            right: 0.0.sp,
+                            child: SizedBox(
+                              width: double.infinity,
+                              child: Padding(
+                                padding: EdgeInsets.symmetric(
+                                  horizontal: 25.0.sp,
+                                  // vertical: 5.0.sp,
+                                ),
+                                child: Row(
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    Container(
+                                      width: 75.0.sp,
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(10.0.sp),
+                                        boxShadow: [
+                                          BoxShadow(
+                                            color: _colors.isNotEmpty
+                                                ? _colors[_currentIndex].color.withOpacity(.5)
+                                                : Colors.white,
+                                            blurRadius: 10.0.sp,
+                                            spreadRadius: 5.0.sp,
+                                          ),
+                                        ],
+                                      ),
+                                      child: ClipRRect(
+                                        borderRadius: BorderRadius.all(Radius.circular(10.0.sp)),
+                                        child: detailMovie.posterPath != null
+                                            ? Image.network(
+                                                'https://image.tmdb.org/t/p/w500/${detailMovie.posterPath}',
+                                                fit: BoxFit.cover,
+                                                width: 90.sp,
+                                              )
+                                            : Image.asset(
+                                                'assets/icons/no-image.png',
+                                                fit: BoxFit.cover,
+                                              ),
+                                      ),
+                                    ),
+                                    const SizedBox(width: 25),
+                                    Flexible(
+                                      child: Column(
+                                        children: [
+                                          SizedBox(height: Platform.isIOS ? 30.0.sp : 50.0.sp),
+                                          Text(
+                                            '${detailMovie.title}',
+                                            style: TextStyle(
+                                              fontSize: 22.0.sp,
+                                              overflow: TextOverflow.ellipsis,
+                                            ),
+                                            maxLines: 2,
+                                          ),
+                                        ],
+                                      ),
+                                    )
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    Expanded(
+                      flex: 0,
+                      child: Padding(
+                        padding: EdgeInsets.only(top: 10.0.sp),
+                        child: SizedBox(
+                          width: MediaQuery.of(context).size.width * 0.6.sp,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              MovieStatus(
+                                icon: FontAwesomeIcons.calendarWeek,
+                                text: detailMovie.releaseDate != ''
+                                    ? DateFormat('dd MMM yyyy')
+                                        .format(DateTime.parse(detailMovie.releaseDate.toString()))
+                                        .toString()
+                                    : '-',
+                              ),
+                              MovieStatus(icon: FontAwesomeIcons.clock, text: '${detailMovie.runtime} min'),
+                              MovieStatus(
+                                  icon: FontAwesomeIcons.ticket,
+                                  text: detailMovie.genres!.isNotEmpty ? '${detailMovie.genres?[0].name}' : '-'),
+                              // MovieStatus(
+                              //     icon: FontAwesomeIcons.ticket,
+                              //     text: detailMovie.genres!.isNotEmpty ? '${detailMovie.genres?[0].name}' : '-'),
+                            ],
                           ),
                         ),
                       ),
-                      SizedBox(height: 10.0.sp),
-                      Expanded(
-                        flex: 2,
-                        child: DefaultTabController(
-                          length: 4,
-                          child: Scaffold(
-                            appBar: myTabBar,
-                            body: TabBarView(
-                              children: [
-                                AboutMovie(
-                                  movieTitle: detailMovie.title,
-                                  content: detailMovie.overview ?? '-',
-                                ),
-                                Reviews(content: detailMovie.overview ?? '-'),
-                                Cast(content: detailMovie.productionCompanies!),
-                                CastCard(listData: responseListCast),
-                              ],
-                            ),
+                    ),
+                    SizedBox(height: 10.0.sp),
+                    Expanded(
+                      flex: 2,
+                      child: DefaultTabController(
+                        length: 4,
+                        child: Scaffold(
+                          appBar: myTabBar,
+                          body: TabBarView(
+                            children: [
+                              AboutMovie(
+                                movieTitle: detailMovie.title,
+                                content: detailMovie.overview ?? '-',
+                              ),
+                              Reviews(content: detailMovie.overview ?? '-'),
+                              Cast(content: detailMovie.productionCompanies!),
+                              CastCard(listData: responseListCast),
+                            ],
                           ),
                         ),
                       ),
-                    ],
-                  );
-                }
-              }),
+                    ),
+                  ],
+                ),
     );
   }
 
@@ -464,41 +701,43 @@ class _MovieDetailScreenState extends ConsumerState<MovieDetailScreen> {
 
   void fetchData() async {
     try {
-      //Block pengecekan Movie Id selanjutnya, untuk kebutuhan Swipe
-      final listOfIds = ref.read(homeController).where((element) => element!['category'] == widget.idAndObject!['type']);
-      var myData = [...listOfIds];
+      if (widget.idAndObject!['type'] != 'watchlist') {
+        //Block pengecekan Movie Id selanjutnya, untuk kebutuhan Swipe
+        final listOfIds = ref.read(homeController).where((element) => element!['category'] == widget.idAndObject!['type']);
+        var myData = [...listOfIds];
 
-      var findIndex = myData.indexWhere(
-        (element) {
-          return element!['value'] == widget.idAndObject!['id'] && element['category'] == widget.idAndObject!['type'];
-        },
-      );
-      Map? nextMovieIndex = {};
-      Map? prevMovieIndex = {};
-      if (findIndex != -1 && myData.length > (findIndex + 1)) {
-        //jika index yg ditemukan ada (tidak -1) dan jika jumlah data masih lebih dari index yang ditemukan, maka ambil data berikutnya.
-        nextMovieIndex = myData[findIndex + 1];
-        if (findIndex != 0) {
-          Logger().i('prevMovieIndex true: $findIndex');
-          prevMovieIndex = myData[findIndex - 1];
+        var findIndex = myData.indexWhere(
+          (element) {
+            return element!['value'] == widget.idAndObject!['id'] && element['category'] == widget.idAndObject!['type'];
+          },
+        );
+        Map? nextMovieIndex = {};
+        Map? prevMovieIndex = {};
+        if (findIndex != -1 && myData.length > (findIndex + 1)) {
+          //jika index yg ditemukan ada (tidak -1) dan jika jumlah data masih lebih dari index yang ditemukan, maka ambil data berikutnya.
+          nextMovieIndex = myData[findIndex + 1];
+          if (findIndex != 0) {
+            Logger().i('prevMovieIndex true: $findIndex');
+            prevMovieIndex = myData[findIndex - 1];
+          } else {
+            Logger().i('prevMovieIndex false: $findIndex');
+            prevMovieIndex = myData[findIndex];
+          }
+          Logger().i('true $nextMovieIndex, $prevMovieIndex');
         } else {
-          Logger().i('prevMovieIndex false: $findIndex');
-          prevMovieIndex = myData[findIndex];
-        }
-        Logger().i('true $nextMovieIndex, $prevMovieIndex');
-      } else {
-        //jika tidak ada data berikutnya, maka ambil data pertama ke-0.
-        nextMovieIndex = myData[findIndex];
-        prevMovieIndex = myData[findIndex - 1];
+          //jika tidak ada data berikutnya, maka ambil data pertama ke-0.
+          nextMovieIndex = myData[findIndex];
+          prevMovieIndex = myData[findIndex - 1];
 
-        Logger().i('false $nextMovieIndex, $prevMovieIndex');
+          Logger().i('false $nextMovieIndex, $prevMovieIndex');
+        }
+        //Block pengecekan Movie Id selanjutnya, untuk kebutuhan Swipe
+        setState(() {
+          nextMovieId = nextMovieIndex?['value'];
+          prevMovieId = prevMovieIndex?['value'];
+          isLoading = true;
+        });
       }
-      //Block pengecekan Movie Id selanjutnya, untuk kebutuhan Swipe
-      setState(() {
-        nextMovieId = nextMovieIndex?['value'];
-        prevMovieId = prevMovieIndex?['value'];
-        isLoading = true;
-      });
       var resp = await DioClient().apiCall(
         // url: '/movie/${widget.trending.id}',
         url: '/movie/${widget.idAndObject?['id']}',
