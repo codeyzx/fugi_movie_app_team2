@@ -14,6 +14,7 @@ class SearchMovieController extends StateNotifier<AsyncValue<List<Map<String, dy
     state = const AsyncValue.loading();
     try {
       var resp = await DioClient().apiCall(
+        // url: '/search/movie?',
         url: '/search/movie?',
         requestType: RequestType.get,
         queryParameters: {

@@ -45,7 +45,7 @@ mixin _$Trending {
   @JsonKey(name: 'popularity')
   double? get popularity => throw _privateConstructorUsedError;
   @JsonKey(name: 'first_air_date')
-  DateTime? get firstAirDate => throw _privateConstructorUsedError;
+  dynamic get firstAirDate => throw _privateConstructorUsedError;
   @JsonKey(name: 'vote_average')
   double? get voteAverage => throw _privateConstructorUsedError;
   @JsonKey(name: 'vote_count')
@@ -76,7 +76,7 @@ abstract class $TrendingCopyWith<$Res> {
       @JsonKey(name: 'media_type') String? mediaType,
       @JsonKey(name: 'genre_ids') List<int>? genreIds,
       @JsonKey(name: 'popularity') double? popularity,
-      @JsonKey(name: 'first_air_date') DateTime? firstAirDate,
+      @JsonKey(name: 'first_air_date') dynamic firstAirDate,
       @JsonKey(name: 'vote_average') double? voteAverage,
       @JsonKey(name: 'vote_count') int? voteCount,
       @JsonKey(name: 'origin_country') List<String>? originCountry});
@@ -161,7 +161,7 @@ class _$TrendingCopyWithImpl<$Res> implements $TrendingCopyWith<$Res> {
       firstAirDate: firstAirDate == freezed
           ? _value.firstAirDate
           : firstAirDate // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
+              as dynamic,
       voteAverage: voteAverage == freezed
           ? _value.voteAverage
           : voteAverage // ignore: cast_nullable_to_non_nullable
@@ -197,7 +197,7 @@ abstract class _$$_TrendingCopyWith<$Res> implements $TrendingCopyWith<$Res> {
       @JsonKey(name: 'media_type') String? mediaType,
       @JsonKey(name: 'genre_ids') List<int>? genreIds,
       @JsonKey(name: 'popularity') double? popularity,
-      @JsonKey(name: 'first_air_date') DateTime? firstAirDate,
+      @JsonKey(name: 'first_air_date') dynamic firstAirDate,
       @JsonKey(name: 'vote_average') double? voteAverage,
       @JsonKey(name: 'vote_count') int? voteCount,
       @JsonKey(name: 'origin_country') List<String>? originCountry});
@@ -284,7 +284,7 @@ class __$$_TrendingCopyWithImpl<$Res> extends _$TrendingCopyWithImpl<$Res>
       firstAirDate: firstAirDate == freezed
           ? _value.firstAirDate
           : firstAirDate // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
+              as dynamic,
       voteAverage: voteAverage == freezed
           ? _value.voteAverage
           : voteAverage // ignore: cast_nullable_to_non_nullable
@@ -372,7 +372,7 @@ class _$_Trending implements _Trending {
   final double? popularity;
   @override
   @JsonKey(name: 'first_air_date')
-  final DateTime? firstAirDate;
+  final dynamic firstAirDate;
   @override
   @JsonKey(name: 'vote_average')
   final double? voteAverage;
@@ -473,7 +473,7 @@ abstract class _Trending implements Trending {
           @JsonKey(name: 'media_type') final String? mediaType,
           @JsonKey(name: 'genre_ids') final List<int>? genreIds,
           @JsonKey(name: 'popularity') final double? popularity,
-          @JsonKey(name: 'first_air_date') final DateTime? firstAirDate,
+          @JsonKey(name: 'first_air_date') final dynamic firstAirDate,
           @JsonKey(name: 'vote_average') final double? voteAverage,
           @JsonKey(name: 'vote_count') final int? voteCount,
           @JsonKey(name: 'origin_country') final List<String>? originCountry}) =
@@ -519,7 +519,7 @@ abstract class _Trending implements Trending {
   double? get popularity;
   @override
   @JsonKey(name: 'first_air_date')
-  DateTime? get firstAirDate;
+  dynamic get firstAirDate;
   @override
   @JsonKey(name: 'vote_average')
   double? get voteAverage;

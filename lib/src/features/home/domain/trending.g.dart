@@ -20,9 +20,7 @@ _$_Trending _$$_TrendingFromJson(Map<String, dynamic> json) => _$_Trending(
       genreIds:
           (json['genre_ids'] as List<dynamic>?)?.map((e) => e as int).toList(),
       popularity: (json['popularity'] as num?)?.toDouble(),
-      firstAirDate: json['first_air_date'] == null
-          ? null
-          : DateTime.parse(json['first_air_date'] as String),
+      firstAirDate: json['first_air_date'],
       voteAverage: (json['vote_average'] as num?)?.toDouble(),
       voteCount: json['vote_count'] as int?,
       originCountry: (json['origin_country'] as List<dynamic>?)
@@ -44,7 +42,7 @@ Map<String, dynamic> _$$_TrendingToJson(_$_Trending instance) =>
       'media_type': instance.mediaType,
       'genre_ids': instance.genreIds,
       'popularity': instance.popularity,
-      'first_air_date': instance.firstAirDate?.toIso8601String(),
+      'first_air_date': instance.firstAirDate,
       'vote_average': instance.voteAverage,
       'vote_count': instance.voteCount,
       'origin_country': instance.originCountry,

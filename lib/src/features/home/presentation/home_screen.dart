@@ -135,11 +135,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                                           color: AppTheme.textBlueColor,
                                         ),
                                       )
-                                    : Icon(
-                                        Icons.search,
-                                        color: AppTheme.thirdColor,
-                                        size: 28.0.sp,
-                                      ),
+                                    : Icon(Icons.search, color: AppTheme.thirdColor, size: 28.0.sp),
                           ),
                           hintText: 'Search',
                           hintStyle: const TextStyle(color: AppTheme.thirdColor),
@@ -148,10 +144,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                           ),
                           focusedBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(50.0.sp),
-                            borderSide: const BorderSide(
-                              color: AppTheme.textBlueColor,
-                              width: 2,
-                            ),
+                            borderSide: const BorderSide(color: AppTheme.textBlueColor, width: 2),
                           ),
                         ),
                       ),
