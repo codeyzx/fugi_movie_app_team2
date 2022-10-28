@@ -2,6 +2,14 @@
 
 FUGI (Flutter User Group Indonesia 🇮🇩)has challenge to create mini project called Movie Apps. Totally 30 participants joined for this event. 6 teams with 5 persons each, has challenge to create unique Movie Apps with collaboration each members.
 
+## Updates:
+
+❗️❗️❗️❗️ AsyncValue Riverpod
+
+Update terakhir untuk branch dev_hendra:
+
+1. home_screen: fetch data untuk trending dan upcoming sudah menggunakan AsyncValue-nya riverpod, silahkan diliat implementasinya. Adapun konsep dan penjelasan ringkas terkait dengan AsyncValue riverpod bisa disimak di video berikut, mulai menit ke 29:34. https://www.youtube.com/watch?v=72iKdmRoNBM
+
 ## Team Id:
 
     The 2nd Team's Squad
