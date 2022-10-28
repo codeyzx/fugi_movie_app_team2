@@ -1,5 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:fugi_movie_app_team2/src/features/home/domain/entities/trending.dart';
+import 'package:fugi_movie_app_team2/src/features/home/domain/entities/upcoming.dart';
 import 'package:fugi_movie_app_team2/src/features/home/domain/repository/home_repository.dart';
 
 class HomeController extends StateNotifier<List<Map<String, dynamic>?>> {
@@ -46,7 +47,7 @@ class TrendingController extends StateNotifier<AsyncValue<List<Trending>?>> {
     state = const AsyncValue.loading();
     final resp = await repository.getTrending();
     state = await resp.fold(
-      (l) => AsyncValue.error(l),
+      (l) => AsyncValue.error(l, StackTrace.current),
       (r) => AsyncValue.data(r),
     );
   }
@@ -54,6 +55,30 @@ class TrendingController extends StateNotifier<AsyncValue<List<Trending>?>> {
 
 final trendingControllerProvider = StateNotifierProvider<TrendingController, AsyncValue<List<Trending>?>>(
   (ref) => TrendingController(
+    repository: ref.watch(homeRepositoryProvider),
+  ),
+);
+
+class UpcomingController extends StateNotifier<AsyncValue<List<Upcoming>?>> {
+  final HomeRepository repository;
+  UpcomingController({
+    required this.repository,
+  }) : super(const AsyncValue.loading()) {
+    getUpcoming();
+  }
+
+  Future<void> getUpcoming() async {
+    state = const AsyncValue.loading();
+    final resp = await repository.getUpcoming();
+    state = await resp.fold(
+      (l) => AsyncValue.error(l, StackTrace.current),
+      (r) => AsyncValue.data(r),
+    );
+  }
+}
+
+final upcomingControllerProvider = StateNotifierProvider<UpcomingController, AsyncValue<List<Upcoming>?>>(
+  (ref) => UpcomingController(
     repository: ref.watch(homeRepositoryProvider),
   ),
 );

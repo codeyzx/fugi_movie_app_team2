@@ -9,4 +9,5 @@ class Endpoints {
   static const int connectionTimeout = 30000;
 
   static const String trending = '/trending/all/day';
+  static const String upcoming = '/movie/upcoming';
 }

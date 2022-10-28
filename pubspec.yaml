@@ -18,14 +18,13 @@ dependencies:
   flutter_dotenv: ^5.0.2
   flutter_hooks: ^0.18.5+1
   flutter_launcher_icons: ^0.10.0
-  flutter_riverpod: ^2.0.0-dev.9
   flutter_screenutil: ^5.5.3+2
   font_awesome_flutter: ^10.1.0
   freezed: ^2.0.3+1
   freezed_annotation: ^2.0.3
   go_router: ^4.2.7
   google_fonts: ^3.0.1
-  hooks_riverpod: ^2.0.0-dev.0
+  hooks_riverpod: ^2.0.2
   intl: ^0.17.0
   keyboard_dismisser: ^3.0.0
   logger: ^1.1.0

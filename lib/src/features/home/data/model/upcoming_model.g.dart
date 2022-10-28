@@ -1,22 +1,22 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'trending_model.dart';
+part of 'upcoming_model.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_TrendingModel _$$_TrendingModelFromJson(Map<String, dynamic> json) =>
-    _$_TrendingModel(
+_$_UpcomingModel _$$_UpcomingModelFromJson(Map<String, dynamic> json) =>
+    _$_UpcomingModel(
       page: json['page'] as int?,
       results: (json['results'] as List<dynamic>?)
-          ?.map((e) => Trending.fromJson(e as Map<String, dynamic>))
+          ?.map((e) => Upcoming.fromJson(e as Map<String, dynamic>))
           .toList(),
       totalPages: json['totalPages'] as int?,
       totalResults: json['totalResults'] as int?,
     );
 
-Map<String, dynamic> _$$_TrendingModelToJson(_$_TrendingModel instance) =>
+Map<String, dynamic> _$$_UpcomingModelToJson(_$_UpcomingModel instance) =>
     <String, dynamic>{
       'page': instance.page,
       'results': instance.results,
