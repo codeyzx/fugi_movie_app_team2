@@ -44,7 +44,7 @@ Mobile Apps for Android and iOS build with Flutter which managed the movie infor
 
 Only getting some data from TMDB api's, no authentications feature, no personal info, no credential or anything related to user personalizations. For _watch list_ features it's only saved on state management instad of local storage/ shared preference.
 
-This project build with **`Flutter 3.0.5`**, and some packages are:
+This project build with **`Flutter 3.3.2`**, and some packages are:
 
 1.  cached_network_image: ^3.2.1 card_swiper:^2.0.4
 2.  cupertino_icons:^1.0.2 dio:^4.0.6 flutter_dotenv:^5.0.2
@@ -54,7 +54,7 @@ This project build with **`Flutter 3.0.5`**, and some packages are:
 6.  freezed_annotation:^2.0.3
 7.  go_router:^4.2.7
 8.  google_fonts:^3.0.1
-9.  hooks_riverpod:^2.0.0-dev.0
+9.  hooks_riverpod:^2.0.2 👈
 10. intl:^0.17.0
 11. keyboard_dismisser:^3.0.0
 12. logger:^1.1.0
