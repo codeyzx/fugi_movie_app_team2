@@ -1,5 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:fugi_movie_app_team2/src/features/home/domain/movie_detail.dart';
+
+import '../../home/domain/entities/movie_detail.dart';
 
 class MovieWatchlistController extends StateNotifier<List<MovieDetail>?> {
   MovieWatchlistController() : super([]);

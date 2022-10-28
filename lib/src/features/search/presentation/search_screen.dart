@@ -5,7 +5,8 @@ import 'package:fugi_movie_app_team2/src/features/search/presentation/search_con
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../core/client/dio_client.dart';
-import '../../home/domain/trending.dart';
+
+import '../../home/domain/entities/trending.dart';
 import 'widgets/movie_item_widget.dart';
 
 class SearchScreen extends StatefulHookConsumerWidget {

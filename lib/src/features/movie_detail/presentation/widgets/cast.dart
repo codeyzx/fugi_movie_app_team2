@@ -1,7 +1,8 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:fugi_movie_app_team2/src/features/home/domain/movie_detail.dart';
+
+import '../../../home/domain/entities/movie_detail.dart';
 
 class Cast extends StatelessWidget {
   final List<ProductionCompany> content;

@@ -1,26 +1,29 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:fugi_movie_app_team2/src/features/home/domain/popular.dart';
-import 'package:fugi_movie_app_team2/src/features/home/domain/top_rated.dart';
-import 'package:fugi_movie_app_team2/src/features/home/domain/upcoming.dart';
-import 'package:fugi_movie_app_team2/src/features/home/presentation/home_controller.dart';
-import 'package:fugi_movie_app_team2/src/features/home/presentation/widgets/image_number_widget.dart';
-import 'package:fugi_movie_app_team2/src/features/movie_detail/presentation/movie_detail_screen.dart';
-import 'package:fugi_movie_app_team2/src/features/search/presentation/search_controller.dart';
-import 'package:fugi_movie_app_team2/src/features/search/presentation/search_page.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:keyboard_dismisser/keyboard_dismisser.dart';
 
 import '../../../common_config/app_theme.dart';
+import '../../../common_utils/ansyn_value_widget.dart';
 import '../../../core/client/dio_client.dart';
+import '../../movie_detail/presentation/movie_detail_screen.dart';
+import '../../search/presentation/search_controller.dart';
+import '../../search/presentation/search_page.dart';
 import '../../search/presentation/widgets/movie_item_widget.dart';
-import '../domain/trending.dart';
+import '../domain/entities/popular.dart';
+import '../domain/entities/top_rated.dart';
+import '../domain/entities/trending.dart';
+import '../domain/entities/upcoming.dart';
 import 'botnavbar_screen.dart';
+import 'home_controller.dart';
+import 'widgets/image_number_widget.dart';
 
 final keywordsProvider = StateProvider<String?>((ref) => '');
+final apiToken = dotenv.env['API_KEY'];
 
 class HomeScreen extends StatefulHookConsumerWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -33,7 +36,7 @@ class HomeScreen extends StatefulHookConsumerWidget {
 class _HomeScreenState extends ConsumerState<HomeScreen> {
   var selectedIndex = 0;
   bool isLoading = false;
-  List<Trending> trendings = [];
+  // List<Trending> trendings = [];
   List<Popular> populars = [];
   List<TopRated> toprateds = [];
   List<Upcoming> upcomings = [];
@@ -194,64 +197,72 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                                     child: CircularProgressIndicator.adaptive(),
                                   )
                                 else
-                                  GridView.builder(
-                                    scrollDirection: Axis.vertical,
-                                    gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                                      crossAxisCount: 3,
-                                      childAspectRatio: .7,
-                                      mainAxisSpacing: 15,
-                                      crossAxisSpacing: 15,
-                                    ),
-                                    padding: EdgeInsets.all(8.0.sp),
-                                    itemCount: trendings.length,
-                                    itemBuilder: (context, index) {
-                                      return InkWell(
-                                        onTap: () {
-                                          context.pushNamed(MovieDetailScreen.routeName, extra: {
-                                            "id": trendings[index].id,
-                                            "object": trendings[index],
-                                            'type': 'trending',
-                                          });
-                                          ref.read(movieDetailAccessFromProvider.state).state = BotNavBarScreen.routeName;
-                                        },
-                                        child: Stack(
-                                          alignment: Alignment.bottomRight,
-                                          children: [
-                                            Container(
-                                              height: MediaQuery.of(context).size.height,
-                                              width: MediaQuery.of(context).size.width,
-                                              decoration: BoxDecoration(
-                                                borderRadius: BorderRadius.circular(10.0.sp),
-                                                // image: DecorationImage(
-                                                //   image: Image.network(
-                                                //     'https://image.tmdb.org/t/p/w780/${trendings[index].posterPath}',
-                                                //   ).image,
-                                                //   fit: BoxFit.cover,
-                                                // ),
-                                                boxShadow: [
-                                                  BoxShadow(
-                                                    color: Colors.white.withOpacity(.2),
-                                                    blurRadius: 10,
-                                                    offset: const Offset(0, 5),
-                                                  ),
-                                                ],
-                                              ),
-                                              child: ClipRRect(
-                                                borderRadius: BorderRadius.circular(5.0.sp),
-                                                child: CachedNetworkImage(
-                                                  imageUrl: "https://image.tmdb.org/t/p/w300/${trendings[index].posterPath}",
-                                                  // height: MediaQuery.of(context).size.height * .4.sp,
-                                                  fit: BoxFit.cover,
-                                                  progressIndicatorBuilder: (context, url, downloadProgress) => Center(
-                                                      child: CircularProgressIndicator(value: downloadProgress.progress)),
-                                                  errorWidget: (context, url, error) => const Icon(Icons.error),
-                                                ),
-                                              ),
-                                            ),
-                                            // Text('${trendings[index].id}',
-                                            //     style: TextStyle(color: Colors.white, fontSize: 20.0.sp)),
-                                          ],
+                                  AsyncValueWidget<List<Trending>?>(
+                                    value: ref.watch(trendingControllerProvider),
+                                    data: (trendings) {
+                                      return GridView.builder(
+                                        scrollDirection: Axis.vertical,
+                                        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                                          crossAxisCount: 3,
+                                          childAspectRatio: .7,
+                                          mainAxisSpacing: 15,
+                                          crossAxisSpacing: 15,
                                         ),
+                                        padding: EdgeInsets.all(8.0.sp),
+                                        itemCount: trendings?.length,
+                                        itemBuilder: (context, index) {
+                                          return InkWell(
+                                            onTap: () {
+                                              context.pushNamed(MovieDetailScreen.routeName, extra: {
+                                                "id": trendings?[index].id,
+                                                "object": trendings?[index],
+                                                'type': 'trending',
+                                              });
+                                              ref.read(movieDetailAccessFromProvider.state).state =
+                                                  BotNavBarScreen.routeName;
+                                            },
+                                            child: Stack(
+                                              alignment: Alignment.bottomRight,
+                                              children: [
+                                                Container(
+                                                  height: MediaQuery.of(context).size.height,
+                                                  width: MediaQuery.of(context).size.width,
+                                                  decoration: BoxDecoration(
+                                                    borderRadius: BorderRadius.circular(10.0.sp),
+                                                    // image: DecorationImage(
+                                                    //   image: Image.network(
+                                                    //     'https://image.tmdb.org/t/p/w780/${trendings[index].posterPath}',
+                                                    //   ).image,
+                                                    //   fit: BoxFit.cover,
+                                                    // ),
+                                                    boxShadow: [
+                                                      BoxShadow(
+                                                        color: Colors.white.withOpacity(.2),
+                                                        blurRadius: 10,
+                                                        offset: const Offset(0, 5),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                  child: ClipRRect(
+                                                    borderRadius: BorderRadius.circular(5.0.sp),
+                                                    child: CachedNetworkImage(
+                                                      imageUrl:
+                                                          "https://image.tmdb.org/t/p/w300/${trendings?[index].posterPath}",
+                                                      // height: MediaQuery.of(context).size.height * .4.sp,
+                                                      fit: BoxFit.cover,
+                                                      progressIndicatorBuilder: (context, url, downloadProgress) => Center(
+                                                          child:
+                                                              CircularProgressIndicator(value: downloadProgress.progress)),
+                                                      errorWidget: (context, url, error) => const Icon(Icons.error),
+                                                    ),
+                                                  ),
+                                                ),
+                                                // Text('${trendings[index].id}',
+                                                //     style: TextStyle(color: Colors.white, fontSize: 20.0.sp)),
+                                              ],
+                                            ),
+                                          );
+                                        },
                                       );
                                     },
                                   ),
@@ -461,28 +472,19 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
   }
 
   Future<void> fetchData() async {
-    var resp = await DioClient().apiCall(
-      url: '/trending/all/day',
-      requestType: RequestType.get,
-      queryParameters: {},
-    );
     var respPopular = await DioClient().apiCall(
       url: '/movie/popular',
       requestType: RequestType.get,
-      queryParameters: {},
     );
     var respTopRated = await DioClient().apiCall(
       url: '/movie/top_rated',
       requestType: RequestType.get,
-      queryParameters: {},
     );
     var respUpcoming = await DioClient().apiCall(
       url: '/movie/upcoming',
       requestType: RequestType.get,
-      queryParameters: {},
     );
 
-    List<dynamic> listTrending = resp.data['results'];
     List<dynamic> listPopular = respPopular.data['results'];
     List<dynamic> listTopRated = respTopRated.data['results'];
     List<dynamic> listUpcoming = respUpcoming.data['results'];
@@ -491,12 +493,6 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
       ref.read(homeController.notifier).add('popular', e['id']);
       return Popular.fromJson(e);
     }).toList();
-    List<Trending> myTrendings = listTrending.map(
-      (e) {
-        ref.read(homeController.notifier).add('trending', e['id']);
-        return Trending.fromJson(e);
-      },
-    ).toList();
     List<TopRated> myTopRated = listTopRated.map((e) {
       ref.read(homeController.notifier).add('toprated', e['id']);
       return TopRated.fromJson(e);
@@ -509,7 +505,6 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     if (mounted) {
       setState(() {
         isLoading = true;
-        trendings = myTrendings;
         populars = myPopular;
         toprateds = myTopRated;
         upcomings = myUpcoming;

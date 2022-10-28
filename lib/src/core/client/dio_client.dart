@@ -1,6 +1,9 @@
+import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
+import 'package:logger/logger.dart';
 
 import 'endpoints.dart';
+import 'failure.dart';
 import 'interceptors/dio_interceptors.dart';
 
 enum RequestType { get, post, put, patch, delete, postForm }
@@ -69,25 +72,25 @@ class DioClient {
   }
 }
 
-// Future<Either<Failure, T>> remoteProcess<T>(Future<T> t) async {
-//   try {
-//     var futureCall = await t;
-//     return Right(futureCall);
-//   } on DioError catch (error) {
-//     Logger().wtf(error
-//         // 'error.message ${error.requestOptions.queryParameters.toString()}',
-//         );
-//     return Left(
-//       GeneralFailure(
-//         message: error.response?.data['message'],
-//         // message: error.response?.statusMessage,
-//       ),
-//     );
-//   } catch (error) {
-//     Logger().i('--------***--------');
-//     Logger().wtf((error as TypeError).stackTrace);
-//     Logger().i('--------***--------');
-//     Logger().wtf(error.toString, [error]);
-//     return Left(GeneralFailure(message: error.toString()));
-//   }
-// }
+Future<Either<Failure, T>> remoteProcess<T>(Future<T> t) async {
+  try {
+    var futureCall = await t;
+    return Right(futureCall);
+  } on DioError catch (error) {
+    Logger().wtf(error
+        // 'error.message ${error.requestOptions.queryParameters.toString()}',
+        );
+    return Left(
+      GeneralFailure(
+        message: error.response?.data['message'],
+        // message: error.response?.statusMessage,
+      ),
+    );
+  } catch (error) {
+    Logger().i('--------***--------');
+    Logger().wtf((error as TypeError).stackTrace);
+    Logger().i('--------***--------');
+    Logger().wtf(error.toString, [error]);
+    return Left(GeneralFailure(message: error.toString()));
+  }
+}

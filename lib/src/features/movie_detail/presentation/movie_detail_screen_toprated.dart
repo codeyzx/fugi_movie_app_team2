@@ -3,8 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:fugi_movie_app_team2/src/common_config/app_theme.dart';
 import 'package:fugi_movie_app_team2/src/core/client/dio_client.dart';
-import 'package:fugi_movie_app_team2/src/features/home/domain/movie_detail.dart';
-import 'package:fugi_movie_app_team2/src/features/home/domain/top_rated.dart';
+
 import 'package:fugi_movie_app_team2/src/features/movie_detail/presentation/widgets/about_movie.dart';
 import 'package:fugi_movie_app_team2/src/features/movie_detail/presentation/widgets/cast.dart';
 import 'package:fugi_movie_app_team2/src/features/movie_detail/presentation/widgets/movie_status.dart';
@@ -12,6 +11,9 @@ import 'package:fugi_movie_app_team2/src/features/movie_detail/presentation/widg
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:logger/logger.dart';
+
+import '../../home/domain/entities/movie_detail.dart';
+import '../../home/domain/entities/top_rated.dart';
 
 class MovieDetailScreenTopRated extends StatefulWidget {
   final TopRated topRated;

@@ -8,8 +8,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:fugi_movie_app_team2/src/common_config/app_theme.dart';
 import 'package:fugi_movie_app_team2/src/core/client/dio_client.dart';
-import 'package:fugi_movie_app_team2/src/features/home/domain/movie_detail.dart';
-import 'package:fugi_movie_app_team2/src/features/home/domain/trending.dart';
+
 import 'package:fugi_movie_app_team2/src/features/home/presentation/home_controller.dart';
 import 'package:fugi_movie_app_team2/src/features/movie_detail/presentation/movie_watchlist_controller.dart';
 import 'package:fugi_movie_app_team2/src/features/movie_detail/presentation/widgets/about_movie.dart';
@@ -24,6 +23,8 @@ import 'package:intl/intl.dart';
 import 'package:logger/logger.dart';
 import 'package:palette_generator/palette_generator.dart';
 
+import '../../home/domain/entities/movie_detail.dart';
+import '../../home/domain/entities/trending.dart';
 import '../../home/presentation/botnavbar_screen.dart';
 import '../../search/presentation/search_page.dart';
 import '../../search/presentation/widgets/movie_item_widget.dart';

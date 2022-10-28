@@ -1,6 +1,3 @@
-import 'package:fugi_movie_app_team2/src/features/home/domain/popular.dart';
-import 'package:fugi_movie_app_team2/src/features/home/domain/top_rated.dart';
-import 'package:fugi_movie_app_team2/src/features/home/domain/upcoming.dart';
 import 'package:fugi_movie_app_team2/src/features/home/presentation/botnavbar_screen.dart';
 import 'package:fugi_movie_app_team2/src/features/movie_detail/presentation/movie_detail_screen.dart';
 import 'package:fugi_movie_app_team2/src/features/movie_detail/presentation/movie_detail_screen_popular.dart';
@@ -11,6 +8,9 @@ import 'package:fugi_movie_app_team2/src/features/profile/presentation/profile_s
 import 'package:fugi_movie_app_team2/src/features/search/presentation/search_screen.dart';
 import 'package:go_router/go_router.dart';
 
+import 'features/home/domain/entities/popular.dart';
+import 'features/home/domain/entities/top_rated.dart';
+import 'features/home/domain/entities/upcoming.dart';
 import 'features/home/presentation/home_screen.dart';
 import 'features/search/presentation/search_page.dart';
 import 'features/starter/presentation/splash_screen.dart';
