@@ -1,5 +1,5 @@
-import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
+import 'package:fpdart/fpdart.dart';
 import 'package:logger/logger.dart';
 
 import 'endpoints.dart';

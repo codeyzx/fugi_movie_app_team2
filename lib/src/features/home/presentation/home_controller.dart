@@ -1,7 +1,7 @@
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:fugi_movie_app_team2/src/features/home/domain/entities/trending.dart';
 import 'package:fugi_movie_app_team2/src/features/home/domain/entities/upcoming.dart';
 import 'package:fugi_movie_app_team2/src/features/home/domain/repository/home_repository.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class HomeController extends StateNotifier<List<Map<String, dynamic>?>> {
   HomeController() : super([]);

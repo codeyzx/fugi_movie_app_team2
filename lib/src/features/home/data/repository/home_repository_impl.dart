@@ -1,4 +1,4 @@
-import 'package:dartz/dartz.dart';
+import 'package:fpdart/fpdart.dart';
 import 'package:fugi_movie_app_team2/src/features/home/domain/entities/trending.dart';
 import 'package:fugi_movie_app_team2/src/features/home/domain/entities/upcoming.dart';
 
