@@ -3,10 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:fugi_movie_app_team2/src/features/home/presentation/widgets/grid_movie_widget.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:keyboard_dismisser/keyboard_dismisser.dart';
-import 'package:logger/logger.dart';
 
 import '../../../common_config/app_theme.dart';
 import '../../../common_utils/ansyn_value_widget.dart';
@@ -198,267 +198,17 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                                 AsyncValueWidget<List<Trending>?>(
                                   value: ref.watch(trendingControllerProvider),
                                   data: (trendings) {
-                                    return GridView.builder(
-                                      scrollDirection: Axis.vertical,
-                                      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                                        crossAxisCount: 3,
-                                        childAspectRatio: .7,
-                                        mainAxisSpacing: 15,
-                                        crossAxisSpacing: 15,
-                                      ),
-                                      padding: EdgeInsets.all(8.0.sp),
-                                      itemCount: trendings?.length,
-                                      itemBuilder: (context, index) {
-                                        return InkWell(
-                                          onTap: () {
-                                            context.pushNamed(MovieDetailScreen.routeName, extra: {
-                                              "id": trendings?[index].id,
-                                              "object": trendings?[index],
-                                              'type': 'trending',
-                                            });
-                                            ref.read(movieDetailAccessFromProvider.state).state =
-                                                HomeBotNavBarScreen.routeName;
-                                          },
-                                          child: Stack(
-                                            alignment: Alignment.bottomRight,
-                                            children: [
-                                              Container(
-                                                height: MediaQuery.of(context).size.height,
-                                                width: MediaQuery.of(context).size.width,
-                                                decoration: BoxDecoration(
-                                                  borderRadius: BorderRadius.circular(10.0.sp),
-                                                  // image: DecorationImage(
-                                                  //   image: Image.network(
-                                                  //     'https://image.tmdb.org/t/p/w780/${trendings[index].posterPath}',
-                                                  //   ).image,
-                                                  //   fit: BoxFit.cover,
-                                                  // ),
-                                                  boxShadow: [
-                                                    BoxShadow(
-                                                      color: Colors.white.withOpacity(.2),
-                                                      blurRadius: 10,
-                                                      offset: const Offset(0, 5),
-                                                    ),
-                                                  ],
-                                                ),
-                                                child: ClipRRect(
-                                                  borderRadius: BorderRadius.circular(5.0.sp),
-                                                  child: CachedNetworkImage(
-                                                    imageUrl:
-                                                        "https://image.tmdb.org/t/p/w300/${trendings?[index].posterPath}",
-                                                    // height: MediaQuery.of(context).size.height * .4.sp,
-                                                    fit: BoxFit.cover,
-                                                    progressIndicatorBuilder: (context, url, downloadProgress) => Center(
-                                                        child: CircularProgressIndicator(value: downloadProgress.progress)),
-                                                    errorWidget: (context, url, error) => const Icon(Icons.error),
-                                                  ),
-                                                ),
-                                              ),
-                                              // Text('${trendings[index].id}',
-                                              //     style: TextStyle(color: Colors.white, fontSize: 20.0.sp)),
-                                            ],
-                                          ),
-                                        );
-                                      },
-                                    );
+                                    return GridMovieWidget<Trending>(listData: trendings);
                                   },
                                 ),
                               AsyncValueWidget<List<Upcoming>?>(
                                 value: ref.watch(upcomingControllerProvider),
                                 data: (upcomings) {
-                                  return GridView.builder(
-                                    //upcoming
-                                    scrollDirection: Axis.vertical,
-                                    gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                                      crossAxisCount: 3,
-                                      childAspectRatio: .7,
-                                      mainAxisSpacing: 15,
-                                      crossAxisSpacing: 15,
-                                    ),
-                                    padding: EdgeInsets.all(8.0.sp),
-                                    itemCount: upcomings?.length,
-                                    itemBuilder: (context, index) {
-                                      return InkWell(
-                                        onTap: () {
-                                          // context.pushNamed(MovieDetailScreenUpcoming.routeName, extra: upcomings[index]);
-                                          context.pushNamed(MovieDetailScreen.routeName, extra: {
-                                            "id": upcomings?[index].id,
-                                            'object': upcomings?[index],
-                                            'type': 'upcoming',
-                                          });
-                                          ref.read(movieDetailAccessFromProvider.state).state =
-                                              HomeBotNavBarScreen.routeName;
-                                        },
-                                        child: Stack(
-                                          alignment: Alignment.bottomRight,
-                                          children: [
-                                            Container(
-                                              height: MediaQuery.of(context).size.height,
-                                              width: MediaQuery.of(context).size.width,
-                                              decoration: BoxDecoration(
-                                                borderRadius: BorderRadius.circular(10.0.sp),
-                                                boxShadow: [
-                                                  BoxShadow(
-                                                    color: Colors.white.withOpacity(.2),
-                                                    blurRadius: 10,
-                                                    offset: const Offset(0, 5),
-                                                  ),
-                                                ],
-                                                // image: DecorationImage(
-                                                //   image: Image.network(
-                                                //     'https://image.tmdb.org/t/p/w780/${upcomings[index].posterPath}',
-                                                //   ).image,
-                                                //   fit: BoxFit.cover,
-                                                // ),
-                                              ),
-                                              child: ClipRRect(
-                                                borderRadius: BorderRadius.circular(5.0.sp),
-                                                child: CachedNetworkImage(
-                                                  fit: BoxFit.cover,
-                                                  imageUrl:
-                                                      "https://image.tmdb.org/t/p/w300/${upcomings?[index].posterPath}",
-                                                  height: MediaQuery.of(context).size.height * .4.sp,
-                                                  progressIndicatorBuilder: (context, url, downloadProgress) => Center(
-                                                      child: CircularProgressIndicator(value: downloadProgress.progress)),
-                                                  errorWidget: (context, url, error) => const Icon(Icons.error),
-                                                ),
-                                              ),
-                                            ),
-                                            // Text('${upcomings[index].id}',
-                                            //     style: TextStyle(color: Colors.white, fontSize: 20.0.sp)),
-                                          ],
-                                        ),
-                                      );
-                                    },
-                                  );
+                                  return GridMovieWidget<Upcoming>(listData: upcomings);
                                 },
                               ),
-                              GridView.builder(
-                                //top rated
-                                scrollDirection: Axis.vertical,
-                                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                                  crossAxisCount: 3,
-                                  childAspectRatio: .7,
-                                  mainAxisSpacing: 15,
-                                  crossAxisSpacing: 15,
-                                ),
-                                padding: EdgeInsets.all(8.0.sp),
-                                itemCount: toprateds.length,
-                                itemBuilder: (context, index) {
-                                  return InkWell(
-                                    onTap: () {
-                                      // context.pushNamed(MovieDetailScreenTopRated.routeName, extra: toprateds[index]);
-                                      context.pushNamed(MovieDetailScreen.routeName, extra: {
-                                        "id": toprateds[index].id,
-                                        'object': toprateds[index],
-                                        'type': 'toprated',
-                                      });
-                                      ref.read(movieDetailAccessFromProvider.notifier).state = HomeBotNavBarScreen.routeName;
-                                    },
-                                    child: Stack(
-                                      alignment: Alignment.bottomRight,
-                                      children: [
-                                        Container(
-                                          height: MediaQuery.of(context).size.height,
-                                          width: MediaQuery.of(context).size.width,
-                                          decoration: BoxDecoration(
-                                            borderRadius: BorderRadius.circular(10.0.sp),
-                                            boxShadow: [
-                                              BoxShadow(
-                                                color: Colors.white.withOpacity(.2),
-                                                blurRadius: 10,
-                                                offset: const Offset(0, 5),
-                                              ),
-                                            ],
-                                            // image: DecorationImage(
-                                            //   image: Image.network(
-                                            //     'https://image.tmdb.org/t/p/w780/${toprateds[index].posterPath}',
-                                            //   ).image,
-                                            //   fit: BoxFit.cover,
-                                            // ),
-                                          ),
-                                          child: ClipRRect(
-                                            borderRadius: BorderRadius.circular(5.0.sp),
-                                            child: CachedNetworkImage(
-                                              fit: BoxFit.cover,
-                                              imageUrl: "https://image.tmdb.org/t/p/w300/${toprateds[index].posterPath}",
-                                              height: MediaQuery.of(context).size.height * .4.sp,
-                                              progressIndicatorBuilder: (context, url, downloadProgress) =>
-                                                  Center(child: CircularProgressIndicator(value: downloadProgress.progress)),
-                                              errorWidget: (context, url, error) => const Icon(Icons.error),
-                                            ),
-                                          ),
-                                        ),
-                                        // Text('${toprateds[index].id}',
-                                        //     style: TextStyle(color: Colors.white, fontSize: 20.0.sp)),
-                                      ],
-                                    ),
-                                  );
-                                },
-                              ),
-                              GridView.builder(
-                                //popular
-                                scrollDirection: Axis.vertical,
-                                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                                  crossAxisCount: 3,
-                                  childAspectRatio: .7,
-                                  mainAxisSpacing: 15,
-                                  crossAxisSpacing: 15,
-                                ),
-                                padding: EdgeInsets.all(8.0.sp),
-                                itemCount: populars.length,
-                                itemBuilder: (context, index) {
-                                  return InkWell(
-                                    onTap: () {
-                                      // context.pushNamed(MovieDetailScreenPopular.routeName, extra: populars[index]);
-                                      context.pushNamed(MovieDetailScreen.routeName, extra: {
-                                        "id": populars[index].id,
-                                        'object': populars[index],
-                                        'type': 'popular',
-                                      });
-                                      ref.read(movieDetailAccessFromProvider.state).state = HomeBotNavBarScreen.routeName;
-                                    },
-                                    child: Stack(
-                                      alignment: Alignment.bottomRight,
-                                      children: [
-                                        Container(
-                                          height: MediaQuery.of(context).size.height,
-                                          width: MediaQuery.of(context).size.width,
-                                          decoration: BoxDecoration(
-                                            borderRadius: BorderRadius.circular(10.0.sp),
-                                            boxShadow: [
-                                              BoxShadow(
-                                                color: Colors.white.withOpacity(.2),
-                                                blurRadius: 10,
-                                                offset: const Offset(0, 5),
-                                              ),
-                                            ],
-                                            // image: DecorationImage(
-                                            //   image: Image.network(
-                                            //     'https://image.tmdb.org/t/p/w780/${populars[index].posterPath}',
-                                            //   ).image,
-                                            //   fit: BoxFit.cover,
-                                            // ),
-                                          ),
-                                          child: ClipRRect(
-                                            borderRadius: BorderRadius.circular(5.0.sp),
-                                            child: CachedNetworkImage(
-                                              fit: BoxFit.cover,
-                                              imageUrl: "https://image.tmdb.org/t/p/w300/${populars[index].posterPath}",
-                                              height: MediaQuery.of(context).size.height * .4.sp,
-                                              progressIndicatorBuilder: (context, url, downloadProgress) =>
-                                                  Center(child: CircularProgressIndicator(value: downloadProgress.progress)),
-                                              errorWidget: (context, url, error) => const Icon(Icons.error),
-                                            ),
-                                          ),
-                                        ),
-                                        // Text('${populars[index].id}',
-                                        //     style: TextStyle(color: Colors.white, fontSize: 20.0.sp)),
-                                      ],
-                                    ),
-                                  );
-                                },
-                              ),
+                              GridMovieWidget<TopRated>(listData: toprateds),
+                              GridMovieWidget<Popular>(listData: populars)
                             ],
                           ),
                         ),
