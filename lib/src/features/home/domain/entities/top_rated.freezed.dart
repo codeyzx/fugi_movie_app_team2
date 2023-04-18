@@ -1,7 +1,7 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'top_rated.dart';
 
@@ -58,7 +58,8 @@ mixin _$TopRated {
 /// @nodoc
 abstract class $TopRatedCopyWith<$Res> {
   factory $TopRatedCopyWith(TopRated value, $Res Function(TopRated) then) =
-      _$TopRatedCopyWithImpl<$Res>;
+      _$TopRatedCopyWithImpl<$Res, TopRated>;
+  @useResult
   $Res call(
       {@JsonKey(name: 'adult') bool? adult,
       @JsonKey(name: 'backdrop_path') String? backdropPath,
@@ -77,13 +78,16 @@ abstract class $TopRatedCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$TopRatedCopyWithImpl<$Res> implements $TopRatedCopyWith<$Res> {
+class _$TopRatedCopyWithImpl<$Res, $Val extends TopRated>
+    implements $TopRatedCopyWith<$Res> {
   _$TopRatedCopyWithImpl(this._value, this._then);
 
-  final TopRated _value;
   // ignore: unused_field
-  final $Res Function(TopRated) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? adult = freezed,
@@ -102,63 +106,63 @@ class _$TopRatedCopyWithImpl<$Res> implements $TopRatedCopyWith<$Res> {
     Object? voteCount = freezed,
   }) {
     return _then(_value.copyWith(
-      adult: adult == freezed
+      adult: freezed == adult
           ? _value.adult
           : adult // ignore: cast_nullable_to_non_nullable
               as bool?,
-      backdropPath: backdropPath == freezed
+      backdropPath: freezed == backdropPath
           ? _value.backdropPath
           : backdropPath // ignore: cast_nullable_to_non_nullable
               as String?,
-      genreIds: genreIds == freezed
+      genreIds: freezed == genreIds
           ? _value.genreIds
           : genreIds // ignore: cast_nullable_to_non_nullable
               as List<int>?,
-      id: id == freezed
+      id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as int?,
-      originalLanguage: originalLanguage == freezed
+      originalLanguage: freezed == originalLanguage
           ? _value.originalLanguage
           : originalLanguage // ignore: cast_nullable_to_non_nullable
               as String?,
-      originalTitle: originalTitle == freezed
+      originalTitle: freezed == originalTitle
           ? _value.originalTitle
           : originalTitle // ignore: cast_nullable_to_non_nullable
               as String?,
-      overview: overview == freezed
+      overview: freezed == overview
           ? _value.overview
           : overview // ignore: cast_nullable_to_non_nullable
               as String?,
-      popularity: popularity == freezed
+      popularity: freezed == popularity
           ? _value.popularity
           : popularity // ignore: cast_nullable_to_non_nullable
               as double?,
-      posterPath: posterPath == freezed
+      posterPath: freezed == posterPath
           ? _value.posterPath
           : posterPath // ignore: cast_nullable_to_non_nullable
               as String?,
-      releaseDate: releaseDate == freezed
+      releaseDate: freezed == releaseDate
           ? _value.releaseDate
           : releaseDate // ignore: cast_nullable_to_non_nullable
               as DateTime?,
-      title: title == freezed
+      title: freezed == title
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
               as String?,
-      video: video == freezed
+      video: freezed == video
           ? _value.video
           : video // ignore: cast_nullable_to_non_nullable
               as bool?,
-      voteAverage: voteAverage == freezed
+      voteAverage: freezed == voteAverage
           ? _value.voteAverage
           : voteAverage // ignore: cast_nullable_to_non_nullable
               as double?,
-      voteCount: voteCount == freezed
+      voteCount: freezed == voteCount
           ? _value.voteCount
           : voteCount // ignore: cast_nullable_to_non_nullable
               as int?,
-    ));
+    ) as $Val);
   }
 }
 
@@ -168,6 +172,7 @@ abstract class _$$_TopRatedCopyWith<$Res> implements $TopRatedCopyWith<$Res> {
           _$_TopRated value, $Res Function(_$_TopRated) then) =
       __$$_TopRatedCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call(
       {@JsonKey(name: 'adult') bool? adult,
       @JsonKey(name: 'backdrop_path') String? backdropPath,
@@ -186,15 +191,14 @@ abstract class _$$_TopRatedCopyWith<$Res> implements $TopRatedCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_TopRatedCopyWithImpl<$Res> extends _$TopRatedCopyWithImpl<$Res>
+class __$$_TopRatedCopyWithImpl<$Res>
+    extends _$TopRatedCopyWithImpl<$Res, _$_TopRated>
     implements _$$_TopRatedCopyWith<$Res> {
   __$$_TopRatedCopyWithImpl(
       _$_TopRated _value, $Res Function(_$_TopRated) _then)
-      : super(_value, (v) => _then(v as _$_TopRated));
+      : super(_value, _then);
 
-  @override
-  _$_TopRated get _value => super._value as _$_TopRated;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? adult = freezed,
@@ -213,59 +217,59 @@ class __$$_TopRatedCopyWithImpl<$Res> extends _$TopRatedCopyWithImpl<$Res>
     Object? voteCount = freezed,
   }) {
     return _then(_$_TopRated(
-      adult: adult == freezed
+      adult: freezed == adult
           ? _value.adult
           : adult // ignore: cast_nullable_to_non_nullable
               as bool?,
-      backdropPath: backdropPath == freezed
+      backdropPath: freezed == backdropPath
           ? _value.backdropPath
           : backdropPath // ignore: cast_nullable_to_non_nullable
               as String?,
-      genreIds: genreIds == freezed
+      genreIds: freezed == genreIds
           ? _value._genreIds
           : genreIds // ignore: cast_nullable_to_non_nullable
               as List<int>?,
-      id: id == freezed
+      id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as int?,
-      originalLanguage: originalLanguage == freezed
+      originalLanguage: freezed == originalLanguage
           ? _value.originalLanguage
           : originalLanguage // ignore: cast_nullable_to_non_nullable
               as String?,
-      originalTitle: originalTitle == freezed
+      originalTitle: freezed == originalTitle
           ? _value.originalTitle
           : originalTitle // ignore: cast_nullable_to_non_nullable
               as String?,
-      overview: overview == freezed
+      overview: freezed == overview
           ? _value.overview
           : overview // ignore: cast_nullable_to_non_nullable
               as String?,
-      popularity: popularity == freezed
+      popularity: freezed == popularity
           ? _value.popularity
           : popularity // ignore: cast_nullable_to_non_nullable
               as double?,
-      posterPath: posterPath == freezed
+      posterPath: freezed == posterPath
           ? _value.posterPath
           : posterPath // ignore: cast_nullable_to_non_nullable
               as String?,
-      releaseDate: releaseDate == freezed
+      releaseDate: freezed == releaseDate
           ? _value.releaseDate
           : releaseDate // ignore: cast_nullable_to_non_nullable
               as DateTime?,
-      title: title == freezed
+      title: freezed == title
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
               as String?,
-      video: video == freezed
+      video: freezed == video
           ? _value.video
           : video // ignore: cast_nullable_to_non_nullable
               as bool?,
-      voteAverage: voteAverage == freezed
+      voteAverage: freezed == voteAverage
           ? _value.voteAverage
           : voteAverage // ignore: cast_nullable_to_non_nullable
               as double?,
-      voteCount: voteCount == freezed
+      voteCount: freezed == voteCount
           ? _value.voteCount
           : voteCount // ignore: cast_nullable_to_non_nullable
               as int?,
@@ -308,6 +312,7 @@ class _$_TopRated implements _TopRated {
   List<int>? get genreIds {
     final value = _genreIds;
     if (value == null) return null;
+    if (_genreIds is EqualUnmodifiableListView) return _genreIds;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(value);
   }
@@ -356,50 +361,53 @@ class _$_TopRated implements _TopRated {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_TopRated &&
-            const DeepCollectionEquality().equals(other.adult, adult) &&
-            const DeepCollectionEquality()
-                .equals(other.backdropPath, backdropPath) &&
+            (identical(other.adult, adult) || other.adult == adult) &&
+            (identical(other.backdropPath, backdropPath) ||
+                other.backdropPath == backdropPath) &&
             const DeepCollectionEquality().equals(other._genreIds, _genreIds) &&
-            const DeepCollectionEquality().equals(other.id, id) &&
-            const DeepCollectionEquality()
-                .equals(other.originalLanguage, originalLanguage) &&
-            const DeepCollectionEquality()
-                .equals(other.originalTitle, originalTitle) &&
-            const DeepCollectionEquality().equals(other.overview, overview) &&
-            const DeepCollectionEquality()
-                .equals(other.popularity, popularity) &&
-            const DeepCollectionEquality()
-                .equals(other.posterPath, posterPath) &&
-            const DeepCollectionEquality()
-                .equals(other.releaseDate, releaseDate) &&
-            const DeepCollectionEquality().equals(other.title, title) &&
-            const DeepCollectionEquality().equals(other.video, video) &&
-            const DeepCollectionEquality()
-                .equals(other.voteAverage, voteAverage) &&
-            const DeepCollectionEquality().equals(other.voteCount, voteCount));
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.originalLanguage, originalLanguage) ||
+                other.originalLanguage == originalLanguage) &&
+            (identical(other.originalTitle, originalTitle) ||
+                other.originalTitle == originalTitle) &&
+            (identical(other.overview, overview) ||
+                other.overview == overview) &&
+            (identical(other.popularity, popularity) ||
+                other.popularity == popularity) &&
+            (identical(other.posterPath, posterPath) ||
+                other.posterPath == posterPath) &&
+            (identical(other.releaseDate, releaseDate) ||
+                other.releaseDate == releaseDate) &&
+            (identical(other.title, title) || other.title == title) &&
+            (identical(other.video, video) || other.video == video) &&
+            (identical(other.voteAverage, voteAverage) ||
+                other.voteAverage == voteAverage) &&
+            (identical(other.voteCount, voteCount) ||
+                other.voteCount == voteCount));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
       runtimeType,
-      const DeepCollectionEquality().hash(adult),
-      const DeepCollectionEquality().hash(backdropPath),
+      adult,
+      backdropPath,
       const DeepCollectionEquality().hash(_genreIds),
-      const DeepCollectionEquality().hash(id),
-      const DeepCollectionEquality().hash(originalLanguage),
-      const DeepCollectionEquality().hash(originalTitle),
-      const DeepCollectionEquality().hash(overview),
-      const DeepCollectionEquality().hash(popularity),
-      const DeepCollectionEquality().hash(posterPath),
-      const DeepCollectionEquality().hash(releaseDate),
-      const DeepCollectionEquality().hash(title),
-      const DeepCollectionEquality().hash(video),
-      const DeepCollectionEquality().hash(voteAverage),
-      const DeepCollectionEquality().hash(voteCount));
+      id,
+      originalLanguage,
+      originalTitle,
+      overview,
+      popularity,
+      posterPath,
+      releaseDate,
+      title,
+      video,
+      voteAverage,
+      voteCount);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_TopRatedCopyWith<_$_TopRated> get copyWith =>
       __$$_TopRatedCopyWithImpl<_$_TopRated>(this, _$identity);
 

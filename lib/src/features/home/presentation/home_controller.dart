@@ -1,11 +1,26 @@
+import 'dart:async';
+
 import 'package:fugi_movie_app_team2/src/features/home/domain/entities/trending.dart';
 import 'package:fugi_movie_app_team2/src/features/home/domain/entities/upcoming.dart';
 import 'package:fugi_movie_app_team2/src/features/home/domain/repository/home_repository.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:logger/logger.dart';
+
+import 'package:riverpod_annotation/riverpod_annotation.dart';
+
+part 'home_controller.g.dart';
 
 class HomeController extends StateNotifier<List<Map<String, dynamic>?>> {
-  HomeController() : super([]);
+  HomeController() : super([]) {
+    getData();
+  }
 
+  List<Map<String, dynamic>?> getData() {
+    Logger().wtf(state);
+    return state;
+  }
+
+  //category: toprated, popular
   void add(String category, dynamic value) {
     var myState = [...state];
     var findIndex = myState.indexWhere(
@@ -33,6 +48,18 @@ final listOfMovieProvider = StateProvider<List<dynamic>?>(
 
 class FetchMovieController extends StateNotifier<AsyncValue<List<dynamic>?>> {
   FetchMovieController() : super(const AsyncValue.loading());
+}
+
+@riverpod
+class TopRatedController extends _$TopRatedController {
+  @override
+  FutureOr<List<Trending>?> build() async {
+    final resp = await ref.read(homeRepositoryProvider).getTopRated();
+    return resp.fold(
+      (l) => null,
+      (r) => r,
+    );
+  }
 }
 
 class TrendingController extends StateNotifier<AsyncValue<List<Trending>?>> {

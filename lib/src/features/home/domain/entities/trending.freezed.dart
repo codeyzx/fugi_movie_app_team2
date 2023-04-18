@@ -1,7 +1,7 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'trending.dart';
 
@@ -62,7 +62,8 @@ mixin _$Trending {
 /// @nodoc
 abstract class $TrendingCopyWith<$Res> {
   factory $TrendingCopyWith(Trending value, $Res Function(Trending) then) =
-      _$TrendingCopyWithImpl<$Res>;
+      _$TrendingCopyWithImpl<$Res, Trending>;
+  @useResult
   $Res call(
       {@JsonKey(name: 'adult') bool? adult,
       @JsonKey(name: 'backdrop_path') String? backdropPath,
@@ -83,13 +84,16 @@ abstract class $TrendingCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$TrendingCopyWithImpl<$Res> implements $TrendingCopyWith<$Res> {
+class _$TrendingCopyWithImpl<$Res, $Val extends Trending>
+    implements $TrendingCopyWith<$Res> {
   _$TrendingCopyWithImpl(this._value, this._then);
 
-  final Trending _value;
   // ignore: unused_field
-  final $Res Function(Trending) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? adult = freezed,
@@ -110,71 +114,71 @@ class _$TrendingCopyWithImpl<$Res> implements $TrendingCopyWith<$Res> {
     Object? originCountry = freezed,
   }) {
     return _then(_value.copyWith(
-      adult: adult == freezed
+      adult: freezed == adult
           ? _value.adult
           : adult // ignore: cast_nullable_to_non_nullable
               as bool?,
-      backdropPath: backdropPath == freezed
+      backdropPath: freezed == backdropPath
           ? _value.backdropPath
           : backdropPath // ignore: cast_nullable_to_non_nullable
               as String?,
-      id: id == freezed
+      id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as int?,
-      name: name == freezed
+      name: freezed == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String?,
-      title: title == freezed
+      title: freezed == title
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
               as String?,
-      originalLanguage: originalLanguage == freezed
+      originalLanguage: freezed == originalLanguage
           ? _value.originalLanguage
           : originalLanguage // ignore: cast_nullable_to_non_nullable
               as String?,
-      originalName: originalName == freezed
+      originalName: freezed == originalName
           ? _value.originalName
           : originalName // ignore: cast_nullable_to_non_nullable
               as String?,
-      overview: overview == freezed
+      overview: freezed == overview
           ? _value.overview
           : overview // ignore: cast_nullable_to_non_nullable
               as String?,
-      posterPath: posterPath == freezed
+      posterPath: freezed == posterPath
           ? _value.posterPath
           : posterPath // ignore: cast_nullable_to_non_nullable
               as String?,
-      mediaType: mediaType == freezed
+      mediaType: freezed == mediaType
           ? _value.mediaType
           : mediaType // ignore: cast_nullable_to_non_nullable
               as String?,
-      genreIds: genreIds == freezed
+      genreIds: freezed == genreIds
           ? _value.genreIds
           : genreIds // ignore: cast_nullable_to_non_nullable
               as List<int>?,
-      popularity: popularity == freezed
+      popularity: freezed == popularity
           ? _value.popularity
           : popularity // ignore: cast_nullable_to_non_nullable
               as double?,
-      firstAirDate: firstAirDate == freezed
+      firstAirDate: freezed == firstAirDate
           ? _value.firstAirDate
           : firstAirDate // ignore: cast_nullable_to_non_nullable
               as dynamic,
-      voteAverage: voteAverage == freezed
+      voteAverage: freezed == voteAverage
           ? _value.voteAverage
           : voteAverage // ignore: cast_nullable_to_non_nullable
               as double?,
-      voteCount: voteCount == freezed
+      voteCount: freezed == voteCount
           ? _value.voteCount
           : voteCount // ignore: cast_nullable_to_non_nullable
               as int?,
-      originCountry: originCountry == freezed
+      originCountry: freezed == originCountry
           ? _value.originCountry
           : originCountry // ignore: cast_nullable_to_non_nullable
               as List<String>?,
-    ));
+    ) as $Val);
   }
 }
 
@@ -184,6 +188,7 @@ abstract class _$$_TrendingCopyWith<$Res> implements $TrendingCopyWith<$Res> {
           _$_Trending value, $Res Function(_$_Trending) then) =
       __$$_TrendingCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call(
       {@JsonKey(name: 'adult') bool? adult,
       @JsonKey(name: 'backdrop_path') String? backdropPath,
@@ -204,15 +209,14 @@ abstract class _$$_TrendingCopyWith<$Res> implements $TrendingCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_TrendingCopyWithImpl<$Res> extends _$TrendingCopyWithImpl<$Res>
+class __$$_TrendingCopyWithImpl<$Res>
+    extends _$TrendingCopyWithImpl<$Res, _$_Trending>
     implements _$$_TrendingCopyWith<$Res> {
   __$$_TrendingCopyWithImpl(
       _$_Trending _value, $Res Function(_$_Trending) _then)
-      : super(_value, (v) => _then(v as _$_Trending));
+      : super(_value, _then);
 
-  @override
-  _$_Trending get _value => super._value as _$_Trending;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? adult = freezed,
@@ -233,67 +237,67 @@ class __$$_TrendingCopyWithImpl<$Res> extends _$TrendingCopyWithImpl<$Res>
     Object? originCountry = freezed,
   }) {
     return _then(_$_Trending(
-      adult: adult == freezed
+      adult: freezed == adult
           ? _value.adult
           : adult // ignore: cast_nullable_to_non_nullable
               as bool?,
-      backdropPath: backdropPath == freezed
+      backdropPath: freezed == backdropPath
           ? _value.backdropPath
           : backdropPath // ignore: cast_nullable_to_non_nullable
               as String?,
-      id: id == freezed
+      id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as int?,
-      name: name == freezed
+      name: freezed == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String?,
-      title: title == freezed
+      title: freezed == title
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
               as String?,
-      originalLanguage: originalLanguage == freezed
+      originalLanguage: freezed == originalLanguage
           ? _value.originalLanguage
           : originalLanguage // ignore: cast_nullable_to_non_nullable
               as String?,
-      originalName: originalName == freezed
+      originalName: freezed == originalName
           ? _value.originalName
           : originalName // ignore: cast_nullable_to_non_nullable
               as String?,
-      overview: overview == freezed
+      overview: freezed == overview
           ? _value.overview
           : overview // ignore: cast_nullable_to_non_nullable
               as String?,
-      posterPath: posterPath == freezed
+      posterPath: freezed == posterPath
           ? _value.posterPath
           : posterPath // ignore: cast_nullable_to_non_nullable
               as String?,
-      mediaType: mediaType == freezed
+      mediaType: freezed == mediaType
           ? _value.mediaType
           : mediaType // ignore: cast_nullable_to_non_nullable
               as String?,
-      genreIds: genreIds == freezed
+      genreIds: freezed == genreIds
           ? _value._genreIds
           : genreIds // ignore: cast_nullable_to_non_nullable
               as List<int>?,
-      popularity: popularity == freezed
+      popularity: freezed == popularity
           ? _value.popularity
           : popularity // ignore: cast_nullable_to_non_nullable
               as double?,
-      firstAirDate: firstAirDate == freezed
+      firstAirDate: freezed == firstAirDate
           ? _value.firstAirDate
           : firstAirDate // ignore: cast_nullable_to_non_nullable
               as dynamic,
-      voteAverage: voteAverage == freezed
+      voteAverage: freezed == voteAverage
           ? _value.voteAverage
           : voteAverage // ignore: cast_nullable_to_non_nullable
               as double?,
-      voteCount: voteCount == freezed
+      voteCount: freezed == voteCount
           ? _value.voteCount
           : voteCount // ignore: cast_nullable_to_non_nullable
               as int?,
-      originCountry: originCountry == freezed
+      originCountry: freezed == originCountry
           ? _value._originCountry
           : originCountry // ignore: cast_nullable_to_non_nullable
               as List<String>?,
@@ -363,6 +367,7 @@ class _$_Trending implements _Trending {
   List<int>? get genreIds {
     final value = _genreIds;
     if (value == null) return null;
+    if (_genreIds is EqualUnmodifiableListView) return _genreIds;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(value);
   }
@@ -385,6 +390,7 @@ class _$_Trending implements _Trending {
   List<String>? get originCountry {
     final value = _originCountry;
     if (value == null) return null;
+    if (_originCountry is EqualUnmodifiableListView) return _originCountry;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(value);
   }
@@ -399,28 +405,31 @@ class _$_Trending implements _Trending {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_Trending &&
-            const DeepCollectionEquality().equals(other.adult, adult) &&
-            const DeepCollectionEquality()
-                .equals(other.backdropPath, backdropPath) &&
-            const DeepCollectionEquality().equals(other.id, id) &&
-            const DeepCollectionEquality().equals(other.name, name) &&
-            const DeepCollectionEquality().equals(other.title, title) &&
-            const DeepCollectionEquality()
-                .equals(other.originalLanguage, originalLanguage) &&
-            const DeepCollectionEquality()
-                .equals(other.originalName, originalName) &&
-            const DeepCollectionEquality().equals(other.overview, overview) &&
-            const DeepCollectionEquality()
-                .equals(other.posterPath, posterPath) &&
-            const DeepCollectionEquality().equals(other.mediaType, mediaType) &&
+            (identical(other.adult, adult) || other.adult == adult) &&
+            (identical(other.backdropPath, backdropPath) ||
+                other.backdropPath == backdropPath) &&
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.name, name) || other.name == name) &&
+            (identical(other.title, title) || other.title == title) &&
+            (identical(other.originalLanguage, originalLanguage) ||
+                other.originalLanguage == originalLanguage) &&
+            (identical(other.originalName, originalName) ||
+                other.originalName == originalName) &&
+            (identical(other.overview, overview) ||
+                other.overview == overview) &&
+            (identical(other.posterPath, posterPath) ||
+                other.posterPath == posterPath) &&
+            (identical(other.mediaType, mediaType) ||
+                other.mediaType == mediaType) &&
             const DeepCollectionEquality().equals(other._genreIds, _genreIds) &&
-            const DeepCollectionEquality()
-                .equals(other.popularity, popularity) &&
+            (identical(other.popularity, popularity) ||
+                other.popularity == popularity) &&
             const DeepCollectionEquality()
                 .equals(other.firstAirDate, firstAirDate) &&
-            const DeepCollectionEquality()
-                .equals(other.voteAverage, voteAverage) &&
-            const DeepCollectionEquality().equals(other.voteCount, voteCount) &&
+            (identical(other.voteAverage, voteAverage) ||
+                other.voteAverage == voteAverage) &&
+            (identical(other.voteCount, voteCount) ||
+                other.voteCount == voteCount) &&
             const DeepCollectionEquality()
                 .equals(other._originCountry, _originCountry));
   }
@@ -429,25 +438,26 @@ class _$_Trending implements _Trending {
   @override
   int get hashCode => Object.hash(
       runtimeType,
-      const DeepCollectionEquality().hash(adult),
-      const DeepCollectionEquality().hash(backdropPath),
-      const DeepCollectionEquality().hash(id),
-      const DeepCollectionEquality().hash(name),
-      const DeepCollectionEquality().hash(title),
-      const DeepCollectionEquality().hash(originalLanguage),
-      const DeepCollectionEquality().hash(originalName),
-      const DeepCollectionEquality().hash(overview),
-      const DeepCollectionEquality().hash(posterPath),
-      const DeepCollectionEquality().hash(mediaType),
+      adult,
+      backdropPath,
+      id,
+      name,
+      title,
+      originalLanguage,
+      originalName,
+      overview,
+      posterPath,
+      mediaType,
       const DeepCollectionEquality().hash(_genreIds),
-      const DeepCollectionEquality().hash(popularity),
+      popularity,
       const DeepCollectionEquality().hash(firstAirDate),
-      const DeepCollectionEquality().hash(voteAverage),
-      const DeepCollectionEquality().hash(voteCount),
+      voteAverage,
+      voteCount,
       const DeepCollectionEquality().hash(_originCountry));
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_TrendingCopyWith<_$_Trending> get copyWith =>
       __$$_TrendingCopyWithImpl<_$_Trending>(this, _$identity);
 

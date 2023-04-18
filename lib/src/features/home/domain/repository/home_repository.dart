@@ -9,6 +9,8 @@ import '../entities/trending.dart';
 abstract class HomeRepository {
   Future<Either<Failure, List<Trending>?>> getTrending();
   Future<Either<Failure, List<Upcoming>?>> getUpcoming();
+  Future<Either<Failure, List<Trending>?>> getTopRated();
+  Future<Either<Failure, List<Trending>?>> getPopular();
 }
 
 final homeRepositoryProvider = Provider<HomeRepository>(

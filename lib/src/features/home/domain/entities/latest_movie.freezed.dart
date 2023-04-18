@@ -1,7 +1,7 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'latest_movie.dart';
 
@@ -81,7 +81,8 @@ mixin _$LatestMovie {
 abstract class $LatestMovieCopyWith<$Res> {
   factory $LatestMovieCopyWith(
           LatestMovie value, $Res Function(LatestMovie) then) =
-      _$LatestMovieCopyWithImpl<$Res>;
+      _$LatestMovieCopyWithImpl<$Res, LatestMovie>;
+  @useResult
   $Res call(
       {@JsonKey(name: 'adult') bool? adult,
       @JsonKey(name: 'backdrop_path') dynamic backdropPath,
@@ -111,13 +112,16 @@ abstract class $LatestMovieCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$LatestMovieCopyWithImpl<$Res> implements $LatestMovieCopyWith<$Res> {
+class _$LatestMovieCopyWithImpl<$Res, $Val extends LatestMovie>
+    implements $LatestMovieCopyWith<$Res> {
   _$LatestMovieCopyWithImpl(this._value, this._then);
 
-  final LatestMovie _value;
   // ignore: unused_field
-  final $Res Function(LatestMovie) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? adult = freezed,
@@ -147,107 +151,107 @@ class _$LatestMovieCopyWithImpl<$Res> implements $LatestMovieCopyWith<$Res> {
     Object? voteCount = freezed,
   }) {
     return _then(_value.copyWith(
-      adult: adult == freezed
+      adult: freezed == adult
           ? _value.adult
           : adult // ignore: cast_nullable_to_non_nullable
               as bool?,
-      backdropPath: backdropPath == freezed
+      backdropPath: freezed == backdropPath
           ? _value.backdropPath
           : backdropPath // ignore: cast_nullable_to_non_nullable
               as dynamic,
-      belongsToCollection: belongsToCollection == freezed
+      belongsToCollection: freezed == belongsToCollection
           ? _value.belongsToCollection
           : belongsToCollection // ignore: cast_nullable_to_non_nullable
               as dynamic,
-      budget: budget == freezed
+      budget: freezed == budget
           ? _value.budget
           : budget // ignore: cast_nullable_to_non_nullable
               as int?,
-      genres: genres == freezed
+      genres: freezed == genres
           ? _value.genres
           : genres // ignore: cast_nullable_to_non_nullable
               as List<dynamic>?,
-      homepage: homepage == freezed
+      homepage: freezed == homepage
           ? _value.homepage
           : homepage // ignore: cast_nullable_to_non_nullable
               as String?,
-      id: id == freezed
+      id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as int?,
-      imdbId: imdbId == freezed
+      imdbId: freezed == imdbId
           ? _value.imdbId
           : imdbId // ignore: cast_nullable_to_non_nullable
               as dynamic,
-      originalLanguage: originalLanguage == freezed
+      originalLanguage: freezed == originalLanguage
           ? _value.originalLanguage
           : originalLanguage // ignore: cast_nullable_to_non_nullable
               as String?,
-      originalTitle: originalTitle == freezed
+      originalTitle: freezed == originalTitle
           ? _value.originalTitle
           : originalTitle // ignore: cast_nullable_to_non_nullable
               as String?,
-      overview: overview == freezed
+      overview: freezed == overview
           ? _value.overview
           : overview // ignore: cast_nullable_to_non_nullable
               as String?,
-      popularity: popularity == freezed
+      popularity: freezed == popularity
           ? _value.popularity
           : popularity // ignore: cast_nullable_to_non_nullable
               as int?,
-      posterPath: posterPath == freezed
+      posterPath: freezed == posterPath
           ? _value.posterPath
           : posterPath // ignore: cast_nullable_to_non_nullable
               as dynamic,
-      productionCompanies: productionCompanies == freezed
+      productionCompanies: freezed == productionCompanies
           ? _value.productionCompanies
           : productionCompanies // ignore: cast_nullable_to_non_nullable
               as List<dynamic>?,
-      productionCountries: productionCountries == freezed
+      productionCountries: freezed == productionCountries
           ? _value.productionCountries
           : productionCountries // ignore: cast_nullable_to_non_nullable
               as List<dynamic>?,
-      releaseDate: releaseDate == freezed
+      releaseDate: freezed == releaseDate
           ? _value.releaseDate
           : releaseDate // ignore: cast_nullable_to_non_nullable
               as String?,
-      revenue: revenue == freezed
+      revenue: freezed == revenue
           ? _value.revenue
           : revenue // ignore: cast_nullable_to_non_nullable
               as int?,
-      runtime: runtime == freezed
+      runtime: freezed == runtime
           ? _value.runtime
           : runtime // ignore: cast_nullable_to_non_nullable
               as int?,
-      spokenLanguages: spokenLanguages == freezed
+      spokenLanguages: freezed == spokenLanguages
           ? _value.spokenLanguages
           : spokenLanguages // ignore: cast_nullable_to_non_nullable
               as List<dynamic>?,
-      status: status == freezed
+      status: freezed == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
               as String?,
-      tagline: tagline == freezed
+      tagline: freezed == tagline
           ? _value.tagline
           : tagline // ignore: cast_nullable_to_non_nullable
               as String?,
-      title: title == freezed
+      title: freezed == title
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
               as String?,
-      video: video == freezed
+      video: freezed == video
           ? _value.video
           : video // ignore: cast_nullable_to_non_nullable
               as bool?,
-      voteAverage: voteAverage == freezed
+      voteAverage: freezed == voteAverage
           ? _value.voteAverage
           : voteAverage // ignore: cast_nullable_to_non_nullable
               as int?,
-      voteCount: voteCount == freezed
+      voteCount: freezed == voteCount
           ? _value.voteCount
           : voteCount // ignore: cast_nullable_to_non_nullable
               as int?,
-    ));
+    ) as $Val);
   }
 }
 
@@ -258,6 +262,7 @@ abstract class _$$_LatestMovieCopyWith<$Res>
           _$_LatestMovie value, $Res Function(_$_LatestMovie) then) =
       __$$_LatestMovieCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call(
       {@JsonKey(name: 'adult') bool? adult,
       @JsonKey(name: 'backdrop_path') dynamic backdropPath,
@@ -287,15 +292,14 @@ abstract class _$$_LatestMovieCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_LatestMovieCopyWithImpl<$Res> extends _$LatestMovieCopyWithImpl<$Res>
+class __$$_LatestMovieCopyWithImpl<$Res>
+    extends _$LatestMovieCopyWithImpl<$Res, _$_LatestMovie>
     implements _$$_LatestMovieCopyWith<$Res> {
   __$$_LatestMovieCopyWithImpl(
       _$_LatestMovie _value, $Res Function(_$_LatestMovie) _then)
-      : super(_value, (v) => _then(v as _$_LatestMovie));
+      : super(_value, _then);
 
-  @override
-  _$_LatestMovie get _value => super._value as _$_LatestMovie;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? adult = freezed,
@@ -325,103 +329,103 @@ class __$$_LatestMovieCopyWithImpl<$Res> extends _$LatestMovieCopyWithImpl<$Res>
     Object? voteCount = freezed,
   }) {
     return _then(_$_LatestMovie(
-      adult: adult == freezed
+      adult: freezed == adult
           ? _value.adult
           : adult // ignore: cast_nullable_to_non_nullable
               as bool?,
-      backdropPath: backdropPath == freezed
+      backdropPath: freezed == backdropPath
           ? _value.backdropPath
           : backdropPath // ignore: cast_nullable_to_non_nullable
               as dynamic,
-      belongsToCollection: belongsToCollection == freezed
+      belongsToCollection: freezed == belongsToCollection
           ? _value.belongsToCollection
           : belongsToCollection // ignore: cast_nullable_to_non_nullable
               as dynamic,
-      budget: budget == freezed
+      budget: freezed == budget
           ? _value.budget
           : budget // ignore: cast_nullable_to_non_nullable
               as int?,
-      genres: genres == freezed
+      genres: freezed == genres
           ? _value._genres
           : genres // ignore: cast_nullable_to_non_nullable
               as List<dynamic>?,
-      homepage: homepage == freezed
+      homepage: freezed == homepage
           ? _value.homepage
           : homepage // ignore: cast_nullable_to_non_nullable
               as String?,
-      id: id == freezed
+      id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as int?,
-      imdbId: imdbId == freezed
+      imdbId: freezed == imdbId
           ? _value.imdbId
           : imdbId // ignore: cast_nullable_to_non_nullable
               as dynamic,
-      originalLanguage: originalLanguage == freezed
+      originalLanguage: freezed == originalLanguage
           ? _value.originalLanguage
           : originalLanguage // ignore: cast_nullable_to_non_nullable
               as String?,
-      originalTitle: originalTitle == freezed
+      originalTitle: freezed == originalTitle
           ? _value.originalTitle
           : originalTitle // ignore: cast_nullable_to_non_nullable
               as String?,
-      overview: overview == freezed
+      overview: freezed == overview
           ? _value.overview
           : overview // ignore: cast_nullable_to_non_nullable
               as String?,
-      popularity: popularity == freezed
+      popularity: freezed == popularity
           ? _value.popularity
           : popularity // ignore: cast_nullable_to_non_nullable
               as int?,
-      posterPath: posterPath == freezed
+      posterPath: freezed == posterPath
           ? _value.posterPath
           : posterPath // ignore: cast_nullable_to_non_nullable
               as dynamic,
-      productionCompanies: productionCompanies == freezed
+      productionCompanies: freezed == productionCompanies
           ? _value._productionCompanies
           : productionCompanies // ignore: cast_nullable_to_non_nullable
               as List<dynamic>?,
-      productionCountries: productionCountries == freezed
+      productionCountries: freezed == productionCountries
           ? _value._productionCountries
           : productionCountries // ignore: cast_nullable_to_non_nullable
               as List<dynamic>?,
-      releaseDate: releaseDate == freezed
+      releaseDate: freezed == releaseDate
           ? _value.releaseDate
           : releaseDate // ignore: cast_nullable_to_non_nullable
               as String?,
-      revenue: revenue == freezed
+      revenue: freezed == revenue
           ? _value.revenue
           : revenue // ignore: cast_nullable_to_non_nullable
               as int?,
-      runtime: runtime == freezed
+      runtime: freezed == runtime
           ? _value.runtime
           : runtime // ignore: cast_nullable_to_non_nullable
               as int?,
-      spokenLanguages: spokenLanguages == freezed
+      spokenLanguages: freezed == spokenLanguages
           ? _value._spokenLanguages
           : spokenLanguages // ignore: cast_nullable_to_non_nullable
               as List<dynamic>?,
-      status: status == freezed
+      status: freezed == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
               as String?,
-      tagline: tagline == freezed
+      tagline: freezed == tagline
           ? _value.tagline
           : tagline // ignore: cast_nullable_to_non_nullable
               as String?,
-      title: title == freezed
+      title: freezed == title
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
               as String?,
-      video: video == freezed
+      video: freezed == video
           ? _value.video
           : video // ignore: cast_nullable_to_non_nullable
               as bool?,
-      voteAverage: voteAverage == freezed
+      voteAverage: freezed == voteAverage
           ? _value.voteAverage
           : voteAverage // ignore: cast_nullable_to_non_nullable
               as int?,
-      voteCount: voteCount == freezed
+      voteCount: freezed == voteCount
           ? _value.voteCount
           : voteCount // ignore: cast_nullable_to_non_nullable
               as int?,
@@ -509,6 +513,7 @@ class _$_LatestMovie implements _LatestMovie {
   List<dynamic>? get genres {
     final value = _genres;
     if (value == null) return null;
+    if (_genres is EqualUnmodifiableListView) return _genres;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(value);
   }
@@ -543,6 +548,8 @@ class _$_LatestMovie implements _LatestMovie {
   List<dynamic>? get productionCompanies {
     final value = _productionCompanies;
     if (value == null) return null;
+    if (_productionCompanies is EqualUnmodifiableListView)
+      return _productionCompanies;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(value);
   }
@@ -553,6 +560,8 @@ class _$_LatestMovie implements _LatestMovie {
   List<dynamic>? get productionCountries {
     final value = _productionCountries;
     if (value == null) return null;
+    if (_productionCountries is EqualUnmodifiableListView)
+      return _productionCountries;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(value);
   }
@@ -572,6 +581,7 @@ class _$_LatestMovie implements _LatestMovie {
   List<dynamic>? get spokenLanguages {
     final value = _spokenLanguages;
     if (value == null) return null;
+    if (_spokenLanguages is EqualUnmodifiableListView) return _spokenLanguages;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(value);
   }
@@ -605,77 +615,81 @@ class _$_LatestMovie implements _LatestMovie {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_LatestMovie &&
-            const DeepCollectionEquality().equals(other.adult, adult) &&
+            (identical(other.adult, adult) || other.adult == adult) &&
             const DeepCollectionEquality()
                 .equals(other.backdropPath, backdropPath) &&
             const DeepCollectionEquality()
                 .equals(other.belongsToCollection, belongsToCollection) &&
-            const DeepCollectionEquality().equals(other.budget, budget) &&
+            (identical(other.budget, budget) || other.budget == budget) &&
             const DeepCollectionEquality().equals(other._genres, _genres) &&
-            const DeepCollectionEquality().equals(other.homepage, homepage) &&
-            const DeepCollectionEquality().equals(other.id, id) &&
+            (identical(other.homepage, homepage) ||
+                other.homepage == homepage) &&
+            (identical(other.id, id) || other.id == id) &&
             const DeepCollectionEquality().equals(other.imdbId, imdbId) &&
-            const DeepCollectionEquality()
-                .equals(other.originalLanguage, originalLanguage) &&
-            const DeepCollectionEquality()
-                .equals(other.originalTitle, originalTitle) &&
-            const DeepCollectionEquality().equals(other.overview, overview) &&
-            const DeepCollectionEquality()
-                .equals(other.popularity, popularity) &&
+            (identical(other.originalLanguage, originalLanguage) ||
+                other.originalLanguage == originalLanguage) &&
+            (identical(other.originalTitle, originalTitle) ||
+                other.originalTitle == originalTitle) &&
+            (identical(other.overview, overview) ||
+                other.overview == overview) &&
+            (identical(other.popularity, popularity) ||
+                other.popularity == popularity) &&
             const DeepCollectionEquality()
                 .equals(other.posterPath, posterPath) &&
             const DeepCollectionEquality()
                 .equals(other._productionCompanies, _productionCompanies) &&
             const DeepCollectionEquality()
                 .equals(other._productionCountries, _productionCountries) &&
-            const DeepCollectionEquality()
-                .equals(other.releaseDate, releaseDate) &&
-            const DeepCollectionEquality().equals(other.revenue, revenue) &&
-            const DeepCollectionEquality().equals(other.runtime, runtime) &&
+            (identical(other.releaseDate, releaseDate) ||
+                other.releaseDate == releaseDate) &&
+            (identical(other.revenue, revenue) || other.revenue == revenue) &&
+            (identical(other.runtime, runtime) || other.runtime == runtime) &&
             const DeepCollectionEquality()
                 .equals(other._spokenLanguages, _spokenLanguages) &&
-            const DeepCollectionEquality().equals(other.status, status) &&
-            const DeepCollectionEquality().equals(other.tagline, tagline) &&
-            const DeepCollectionEquality().equals(other.title, title) &&
-            const DeepCollectionEquality().equals(other.video, video) &&
-            const DeepCollectionEquality()
-                .equals(other.voteAverage, voteAverage) &&
-            const DeepCollectionEquality().equals(other.voteCount, voteCount));
+            (identical(other.status, status) || other.status == status) &&
+            (identical(other.tagline, tagline) || other.tagline == tagline) &&
+            (identical(other.title, title) || other.title == title) &&
+            (identical(other.video, video) || other.video == video) &&
+            (identical(other.voteAverage, voteAverage) ||
+                other.voteAverage == voteAverage) &&
+            (identical(other.voteCount, voteCount) ||
+                other.voteCount == voteCount));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hashAll([
         runtimeType,
-        const DeepCollectionEquality().hash(adult),
+        adult,
         const DeepCollectionEquality().hash(backdropPath),
         const DeepCollectionEquality().hash(belongsToCollection),
-        const DeepCollectionEquality().hash(budget),
+        budget,
         const DeepCollectionEquality().hash(_genres),
-        const DeepCollectionEquality().hash(homepage),
-        const DeepCollectionEquality().hash(id),
+        homepage,
+        id,
         const DeepCollectionEquality().hash(imdbId),
-        const DeepCollectionEquality().hash(originalLanguage),
-        const DeepCollectionEquality().hash(originalTitle),
-        const DeepCollectionEquality().hash(overview),
-        const DeepCollectionEquality().hash(popularity),
+        originalLanguage,
+        originalTitle,
+        overview,
+        popularity,
         const DeepCollectionEquality().hash(posterPath),
         const DeepCollectionEquality().hash(_productionCompanies),
         const DeepCollectionEquality().hash(_productionCountries),
-        const DeepCollectionEquality().hash(releaseDate),
-        const DeepCollectionEquality().hash(revenue),
-        const DeepCollectionEquality().hash(runtime),
+        releaseDate,
+        revenue,
+        runtime,
         const DeepCollectionEquality().hash(_spokenLanguages),
-        const DeepCollectionEquality().hash(status),
-        const DeepCollectionEquality().hash(tagline),
-        const DeepCollectionEquality().hash(title),
-        const DeepCollectionEquality().hash(video),
-        const DeepCollectionEquality().hash(voteAverage),
-        const DeepCollectionEquality().hash(voteCount)
+        status,
+        tagline,
+        title,
+        video,
+        voteAverage,
+        voteCount
       ]);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_LatestMovieCopyWith<_$_LatestMovie> get copyWith =>
       __$$_LatestMovieCopyWithImpl<_$_LatestMovie>(this, _$identity);
 

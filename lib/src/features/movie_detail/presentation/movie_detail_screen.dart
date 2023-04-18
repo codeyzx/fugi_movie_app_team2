@@ -31,13 +31,13 @@ import '../../search/presentation/widgets/movie_item_widget.dart';
 
 class MovieDetailScreen extends StatefulHookConsumerWidget {
   final Map<String, dynamic>? idAndObject;
-  final Trending? trending;
-  final String? paramRouteName;
+  // final Trending? trending;
+  // final String? paramRouteName;
   const MovieDetailScreen({
     Key? key,
-    this.trending,
+    // this.trending,
     this.idAndObject,
-    this.paramRouteName,
+    // this.paramRouteName,
   }) : super(key: key);
   static const routeName = 'movie-detail-screen';
 
@@ -78,7 +78,7 @@ class _MovieDetailScreenState extends ConsumerState<MovieDetailScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final movieIdsState = ref.read(homeController).where(
+    final movieIdsState = ref.watch(homeController).where(
           (element) => element!['category'] == widget.idAndObject!['type'],
         );
 
@@ -155,14 +155,16 @@ class _MovieDetailScreenState extends ConsumerState<MovieDetailScreen> {
                           },
                         );
                       } else {
-                        context.pushNamed(
-                          MovieDetailScreen.routeName,
-                          extra: {
-                            "id": prevMovieId,
-                            "object": '',
-                            "type": widget.idAndObject!['type'],
-                          },
-                        );
+                        if (prevMovieId != 0) {
+                          context.pushNamed(
+                            MovieDetailScreen.routeName,
+                            extra: {
+                              "id": prevMovieId,
+                              "object": '',
+                              "type": widget.idAndObject!['type'],
+                            },
+                          );
+                        }
                       }
                     },
                     // control: const SwiperControl(),
@@ -183,7 +185,7 @@ class _MovieDetailScreenState extends ConsumerState<MovieDetailScreen> {
                             ),
                             ElevatedButton(
                               style: ElevatedButton.styleFrom(
-                                primary: AppTheme.textBlueColor,
+                                backgroundColor: AppTheme.textBlueColor,
                               ),
                               onPressed: () {},
                               child: const Text('Swipe to Home'),
@@ -710,12 +712,16 @@ class _MovieDetailScreenState extends ConsumerState<MovieDetailScreen> {
   }
 
   void fetchData() async {
+    Logger().i('listOfIds: ${widget.idAndObject!['type']}');
     try {
       if (widget.idAndObject!['type'] != 'watchlist') {
         //Block pengecekan Movie Id selanjutnya, untuk kebutuhan Swipe
-        final listOfIds = ref.read(homeController).where((element) => element!['category'] == widget.idAndObject!['type']);
+        final listIdState = ref.read(homeController);
+        final listOfIds = listIdState.where(
+          (element) => element?['category'] == widget.idAndObject?['type'],
+        );
+        Logger().i('listOfIds: $listOfIds');
         var myData = [...listOfIds];
-
         var findIndex = myData.indexWhere(
           (element) {
             return element!['value'] == widget.idAndObject!['id'] && element['category'] == widget.idAndObject!['type'];

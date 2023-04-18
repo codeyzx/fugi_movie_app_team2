@@ -1,4 +1,3 @@
-import 'package:fugi_movie_app_team2/src/features/home/presentation/home_controller.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:logger/logger.dart';
 

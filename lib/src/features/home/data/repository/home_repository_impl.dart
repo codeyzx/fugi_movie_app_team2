@@ -31,4 +31,26 @@ class HomeRepositoryImpl implements HomeRepository {
       (r) => Right(r.results),
     );
   }
+
+  @override
+  Future<Either<Failure, List<Trending>?>> getPopular() async {
+    final resp = await remoteProcess(
+      remoteDataSource.getPopular(),
+    );
+    return resp.fold(
+      (l) => Left(l),
+      (r) => Right(r.results),
+    );
+  }
+
+  @override
+  Future<Either<Failure, List<Trending>?>> getTopRated() async {
+    final resp = await remoteProcess(
+      remoteDataSource.getTopRated(),
+    );
+    return resp.fold(
+      (l) => Left(l),
+      (r) => Right(r.results),
+    );
+  }
 }

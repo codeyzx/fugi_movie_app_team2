@@ -1,7 +1,7 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'upcoming_model.dart';
 
@@ -35,20 +35,23 @@ mixin _$UpcomingModel {
 abstract class $UpcomingModelCopyWith<$Res> {
   factory $UpcomingModelCopyWith(
           UpcomingModel value, $Res Function(UpcomingModel) then) =
-      _$UpcomingModelCopyWithImpl<$Res>;
+      _$UpcomingModelCopyWithImpl<$Res, UpcomingModel>;
+  @useResult
   $Res call(
       {int? page, List<Upcoming>? results, int? totalPages, int? totalResults});
 }
 
 /// @nodoc
-class _$UpcomingModelCopyWithImpl<$Res>
+class _$UpcomingModelCopyWithImpl<$Res, $Val extends UpcomingModel>
     implements $UpcomingModelCopyWith<$Res> {
   _$UpcomingModelCopyWithImpl(this._value, this._then);
 
-  final UpcomingModel _value;
   // ignore: unused_field
-  final $Res Function(UpcomingModel) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? page = freezed,
@@ -57,23 +60,23 @@ class _$UpcomingModelCopyWithImpl<$Res>
     Object? totalResults = freezed,
   }) {
     return _then(_value.copyWith(
-      page: page == freezed
+      page: freezed == page
           ? _value.page
           : page // ignore: cast_nullable_to_non_nullable
               as int?,
-      results: results == freezed
+      results: freezed == results
           ? _value.results
           : results // ignore: cast_nullable_to_non_nullable
               as List<Upcoming>?,
-      totalPages: totalPages == freezed
+      totalPages: freezed == totalPages
           ? _value.totalPages
           : totalPages // ignore: cast_nullable_to_non_nullable
               as int?,
-      totalResults: totalResults == freezed
+      totalResults: freezed == totalResults
           ? _value.totalResults
           : totalResults // ignore: cast_nullable_to_non_nullable
               as int?,
-    ));
+    ) as $Val);
   }
 }
 
@@ -84,21 +87,20 @@ abstract class _$$_UpcomingModelCopyWith<$Res>
           _$_UpcomingModel value, $Res Function(_$_UpcomingModel) then) =
       __$$_UpcomingModelCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call(
       {int? page, List<Upcoming>? results, int? totalPages, int? totalResults});
 }
 
 /// @nodoc
 class __$$_UpcomingModelCopyWithImpl<$Res>
-    extends _$UpcomingModelCopyWithImpl<$Res>
+    extends _$UpcomingModelCopyWithImpl<$Res, _$_UpcomingModel>
     implements _$$_UpcomingModelCopyWith<$Res> {
   __$$_UpcomingModelCopyWithImpl(
       _$_UpcomingModel _value, $Res Function(_$_UpcomingModel) _then)
-      : super(_value, (v) => _then(v as _$_UpcomingModel));
+      : super(_value, _then);
 
-  @override
-  _$_UpcomingModel get _value => super._value as _$_UpcomingModel;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? page = freezed,
@@ -107,19 +109,19 @@ class __$$_UpcomingModelCopyWithImpl<$Res>
     Object? totalResults = freezed,
   }) {
     return _then(_$_UpcomingModel(
-      page: page == freezed
+      page: freezed == page
           ? _value.page
           : page // ignore: cast_nullable_to_non_nullable
               as int?,
-      results: results == freezed
+      results: freezed == results
           ? _value._results
           : results // ignore: cast_nullable_to_non_nullable
               as List<Upcoming>?,
-      totalPages: totalPages == freezed
+      totalPages: freezed == totalPages
           ? _value.totalPages
           : totalPages // ignore: cast_nullable_to_non_nullable
               as int?,
-      totalResults: totalResults == freezed
+      totalResults: freezed == totalResults
           ? _value.totalResults
           : totalResults // ignore: cast_nullable_to_non_nullable
               as int?,
@@ -147,6 +149,7 @@ class _$_UpcomingModel implements _UpcomingModel {
   List<Upcoming>? get results {
     final value = _results;
     if (value == null) return null;
+    if (_results is EqualUnmodifiableListView) return _results;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(value);
   }
@@ -166,25 +169,22 @@ class _$_UpcomingModel implements _UpcomingModel {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_UpcomingModel &&
-            const DeepCollectionEquality().equals(other.page, page) &&
+            (identical(other.page, page) || other.page == page) &&
             const DeepCollectionEquality().equals(other._results, _results) &&
-            const DeepCollectionEquality()
-                .equals(other.totalPages, totalPages) &&
-            const DeepCollectionEquality()
-                .equals(other.totalResults, totalResults));
+            (identical(other.totalPages, totalPages) ||
+                other.totalPages == totalPages) &&
+            (identical(other.totalResults, totalResults) ||
+                other.totalResults == totalResults));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(page),
-      const DeepCollectionEquality().hash(_results),
-      const DeepCollectionEquality().hash(totalPages),
-      const DeepCollectionEquality().hash(totalResults));
+  int get hashCode => Object.hash(runtimeType, page,
+      const DeepCollectionEquality().hash(_results), totalPages, totalResults);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_UpcomingModelCopyWith<_$_UpcomingModel> get copyWith =>
       __$$_UpcomingModelCopyWithImpl<_$_UpcomingModel>(this, _$identity);
 

@@ -1,7 +1,7 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'movie_detail.dart';
 
@@ -82,7 +82,8 @@ mixin _$MovieDetail {
 abstract class $MovieDetailCopyWith<$Res> {
   factory $MovieDetailCopyWith(
           MovieDetail value, $Res Function(MovieDetail) then) =
-      _$MovieDetailCopyWithImpl<$Res>;
+      _$MovieDetailCopyWithImpl<$Res, MovieDetail>;
+  @useResult
   $Res call(
       {@JsonKey(name: 'adult')
           bool? adult,
@@ -137,13 +138,16 @@ abstract class $MovieDetailCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$MovieDetailCopyWithImpl<$Res> implements $MovieDetailCopyWith<$Res> {
+class _$MovieDetailCopyWithImpl<$Res, $Val extends MovieDetail>
+    implements $MovieDetailCopyWith<$Res> {
   _$MovieDetailCopyWithImpl(this._value, this._then);
 
-  final MovieDetail _value;
   // ignore: unused_field
-  final $Res Function(MovieDetail) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? adult = freezed,
@@ -173,107 +177,107 @@ class _$MovieDetailCopyWithImpl<$Res> implements $MovieDetailCopyWith<$Res> {
     Object? voteCount = freezed,
   }) {
     return _then(_value.copyWith(
-      adult: adult == freezed
+      adult: freezed == adult
           ? _value.adult
           : adult // ignore: cast_nullable_to_non_nullable
               as bool?,
-      backdropPath: backdropPath == freezed
+      backdropPath: freezed == backdropPath
           ? _value.backdropPath
           : backdropPath // ignore: cast_nullable_to_non_nullable
               as dynamic,
-      belongsToCollection: belongsToCollection == freezed
+      belongsToCollection: freezed == belongsToCollection
           ? _value.belongsToCollection
           : belongsToCollection // ignore: cast_nullable_to_non_nullable
               as dynamic,
-      budget: budget == freezed
+      budget: freezed == budget
           ? _value.budget
           : budget // ignore: cast_nullable_to_non_nullable
               as int?,
-      genres: genres == freezed
+      genres: freezed == genres
           ? _value.genres
           : genres // ignore: cast_nullable_to_non_nullable
               as List<Genre>?,
-      homepage: homepage == freezed
+      homepage: freezed == homepage
           ? _value.homepage
           : homepage // ignore: cast_nullable_to_non_nullable
               as String?,
-      id: id == freezed
+      id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as int?,
-      imdbId: imdbId == freezed
+      imdbId: freezed == imdbId
           ? _value.imdbId
           : imdbId // ignore: cast_nullable_to_non_nullable
               as dynamic,
-      originalLanguage: originalLanguage == freezed
+      originalLanguage: freezed == originalLanguage
           ? _value.originalLanguage
           : originalLanguage // ignore: cast_nullable_to_non_nullable
               as String?,
-      originalTitle: originalTitle == freezed
+      originalTitle: freezed == originalTitle
           ? _value.originalTitle
           : originalTitle // ignore: cast_nullable_to_non_nullable
               as String?,
-      overview: overview == freezed
+      overview: freezed == overview
           ? _value.overview
           : overview // ignore: cast_nullable_to_non_nullable
               as String?,
-      popularity: popularity == freezed
+      popularity: freezed == popularity
           ? _value.popularity
           : popularity // ignore: cast_nullable_to_non_nullable
               as double?,
-      posterPath: posterPath == freezed
+      posterPath: freezed == posterPath
           ? _value.posterPath
           : posterPath // ignore: cast_nullable_to_non_nullable
               as String?,
-      productionCompanies: productionCompanies == freezed
+      productionCompanies: freezed == productionCompanies
           ? _value.productionCompanies
           : productionCompanies // ignore: cast_nullable_to_non_nullable
               as List<ProductionCompany>?,
-      productionCountries: productionCountries == freezed
+      productionCountries: freezed == productionCountries
           ? _value.productionCountries
           : productionCountries // ignore: cast_nullable_to_non_nullable
               as List<dynamic>?,
-      releaseDate: releaseDate == freezed
+      releaseDate: freezed == releaseDate
           ? _value.releaseDate
           : releaseDate // ignore: cast_nullable_to_non_nullable
               as dynamic,
-      revenue: revenue == freezed
+      revenue: freezed == revenue
           ? _value.revenue
           : revenue // ignore: cast_nullable_to_non_nullable
               as int?,
-      runtime: runtime == freezed
+      runtime: freezed == runtime
           ? _value.runtime
           : runtime // ignore: cast_nullable_to_non_nullable
               as int?,
-      spokenLanguages: spokenLanguages == freezed
+      spokenLanguages: freezed == spokenLanguages
           ? _value.spokenLanguages
           : spokenLanguages // ignore: cast_nullable_to_non_nullable
               as List<dynamic>?,
-      status: status == freezed
+      status: freezed == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
               as String?,
-      tagline: tagline == freezed
+      tagline: freezed == tagline
           ? _value.tagline
           : tagline // ignore: cast_nullable_to_non_nullable
               as String?,
-      title: title == freezed
+      title: freezed == title
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
               as String?,
-      video: video == freezed
+      video: freezed == video
           ? _value.video
           : video // ignore: cast_nullable_to_non_nullable
               as bool?,
-      voteAverage: voteAverage == freezed
+      voteAverage: freezed == voteAverage
           ? _value.voteAverage
           : voteAverage // ignore: cast_nullable_to_non_nullable
               as double?,
-      voteCount: voteCount == freezed
+      voteCount: freezed == voteCount
           ? _value.voteCount
           : voteCount // ignore: cast_nullable_to_non_nullable
               as int?,
-    ));
+    ) as $Val);
   }
 }
 
@@ -284,6 +288,7 @@ abstract class _$$_MovieDetailCopyWith<$Res>
           _$_MovieDetail value, $Res Function(_$_MovieDetail) then) =
       __$$_MovieDetailCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call(
       {@JsonKey(name: 'adult')
           bool? adult,
@@ -338,15 +343,14 @@ abstract class _$$_MovieDetailCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_MovieDetailCopyWithImpl<$Res> extends _$MovieDetailCopyWithImpl<$Res>
+class __$$_MovieDetailCopyWithImpl<$Res>
+    extends _$MovieDetailCopyWithImpl<$Res, _$_MovieDetail>
     implements _$$_MovieDetailCopyWith<$Res> {
   __$$_MovieDetailCopyWithImpl(
       _$_MovieDetail _value, $Res Function(_$_MovieDetail) _then)
-      : super(_value, (v) => _then(v as _$_MovieDetail));
+      : super(_value, _then);
 
-  @override
-  _$_MovieDetail get _value => super._value as _$_MovieDetail;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? adult = freezed,
@@ -376,103 +380,103 @@ class __$$_MovieDetailCopyWithImpl<$Res> extends _$MovieDetailCopyWithImpl<$Res>
     Object? voteCount = freezed,
   }) {
     return _then(_$_MovieDetail(
-      adult: adult == freezed
+      adult: freezed == adult
           ? _value.adult
           : adult // ignore: cast_nullable_to_non_nullable
               as bool?,
-      backdropPath: backdropPath == freezed
+      backdropPath: freezed == backdropPath
           ? _value.backdropPath
           : backdropPath // ignore: cast_nullable_to_non_nullable
               as dynamic,
-      belongsToCollection: belongsToCollection == freezed
+      belongsToCollection: freezed == belongsToCollection
           ? _value.belongsToCollection
           : belongsToCollection // ignore: cast_nullable_to_non_nullable
               as dynamic,
-      budget: budget == freezed
+      budget: freezed == budget
           ? _value.budget
           : budget // ignore: cast_nullable_to_non_nullable
               as int?,
-      genres: genres == freezed
+      genres: freezed == genres
           ? _value._genres
           : genres // ignore: cast_nullable_to_non_nullable
               as List<Genre>?,
-      homepage: homepage == freezed
+      homepage: freezed == homepage
           ? _value.homepage
           : homepage // ignore: cast_nullable_to_non_nullable
               as String?,
-      id: id == freezed
+      id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as int?,
-      imdbId: imdbId == freezed
+      imdbId: freezed == imdbId
           ? _value.imdbId
           : imdbId // ignore: cast_nullable_to_non_nullable
               as dynamic,
-      originalLanguage: originalLanguage == freezed
+      originalLanguage: freezed == originalLanguage
           ? _value.originalLanguage
           : originalLanguage // ignore: cast_nullable_to_non_nullable
               as String?,
-      originalTitle: originalTitle == freezed
+      originalTitle: freezed == originalTitle
           ? _value.originalTitle
           : originalTitle // ignore: cast_nullable_to_non_nullable
               as String?,
-      overview: overview == freezed
+      overview: freezed == overview
           ? _value.overview
           : overview // ignore: cast_nullable_to_non_nullable
               as String?,
-      popularity: popularity == freezed
+      popularity: freezed == popularity
           ? _value.popularity
           : popularity // ignore: cast_nullable_to_non_nullable
               as double?,
-      posterPath: posterPath == freezed
+      posterPath: freezed == posterPath
           ? _value.posterPath
           : posterPath // ignore: cast_nullable_to_non_nullable
               as String?,
-      productionCompanies: productionCompanies == freezed
+      productionCompanies: freezed == productionCompanies
           ? _value._productionCompanies
           : productionCompanies // ignore: cast_nullable_to_non_nullable
               as List<ProductionCompany>?,
-      productionCountries: productionCountries == freezed
+      productionCountries: freezed == productionCountries
           ? _value._productionCountries
           : productionCountries // ignore: cast_nullable_to_non_nullable
               as List<dynamic>?,
-      releaseDate: releaseDate == freezed
+      releaseDate: freezed == releaseDate
           ? _value.releaseDate
           : releaseDate // ignore: cast_nullable_to_non_nullable
               as dynamic,
-      revenue: revenue == freezed
+      revenue: freezed == revenue
           ? _value.revenue
           : revenue // ignore: cast_nullable_to_non_nullable
               as int?,
-      runtime: runtime == freezed
+      runtime: freezed == runtime
           ? _value.runtime
           : runtime // ignore: cast_nullable_to_non_nullable
               as int?,
-      spokenLanguages: spokenLanguages == freezed
+      spokenLanguages: freezed == spokenLanguages
           ? _value._spokenLanguages
           : spokenLanguages // ignore: cast_nullable_to_non_nullable
               as List<dynamic>?,
-      status: status == freezed
+      status: freezed == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
               as String?,
-      tagline: tagline == freezed
+      tagline: freezed == tagline
           ? _value.tagline
           : tagline // ignore: cast_nullable_to_non_nullable
               as String?,
-      title: title == freezed
+      title: freezed == title
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
               as String?,
-      video: video == freezed
+      video: freezed == video
           ? _value.video
           : video // ignore: cast_nullable_to_non_nullable
               as bool?,
-      voteAverage: voteAverage == freezed
+      voteAverage: freezed == voteAverage
           ? _value.voteAverage
           : voteAverage // ignore: cast_nullable_to_non_nullable
               as double?,
-      voteCount: voteCount == freezed
+      voteCount: freezed == voteCount
           ? _value.voteCount
           : voteCount // ignore: cast_nullable_to_non_nullable
               as int?,
@@ -560,6 +564,7 @@ class _$_MovieDetail implements _MovieDetail {
   List<Genre>? get genres {
     final value = _genres;
     if (value == null) return null;
+    if (_genres is EqualUnmodifiableListView) return _genres;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(value);
   }
@@ -594,6 +599,8 @@ class _$_MovieDetail implements _MovieDetail {
   List<ProductionCompany>? get productionCompanies {
     final value = _productionCompanies;
     if (value == null) return null;
+    if (_productionCompanies is EqualUnmodifiableListView)
+      return _productionCompanies;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(value);
   }
@@ -604,6 +611,8 @@ class _$_MovieDetail implements _MovieDetail {
   List<dynamic>? get productionCountries {
     final value = _productionCountries;
     if (value == null) return null;
+    if (_productionCountries is EqualUnmodifiableListView)
+      return _productionCountries;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(value);
   }
@@ -623,6 +632,7 @@ class _$_MovieDetail implements _MovieDetail {
   List<dynamic>? get spokenLanguages {
     final value = _spokenLanguages;
     if (value == null) return null;
+    if (_spokenLanguages is EqualUnmodifiableListView) return _spokenLanguages;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(value);
   }
@@ -656,77 +666,81 @@ class _$_MovieDetail implements _MovieDetail {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_MovieDetail &&
-            const DeepCollectionEquality().equals(other.adult, adult) &&
+            (identical(other.adult, adult) || other.adult == adult) &&
             const DeepCollectionEquality()
                 .equals(other.backdropPath, backdropPath) &&
             const DeepCollectionEquality()
                 .equals(other.belongsToCollection, belongsToCollection) &&
-            const DeepCollectionEquality().equals(other.budget, budget) &&
+            (identical(other.budget, budget) || other.budget == budget) &&
             const DeepCollectionEquality().equals(other._genres, _genres) &&
-            const DeepCollectionEquality().equals(other.homepage, homepage) &&
-            const DeepCollectionEquality().equals(other.id, id) &&
+            (identical(other.homepage, homepage) ||
+                other.homepage == homepage) &&
+            (identical(other.id, id) || other.id == id) &&
             const DeepCollectionEquality().equals(other.imdbId, imdbId) &&
-            const DeepCollectionEquality()
-                .equals(other.originalLanguage, originalLanguage) &&
-            const DeepCollectionEquality()
-                .equals(other.originalTitle, originalTitle) &&
-            const DeepCollectionEquality().equals(other.overview, overview) &&
-            const DeepCollectionEquality()
-                .equals(other.popularity, popularity) &&
-            const DeepCollectionEquality()
-                .equals(other.posterPath, posterPath) &&
+            (identical(other.originalLanguage, originalLanguage) ||
+                other.originalLanguage == originalLanguage) &&
+            (identical(other.originalTitle, originalTitle) ||
+                other.originalTitle == originalTitle) &&
+            (identical(other.overview, overview) ||
+                other.overview == overview) &&
+            (identical(other.popularity, popularity) ||
+                other.popularity == popularity) &&
+            (identical(other.posterPath, posterPath) ||
+                other.posterPath == posterPath) &&
             const DeepCollectionEquality()
                 .equals(other._productionCompanies, _productionCompanies) &&
             const DeepCollectionEquality()
                 .equals(other._productionCountries, _productionCountries) &&
             const DeepCollectionEquality()
                 .equals(other.releaseDate, releaseDate) &&
-            const DeepCollectionEquality().equals(other.revenue, revenue) &&
-            const DeepCollectionEquality().equals(other.runtime, runtime) &&
+            (identical(other.revenue, revenue) || other.revenue == revenue) &&
+            (identical(other.runtime, runtime) || other.runtime == runtime) &&
             const DeepCollectionEquality()
                 .equals(other._spokenLanguages, _spokenLanguages) &&
-            const DeepCollectionEquality().equals(other.status, status) &&
-            const DeepCollectionEquality().equals(other.tagline, tagline) &&
-            const DeepCollectionEquality().equals(other.title, title) &&
-            const DeepCollectionEquality().equals(other.video, video) &&
-            const DeepCollectionEquality()
-                .equals(other.voteAverage, voteAverage) &&
-            const DeepCollectionEquality().equals(other.voteCount, voteCount));
+            (identical(other.status, status) || other.status == status) &&
+            (identical(other.tagline, tagline) || other.tagline == tagline) &&
+            (identical(other.title, title) || other.title == title) &&
+            (identical(other.video, video) || other.video == video) &&
+            (identical(other.voteAverage, voteAverage) ||
+                other.voteAverage == voteAverage) &&
+            (identical(other.voteCount, voteCount) ||
+                other.voteCount == voteCount));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hashAll([
         runtimeType,
-        const DeepCollectionEquality().hash(adult),
+        adult,
         const DeepCollectionEquality().hash(backdropPath),
         const DeepCollectionEquality().hash(belongsToCollection),
-        const DeepCollectionEquality().hash(budget),
+        budget,
         const DeepCollectionEquality().hash(_genres),
-        const DeepCollectionEquality().hash(homepage),
-        const DeepCollectionEquality().hash(id),
+        homepage,
+        id,
         const DeepCollectionEquality().hash(imdbId),
-        const DeepCollectionEquality().hash(originalLanguage),
-        const DeepCollectionEquality().hash(originalTitle),
-        const DeepCollectionEquality().hash(overview),
-        const DeepCollectionEquality().hash(popularity),
-        const DeepCollectionEquality().hash(posterPath),
+        originalLanguage,
+        originalTitle,
+        overview,
+        popularity,
+        posterPath,
         const DeepCollectionEquality().hash(_productionCompanies),
         const DeepCollectionEquality().hash(_productionCountries),
         const DeepCollectionEquality().hash(releaseDate),
-        const DeepCollectionEquality().hash(revenue),
-        const DeepCollectionEquality().hash(runtime),
+        revenue,
+        runtime,
         const DeepCollectionEquality().hash(_spokenLanguages),
-        const DeepCollectionEquality().hash(status),
-        const DeepCollectionEquality().hash(tagline),
-        const DeepCollectionEquality().hash(title),
-        const DeepCollectionEquality().hash(video),
-        const DeepCollectionEquality().hash(voteAverage),
-        const DeepCollectionEquality().hash(voteCount)
+        status,
+        tagline,
+        title,
+        video,
+        voteAverage,
+        voteCount
       ]);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_MovieDetailCopyWith<_$_MovieDetail> get copyWith =>
       __$$_MovieDetailCopyWithImpl<_$_MovieDetail>(this, _$identity);
 
@@ -894,34 +908,38 @@ mixin _$Genre {
 /// @nodoc
 abstract class $GenreCopyWith<$Res> {
   factory $GenreCopyWith(Genre value, $Res Function(Genre) then) =
-      _$GenreCopyWithImpl<$Res>;
+      _$GenreCopyWithImpl<$Res, Genre>;
+  @useResult
   $Res call(
       {@JsonKey(name: 'id') int? id, @JsonKey(name: 'name') String? name});
 }
 
 /// @nodoc
-class _$GenreCopyWithImpl<$Res> implements $GenreCopyWith<$Res> {
+class _$GenreCopyWithImpl<$Res, $Val extends Genre>
+    implements $GenreCopyWith<$Res> {
   _$GenreCopyWithImpl(this._value, this._then);
 
-  final Genre _value;
   // ignore: unused_field
-  final $Res Function(Genre) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? id = freezed,
     Object? name = freezed,
   }) {
     return _then(_value.copyWith(
-      id: id == freezed
+      id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as int?,
-      name: name == freezed
+      name: freezed == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String?,
-    ));
+    ) as $Val);
   }
 }
 
@@ -930,30 +948,29 @@ abstract class _$$_GenreCopyWith<$Res> implements $GenreCopyWith<$Res> {
   factory _$$_GenreCopyWith(_$_Genre value, $Res Function(_$_Genre) then) =
       __$$_GenreCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call(
       {@JsonKey(name: 'id') int? id, @JsonKey(name: 'name') String? name});
 }
 
 /// @nodoc
-class __$$_GenreCopyWithImpl<$Res> extends _$GenreCopyWithImpl<$Res>
+class __$$_GenreCopyWithImpl<$Res> extends _$GenreCopyWithImpl<$Res, _$_Genre>
     implements _$$_GenreCopyWith<$Res> {
   __$$_GenreCopyWithImpl(_$_Genre _value, $Res Function(_$_Genre) _then)
-      : super(_value, (v) => _then(v as _$_Genre));
+      : super(_value, _then);
 
-  @override
-  _$_Genre get _value => super._value as _$_Genre;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? id = freezed,
     Object? name = freezed,
   }) {
     return _then(_$_Genre(
-      id: id == freezed
+      id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as int?,
-      name: name == freezed
+      name: freezed == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String?,
@@ -987,19 +1004,17 @@ class _$_Genre implements _Genre {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_Genre &&
-            const DeepCollectionEquality().equals(other.id, id) &&
-            const DeepCollectionEquality().equals(other.name, name));
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.name, name) || other.name == name));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(id),
-      const DeepCollectionEquality().hash(name));
+  int get hashCode => Object.hash(runtimeType, id, name);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_GenreCopyWith<_$_Genre> get copyWith =>
       __$$_GenreCopyWithImpl<_$_Genre>(this, _$identity);
 
@@ -1055,7 +1070,8 @@ mixin _$ProductionCompany {
 abstract class $ProductionCompanyCopyWith<$Res> {
   factory $ProductionCompanyCopyWith(
           ProductionCompany value, $Res Function(ProductionCompany) then) =
-      _$ProductionCompanyCopyWithImpl<$Res>;
+      _$ProductionCompanyCopyWithImpl<$Res, ProductionCompany>;
+  @useResult
   $Res call(
       {@JsonKey(name: 'idd') int? id,
       @JsonKey(name: 'logo_path') dynamic logoPath,
@@ -1064,14 +1080,16 @@ abstract class $ProductionCompanyCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$ProductionCompanyCopyWithImpl<$Res>
+class _$ProductionCompanyCopyWithImpl<$Res, $Val extends ProductionCompany>
     implements $ProductionCompanyCopyWith<$Res> {
   _$ProductionCompanyCopyWithImpl(this._value, this._then);
 
-  final ProductionCompany _value;
   // ignore: unused_field
-  final $Res Function(ProductionCompany) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? id = freezed,
@@ -1080,23 +1098,23 @@ class _$ProductionCompanyCopyWithImpl<$Res>
     Object? originCountry = freezed,
   }) {
     return _then(_value.copyWith(
-      id: id == freezed
+      id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as int?,
-      logoPath: logoPath == freezed
+      logoPath: freezed == logoPath
           ? _value.logoPath
           : logoPath // ignore: cast_nullable_to_non_nullable
               as dynamic,
-      name: name == freezed
+      name: freezed == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String?,
-      originCountry: originCountry == freezed
+      originCountry: freezed == originCountry
           ? _value.originCountry
           : originCountry // ignore: cast_nullable_to_non_nullable
               as String?,
-    ));
+    ) as $Val);
   }
 }
 
@@ -1107,6 +1125,7 @@ abstract class _$$_ProductionCompanyCopyWith<$Res>
           $Res Function(_$_ProductionCompany) then) =
       __$$_ProductionCompanyCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call(
       {@JsonKey(name: 'idd') int? id,
       @JsonKey(name: 'logo_path') dynamic logoPath,
@@ -1116,15 +1135,13 @@ abstract class _$$_ProductionCompanyCopyWith<$Res>
 
 /// @nodoc
 class __$$_ProductionCompanyCopyWithImpl<$Res>
-    extends _$ProductionCompanyCopyWithImpl<$Res>
+    extends _$ProductionCompanyCopyWithImpl<$Res, _$_ProductionCompany>
     implements _$$_ProductionCompanyCopyWith<$Res> {
   __$$_ProductionCompanyCopyWithImpl(
       _$_ProductionCompany _value, $Res Function(_$_ProductionCompany) _then)
-      : super(_value, (v) => _then(v as _$_ProductionCompany));
+      : super(_value, _then);
 
-  @override
-  _$_ProductionCompany get _value => super._value as _$_ProductionCompany;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? id = freezed,
@@ -1133,19 +1150,19 @@ class __$$_ProductionCompanyCopyWithImpl<$Res>
     Object? originCountry = freezed,
   }) {
     return _then(_$_ProductionCompany(
-      id: id == freezed
+      id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as int?,
-      logoPath: logoPath == freezed
+      logoPath: freezed == logoPath
           ? _value.logoPath
           : logoPath // ignore: cast_nullable_to_non_nullable
               as dynamic,
-      name: name == freezed
+      name: freezed == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String?,
-      originCountry: originCountry == freezed
+      originCountry: freezed == originCountry
           ? _value.originCountry
           : originCountry // ignore: cast_nullable_to_non_nullable
               as String?,
@@ -1188,24 +1205,21 @@ class _$_ProductionCompany implements _ProductionCompany {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_ProductionCompany &&
-            const DeepCollectionEquality().equals(other.id, id) &&
+            (identical(other.id, id) || other.id == id) &&
             const DeepCollectionEquality().equals(other.logoPath, logoPath) &&
-            const DeepCollectionEquality().equals(other.name, name) &&
-            const DeepCollectionEquality()
-                .equals(other.originCountry, originCountry));
+            (identical(other.name, name) || other.name == name) &&
+            (identical(other.originCountry, originCountry) ||
+                other.originCountry == originCountry));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(id),
-      const DeepCollectionEquality().hash(logoPath),
-      const DeepCollectionEquality().hash(name),
-      const DeepCollectionEquality().hash(originCountry));
+  int get hashCode => Object.hash(runtimeType, id,
+      const DeepCollectionEquality().hash(logoPath), name, originCountry);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_ProductionCompanyCopyWith<_$_ProductionCompany> get copyWith =>
       __$$_ProductionCompanyCopyWithImpl<_$_ProductionCompany>(
           this, _$identity);

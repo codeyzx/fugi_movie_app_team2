@@ -1,7 +1,7 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'trending_model.dart';
 
@@ -35,20 +35,23 @@ mixin _$TrendingModel {
 abstract class $TrendingModelCopyWith<$Res> {
   factory $TrendingModelCopyWith(
           TrendingModel value, $Res Function(TrendingModel) then) =
-      _$TrendingModelCopyWithImpl<$Res>;
+      _$TrendingModelCopyWithImpl<$Res, TrendingModel>;
+  @useResult
   $Res call(
       {int? page, List<Trending>? results, int? totalPages, int? totalResults});
 }
 
 /// @nodoc
-class _$TrendingModelCopyWithImpl<$Res>
+class _$TrendingModelCopyWithImpl<$Res, $Val extends TrendingModel>
     implements $TrendingModelCopyWith<$Res> {
   _$TrendingModelCopyWithImpl(this._value, this._then);
 
-  final TrendingModel _value;
   // ignore: unused_field
-  final $Res Function(TrendingModel) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? page = freezed,
@@ -57,23 +60,23 @@ class _$TrendingModelCopyWithImpl<$Res>
     Object? totalResults = freezed,
   }) {
     return _then(_value.copyWith(
-      page: page == freezed
+      page: freezed == page
           ? _value.page
           : page // ignore: cast_nullable_to_non_nullable
               as int?,
-      results: results == freezed
+      results: freezed == results
           ? _value.results
           : results // ignore: cast_nullable_to_non_nullable
               as List<Trending>?,
-      totalPages: totalPages == freezed
+      totalPages: freezed == totalPages
           ? _value.totalPages
           : totalPages // ignore: cast_nullable_to_non_nullable
               as int?,
-      totalResults: totalResults == freezed
+      totalResults: freezed == totalResults
           ? _value.totalResults
           : totalResults // ignore: cast_nullable_to_non_nullable
               as int?,
-    ));
+    ) as $Val);
   }
 }
 
@@ -84,21 +87,20 @@ abstract class _$$_TrendingModelCopyWith<$Res>
           _$_TrendingModel value, $Res Function(_$_TrendingModel) then) =
       __$$_TrendingModelCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call(
       {int? page, List<Trending>? results, int? totalPages, int? totalResults});
 }
 
 /// @nodoc
 class __$$_TrendingModelCopyWithImpl<$Res>
-    extends _$TrendingModelCopyWithImpl<$Res>
+    extends _$TrendingModelCopyWithImpl<$Res, _$_TrendingModel>
     implements _$$_TrendingModelCopyWith<$Res> {
   __$$_TrendingModelCopyWithImpl(
       _$_TrendingModel _value, $Res Function(_$_TrendingModel) _then)
-      : super(_value, (v) => _then(v as _$_TrendingModel));
+      : super(_value, _then);
 
-  @override
-  _$_TrendingModel get _value => super._value as _$_TrendingModel;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? page = freezed,
@@ -107,19 +109,19 @@ class __$$_TrendingModelCopyWithImpl<$Res>
     Object? totalResults = freezed,
   }) {
     return _then(_$_TrendingModel(
-      page: page == freezed
+      page: freezed == page
           ? _value.page
           : page // ignore: cast_nullable_to_non_nullable
               as int?,
-      results: results == freezed
+      results: freezed == results
           ? _value._results
           : results // ignore: cast_nullable_to_non_nullable
               as List<Trending>?,
-      totalPages: totalPages == freezed
+      totalPages: freezed == totalPages
           ? _value.totalPages
           : totalPages // ignore: cast_nullable_to_non_nullable
               as int?,
-      totalResults: totalResults == freezed
+      totalResults: freezed == totalResults
           ? _value.totalResults
           : totalResults // ignore: cast_nullable_to_non_nullable
               as int?,
@@ -147,6 +149,7 @@ class _$_TrendingModel implements _TrendingModel {
   List<Trending>? get results {
     final value = _results;
     if (value == null) return null;
+    if (_results is EqualUnmodifiableListView) return _results;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(value);
   }
@@ -166,25 +169,22 @@ class _$_TrendingModel implements _TrendingModel {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_TrendingModel &&
-            const DeepCollectionEquality().equals(other.page, page) &&
+            (identical(other.page, page) || other.page == page) &&
             const DeepCollectionEquality().equals(other._results, _results) &&
-            const DeepCollectionEquality()
-                .equals(other.totalPages, totalPages) &&
-            const DeepCollectionEquality()
-                .equals(other.totalResults, totalResults));
+            (identical(other.totalPages, totalPages) ||
+                other.totalPages == totalPages) &&
+            (identical(other.totalResults, totalResults) ||
+                other.totalResults == totalResults));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(page),
-      const DeepCollectionEquality().hash(_results),
-      const DeepCollectionEquality().hash(totalPages),
-      const DeepCollectionEquality().hash(totalResults));
+  int get hashCode => Object.hash(runtimeType, page,
+      const DeepCollectionEquality().hash(_results), totalPages, totalResults);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_TrendingModelCopyWith<_$_TrendingModel> get copyWith =>
       __$$_TrendingModelCopyWithImpl<_$_TrendingModel>(this, _$identity);
 

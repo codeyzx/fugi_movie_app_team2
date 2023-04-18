@@ -6,6 +6,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:keyboard_dismisser/keyboard_dismisser.dart';
+import 'package:logger/logger.dart';
 
 import '../../../common_config/app_theme.dart';
 import '../../../common_utils/ansyn_value_widget.dart';
@@ -36,7 +37,8 @@ class HomeScreen extends StatefulHookConsumerWidget {
 class _HomeScreenState extends ConsumerState<HomeScreen> {
   var selectedIndex = 0;
   bool isLoading = false;
-  // List<Trending> trendings = [];
+  // List<Trending> trendings = []; change to AsyncValue
+  // List<Trending> upcoming = []; change to AsyncValue
   List<Popular> populars = [];
   List<TopRated> toprateds = [];
   bool isLoadingSearch = false;
@@ -89,6 +91,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
             padding: EdgeInsets.all(16.sp),
             child: Column(
               children: [
+                //search part
                 Expanded(
                   flex: 0,
                   child: Container(
@@ -148,8 +151,8 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                     ),
                   ),
                 ),
+                //reatures
                 Expanded(
-                  flex: 2,
                   child: isLoading
                       ? const Center(child: CircularProgressIndicator.adaptive())
                       : ListView.builder(
@@ -165,8 +168,8 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                           },
                         ),
                 ),
+                //footer
                 Expanded(
-                  flex: 2,
                   child: DefaultTabController(
                     initialIndex: 0,
                     length: 4,
@@ -350,7 +353,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                                         'object': toprateds[index],
                                         'type': 'toprated',
                                       });
-                                      ref.read(movieDetailAccessFromProvider.state).state = HomeBotNavBarScreen.routeName;
+                                      ref.read(movieDetailAccessFromProvider.notifier).state = HomeBotNavBarScreen.routeName;
                                     },
                                     child: Stack(
                                       alignment: Alignment.bottomRight,
@@ -472,26 +475,48 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
   }
 
   Future<void> fetchData() async {
-    var respPopular = await DioClient().apiCall(
-      url: '/movie/popular',
+    var respTrending = await DioClient().apiCall(
+      url: '/trending/all/day',
+      requestType: RequestType.get,
+    );
+    var respUpcoming = await DioClient().apiCall(
+      url: '/movie/upcoming',
       requestType: RequestType.get,
     );
     var respTopRated = await DioClient().apiCall(
       url: '/movie/top_rated',
       requestType: RequestType.get,
     );
+    var respPopular = await DioClient().apiCall(
+      url: '/movie/popular',
+      requestType: RequestType.get,
+    );
 
+    List<dynamic> listTrending = respTrending.data['results'];
+    List<dynamic> listUpcoming = respUpcoming.data['results'];
     List<dynamic> listTopRated = respTopRated.data['results'];
     List<dynamic> listPopular = respPopular.data['results'];
+
+    //Block untuk mengisi daftar id dari movie yang sudah di fetch, untuk fungsi swaip
+    List<Popular> myTrending = listTrending.map((e) {
+      ref.read(homeController.notifier).add('trending', e['id']);
+      return Popular.fromJson(e);
+    }).toList();
+    List<Popular> myUpcoming = listUpcoming.map((e) {
+      ref.read(homeController.notifier).add('upcoming', e['id']);
+      return Popular.fromJson(e);
+    }).toList();
+
+    List<TopRated> myTopRated = listTopRated.map((e) {
+      ref.read(homeController.notifier).add('toprated', e['id']);
+      return TopRated.fromJson(e);
+    }).toList();
 
     List<Popular> myPopular = listPopular.map((e) {
       ref.read(homeController.notifier).add('popular', e['id']);
       return Popular.fromJson(e);
     }).toList();
-    List<TopRated> myTopRated = listTopRated.map((e) {
-      ref.read(homeController.notifier).add('toprated', e['id']);
-      return TopRated.fromJson(e);
-    }).toList();
+    //End of block
 
     if (mounted) {
       setState(() {
