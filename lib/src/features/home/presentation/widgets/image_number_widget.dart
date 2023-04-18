@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:fugi_movie_app_team2/src/features/home/presentation/botnavbar_screen.dart';
+import 'package:fugi_movie_app_team2/src/features/home/presentation/home_botnavbar_screen.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:palette_generator/palette_generator.dart';
@@ -52,7 +52,7 @@ class _ImageNumberWidgetState extends ConsumerState<ImageNumberWidget> {
             "type": widget.type,
           },
         );
-        ref.read(movieDetailAccessFromProvider.state).state = BotNavBarScreen.routeName;
+        ref.read(movieDetailAccessFromProvider.state).state = HomeBotNavBarScreen.routeName;
       },
       child: Stack(
         alignment: Alignment.topLeft,

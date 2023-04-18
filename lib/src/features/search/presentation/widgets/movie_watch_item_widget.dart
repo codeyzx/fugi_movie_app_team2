@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:fugi_movie_app_team2/src/features/home/presentation/botnavbar_screen.dart';
+import 'package:fugi_movie_app_team2/src/features/home/presentation/home_botnavbar_screen.dart';
 import 'package:fugi_movie_app_team2/src/features/search/presentation/widgets/movie_item_widget.dart';
 import 'package:go_router/go_router.dart';
 
@@ -28,7 +28,7 @@ class MovieWatchItemWidget extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return InkWell(
       onTap: () {
-        ref.read(movieDetailAccessFromProvider.state).state = BotNavBarScreen.routeName;
+        ref.read(movieDetailAccessFromProvider.state).state = HomeBotNavBarScreen.routeName;
         ref.read(currentIndexProvider.state).state = 2;
         context.pushNamed(
           MovieDetailScreen.routeName,

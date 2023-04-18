@@ -1,4 +1,4 @@
-import 'package:fugi_movie_app_team2/src/features/home/presentation/botnavbar_screen.dart';
+import 'package:fugi_movie_app_team2/src/features/home/presentation/home_botnavbar_screen.dart';
 import 'package:fugi_movie_app_team2/src/features/movie_detail/presentation/movie_detail_screen.dart';
 import 'package:fugi_movie_app_team2/src/features/movie_detail/presentation/movie_detail_screen_popular.dart';
 import 'package:fugi_movie_app_team2/src/features/movie_detail/presentation/movie_detail_screen_toprated.dart';
@@ -29,10 +29,10 @@ final goRouter = GoRouter(
     ),
     GoRoute(
         path: '/botnavbar-screen',
-        name: BotNavBarScreen.routeName,
+        name: HomeBotNavBarScreen.routeName,
         pageBuilder: (context, state) => NoTransitionPage<void>(
               key: state.pageKey,
-              child: const BotNavBarScreen(),
+              child: const HomeBotNavBarScreen(),
             ),
         routes: []),
     GoRoute(

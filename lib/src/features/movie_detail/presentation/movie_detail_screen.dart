@@ -25,7 +25,7 @@ import 'package:palette_generator/palette_generator.dart';
 
 import '../../home/domain/entities/movie_detail.dart';
 import '../../home/domain/entities/trending.dart';
-import '../../home/presentation/botnavbar_screen.dart';
+import '../../home/presentation/home_botnavbar_screen.dart';
 import '../../search/presentation/search_page.dart';
 import '../../search/presentation/widgets/movie_item_widget.dart';
 
@@ -809,7 +809,7 @@ class _MovieDetailScreenState extends ConsumerState<MovieDetailScreen> {
       // context.goNamed(SearchScreen.routeName);
       context.pushNamed(SearchPage.routeName);
     } else {
-      context.goNamed(BotNavBarScreen.routeName);
+      context.goNamed(HomeBotNavBarScreen.routeName);
     }
   }
 }

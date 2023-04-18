@@ -13,15 +13,15 @@ import '../../movie_detail/presentation/movie_watchlist_controller.dart';
 final currentScreenProvider = StateProvider<Widget>((ref) => const HomeScreen());
 final currentIndexProvider = StateProvider<int>((ref) => 0);
 
-class BotNavBarScreen extends StatefulHookConsumerWidget {
-  const BotNavBarScreen({Key? key}) : super(key: key);
+class HomeBotNavBarScreen extends StatefulHookConsumerWidget {
+  const HomeBotNavBarScreen({Key? key}) : super(key: key);
   static const routeName = '/botnavbar-screen';
 
   @override
-  BotNavBarScreenState createState() => BotNavBarScreenState();
+  HomeBotNavBarScreenState createState() => HomeBotNavBarScreenState();
 }
 
-class BotNavBarScreenState extends ConsumerState<BotNavBarScreen> {
+class HomeBotNavBarScreenState extends ConsumerState<HomeBotNavBarScreen> {
   final PageStorageBucket bucket = PageStorageBucket();
   // int currentIndex = 0;
   // Widget currentScreen = const HomeScreen();

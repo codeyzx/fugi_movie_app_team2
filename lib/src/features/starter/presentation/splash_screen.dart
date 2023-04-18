@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:fugi_movie_app_team2/src/features/home/presentation/botnavbar_screen.dart';
+import 'package:fugi_movie_app_team2/src/features/home/presentation/home_botnavbar_screen.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../common_config/palette.dart';
@@ -71,7 +71,7 @@ class SplashScreenState extends State<SplashScreen> {
     await Future.delayed(const Duration(milliseconds: 2000));
     if (!mounted) return;
     // if (activatedStatus == 'activated') {
-    context.goNamed(BotNavBarScreen.routeName);
+    context.goNamed(HomeBotNavBarScreen.routeName);
     // context.goNamed(HomeScreen.routeName);
     // context.goNamed(WatchlistScreen.routeName);
     // } else {

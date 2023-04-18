@@ -18,7 +18,7 @@ import '../domain/entities/popular.dart';
 import '../domain/entities/top_rated.dart';
 import '../domain/entities/trending.dart';
 import '../domain/entities/upcoming.dart';
-import 'botnavbar_screen.dart';
+import 'home_botnavbar_screen.dart';
 import 'home_controller.dart';
 import 'widgets/image_number_widget.dart';
 
@@ -213,7 +213,8 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                                               "object": trendings?[index],
                                               'type': 'trending',
                                             });
-                                            ref.read(movieDetailAccessFromProvider.state).state = BotNavBarScreen.routeName;
+                                            ref.read(movieDetailAccessFromProvider.state).state =
+                                                HomeBotNavBarScreen.routeName;
                                           },
                                           child: Stack(
                                             alignment: Alignment.bottomRight,
@@ -282,7 +283,8 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                                             'object': upcomings?[index],
                                             'type': 'upcoming',
                                           });
-                                          ref.read(movieDetailAccessFromProvider.state).state = BotNavBarScreen.routeName;
+                                          ref.read(movieDetailAccessFromProvider.state).state =
+                                              HomeBotNavBarScreen.routeName;
                                         },
                                         child: Stack(
                                           alignment: Alignment.bottomRight,
@@ -348,7 +350,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                                         'object': toprateds[index],
                                         'type': 'toprated',
                                       });
-                                      ref.read(movieDetailAccessFromProvider.state).state = BotNavBarScreen.routeName;
+                                      ref.read(movieDetailAccessFromProvider.state).state = HomeBotNavBarScreen.routeName;
                                     },
                                     child: Stack(
                                       alignment: Alignment.bottomRight,
@@ -411,7 +413,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                                         'object': populars[index],
                                         'type': 'popular',
                                       });
-                                      ref.read(movieDetailAccessFromProvider.state).state = BotNavBarScreen.routeName;
+                                      ref.read(movieDetailAccessFromProvider.state).state = HomeBotNavBarScreen.routeName;
                                     },
                                     child: Stack(
                                       alignment: Alignment.bottomRight,
