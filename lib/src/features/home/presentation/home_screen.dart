@@ -1,9 +1,7 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:fugi_movie_app_team2/src/features/home/presentation/widgets/grid_movie_widget.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:keyboard_dismisser/keyboard_dismisser.dart';
@@ -11,16 +9,15 @@ import 'package:keyboard_dismisser/keyboard_dismisser.dart';
 import '../../../common_config/app_theme.dart';
 import '../../../common_utils/ansyn_value_widget.dart';
 import '../../../core/client/dio_client.dart';
-import '../../movie_detail/presentation/movie_detail_screen.dart';
 import '../../search/presentation/search_controller.dart';
 import '../../search/presentation/search_page.dart';
-import '../../search/presentation/widgets/movie_item_widget.dart';
 import '../domain/entities/popular.dart';
 import '../domain/entities/top_rated.dart';
 import '../domain/entities/trending.dart';
 import '../domain/entities/upcoming.dart';
 import 'home_botnavbar_screen.dart';
 import 'home_controller.dart';
+import 'widgets/grid_movie_widget.dart';
 import 'widgets/image_number_widget.dart';
 
 final keywordsProvider = StateProvider<String?>((ref) => '');
@@ -39,8 +36,8 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
   bool isLoading = false;
   // List<Trending> trendings = []; change to AsyncValue
   // List<Trending> upcoming = []; change to AsyncValue
-  List<Popular> populars = [];
-  List<TopRated> toprateds = [];
+  // List<Popular> populars = [];
+  // List<TopRated> toprateds = [];
   bool isLoadingSearch = false;
 
   @override
@@ -57,16 +54,16 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
       searchControllerProvider,
       (prev, state) {
         // if (!state.isRefreshing && !state.hasError) {
-        if (!state.isRefreshing) {
+        if (state is AsyncData) {
           Future.delayed(const Duration(milliseconds: 1000), () {
-            // context.pushNamed(SearchScreen.routeName);
             context.pushNamed(SearchPage.routeName);
             setState(() {
               isLoadingSearch = false;
             });
           });
         }
-        if (state.isRefreshing) {
+
+        if (state is AsyncLoading) {
           setState(() {
             isLoadingSearch = true;
           });
@@ -101,11 +98,11 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                     ),
                     child: TextField(
                       onTap: () {
-                        ref.read(currentScreenProvider.state).state = const SearchPage();
-                        ref.read(currentIndexProvider.state).state = 1;
+                        ref.read(currentScreenProvider.notifier).state = const SearchPage();
+                        ref.read(currentIndexProvider.notifier).state = 1;
                       },
                       onChanged: (value) {
-                        ref.read(keywordsProvider.state).state = value;
+                        ref.read(keywordsProvider.notifier).state = value;
                         setState(() {});
                       },
                       onSubmitted: (value) {
@@ -155,17 +152,20 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                 Expanded(
                   child: isLoading
                       ? const Center(child: CircularProgressIndicator.adaptive())
-                      : ListView.builder(
-                          padding: EdgeInsets.symmetric(vertical: 16.5.sp),
-                          scrollDirection: Axis.horizontal,
-                          itemCount: populars.length,
-                          itemBuilder: (context, index) {
-                            return ImageNumberWidget<Popular>(
-                              trending: populars[index],
-                              number: (index + 1),
-                              type: 'popular',
-                            );
-                          },
+                      : AsyncValueWidget<List<TopRated>?>(
+                          value: ref.watch(topRatedControllerProvider),
+                          data: (topRated) => ListView.builder(
+                            padding: EdgeInsets.symmetric(vertical: 16.5.sp),
+                            scrollDirection: Axis.horizontal,
+                            itemCount: topRated?.length,
+                            itemBuilder: (context, index) {
+                              return ImageNumberWidget<TopRated>(
+                                trending: topRated?[index] as TopRated,
+                                number: (index + 1),
+                                type: 'toprated',
+                              );
+                            },
+                          ),
                         ),
                 ),
                 //footer
@@ -201,14 +201,39 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                                     return GridMovieWidget<Trending>(listData: trendings);
                                   },
                                 ),
-                              AsyncValueWidget<List<Upcoming>?>(
-                                value: ref.watch(upcomingControllerProvider),
-                                data: (upcomings) {
-                                  return GridMovieWidget<Upcoming>(listData: upcomings);
-                                },
-                              ),
-                              GridMovieWidget<TopRated>(listData: toprateds),
-                              GridMovieWidget<Popular>(listData: populars)
+                              if (isLoading)
+                                const Center(
+                                  child: CircularProgressIndicator.adaptive(),
+                                )
+                              else
+                                AsyncValueWidget<List<Upcoming>?>(
+                                  value: ref.watch(upcomingControllerProvider),
+                                  data: (upcomings) {
+                                    return GridMovieWidget<Upcoming>(listData: upcomings);
+                                  },
+                                ),
+                              if (isLoading)
+                                const Center(
+                                  child: CircularProgressIndicator.adaptive(),
+                                )
+                              else
+                                AsyncValueWidget<List<TopRated>?>(
+                                  value: ref.watch(topRatedControllerProvider),
+                                  data: (topRated) {
+                                    return GridMovieWidget<TopRated>(listData: topRated);
+                                  },
+                                ),
+                              if (isLoading)
+                                const Center(
+                                  child: CircularProgressIndicator.adaptive(),
+                                )
+                              else
+                                AsyncValueWidget<List<Popular>?>(
+                                  value: ref.watch(popularControllerProvider),
+                                  data: (populars) {
+                                    return GridMovieWidget<Popular>(listData: populars);
+                                  },
+                                ),
                             ],
                           ),
                         ),
@@ -248,33 +273,24 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     List<dynamic> listPopular = respPopular.data['results'];
 
     //Block untuk mengisi daftar id dari movie yang sudah di fetch, untuk fungsi swaip
-    List<Popular> myTrending = listTrending.map((e) {
+    listTrending.map((e) {
       ref.read(homeController.notifier).add('trending', e['id']);
       return Popular.fromJson(e);
     }).toList();
-    List<Popular> myUpcoming = listUpcoming.map((e) {
+    listUpcoming.map((e) {
       ref.read(homeController.notifier).add('upcoming', e['id']);
       return Popular.fromJson(e);
     }).toList();
 
-    List<TopRated> myTopRated = listTopRated.map((e) {
+    listTopRated.map((e) {
       ref.read(homeController.notifier).add('toprated', e['id']);
       return TopRated.fromJson(e);
     }).toList();
 
-    List<Popular> myPopular = listPopular.map((e) {
+    listPopular.map((e) {
       ref.read(homeController.notifier).add('popular', e['id']);
       return Popular.fromJson(e);
     }).toList();
     //End of block
-
-    if (mounted) {
-      setState(() {
-        isLoading = true;
-        populars = myPopular;
-        toprateds = myTopRated;
-        isLoading = false;
-      });
-    }
   }
 }

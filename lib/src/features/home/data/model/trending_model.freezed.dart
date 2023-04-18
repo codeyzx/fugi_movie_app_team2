@@ -219,3 +219,415 @@ abstract class _TrendingModel implements TrendingModel {
   _$$_TrendingModelCopyWith<_$_TrendingModel> get copyWith =>
       throw _privateConstructorUsedError;
 }
+
+TopRatedModel _$TopRatedModelFromJson(Map<String, dynamic> json) {
+  return _TopRatedModel.fromJson(json);
+}
+
+/// @nodoc
+mixin _$TopRatedModel {
+  int? get page => throw _privateConstructorUsedError;
+  List<TopRated>? get results => throw _privateConstructorUsedError;
+  int? get totalPages => throw _privateConstructorUsedError;
+  int? get totalResults => throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $TopRatedModelCopyWith<TopRatedModel> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $TopRatedModelCopyWith<$Res> {
+  factory $TopRatedModelCopyWith(
+          TopRatedModel value, $Res Function(TopRatedModel) then) =
+      _$TopRatedModelCopyWithImpl<$Res, TopRatedModel>;
+  @useResult
+  $Res call(
+      {int? page, List<TopRated>? results, int? totalPages, int? totalResults});
+}
+
+/// @nodoc
+class _$TopRatedModelCopyWithImpl<$Res, $Val extends TopRatedModel>
+    implements $TopRatedModelCopyWith<$Res> {
+  _$TopRatedModelCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? page = freezed,
+    Object? results = freezed,
+    Object? totalPages = freezed,
+    Object? totalResults = freezed,
+  }) {
+    return _then(_value.copyWith(
+      page: freezed == page
+          ? _value.page
+          : page // ignore: cast_nullable_to_non_nullable
+              as int?,
+      results: freezed == results
+          ? _value.results
+          : results // ignore: cast_nullable_to_non_nullable
+              as List<TopRated>?,
+      totalPages: freezed == totalPages
+          ? _value.totalPages
+          : totalPages // ignore: cast_nullable_to_non_nullable
+              as int?,
+      totalResults: freezed == totalResults
+          ? _value.totalResults
+          : totalResults // ignore: cast_nullable_to_non_nullable
+              as int?,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$_TopRatedModelCopyWith<$Res>
+    implements $TopRatedModelCopyWith<$Res> {
+  factory _$$_TopRatedModelCopyWith(
+          _$_TopRatedModel value, $Res Function(_$_TopRatedModel) then) =
+      __$$_TopRatedModelCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call(
+      {int? page, List<TopRated>? results, int? totalPages, int? totalResults});
+}
+
+/// @nodoc
+class __$$_TopRatedModelCopyWithImpl<$Res>
+    extends _$TopRatedModelCopyWithImpl<$Res, _$_TopRatedModel>
+    implements _$$_TopRatedModelCopyWith<$Res> {
+  __$$_TopRatedModelCopyWithImpl(
+      _$_TopRatedModel _value, $Res Function(_$_TopRatedModel) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? page = freezed,
+    Object? results = freezed,
+    Object? totalPages = freezed,
+    Object? totalResults = freezed,
+  }) {
+    return _then(_$_TopRatedModel(
+      page: freezed == page
+          ? _value.page
+          : page // ignore: cast_nullable_to_non_nullable
+              as int?,
+      results: freezed == results
+          ? _value._results
+          : results // ignore: cast_nullable_to_non_nullable
+              as List<TopRated>?,
+      totalPages: freezed == totalPages
+          ? _value.totalPages
+          : totalPages // ignore: cast_nullable_to_non_nullable
+              as int?,
+      totalResults: freezed == totalResults
+          ? _value.totalResults
+          : totalResults // ignore: cast_nullable_to_non_nullable
+              as int?,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$_TopRatedModel implements _TopRatedModel {
+  const _$_TopRatedModel(
+      {this.page,
+      final List<TopRated>? results,
+      this.totalPages,
+      this.totalResults})
+      : _results = results;
+
+  factory _$_TopRatedModel.fromJson(Map<String, dynamic> json) =>
+      _$$_TopRatedModelFromJson(json);
+
+  @override
+  final int? page;
+  final List<TopRated>? _results;
+  @override
+  List<TopRated>? get results {
+    final value = _results;
+    if (value == null) return null;
+    if (_results is EqualUnmodifiableListView) return _results;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
+  }
+
+  @override
+  final int? totalPages;
+  @override
+  final int? totalResults;
+
+  @override
+  String toString() {
+    return 'TopRatedModel(page: $page, results: $results, totalPages: $totalPages, totalResults: $totalResults)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_TopRatedModel &&
+            (identical(other.page, page) || other.page == page) &&
+            const DeepCollectionEquality().equals(other._results, _results) &&
+            (identical(other.totalPages, totalPages) ||
+                other.totalPages == totalPages) &&
+            (identical(other.totalResults, totalResults) ||
+                other.totalResults == totalResults));
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode => Object.hash(runtimeType, page,
+      const DeepCollectionEquality().hash(_results), totalPages, totalResults);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_TopRatedModelCopyWith<_$_TopRatedModel> get copyWith =>
+      __$$_TopRatedModelCopyWithImpl<_$_TopRatedModel>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$_TopRatedModelToJson(
+      this,
+    );
+  }
+}
+
+abstract class _TopRatedModel implements TopRatedModel {
+  const factory _TopRatedModel(
+      {final int? page,
+      final List<TopRated>? results,
+      final int? totalPages,
+      final int? totalResults}) = _$_TopRatedModel;
+
+  factory _TopRatedModel.fromJson(Map<String, dynamic> json) =
+      _$_TopRatedModel.fromJson;
+
+  @override
+  int? get page;
+  @override
+  List<TopRated>? get results;
+  @override
+  int? get totalPages;
+  @override
+  int? get totalResults;
+  @override
+  @JsonKey(ignore: true)
+  _$$_TopRatedModelCopyWith<_$_TopRatedModel> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+PopularModel _$PopularModelFromJson(Map<String, dynamic> json) {
+  return _PopularModel.fromJson(json);
+}
+
+/// @nodoc
+mixin _$PopularModel {
+  int? get page => throw _privateConstructorUsedError;
+  List<Popular>? get results => throw _privateConstructorUsedError;
+  int? get totalPages => throw _privateConstructorUsedError;
+  int? get totalResults => throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $PopularModelCopyWith<PopularModel> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $PopularModelCopyWith<$Res> {
+  factory $PopularModelCopyWith(
+          PopularModel value, $Res Function(PopularModel) then) =
+      _$PopularModelCopyWithImpl<$Res, PopularModel>;
+  @useResult
+  $Res call(
+      {int? page, List<Popular>? results, int? totalPages, int? totalResults});
+}
+
+/// @nodoc
+class _$PopularModelCopyWithImpl<$Res, $Val extends PopularModel>
+    implements $PopularModelCopyWith<$Res> {
+  _$PopularModelCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? page = freezed,
+    Object? results = freezed,
+    Object? totalPages = freezed,
+    Object? totalResults = freezed,
+  }) {
+    return _then(_value.copyWith(
+      page: freezed == page
+          ? _value.page
+          : page // ignore: cast_nullable_to_non_nullable
+              as int?,
+      results: freezed == results
+          ? _value.results
+          : results // ignore: cast_nullable_to_non_nullable
+              as List<Popular>?,
+      totalPages: freezed == totalPages
+          ? _value.totalPages
+          : totalPages // ignore: cast_nullable_to_non_nullable
+              as int?,
+      totalResults: freezed == totalResults
+          ? _value.totalResults
+          : totalResults // ignore: cast_nullable_to_non_nullable
+              as int?,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$_PopularModelCopyWith<$Res>
+    implements $PopularModelCopyWith<$Res> {
+  factory _$$_PopularModelCopyWith(
+          _$_PopularModel value, $Res Function(_$_PopularModel) then) =
+      __$$_PopularModelCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call(
+      {int? page, List<Popular>? results, int? totalPages, int? totalResults});
+}
+
+/// @nodoc
+class __$$_PopularModelCopyWithImpl<$Res>
+    extends _$PopularModelCopyWithImpl<$Res, _$_PopularModel>
+    implements _$$_PopularModelCopyWith<$Res> {
+  __$$_PopularModelCopyWithImpl(
+      _$_PopularModel _value, $Res Function(_$_PopularModel) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? page = freezed,
+    Object? results = freezed,
+    Object? totalPages = freezed,
+    Object? totalResults = freezed,
+  }) {
+    return _then(_$_PopularModel(
+      page: freezed == page
+          ? _value.page
+          : page // ignore: cast_nullable_to_non_nullable
+              as int?,
+      results: freezed == results
+          ? _value._results
+          : results // ignore: cast_nullable_to_non_nullable
+              as List<Popular>?,
+      totalPages: freezed == totalPages
+          ? _value.totalPages
+          : totalPages // ignore: cast_nullable_to_non_nullable
+              as int?,
+      totalResults: freezed == totalResults
+          ? _value.totalResults
+          : totalResults // ignore: cast_nullable_to_non_nullable
+              as int?,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$_PopularModel implements _PopularModel {
+  const _$_PopularModel(
+      {this.page,
+      final List<Popular>? results,
+      this.totalPages,
+      this.totalResults})
+      : _results = results;
+
+  factory _$_PopularModel.fromJson(Map<String, dynamic> json) =>
+      _$$_PopularModelFromJson(json);
+
+  @override
+  final int? page;
+  final List<Popular>? _results;
+  @override
+  List<Popular>? get results {
+    final value = _results;
+    if (value == null) return null;
+    if (_results is EqualUnmodifiableListView) return _results;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
+  }
+
+  @override
+  final int? totalPages;
+  @override
+  final int? totalResults;
+
+  @override
+  String toString() {
+    return 'PopularModel(page: $page, results: $results, totalPages: $totalPages, totalResults: $totalResults)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_PopularModel &&
+            (identical(other.page, page) || other.page == page) &&
+            const DeepCollectionEquality().equals(other._results, _results) &&
+            (identical(other.totalPages, totalPages) ||
+                other.totalPages == totalPages) &&
+            (identical(other.totalResults, totalResults) ||
+                other.totalResults == totalResults));
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode => Object.hash(runtimeType, page,
+      const DeepCollectionEquality().hash(_results), totalPages, totalResults);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_PopularModelCopyWith<_$_PopularModel> get copyWith =>
+      __$$_PopularModelCopyWithImpl<_$_PopularModel>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$_PopularModelToJson(
+      this,
+    );
+  }
+}
+
+abstract class _PopularModel implements PopularModel {
+  const factory _PopularModel(
+      {final int? page,
+      final List<Popular>? results,
+      final int? totalPages,
+      final int? totalResults}) = _$_PopularModel;
+
+  factory _PopularModel.fromJson(Map<String, dynamic> json) =
+      _$_PopularModel.fromJson;
+
+  @override
+  int? get page;
+  @override
+  List<Popular>? get results;
+  @override
+  int? get totalPages;
+  @override
+  int? get totalResults;
+  @override
+  @JsonKey(ignore: true)
+  _$$_PopularModelCopyWith<_$_PopularModel> get copyWith =>
+      throw _privateConstructorUsedError;
+}

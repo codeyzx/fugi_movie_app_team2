@@ -1,5 +1,7 @@
 import 'dart:async';
 
+import 'package:fugi_movie_app_team2/src/features/home/domain/entities/popular.dart';
+import 'package:fugi_movie_app_team2/src/features/home/domain/entities/top_rated.dart';
 import 'package:fugi_movie_app_team2/src/features/home/domain/entities/trending.dart';
 import 'package:fugi_movie_app_team2/src/features/home/domain/entities/upcoming.dart';
 import 'package:fugi_movie_app_team2/src/features/home/domain/repository/home_repository.dart';
@@ -53,8 +55,20 @@ class FetchMovieController extends StateNotifier<AsyncValue<List<dynamic>?>> {
 @riverpod
 class TopRatedController extends _$TopRatedController {
   @override
-  FutureOr<List<Trending>?> build() async {
+  FutureOr<List<TopRated>?> build() async {
     final resp = await ref.read(homeRepositoryProvider).getTopRated();
+    return resp.fold(
+      (l) => null,
+      (r) => r,
+    );
+  }
+}
+
+@riverpod
+class PopularController extends _$PopularController {
+  @override
+  FutureOr<List<Popular>?> build() async {
+    final resp = await ref.read(homeRepositoryProvider).getPopular();
     return resp.fold(
       (l) => null,
       (r) => r,

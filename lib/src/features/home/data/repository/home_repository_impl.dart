@@ -1,4 +1,6 @@
 import 'package:fpdart/fpdart.dart';
+import 'package:fugi_movie_app_team2/src/features/home/domain/entities/popular.dart';
+import 'package:fugi_movie_app_team2/src/features/home/domain/entities/top_rated.dart';
 import 'package:fugi_movie_app_team2/src/features/home/domain/entities/trending.dart';
 import 'package:fugi_movie_app_team2/src/features/home/domain/entities/upcoming.dart';
 
@@ -33,7 +35,7 @@ class HomeRepositoryImpl implements HomeRepository {
   }
 
   @override
-  Future<Either<Failure, List<Trending>?>> getPopular() async {
+  Future<Either<Failure, List<Popular>?>> getPopular() async {
     final resp = await remoteProcess(
       remoteDataSource.getPopular(),
     );
@@ -44,7 +46,7 @@ class HomeRepositoryImpl implements HomeRepository {
   }
 
   @override
-  Future<Either<Failure, List<Trending>?>> getTopRated() async {
+  Future<Either<Failure, List<TopRated>?>> getTopRated() async {
     final resp = await remoteProcess(
       remoteDataSource.getTopRated(),
     );

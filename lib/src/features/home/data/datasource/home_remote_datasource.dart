@@ -7,8 +7,8 @@ import '../model/trending_model.dart';
 abstract class HomeRemoteDataSource {
   Future<TrendingModel> getTrending();
   Future<UpcomingModel> getUpcoming();
-  Future<TrendingModel> getTopRated();
-  Future<TrendingModel> getPopular();
+  Future<TopRatedModel> getTopRated();
+  Future<PopularModel> getPopular();
 }
 
 class HomeRemoteDataSourceImpl implements HomeRemoteDataSource {
@@ -33,22 +33,22 @@ class HomeRemoteDataSourceImpl implements HomeRemoteDataSource {
   }
 
   @override
-  Future<TrendingModel> getPopular() async {
+  Future<PopularModel> getPopular() async {
     final resp = await DioClient().apiCall(
-      url: Endpoints.trending,
+      url: Endpoints.popular,
       requestType: RequestType.get,
       queryParameters: {},
     );
-    return TrendingModel.fromJson(resp.data);
+    return PopularModel.fromJson(resp.data);
   }
 
   @override
-  Future<TrendingModel> getTopRated() async {
+  Future<TopRatedModel> getTopRated() async {
     final resp = await DioClient().apiCall(
       url: Endpoints.topRated,
       requestType: RequestType.get,
       queryParameters: {},
     );
-    return TrendingModel.fromJson(resp.data);
+    return TopRatedModel.fromJson(resp.data);
   }
 }
