@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -175,13 +176,29 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                     length: 4,
                     child: SafeArea(
                       child: Scaffold(
-                        appBar: const TabBar(
+                        appBar: TabBar(
                           isScrollable: true,
                           tabs: [
-                            Tab(text: 'Trending'),
-                            Tab(text: 'Upcoming'),
-                            Tab(text: 'Top Rated'),
-                            Tab(text: 'Popular'),
+                            Tab(text: 'Trending')
+                                .animate()
+                                .fadeIn(duration: 600.ms)
+                                .then(delay: 200.ms) // baseline=800ms
+                                .slide(),
+                            Tab(text: 'Upcoming')
+                                .animate()
+                                .fadeIn(duration: 650.ms)
+                                .then(delay: 250.ms) // baseline=800ms
+                                .slide(),
+                            Tab(text: 'Top Rated')
+                                .animate()
+                                .fadeIn(duration: 700.ms)
+                                .then(delay: 300.ms) // baseline=800ms
+                                .slide(),
+                            Tab(text: 'Popular')
+                                .animate()
+                                .fadeIn(duration: 750.ms)
+                                .then(delay: 350.ms) // baseline=800ms
+                                .slide(),
                           ],
                         ),
                         body: RefreshIndicator(
@@ -198,40 +215,46 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                                 AsyncValueWidget<List<Trending>?>(
                                   value: ref.watch(trendingControllerProvider),
                                   data: (trendings) {
-                                    return GridMovieWidget<Trending>(listData: trendings);
+                                    return GridMovieWidget<Trending>(
+                                      listData: trendings,
+                                      type: "trending",
+                                    );
                                   },
                                 ),
                               if (isLoading)
-                                const Center(
-                                  child: CircularProgressIndicator.adaptive(),
-                                )
+                                const Center(child: CircularProgressIndicator.adaptive())
                               else
                                 AsyncValueWidget<List<Upcoming>?>(
                                   value: ref.watch(upcomingControllerProvider),
                                   data: (upcomings) {
-                                    return GridMovieWidget<Upcoming>(listData: upcomings);
+                                    return GridMovieWidget<Upcoming>(
+                                      listData: upcomings,
+                                      type: "upcoming",
+                                    );
                                   },
                                 ),
                               if (isLoading)
-                                const Center(
-                                  child: CircularProgressIndicator.adaptive(),
-                                )
+                                const Center(child: CircularProgressIndicator.adaptive())
                               else
                                 AsyncValueWidget<List<TopRated>?>(
                                   value: ref.watch(topRatedControllerProvider),
                                   data: (topRated) {
-                                    return GridMovieWidget<TopRated>(listData: topRated);
+                                    return GridMovieWidget<TopRated>(
+                                      listData: topRated,
+                                      type: "toprated",
+                                    );
                                   },
                                 ),
                               if (isLoading)
-                                const Center(
-                                  child: CircularProgressIndicator.adaptive(),
-                                )
+                                const Center(child: CircularProgressIndicator.adaptive())
                               else
                                 AsyncValueWidget<List<Popular>?>(
                                   value: ref.watch(popularControllerProvider),
                                   data: (populars) {
-                                    return GridMovieWidget<Popular>(listData: populars);
+                                    return GridMovieWidget<Popular>(
+                                      listData: populars,
+                                      type: "popular",
+                                    );
                                   },
                                 ),
                             ],

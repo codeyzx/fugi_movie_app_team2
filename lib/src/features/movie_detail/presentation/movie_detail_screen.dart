@@ -65,9 +65,7 @@ class _MovieDetailScreenState extends ConsumerState<MovieDetailScreen> {
   void _updatePalettes(MovieDetail movieDetailResponse) async {
     var poster = movieDetailResponse.posterPath;
     final generator = await PaletteGenerator.fromImageProvider(
-      NetworkImage(
-        'https://image.tmdb.org/t/p/w500/$poster',
-      ),
+      NetworkImage('https://image.tmdb.org/t/p/w500/$poster'),
     );
     _colors.add(
       // generator.lightVibrantColor ?? generator.lightVibrantColor ?? PaletteColor(Colors.teal, 2),
@@ -417,17 +415,22 @@ class _MovieDetailScreenState extends ConsumerState<MovieDetailScreen> {
                                 length: 4,
                                 child: Scaffold(
                                   appBar: myTabBar,
-                                  body: TabBarView(
-                                    children: [
-                                      AboutMovie(
-                                        movieTitle: detailMovie.title,
-                                        content: detailMovie.overview ?? '-',
-                                      ),
-                                      Reviews(content: detailMovie.overview ?? '-'),
-                                      Cast(content: detailMovie.productionCompanies!),
-                                      CastCard(listData: responseListCast),
-                                    ],
-                                  ),
+                                  body: !isLoading
+                                      ? TabBarView(
+                                          children: [
+                                            AboutMovie(
+                                              movieTitle: detailMovie.title,
+                                              content: detailMovie.overview ?? '-',
+                                              color: _colors.isNotEmpty ? _colors[_currentIndex].color : Colors.white,
+                                            ),
+                                            Reviews(content: detailMovie.overview ?? '-'),
+                                            Cast(content: detailMovie.productionCompanies!),
+                                            CastCard(listData: responseListCast),
+                                          ],
+                                        )
+                                      : Center(
+                                          child: CircularProgressIndicator(),
+                                        ),
                                 ),
                               ),
                             ),
@@ -446,14 +449,10 @@ class _MovieDetailScreenState extends ConsumerState<MovieDetailScreen> {
                               children: [
                                 Container(
                                   width: MediaQuery.of(context).size.width,
-                                  margin: EdgeInsets.only(
-                                    bottom: MediaQuery.of(context).size.height * .09.sp,
-                                  ),
+                                  margin: EdgeInsets.only(bottom: MediaQuery.of(context).size.height * .09.sp),
                                   decoration: BoxDecoration(
                                     borderRadius: BorderRadius.only(
-                                      bottomLeft: Radius.circular(15.0.sp),
-                                      bottomRight: Radius.circular(15.0.sp),
-                                    ),
+                                        bottomLeft: Radius.circular(15.0.sp), bottomRight: Radius.circular(15.0.sp)),
                                     boxShadow: [
                                       BoxShadow(
                                         color: _colors.isNotEmpty
@@ -660,6 +659,7 @@ class _MovieDetailScreenState extends ConsumerState<MovieDetailScreen> {
                                 AboutMovie(
                                   movieTitle: detailMovie.title,
                                   content: detailMovie.overview ?? '-',
+                                  color: _colors[_currentIndex].color.withOpacity(.5),
                                 ),
                                 Reviews(content: detailMovie.overview ?? '-'),
                                 Cast(content: detailMovie.productionCompanies!),
@@ -766,7 +766,14 @@ class _MovieDetailScreenState extends ConsumerState<MovieDetailScreen> {
         detailMovie = movieDetailResponse;
         isLoading = false;
       });
-      _updatePalettes(movieDetailResponse);
+      var poster = detailMovie.posterPath;
+      final generator = await PaletteGenerator.fromImageProvider(
+        NetworkImage('https://image.tmdb.org/t/p/w500/$poster'),
+      );
+      _colors.add(
+        generator.darkVibrantColor ?? generator.lightVibrantColor ?? PaletteColor(Colors.teal, 2),
+      );
+      // _updatePalettes(movieDetailResponse);
     } on DioError catch (e) {
       // Logger().e(e.response?.data);
       setState(() {

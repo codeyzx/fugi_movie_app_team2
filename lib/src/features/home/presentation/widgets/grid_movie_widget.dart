@@ -14,9 +14,11 @@ import '../home_botnavbar_screen.dart';
 
 class GridMovieWidget<T> extends HookConsumerWidget {
   final List<T>? listData;
+  final String type;
   const GridMovieWidget({
     super.key,
     this.listData,
+    required this.type,
   });
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -54,7 +56,7 @@ class GridMovieWidget<T> extends HookConsumerWidget {
                               ? data.id
                               : 0,
               "object": listData?[index],
-              'type': 'trending',
+              'type': type,
             });
             ref.read(movieDetailAccessFromProvider.notifier).state = HomeBotNavBarScreen.routeName;
           },

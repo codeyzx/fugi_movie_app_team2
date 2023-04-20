@@ -52,7 +52,7 @@ class _ImageNumberWidgetState extends ConsumerState<ImageNumberWidget> {
             "type": widget.type,
           },
         );
-        ref.read(movieDetailAccessFromProvider.state).state = HomeBotNavBarScreen.routeName;
+        ref.read(movieDetailAccessFromProvider.notifier).state = HomeBotNavBarScreen.routeName;
       },
       child: Stack(
         alignment: Alignment.topLeft,
@@ -74,9 +74,6 @@ class _ImageNumberWidgetState extends ConsumerState<ImageNumberWidget> {
                 borderRadius: BorderRadius.all(
                   Radius.circular(10.0.sp),
                 ),
-                // child: Image.network(
-                //   'https://image.tmdb.org/t/p/w500/${widget.trending.posterPath}',
-                // ),
                 child: CachedNetworkImage(
                   imageUrl: "https://image.tmdb.org/t/p/w300/${widget.trending.posterPath}",
                   height: MediaQuery.of(context).size.height * .4.sp,
